@@ -1,15 +1,14 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import { translate } from 'react-i18next';
 
 import './Index.scss';
 
-const Index = () => (
+const Index = (props) => {
+  const { t } = props;
+  return (
   <div className="Index">
-    <img
-      src="https://s3-us-west-2.amazonaws.com/cleverbeagle-assets/graphics/email-icon.png"
-      alt="Clever Beagle"
-    />
-    <h1>Pup</h1>
+    <h1>{props.t('AppName')}</h1>
     <p>A boilerplate for products.</p>
     <div>
       <Button href="http://cleverbeagle.com/pup">Read the Docs</Button>
@@ -19,6 +18,7 @@ const Index = () => (
       <p>Need help and want to stay accountable building your product? <a href="http://cleverbeagle.com?utm_source=pupappindex&utm_campaign=oss">Check out Clever Beagle</a>.</p>
     </footer>
   </div>
-);
+  );
+};
 
-export default Index;
+export default translate([], { wait: true })(Index);

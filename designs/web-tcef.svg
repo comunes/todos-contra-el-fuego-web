@@ -27,8 +27,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.69575618"
-     inkscape:cx="793.70078"
-     inkscape:cy="618.75125"
+     inkscape:cx="900.10663"
+     inkscape:cy="596.82354"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -64,33 +64,36 @@
        width="442.13651"
        style="stroke-width:165.45117188" />
     <rect
-       style="opacity:0.75820001;fill:#ac9393;fill-opacity:0.95473256;stroke:none;stroke-width:26.45833206;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="opacity:0.18059999;fill:#ac9393;fill-opacity:0.95473256;stroke:none;stroke-width:26.45833206;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect6086"
        width="390.98022"
        height="252.89684"
        x="11.057551"
-       y="14.26377" />
+       y="14.26377"
+       rx="5" />
     <rect
        style="opacity:0.29160007;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:26.45833206;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect4573"
        width="165.10446"
        height="165.10446"
-       x="29.196411"
-       y="79.843651" />
+       x="27.583012"
+       y="83.608246"
+       rx="5"
+       ry="5" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:23.18472672px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:Normal;letter-spacing:0px;word-spacing:0px;fill:#550000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        x="206.0237"
-       y="55.688263"
+       y="62.567436"
        id="text6092"><tspan
          sodipodi:role="line"
          x="206.0237"
-         y="55.688263"
+         y="62.567436"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:30.03565788px;font-family:Roboto;-inkscape-font-specification:'Roboto, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#550000;stroke-width:0.26458332"
          id="tspan6094">TODOS CONTRA EL FUEGO</tspan></text>
     <g
        id="g4691"
-       transform="translate(-3.1138107)">
+       transform="translate(-4.7272093,3.7645966)">
       <text
          id="text6339"
          y="191.32181"
@@ -168,67 +171,48 @@
        id="rect4573-9"
        width="165.10446"
        height="165.10446"
-       x="221.68365"
-       y="80.650345" />
+       x="220.07025"
+       y="84.41494"
+       rx="5"
+       ry="5" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:83.00547791px;line-height:1.25;font-family:FontAwesome;-inkscape-font-specification:FontAwesome;letter-spacing:0px;word-spacing:0px;fill:#280b0b;fill-opacity:1;stroke:none;stroke-width:0.26458335"
-       x="268.66077"
-       y="172.39661"
+       x="267.04736"
+       y="176.16121"
        id="text6347"><tspan
          sodipodi:role="line"
          id="tspan6345"
-         x="268.66077"
-         y="172.39661"
+         x="267.04736"
+         y="176.16121"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:FontAwesome;-inkscape-font-specification:FontAwesome;fill:#280b0b;fill-opacity:1;stroke-width:0.26458335"></tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.69999981px;line-height:1;font-family:sans-serif;-inkscape-font-specification:Normal;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="111.32697"
-       y="216.8549"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.69999981px;line-height:1.29999995;font-family:sans-serif;-inkscape-font-specification:Normal;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="109.71358"
+       y="220.61951"
        id="text6092-1"><tspan
          sodipodi:role="line"
-         x="112.91447"
-         y="216.8549"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.69999981px;line-height:1;font-family:Roboto;-inkscape-font-specification:'Roboto, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#501616;stroke-width:0.26458332"
-         id="tspan4531">ESCOGE UN ÁREA </tspan><tspan
+         x="111.30108"
+         y="220.61951"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.69999981px;line-height:1.29999995;font-family:Roboto;-inkscape-font-specification:'Roboto, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#501616;stroke-width:0.26458332"
+         id="tspan4535">ESCOGE UN ÁREA </tspan><tspan
          sodipodi:role="line"
-         x="111.32697"
-         y="229.99629"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.69999981px;line-height:1;font-family:Roboto;-inkscape-font-specification:'Roboto, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#501616;stroke-width:0.26458332"
-         id="tspan4535">DE TÚ INTERÉS</tspan></text>
+         x="109.71358"
+         y="237.57089"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.69999981px;line-height:1.29999995;font-family:Roboto;-inkscape-font-specification:'Roboto, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#501616;stroke-width:0.26458332"
+         id="tspan4803">DE TÚ INTERÉS</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.93333244px;line-height:1;font-family:sans-serif;-inkscape-font-specification:Normal;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="304.28241"
-       y="217.38934"
-       id="text6092-1-2"><tspan
-         sodipodi:role="line"
-         x="304.28241"
-         y="217.38934"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.69999981px;line-height:1;font-family:Roboto;-inkscape-font-specification:'Roboto, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#501616;stroke-width:0.26458332"
-         id="tspan4562">TE AVISAREMOS DE</tspan><tspan
-         sodipodi:role="line"
-         x="304.28241"
-         y="234.32268"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.69999981px;line-height:1;font-family:Roboto;-inkscape-font-specification:'Roboto, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#501616;stroke-width:0.26458332"
-         id="tspan4569">FUEGOS ACTIVOS</tspan><tspan
-         sodipodi:role="line"
-         x="304.28241"
-         y="251.25601"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.69999981px;line-height:1;font-family:Roboto;-inkscape-font-specification:'Roboto, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#501616;stroke-width:0.26458332"
-         id="tspan4571" /></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:47.82115555px;line-height:1.25;font-family:FontAwesome;-inkscape-font-specification:FontAwesome;letter-spacing:0px;word-spacing:0px;fill:#552200;fill-opacity:1;stroke:none;stroke-width:0.26458338;"
-       x="189.35361"
-       y="172.33788"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:47.82115555px;line-height:1.25;font-family:FontAwesome;-inkscape-font-specification:FontAwesome;letter-spacing:0px;word-spacing:0px;fill:#552200;fill-opacity:1;stroke:none;stroke-width:0.26458338"
+       x="187.7402"
+       y="176.10248"
        id="text6347-8"><tspan
          sodipodi:role="line"
          id="tspan6345-9"
-         x="189.35361"
-         y="172.33788"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:FontAwesome;-inkscape-font-specification:FontAwesome;fill:#552200;fill-opacity:1;stroke-width:0.26458338;"></tspan></text>
+         x="187.7402"
+         y="176.10248"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:FontAwesome;-inkscape-font-specification:FontAwesome;fill:#552200;fill-opacity:1;stroke-width:0.26458338"></tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:74.13223267px;line-height:1.25;font-family:FontAwesome;-inkscape-font-specification:FontAwesome;letter-spacing:0px;word-spacing:0px;fill:#280b0b;fill-opacity:1;stroke:none;stroke-width:0.26458338"
@@ -240,5 +224,50 @@
          x="200.96007"
          y="480.14008"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:FontAwesome;-inkscape-font-specification:FontAwesome;fill:#280b0b;fill-opacity:1;stroke-width:0.26458338"></tspan></text>
+    <rect
+       style="opacity:0.29160007;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:26.45833397;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4573-9-9"
+       width="268.92136"
+       height="45.315727"
+       x="159.30693"
+       y="-27.791666" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.3499999px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:Normal;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#550000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="413.64679"
+       y="13.487597"
+       id="text6092-0"><tspan
+         sodipodi:role="line"
+         x="413.64679"
+         y="13.487597"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:6.3499999px;font-family:Roboto;-inkscape-font-specification:'Roboto, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#550000;stroke-width:0.26458332"
+         id="tspan6094-5">INICIO   MAPA ACTUAL   CONTACTO   HISTORIA    ESPAÑOL   MÁS</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.3499999px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:Normal;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#ac9393;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="384.42468"
+       y="262.5817"
+       id="text6092-0-2"><tspan
+         sodipodi:role="line"
+         x="384.42468"
+         y="262.5817"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:6.3499999px;font-family:Roboto;-inkscape-font-specification:'Roboto, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#ac9393;stroke-width:0.26458332"
+         id="tspan6094-5-0">© COPYLEFT BLA BLA BLA</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.69999981px;line-height:1.29999995;font-family:sans-serif;-inkscape-font-specification:Normal;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="306.66183"
+       y="219.36673"
+       id="text6092-1-0"><tspan
+         sodipodi:role="line"
+         x="306.66183"
+         y="219.36673"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.69999981px;line-height:1.29999995;font-family:Roboto;-inkscape-font-specification:'Roboto, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#501616;stroke-width:0.26458332"
+         id="tspan4803-3">TE AVISAREMOS DE</tspan><tspan
+         sodipodi:role="line"
+         x="306.66183"
+         y="236.31812"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.69999981px;line-height:1.29999995;font-family:Roboto;-inkscape-font-specification:'Roboto, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#501616;stroke-width:0.26458332"
+         id="tspan4828">FUEGOS ACTIVOS</tspan></text>
   </g>
 </svg>

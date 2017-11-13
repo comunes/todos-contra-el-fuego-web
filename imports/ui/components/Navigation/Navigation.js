@@ -4,6 +4,7 @@ import { Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import PublicNavigation from '../PublicNavigation/PublicNavigation';
 import AuthenticatedNavigation from '../AuthenticatedNavigation/AuthenticatedNavigation';
+import { translate } from 'react-i18next';
 
 import './Navigation.scss';
 
@@ -11,7 +12,7 @@ const Navigation = props => (
   <Navbar>
     <Navbar.Header>
       <Navbar.Brand>
-        <Link to="/">Pup</Link>
+        <Link to="/">{props.t('AppName')}</Link>
       </Navbar.Brand>
       <Navbar.Toggle />
     </Navbar.Header>
@@ -29,4 +30,6 @@ Navigation.propTypes = {
   authenticated: PropTypes.bool.isRequired,
 };
 
-export default Navigation;
+//  export default Navigation;
+
+export default translate([], { wait: true })(Navigation);

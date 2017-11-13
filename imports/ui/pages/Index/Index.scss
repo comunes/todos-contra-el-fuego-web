@@ -3,10 +3,12 @@
 
 .Index {
   padding: 20px;
-  background: $cb-blue;
+  background: lighten($todos-back1, 75%);
   text-align: center;
   border-radius: 3px;
-  color: #fff;
+  color: $todos-font1;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
 
   img {
     width: 100px;
@@ -14,7 +16,9 @@
   }
 
   h1 {
-    font-size: 28px;
+    font-size: 86px;
+    text-transform: uppercase;
+    font-family: 'Roboto';
   }
 
   p {

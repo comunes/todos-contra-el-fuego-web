@@ -28,6 +28,11 @@ import Footer from '../../components/Footer/Footer';
 import Terms from '../../pages/Terms/Terms';
 import Privacy from '../../pages/Privacy/Privacy';
 import ExamplePage from '../../pages/ExamplePage/ExamplePage';
+// i18n
+import { I18nextProvider } from 'react-i18next';
+import i18n from '/imports/startup/client/i18n';
+//https://react.i18next.com/components/i18nextprovider.html
+
 
 import './App.scss';
 
@@ -41,7 +46,10 @@ const handleResendVerificationEmail = (emailAddress) => {
   });
 };
 
+
+
 const App = props => (
+  <I18nextProvider i18n={i18n}>
   <Router>
     {!props.loading ? <div className="App">
       {props.userId && !props.emailVerified ? <Alert className="verify-email text-center"><p>Hey friend! Can you <strong>verify your email address</strong> ({props.emailAddress}) for us? <Button bsStyle="link" onClick={() => handleResendVerificationEmail(props.emailAddress)} href="#">Re-send verification email</Button></p></Alert> : ''}
@@ -61,7 +69,7 @@ const App = props => (
           <Route name="recover-password" path="/recover-password" component={RecoverPassword} />
           <Route name="reset-password" path="/reset-password/:token" component={ResetPassword} />
           <Route name="terms" path="/terms" component={Terms} />
-          <Route name="privacy" path="/privacy" component={Privacy} />
+          <Route name="privacy" path="/privacidad" component={Privacy} />
           <Route name="examplePage" path="/example-page" component={ExamplePage} />
           <Route component={NotFound} />
         </Switch>
@@ -69,6 +77,7 @@ const App = props => (
       <Footer />
     </div> : ''}
   </Router>
+  </I18nextProvider>
 );
 
 App.defaultProps = {
