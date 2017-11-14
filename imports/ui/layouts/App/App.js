@@ -54,7 +54,7 @@ const App = props => (
     {!props.loading ? <div className="App">
       {props.userId && !props.emailVerified ? <Alert className="verify-email text-center"><p>Hey friend! Can you <strong>verify your email address</strong> ({props.emailAddress}) for us? <Button bsStyle="link" onClick={() => handleResendVerificationEmail(props.emailAddress)} href="#">Re-send verification email</Button></p></Alert> : ''}
       <Navigation {...props} />
-      <Grid>
+      <Grid bsClass="previously-container-but-disabled" >
         <Switch>
           <Route exact name="index" path="/" component={Index} />
           <Authenticated exact path="/documents" component={Documents} {...props} />
