@@ -1,16 +1,58 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { Button } from 'react-bootstrap';
 import { translate } from 'react-i18next';
+import {render} from 'react-dom';
+
+// https://www.npmjs.com/package/react-resize-detector
+import ReactResizeDetector from 'react-resize-detector';
 
 import './Index.scss';
 import './Index-custom.scss';
 
-const Index = (props) => {
-  const { t } = props;
-  return (
+class Index extends Component {
+  // Debounce by David Walsch
+  // https://davidwalsh.name/javascript-debounce-function
+
+  debounce = (func, wait, immediate) => {
+    var timeout;
+    return function() {
+      var context = this, args = arguments;
+      var later = function() {
+        timeout = null;
+        if (!immediate) func.apply(context, args);
+      };
+      var callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) func.apply(context, args);
+    };
+  };
+
+  scaleHeader = () => {
+    var scalable = document.getElementById('tcefh1');
+    var margin = 10;
+    var scalableContainer = scalable.parentNode;
+    scalable.style.transform = 'scale(1)';
+    var scalableContainerWidth = scalableContainer.offsetWidth - margin;
+    var scalableWidth = scalable.offsetWidth;
+    scalable.style.transform = 'scale(' + scalableContainerWidth / scalableWidth + ')';
+    scalableContainer.style.height = scalable.getBoundingClientRect().height + 'px';
+  };
+
+  myScaleFunction = this.debounce(() => {
+    this.scaleHeader();
+  }, 250);
+
+  _onResize = () => {
+    this.myScaleFunction();
+  };
+
+  render() {
+    return (
     <div className="IndexDisabled">
       {/* https://v4-alpha.getbootstrap.com/components/carousel/  */}
       <header>
+        <ReactResizeDetector handleWidth handleHeight onResize={this._onResize} />
         <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
           <ol className="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
@@ -66,7 +108,7 @@ const Index = (props) => {
       <section className="py-5">
         <div className="container">
           <div className="scale__container--js">
-            <h1 className="scale--js">{props.t('AppName')}</h1>
+            <h1 id="tcefh1" className="scale--js">{this.props.t('AppName')}</h1>
           </div>
           <p>Siempre alerta a los fuegos en nuestro vecindario</p>
           <button type="button" className="btn btn-raised btn-lg btn-warning">PARTICIPA</button>
@@ -74,46 +116,7 @@ const Index = (props) => {
       </section>
     </div>
   );
-};
-
-function scaleHeader() {
-  var scalable = document.querySelectorAll('.scale--js');
-  var margin = 10;
-  for (var i = 0; i < scalable.length; i++) {
-    var scalableContainer = scalable[i].parentNode;
-    scalable[i].style.transform = 'scale(1)';
-    var scalableContainerWidth = scalableContainer.offsetWidth - margin;
-    var scalableWidth = scalable[i].offsetWidth;
-    scalable[i].style.transform = 'scale(' + scalableContainerWidth / scalableWidth + ')';
-    scalableContainer.style.height = scalable[i].getBoundingClientRect().height + 'px';
-  }
-}
-
-
-// Debounce by David Walsch
-// https://davidwalsh.name/javascript-debounce-function
-
-function debounce(func, wait, immediate) {
-  var timeout;
-  return function() {
-    var context = this, args = arguments;
-    var later = function() {
-      timeout = null;
-      if (!immediate) func.apply(context, args);
-    };
-    var callNow = immediate && !timeout;
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-    if (callNow) func.apply(context, args);
   };
-};
-
-var myScaleFunction = debounce(function() {
-  scaleHeader();
-}, 250);
-
-myScaleFunction();
-
-window.addEventListener('resize', myScaleFunction);
+}
 
 export default translate([], { wait: true })(Index);
