@@ -27,7 +27,7 @@ import NotFound from '../../pages/NotFound/NotFound';
 import Footer from '../../components/Footer/Footer';
 import Terms from '../../pages/Terms/Terms';
 import Privacy from '../../pages/Privacy/Privacy';
-import ExamplePage from '../../pages/ExamplePage/ExamplePage';
+import License from '../../pages/License/License';
 // i18n
 import { I18nextProvider } from 'react-i18next';
 import i18n from '/imports/startup/client/i18n';
@@ -54,7 +54,7 @@ const App = props => (
     {!props.loading ? <div className="App">
       {props.userId && !props.emailVerified ? <Alert className="verify-email text-center"><p>Hey friend! Can you <strong>verify your email address</strong> ({props.emailAddress}) for us? <Button bsStyle="link" onClick={() => handleResendVerificationEmail(props.emailAddress)} href="#">Re-send verification email</Button></p></Alert> : ''}
       <Navigation {...props} />
-      <Grid bsClass="previously-container-but-disabled" >
+      <Grid> {/* bsClass="previously-container-but-disabled" > */}
         <Switch>
           <Route exact name="index" path="/" component={Index} />
           <Authenticated exact path="/documents" component={Documents} {...props} />
@@ -69,8 +69,8 @@ const App = props => (
           <Route name="recover-password" path="/recover-password" component={RecoverPassword} />
           <Route name="reset-password" path="/reset-password/:token" component={ResetPassword} />
           <Route name="terms" path="/terms" component={Terms} />
-          <Route name="privacy" path="/privacidad" component={Privacy} />
-          <Route name="examplePage" path="/example-page" component={ExamplePage} />
+          <Route name="privacy" path="/privacy" component={Privacy} />
+          <Route name="license" path="/license" component={License} />
           <Route component={NotFound} />
         </Switch>
       </Grid>

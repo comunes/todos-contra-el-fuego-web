@@ -1,38 +1,46 @@
-#### Terms
+# CONDICIONES GENERALES DE USO DE TOD@S CONTRA EL FUEGO
 
-By accessing the website at https://pup.cleverbeagle.com, you are agreeing to be bound by these terms of service, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local laws. If you do not agree with any of these terms, you are prohibited from using or accessing this site. The materials contained in this website are protected by applicable copyright and trademark law.
+La Asociación Comunes (en adelante Comunes) con domicilio en Calle Duque de Alba, 13, 28012 MADRID con CIF G85860708 pone a disposición en su sitio web fuegos.comunes.org determinados contenidos de carácter informativo sobre sus actividades.
 
-#### Use License
+Las presentes condiciones generales rigen única y exclusivamente el uso del sitio web de Comunes por parte de los USUARIOS que accedan al mismo. Las presentes condiciones generales se le exponen al USUARIO en el sitio web fuegos.comunes.org en todas y cada una de las páginas y cada vez que un USUARIO introduce sus datos en los formularios existentes, para que las lea, las imprima, archive y acepte a través de internet, no pudiendo el USUARIO introducir sus datos efectivamente sin que se haya producido esta aceptación.
 
-Permission is granted to temporarily download one copy of the materials (information or software) on Clever Beagle's website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:
-modify or copy the materials;
-use the materials for any commercial purpose, or for any public display (commercial or non-commercial);
-attempt to decompile or reverse engineer any software contained on Clever Beagle's website;
-remove any copyright or other proprietary notations from the materials; or
-transfer the materials to another person or "mirror" the materials on any other server.
-This license shall automatically terminate if you violate any of these restrictions and may be terminated by Clever Beagle at any time. Upon terminating your viewing of these materials or upon the termination of this license, you must destroy any downloaded materials in your possession whether in electronic or printed format.
+Comunes está inscrita en el Registro Nacional de Asocisaciones.: Grupo 1 / Sección 1 / Número Nacional: 594506.
 
-#### Disclaimer
+El acceso a este sitio web de Comunes, 'Todos contra el Fuego', implica sin reservas la aceptación de las presentes condiciones generales de uso que el USUARIO afirma comprender en su totalidad. El USUARIO se compromete a no utilizar el sitio web y los servicios que se ofrecen en el mismo para la realización de actividades contrarias a la ley y a respetar en todo momento las presentes condiciones generales.
 
-The materials on Clever Beagle's website are provided on an 'as is' basis. Clever Beagle makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.
-Further, Clever Beagle does not warrant or make any representations concerning the accuracy, likely results, or reliability of the use of the materials on its website or otherwise relating to such materials or on any sites linked to this site.
+## PRIMERA.- CONDICIONES DE ACCESO Y USO
 
-#### Limitations
+1.1.-La utilización del sitio web de Comunes, 'Todos contra el Fuego', no conlleva la obligatoriedad de inscripción del USUARIO, salvo si este USUARIO desee utilizar los servicios de notificación de fuegos.comunes.org donde será preciso que se registre cubriendo un formulario básico, ésta suscripción se regirá por las condiciones generales específicas. Las condiciones de acceso y uso del presente sitio web se rigen estrictamente por la legalidad vigente y por el principio de buena fe comprometiéndose el USUARIO a realizar un buen uso de la web. Quedan prohibidos todos los actos que vulneren la legalidad, derechos o intereses de terceros: derecho a la intimidad, protección de datos, propiedad intelectual etc. Expresamente Comunes prohíbe los siguientes:
 
-In no event shall Clever Beagle or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on Clever Beagle's website, even if Clever Beagle or a Clever Beagle authorized representative has been notified orally or in writing of the possibility of such damage. Because some jurisdictions do not allow limitations on implied warranties, or limitations of liability for consequential or incidental damages, these limitations may not apply to you.
+1.1.1.- Realizar acciones que puedan producir en el sitio web o a través del mismo por cualquier medio cualquier tipo de daño a los sistemas de Comunes o a terceros.
 
-#### Accuracy of materials
+1.1.2.- Realizar sin la debida autorización cualquier tipo de publicidad o información comercial directamente o de forma encubierta, el envío de correos masivos ("spaming") o envío de grandes mensajes con el fin de bloquear servidores de la red ("mail bombing").
 
-The materials appearing on Clever Beagle's website could include technical, typographical, or photographic errors. Clever Beagle does not warrant that any of the materials on its website are accurate, complete or current. Clever Beagle may make changes to the materials contained on its website at any time without notice. However Clever Beagle does not make any commitment to update the materials.
+1.2.- Proporicionar información falsa sobre fuegos.
 
-#### Links
+1.3.- Comunes podrá interrumpir en cualquier momento el acceso a su sitio web si detecta un uso contrario a la legalidad, la buena fe o a las presentes condiciones generales- ver cláusula quinta.
 
-Clever Beagle has not reviewed all of the sites linked to its website and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by Clever Beagle of the site. Use of any such linked website is at the user's own risk.
+## SEGUNDA.- CONTENIDOS
 
-#### Modifications
+Los contenidos incorporados en este sitio web han sido elaborados e incluidos por:
 
-Clever Beagle may revise these terms of service for its website at any time without notice. By using this website you are agreeing to be bound by the then current version of these terms of service.
+2.1.- Comunes utilizando fuentes internas y externas de tal modo que Comunes únicamente se hace responsable por los contenidos elaborados de forma interna.
 
-#### Governing Law
+2.2.- Terceros ajenos a, Comunes bien mediante colaboraciones directas en el sitio web o bien presentes a través de hiperenlaces o links a otros sitios web o a noticias de otros sitios de los que no es titular Comunes. Comunes en ningún caso será responsable de los contenidos así introducidos y no garantiza el correcto funcionamiento de todos estos links o hiperenlaces.
+El USUARIO que desee establecer un hiperenlace en su sitio web al sitio web de Comunes no realizará un uso ilegal o contrario a la buena fe de las informaciones puestas a disposición en el referido sitio web.
 
-These terms and conditions are governed by and construed in accordance with the laws of Illinois and you irrevocably submit to the exclusive jurisdiction of the courts in that State or location.
+2.3.- Comunes se reserva el derecho a modificar en cualquier momento los contenidos existentes en su sitio web.
+
+## TERCERA.- DERECHOS DE AUTOR Y MARCA
+
+Comunes informa que el sitio web fuegos.comunes.org los contenidos propios, la programación y el diseño del sitio web se encuentra plenamente protegido por los derechos de autor mediante la licencia que en cada caso aplique y se indique. Comunes utiliza fuentes externas (como la NASA) para la elaboración de sus contenidos en determinadas ocasiones y también establece links o hiperenlaces a artículos o informaciones de terceros citando siempre la fuente. El legítimo titular de los derechos de autor de estas informaciones así incluidas podrá solicitar en cualquier momento la eliminación de las referidas referencias.
+
+Sobre los datos de la NASA: *We acknowledge the use of data and imagery from LANCE FIRMS operated by the NASA/GSFC/Earth Science Data and Information System (ESDIS) with funding provided by NASA/HQ*.
+
+## CUARTA.- JURISDICCIÓN Y LEY APLICABLE
+
+Las presentes condiciones generales se rigen por la legislación española. Son competentes para resolver toda controversia o conflicto que se derive de las presentes condiciones generales los Juzgados de Madrid renunciando expresamente el USUARIO a cualquier otro fuero que pudiera corresponderle.
+
+## QUINTA
+
+En caso de que cualquier cláusula del presente documento sea declarada nula, las demás cláusulas seguirán vigentes y se interpretarán teniendo en cuenta la voluntad de las partes y la finalidad misma de las presentes condiciones. Comunes podrá no ejercitar alguno de los derechos y facultades conferidos en este documento lo que no implicará en ningún caso la renuncia a los mismos salvo reconocimiento expreso por parte de Comunes.
