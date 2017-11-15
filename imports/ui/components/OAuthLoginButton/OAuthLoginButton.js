@@ -38,7 +38,7 @@ const serviceLabel = {
 
 const OAuthLoginButton = ({ service, callback }) => (
   <button
-    className={`OAuthLoginButton OAuthLoginButton-${service}`}
+    className={`btn btn-raised btn-danger OAuthLoginButton OAuthLoginButton-${service}`}
     type="button"
     onClick={() => handleLogin(service, callback)}
   >
