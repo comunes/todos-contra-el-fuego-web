@@ -49,7 +49,7 @@ class Index extends Component {
 
   render() {
     return (
-    <div className="IndexDisabled">
+      <div className="IndexDisabled full-width">
       {/* https://v4-alpha.getbootstrap.com/components/carousel/  */}
       <header>
         <ReactResizeDetector handleWidth handleHeight onResize={this._onResize} />

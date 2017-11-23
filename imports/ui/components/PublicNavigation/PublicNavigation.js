@@ -3,14 +3,10 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Nav, NavItem } from 'react-bootstrap';
 
 const PublicNavigation = () => (
-  <Nav pullRight>
-    <LinkContainer to="/signup">
-      <NavItem eventKey={1} href="/signup">Sign Up</NavItem>
-    </LinkContainer>
-    <LinkContainer to="/login">
-      <NavItem eventKey={2} href="/login">Log In</NavItem>
-    </LinkContainer>
-  </Nav>
+  <div className="dropdown-menu dropdown-menu-right">
+    <a className="dropdown-item" href="/signup">Sign Up</a>
+    <a className="dropdown-item" href="/login">Log In</a>
+  </div>
 );
 
 export default PublicNavigation;

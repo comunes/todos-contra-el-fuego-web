@@ -26,9 +26,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.69575618"
-     inkscape:cx="900.10663"
-     inkscape:cy="596.82354"
+     inkscape:zoom="0.34787809"
+     inkscape:cx="482.26239"
+     inkscape:cy="500.72871"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -62,15 +62,16 @@
        preserveAspectRatio="none"
        height="276.33533"
        width="442.13651"
-       style="stroke-width:165.45117188" />
+       style="stroke-width:165.45117188"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <rect
-       style="opacity:0.18059999;fill:#ac9393;fill-opacity:0.95473256;stroke:none;stroke-width:26.45833206;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="opacity:0.18059998;fill:#ac9393;fill-opacity:0.95473256;stroke:none;stroke-width:26.45833206;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect6086"
        width="390.98022"
        height="252.89684"
        x="11.057551"
-       y="14.26377"
-       rx="5" />
+       y="14.26377" />
     <rect
        style="opacity:0.29160007;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:26.45833206;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect4573"
@@ -82,14 +83,14 @@
        ry="5" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:23.18472672px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:Normal;letter-spacing:0px;word-spacing:0px;fill:#550000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:23.18472672px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:Normal;letter-spacing:0px;word-spacing:0px;fill:#280b0b;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        x="206.0237"
        y="62.567436"
        id="text6092"><tspan
          sodipodi:role="line"
          x="206.0237"
          y="62.567436"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:30.03565788px;font-family:Roboto;-inkscape-font-specification:'Roboto, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#550000;stroke-width:0.26458332"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:30.03565788px;font-family:Roboto;-inkscape-font-specification:'Roboto, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#280b0b;fill-opacity:1;stroke-width:0.26458332"
          id="tspan6094">TODOS CONTRA EL FUEGO</tspan></text>
     <g
        id="g4691"

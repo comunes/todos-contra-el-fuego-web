@@ -7,20 +7,17 @@ import { Meteor } from 'meteor/meteor';
 
 const AuthenticatedNavigation = ({ name, history }) => (
   <div>
+    {/*
+    https://github.com/react-bootstrap/react-bootstrap/blob/master/src/Nav.js
     <Nav>
       <LinkContainer to="/documents">
-        <NavItem eventKey={1} href="/documents">Documents</NavItem>
+        <NavItem href="/documents">Documents</NavItem>
       </LinkContainer>
-    </Nav>
-    <Nav pullRight>
-      <NavDropdown eventKey={2} title={name} id="user-nav-dropdown">
-        <LinkContainer to="/profile">
-          <NavItem eventKey={2.1} href="/profile">Profile</NavItem>
-        </LinkContainer>
-        <MenuItem divider />
-        <MenuItem eventKey={2.2} onClick={() => history.push('/logout')}>Logout</MenuItem>
-      </NavDropdown>
-    </Nav>
+</Nav> */}
+    <div title={name} className="dropdown-menu dropdown-menu-right">
+      <a className="dropdown-item" href="/profile">Profile</a>
+      <a className="dropdown-item" onClick={() => history.push('/logout')} >Logout</a>
+    </div>
   </div>
 );
 

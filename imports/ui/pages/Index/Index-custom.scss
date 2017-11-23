@@ -118,3 +118,17 @@
 .carousel-item-4 {
   background-image: url('/home-slide4.jpg')
 }
+
+.full-width {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(-50vw + 50% - 8px);
+  position: relative;
+  /*
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;*/
+}
