@@ -6,6 +6,7 @@ accounts-oauth@1.1.15
 accounts-password@1.4.0
 alanning:roles@1.2.16
 aldeed:collection2-core@2.0.1
+alexwine:bootstrap-4@4.0.0-beta.2
 allow-deny@1.0.9
 audit-argument-checks@1.0.7
 autoupdate@1.3.12
