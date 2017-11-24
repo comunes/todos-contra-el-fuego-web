@@ -55,7 +55,6 @@ class NavItem extends React.Component {
     } else if (props.role === 'tab') {
       props['aria-selected'] = active;
     }
-
     return (
       <li
         role="presentation"
