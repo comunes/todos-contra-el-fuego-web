@@ -2,22 +2,35 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import { Nav, NavDropdown, MenuItem } from 'react-bootstrap';
+/*
+   FIXME:
+   navitem needs a nav-link class but does not works
+   https://github.com/react-bootstrap/react-bootstrap/issues/2644
+   className="nav-link"
+   so we did a custom NavLink
+ */
+import NavItem from '../NavItem/NavItem';
 import { Meteor } from 'meteor/meteor';
 
 const AuthenticatedNavigation = ({ name, history }) => (
   <div>
     {/*
-    https://github.com/react-bootstrap/react-bootstrap/blob/master/src/Nav.js
+    https://github.com/react-bootstrap/react-bootstrap/blob/master/src/Nav.js */}
     <Nav>
-      <LinkContainer to="/documents">
-        <NavItem href="/documents">Documents</NavItem>
+      <LinkContainer className="nav-item" anchorClassName="nav-link" to="/documents">
+        <NavItem eventKey={1} href="/documents">Documents</NavItem>
       </LinkContainer>
-</Nav> */}
-    <div title={name} className="dropdown-menu dropdown-menu-right">
-      <a className="dropdown-item" href="/profile">Profile</a>
-      <a className="dropdown-item" onClick={() => history.push('/logout')} >Logout</a>
-    </div>
+    </Nav>
+    <Nav pullRight>
+      <NavDropdown eventKey={2} title={name} id="user-nav-dropdown">
+        <LinkContainer className="nav-item" anchorClassName="nav-link" to="/profile">
+          <NavItem eventKey={2.1} href="/profile">Profile</NavItem>
+        </LinkContainer>
+        <MenuItem divider />x
+        <MenuItem eventKey={2.2} onClick={() => history.push('/logout')}>Logout</MenuItem>
+      </NavDropdown>
+    </Nav>
   </div>
 );
 
