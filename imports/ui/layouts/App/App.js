@@ -52,8 +52,8 @@ const App = props => (
   <I18nextProvider i18n={i18n}>
   <Router>
     {!props.loading ? <div className="App">
-      {props.userId && !props.emailVerified ? <Alert className="verify-email text-center"><p>Hey friend! Can you <strong>verify your email address</strong> ({props.emailAddress}) for us? <Button bsStyle="link" onClick={() => handleResendVerificationEmail(props.emailAddress)} href="#">Re-send verification email</Button></p></Alert> : ''}
-      <Navigation {...props} />
+    <Navigation {...props} />
+    {props.userId && !props.emailVerified ? <Alert className="verify-email text-center"><p>Hey friend! Can you <strong>verify your email address</strong> ({props.emailAddress}) for us? <Button bsStyle="link" onClick={() => handleResendVerificationEmail(props.emailAddress)} href="#">Re-send verification email</Button></p></Alert> : ''}
       <Grid> {/* bsClass="previously-container-but-disabled" > */}
         <Switch>
           <Route exact name="index" path="/" component={Index} />

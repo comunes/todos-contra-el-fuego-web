@@ -21,6 +21,18 @@ body {
 
   p {
     color: $gray-light;
+
+    a {
+      color: $gray-light;
+    }
+
+    a:hover,
+    a:active,
+    a:focus {
+      text-decoration: none;
+      color: $gray;
+    }
+
   }
 
   ul {
@@ -52,4 +64,11 @@ body {
   .Footer ul li:first-child, .Footer ul li:nth-child(2) {
     margin-right: 30px;
   }
+}
+
+.reverse {
+  display:inline-block;
+  -moz-transform: rotate(-180deg);
+  -webkit-transform: rotate(-180deg);
+  transform: rotate(-180deg);
 }

@@ -9,12 +9,14 @@ import { translate } from 'react-i18next';
 import './Navigation.scss';
 
 const Navigation = props => (
-  <Navbar bsClass="navbar navbar-light">
+  <Navbar bsClass="navbar navbar-dark bg-dark">
     {/* https://github.com/react-bootstrap/react-bootstrap/blob/master/src/Navbar.js */}
     <Navbar.Header>
+      {window.location.pathname != '/'?
       <Navbar.Brand>
         <Link to="/">{props.t('Inicio')}</Link>
-      </Navbar.Brand>
+      </Navbar.Brand>: ''
+      }
       {/* <Navbar.Toggle/> */}
       <button className="sr-only navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
@@ -31,7 +33,7 @@ Navigation.defaultProps = {
 };
 
 Navigation.propTypes = {
-  authenticated: PropTypes.bool.isRequired,
+  authenticated: PropTypes.bool.isRequired
 };
 
 //  export default Navigation;

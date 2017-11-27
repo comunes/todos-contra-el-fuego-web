@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Button } from 'react-bootstrap';
 import { translate } from 'react-i18next';
 import {render} from 'react-dom';
+import { Link } from 'react-router-dom';
 
 // https://www.npmjs.com/package/react-resize-detector
 import ReactResizeDetector from 'react-resize-detector';
@@ -111,7 +112,7 @@ class Index extends Component {
             <h1 id="tcefh1" className="scale--js">{this.props.t('AppName')}</h1>
           </div>
           <p>Siempre alerta a los fuegos en nuestro vecindario</p>
-          <button type="button" className="btn btn-raised btn-lg btn-warning">PARTICIPA</button>
+          <Link className="participe-btn btn btn-lg btn-warning" role="button" to="/signup">{this.props.t('PARTICIPA')}</Link>
         </div>
       </section>
     </div>

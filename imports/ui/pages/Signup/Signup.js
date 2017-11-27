@@ -1,5 +1,6 @@
 import React from 'react';
-import { Row, Col, FormGroup, ControlLabel, Button } from 'react-bootstrap';
+import { Row, FormGroup, ControlLabel, Button } from 'react-bootstrap';
+import Col from '../../components/Col/Col';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';

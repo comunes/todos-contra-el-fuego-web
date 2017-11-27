@@ -4,3 +4,25 @@
   border-right: none;
   border-top: none;
 }
+
+a.navbar-dark:hover {
+  text-decoration: none;
+  color: gray;
+}
+
+a.navbar-dark,
+a.nav-link {
+  color: white;
+}
+
+a.nav-link:hover {
+  color: gray;
+}
+
+.nav-link {
+  padding: 0rem 0.8rem;
+}
+
+.navbar {
+  padding: 0.3rem 1rem;
+}

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Row, Col, Alert, FormGroup, ControlLabel, Button } from 'react-bootstrap';
+import { Row, Alert, FormGroup, ControlLabel, Button } from 'react-bootstrap';
+import Col from '../../components/Col/Col';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Accounts } from 'meteor/accounts-base';

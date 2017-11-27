@@ -2,7 +2,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col, FormGroup, ControlLabel, Button } from 'react-bootstrap';
+import { Row, FormGroup, ControlLabel, Button } from 'react-bootstrap';
+import Col from '../../components/Col/Col';
 import _ from 'lodash';
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';

@@ -80,6 +80,7 @@ i18n.use(backend)
   }, function(err, t) {
     // initialized and ready to
     // console.log(t('AppName'));
+    document.title = t("AppName");
   });
 
 export default i18n;

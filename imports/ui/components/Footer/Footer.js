@@ -14,19 +14,20 @@ const copyrightYear = () => {
 const Footer = (props) => {
   const { t } = props;
   return (
-  <div className="Footer">
-    <Grid>
-      <p className="pull-left">&copy; Copyleft {copyrightYear()} <a href="https://comunes.org/">{t('OrgNameFull')}</a></p>
-      <ul className="pull-right">
-        <li><Link to="/terms"> {t('Términos')}<span className="hidden-xs"> {t('de Servicio')}</span></Link></li>
-        <li><Link to="/privacy">{t('Política')}<span className="hidden-xs"> {t('de Privacidad')}</span></Link></li>
-        <li><Link to="/license">{t('Licencia')}<span className="hidden-xs"></span></Link></li>
-      </ul>
-    </Grid>
-  </div>
+    <div className="Footer">
+      <Grid>
+        <p className="pull-left"><span className="reverse">&copy;</span><span className="d-none d-md-inline"> Copyleft</span> {copyrightYear()} <a href="https://comunes.org/"><span className="d-none d-md-inline">{t('OrgNameFull')}</span><span className="d-inline d-md-none">{t('OrgName')}</span></a></p>
+
+        <ul className="pull-right">
+          <li><Link to="/terms"> {t('Términos')}<span className="d-none d-md-inline"> {t('de Servicio')}</span></Link></li>
+          <li><Link to="/privacy"><span className="d-none d-md-inline">{t('Política de')} </span>{t('Privacidad')}</Link></li>
+          <li><span className="d-none d-md-inline"><Link to="/license">{t('Licencia')}</Link></span></li>
+        </ul>
+      </Grid>
+    </div>
   );
 };
 
 Footer.propTypes = {};
 
-export default translate([], { wait: true })(Footer);
+export default translate([], { wait: true })(Footer)
