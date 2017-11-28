@@ -8,11 +8,12 @@ import { Bert } from 'meteor/themeteorchef:bert';
 import OAuthLoginButtons from '../../components/OAuthLoginButtons/OAuthLoginButtons';
 import AccountPageFooter from '../../components/AccountPageFooter/AccountPageFooter';
 import validate from '../../../modules/validate';
-
+import { translate } from 'react-i18next';
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
+    this.t = props.t;
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -31,11 +32,11 @@ class Login extends React.Component {
       },
       messages: {
         emailAddress: {
-          required: 'Need an email address here.',
-          email: 'Is this email address correct?',
+          required: this.t("Necesitamos un correo aquí."),
+          email: this.t("¿Es este correo correcto?"),
         },
         password: {
-          required: 'Need a password here.',
+          required: this.t("Necesitamos una contraseña aquí."),
         },
       },
       submitHandler() { component.handleSubmit(); },
@@ -49,7 +50,7 @@ class Login extends React.Component {
       if (error) {
         Bert.alert(error.reason, 'danger');
       } else {
-        Bert.alert('Welcome back!', 'success');
+        Bert.alert(this.t('Bienvenid@ de nuevo'), 'success');
       }
     });
   }
@@ -58,21 +59,21 @@ class Login extends React.Component {
     return (<div className="Login">
       <Row>
         <Col xs={12} sm={6} md={5} lg={4}>
-          <h4 className="page-header">Log In</h4>
+          <h4 className="page-header">{this.t("Iniciar sesión")}</h4>
           <Row>
             <Col xs={12}>
               <OAuthLoginButtons
                 services={['google']}
                 emailMessage={{
                   offset: 100,
-                  text: 'Log In with an Email Address',
+                  text: this.t('o inicia sesión con un correo'),
                 }}
               />
             </Col>
           </Row>
           <form ref={form => (this.form = form)} onSubmit={event => event.preventDefault()}>
             <FormGroup>
-              <ControlLabel>Email Address</ControlLabel>
+              <ControlLabel>{this.t("Correo electrónico")}</ControlLabel>
               <input
                 type="email"
                 name="emailAddress"
@@ -82,8 +83,8 @@ class Login extends React.Component {
             </FormGroup>
             <FormGroup>
               <ControlLabel className="clearfix">
-                <span className="pull-left">Password</span>
-                <Link className="pull-right" to="/recover-password">Forgot password?</Link>
+                <span className="pull-left">{this.t("Contraseña")}</span>
+                <Link className="pull-right" to="/recover-password">{this.t("¿Olvidaste tu contraseña?")}</Link>
               </ControlLabel>
               <input
                 type="password"
@@ -92,9 +93,9 @@ class Login extends React.Component {
                 className="form-control"
               />
             </FormGroup>
-            <Button type="submit" bsStyle="success">Log In</Button>
+            <Button type="submit" bsStyle="success">{this.t("Iniciar sesión")}</Button>
             <AccountPageFooter>
-              <p>{'Don\'t have an account?'} <Link to="/signup">Sign Up</Link>.</p>
+              <p>{this.t("¿No tienes una cuenta?")} <Link to="/signup">{this.t("Regístrate")}</Link>.</p>
             </AccountPageFooter>
           </form>
         </Col>
@@ -107,4 +108,4 @@ Login.propTypes = {
   history: PropTypes.object.isRequired,
 };
 
-export default Login;
+export default translate([], { wait: true })(Login);

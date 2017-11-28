@@ -7,10 +7,12 @@ import { Accounts } from 'meteor/accounts-base';
 import { Bert } from 'meteor/themeteorchef:bert';
 import AccountPageFooter from '../../components/AccountPageFooter/AccountPageFooter';
 import validate from '../../../modules/validate';
+import { translate } from 'react-i18next';
 
 class RecoverPassword extends React.Component {
   constructor(props) {
     super(props);
+    this.t = props.t;
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -37,12 +39,13 @@ class RecoverPassword extends React.Component {
   handleSubmit() {
     const { history } = this.props;
     const email = this.emailAddress.value;
+    const t = this.props.t;
 
-    Accounts.forgotPassword({ email }, (error) => {
+    Accounts.forgotPassword({ email, t }, (error) => {
       if (error) {
         Bert.alert(error.reason, 'danger');
       } else {
-        Bert.alert(`Check ${email} for a reset link!`, 'success');
+        Bert.alert(t("checkResetEmail", {email: email}), 'success');
         history.push('/login');
       }
     });
@@ -52,13 +55,13 @@ class RecoverPassword extends React.Component {
     return (<div className="RecoverPassword">
       <Row>
         <Col xs={12} sm={6} md={5} lg={4}>
-          <h4 className="page-header">Recover Password</h4>
+          <h4 className="page-header">{this.t("Recupera tu contraseña")}</h4>
           <Alert bsStyle="info">
-            Enter your email address below to receive a link to reset your password.
+            {this.t("Introduce tu correo abajo para recibir un enlace para resetear tu contraseña.")}
           </Alert>
           <form ref={form => (this.form = form)} onSubmit={event => event.preventDefault()}>
             <FormGroup>
-              <ControlLabel>Email Address</ControlLabel>
+              <ControlLabel>{this.t("Correo electrónico")}</ControlLabel>
               <input
                 type="email"
                 name="emailAddress"
@@ -66,9 +69,9 @@ class RecoverPassword extends React.Component {
                 className="form-control"
               />
             </FormGroup>
-            <Button type="submit" bsStyle="success">Recover Password</Button>
+            <Button type="submit" bsStyle="success">{this.t("Recupera tu contraseña")}</Button>
             <AccountPageFooter>
-              <p>Remember your password? <Link to="/login">Log In</Link>.</p>
+              <p>{this.t("¿Recuerdas tu contraseña?")} <Link to="/login">{this.t("Iniciar sesión")}</Link>.</p>
             </AccountPageFooter>
           </form>
         </Col>
@@ -81,4 +84,4 @@ RecoverPassword.propTypes = {
   history: PropTypes.object.isRequired,
 };
 
-export default RecoverPassword;
+export default translate([], { wait: true })(RecoverPassword);

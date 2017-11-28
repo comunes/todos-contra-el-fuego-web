@@ -12,5 +12,71 @@
   "Licencia": "Licencia",
   "Cerrar sesión": "Cerrar sesión",
   "Registrarse": "Registrarse",
-  "Iniciar sesión": "Iniciar sesión"
+  "Iniciar sesión": "Iniciar sesión",
+  "o regístrate con un correo":
+  "o regístrate con un correo",
+  "o inicia sesión con un correo":
+  "o inicia sesión con un correo",
+  "Nombre":
+  "Nombre",
+  "Apellidos":
+  "Apellidos",
+  "Correo electrónico":
+  "Correo electrónico",
+  "Contraseña":
+  "Contraseña",
+  "¿Ya tienes un cuenta?":
+  "¿Ya tienes un cuenta?",
+  "Usa al menos seis caracteres.":
+  "Usa al menos seis caracteres.",
+  "Iniciar sesión con Google":
+  "Iniciar sesión con Google",
+  "¿Olvidaste tu contraseña":
+  "¿Olvidaste tu contraseña",
+  "¿No tienes una cuenta?":
+  "¿No tienes una cuenta?",
+  "Introduce tu correo abajo para recibir un enlace para resetear tu contraseña.":
+  "Introduce tu correo abajo para recibir un enlace para resetear tu contraseña.",
+  "Recupera tu contraseña":
+  "Recupera tu contraseña",
+  "¿Recuerdas tu contraseña?":
+  "¿Recuerdas tu contraseña?",
+  "Necesitamos un correo aquí.":
+  "Necesitamos un correo aquí.",
+  "¿Es este correo correcto?":
+  "¿Es este correo correcto?",
+  "Necesitamos una contraseña aquí.":
+  "Necesitamos una contraseña aquí.",
+  "Bienvenid@ de nuevo":
+  "Bienvenid@ de nuevo",
+  "Guardar perfíl":
+  "Guardar perfíl",
+  "Contraseña actual":
+  "Contraseña actual",
+  "Nueva contraseña":
+  "Nueva contraseña",
+  "Editar perfíl":
+  "Editar perfíl",
+  "Editar perfíl en":
+  "Editar perfíl en",
+  "¡Perfíl actualizado!":
+  "¡Perfíl actualizado!",
+  "¿Cuál es tu nombre?":
+  "¿Cuál es tu nombre?",
+  "¿Cuál es tu apellido?":
+  "¿Cuál es tu apellido?",
+  "Necesito tu contraseña si la quieres cambiar.":
+  "Necesito tu contraseña si la quieres cambiar.",
+  "Necesito tu nueva contraseña si la quieres cambiar.":
+  "Necesito tu nueva contraseña si la quieres cambiar.",
+  "¿Es correcto este correo?":
+  "¿Es correcto este correo?",
+  "verifyEmail":
+  "¡Ey! ¿Nos puedes verificar tu correo electrónico ({{email}})?",
+  "Reenviar email de verificación":
+  "Reenviar email de verificación",
+  "checkVerificationEmail":
+  "¡Comprueba en tu correo {{email}} el enlace de verificación!",
+  "checkResetEmail":
+  "¡Comprueba en tu correo {{email}} el enlace de reseteo!"
 }

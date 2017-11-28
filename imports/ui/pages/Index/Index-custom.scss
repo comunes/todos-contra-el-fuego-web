@@ -1,3 +1,5 @@
+@import '../../stylesheets/colors';
+
 .carousel-item {
   height: 65vh;
   min-height: 300px;
@@ -134,5 +136,6 @@
 }
 
 .participe-btn {
-  background-color: #FD593A
+  background-color: $todos-palette1;
+  color: white;
 }

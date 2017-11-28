@@ -2,8 +2,8 @@
 @import '../../stylesheets/colors';
 
 .Logout {
-  padding: 20px;
-  background: $cb-blue;
+  margin: 20px;
+  background: $todos-palette3;
   text-align: center;
   border-radius: 3px;
   color: #fff;
@@ -19,7 +19,7 @@
 
   p {
     font-size: 18px;
-    color: lighten($cb-blue, 25%);
+    color: lighten($todos-palette3, 25%);
   }
 
   ul {

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { Bert } from 'meteor/themeteorchef:bert';
 import Icon from '../Icon/Icon';
+import { translate, Trans } from 'react-i18next';
 
 import './OAuthLoginButton.scss';
 
@@ -31,9 +32,9 @@ const handleLogin = (service, callback) => {
 };
 
 const serviceLabel = {
-  facebook: <span><Icon icon="facebook-official" /> Log In with Facebook</span>,
-  github: <span><Icon icon="github" /> Log In with GitHub</span>,
-  google: <span><Icon icon="google" /> Log In with Google</span>,
+  facebook: <span><Icon icon="facebook-official" /> <Trans parent="span">Log In with Facebook</Trans></span>,
+  github: <span><Icon icon="github" /> <Trans parent="span">Log In with GitHub</Trans></span>,
+  google: <span><Icon icon="google" /> <Trans parent="span">Iniciar sesión con Google</Trans></span>,
 };
 
 const OAuthLoginButton = ({ service, callback }) => (
@@ -57,4 +58,4 @@ OAuthLoginButton.propTypes = {
   callback: PropTypes.func,
 };
 
-export default OAuthLoginButton;
+export default translate([], { wait: true })(OAuthLoginButton);

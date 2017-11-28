@@ -10,10 +10,14 @@ import OAuthLoginButtons from '../../components/OAuthLoginButtons/OAuthLoginButt
 import InputHint from '../../components/InputHint/InputHint';
 import AccountPageFooter from '../../components/AccountPageFooter/AccountPageFooter';
 import validate from '../../../modules/validate';
+import Icon from '../../components/Icon/Icon';
+import './Signup.scss';
+import { translate } from 'react-i18next';
 
 class Signup extends React.Component {
   constructor(props) {
     super(props);
+    this.t = this.props.t;
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -84,14 +88,21 @@ class Signup extends React.Component {
     return (<div className="Signup">
       <Row>
         <Col xs={12} sm={6} md={5} lg={4}>
-          <h4 className="page-header">Sign Up</h4>
+          <h4 className="page-header">{this.t("Registrarse")}</h4>
           <Row>
             <Col xs={12}>
+                <button
+                    className={`btn btn-block btn-raised btn-primary OAuthLoginButtonDis OAuthLoginButton-telegram`}
+                    type="button" onClick={() => handleLogin(service, callback)}>
+                  <span><Icon icon="telegram" /> Usa nuestro bot de Telegram</span>
+                </button>
+            </Col>
+            <Col xs={12}>
               <OAuthLoginButtons
-                services={['google']}
+                services={['telegram', 'google']}
                 emailMessage={{
                   offset: 97,
-                  text: 'Sign Up with an Email Address',
+                  text: this.t('o regístrate con un correo'),
                 }}
               />
             </Col>
@@ -100,7 +111,7 @@ class Signup extends React.Component {
             <Row>
               <Col xs={6}>
                 <FormGroup>
-                  <ControlLabel>First Name</ControlLabel>
+                  <ControlLabel>{this.t("Nombre")}</ControlLabel>
                   <input
                     type="text"
                     name="firstName"
@@ -111,7 +122,7 @@ class Signup extends React.Component {
               </Col>
               <Col xs={6}>
                 <FormGroup>
-                  <ControlLabel>Last Name</ControlLabel>
+                  <ControlLabel>{this.t("Apellidos")}</ControlLabel>
                   <input
                     type="text"
                     name="lastName"
@@ -122,7 +133,7 @@ class Signup extends React.Component {
               </Col>
             </Row>
             <FormGroup>
-              <ControlLabel>Email Address</ControlLabel>
+              <ControlLabel>{this.t("Correo electrónico")}</ControlLabel>
               <input
                 type="email"
                 name="emailAddress"
@@ -131,18 +142,18 @@ class Signup extends React.Component {
               />
             </FormGroup>
             <FormGroup>
-              <ControlLabel>Password</ControlLabel>
+              <ControlLabel>{this.t("Contraseña")}</ControlLabel>
               <input
                 type="password"
                 name="password"
                 ref={password => (this.password = password)}
                 className="form-control"
               />
-              <InputHint>Use at least six characters.</InputHint>
+              <InputHint>{this.t("Usa al menos seis caracteres.")}</InputHint>
             </FormGroup>
-            <Button type="submit" bsStyle="success">Sign Up</Button>
+            <Button type="submit" bsStyle="success">{this.t("Registrarse")}</Button>
             <AccountPageFooter>
-              <p>Already have an account? <Link to="/login">Log In</Link>.</p>
+              <p>{this.t("¿Ya tienes un cuenta?")} <Link to="/login">{this.t("Iniciar sesión")}</Link>.</p>
             </AccountPageFooter>
           </form>
         </Col>
@@ -155,4 +166,4 @@ Signup.propTypes = {
   history: PropTypes.object.isRequired,
 };
 
-export default Signup;
+export default translate([], { wait: true })(Signup)

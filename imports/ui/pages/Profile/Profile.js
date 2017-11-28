@@ -11,6 +11,7 @@ import { Bert } from 'meteor/themeteorchef:bert';
 import { createContainer } from 'meteor/react-meteor-data';
 import InputHint from '../../components/InputHint/InputHint';
 import validate from '../../../modules/validate';
+import { translate } from 'react-i18next';
 
 import './Profile.scss';
 
@@ -18,6 +19,7 @@ class Profile extends React.Component {
   constructor(props) {
     super(props);
 
+    this.t = this.props.t;
     this.getUserType = this.getUserType.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderOAuthUser = this.renderOAuthUser.bind(this);
@@ -31,14 +33,14 @@ class Profile extends React.Component {
     validate(component.form, {
       rules: {
         firstName: {
-          required: true,
+          required: true
         },
         lastName: {
-          required: true,
+          required: true
         },
         emailAddress: {
           required: true,
-          email: true,
+          email: true
         },
         currentPassword: {
           required() {
@@ -55,20 +57,20 @@ class Profile extends React.Component {
       },
       messages: {
         firstName: {
-          required: 'What\'s your first name?',
+          required: this.t("¿Cuál es tu nombre?"),
         },
         lastName: {
-          required: 'What\'s your last name?',
+          required: this.t("¿Cuál es tu apellido?"),
         },
         emailAddress: {
-          required: 'Need an email address here.',
-          email: 'Is this email address correct?',
+          required: this.t("Necesitamos una contraseña aquí."),
+          email: this.t("¿Es correcto este correo?"),
         },
         currentPassword: {
-          required: 'Need your current password if changing.',
+          required: this.t("Necesito tu contraseña si la quieres cambiar."),
         },
         newPassword: {
-          required: 'Need your new password if changing.',
+          required: this.t("Necesito tu nueva contraseña si la quieres cambiar."),
         },
       },
       submitHandler() { component.handleSubmit(); },
@@ -97,7 +99,7 @@ class Profile extends React.Component {
       if (error) {
         Bert.alert(error.reason, 'danger');
       } else {
-        Bert.alert('Profile updated!', 'success');
+        Bert.alert(this.t("¡Perfíl actualizado!"), 'success');
       }
     });
 
@@ -127,7 +129,7 @@ class Profile extends React.Component {
               github: 'https://github.com/settings/profile',
             }[service]}
             target="_blank"
-          >Edit Profile on {_.capitalize(service)}</Button>
+          >{this.t("Editar perfíl en")} {_.capitalize(service)}</Button>
         </div>
       ))}
     </div>) : <div />;
@@ -138,7 +140,7 @@ class Profile extends React.Component {
       <Row>
         <Col xs={6}>
           <FormGroup>
-            <ControlLabel>First Name</ControlLabel>
+            <ControlLabel>{this.t("Nombre")}</ControlLabel>
             <input
               type="text"
               name="firstName"
@@ -150,7 +152,7 @@ class Profile extends React.Component {
         </Col>
         <Col xs={6}>
           <FormGroup>
-            <ControlLabel>Last Name</ControlLabel>
+            <ControlLabel>{this.t("Apellidos")}</ControlLabel>
             <input
               type="text"
               name="lastName"
@@ -162,7 +164,7 @@ class Profile extends React.Component {
         </Col>
       </Row>
       <FormGroup>
-        <ControlLabel>Email Address</ControlLabel>
+        <ControlLabel>{this.t("Correo electrónico")}</ControlLabel>
         <input
           type="email"
           name="emailAddress"
@@ -172,7 +174,7 @@ class Profile extends React.Component {
         />
       </FormGroup>
       <FormGroup>
-        <ControlLabel>Current Password</ControlLabel>
+        <ControlLabel>{this.t("Contraseña actual")}</ControlLabel>
         <input
           type="password"
           name="currentPassword"
@@ -181,16 +183,16 @@ class Profile extends React.Component {
         />
       </FormGroup>
       <FormGroup>
-        <ControlLabel>New Password</ControlLabel>
+        <ControlLabel>{this.t("Nueva contraseña")}</ControlLabel>
         <input
           type="password"
           name="newPassword"
           ref={newPassword => (this.newPassword = newPassword)}
           className="form-control"
         />
-        <InputHint>Use at least six characters.</InputHint>
+        <InputHint>{this.t("Usa al menos seis caracteres.")}</InputHint>
       </FormGroup>
-      <Button type="submit" bsStyle="success">Save Profile</Button>
+      <Button type="submit" bsStyle="success">{this.t("Guardar perfíl")}</Button>
     </div>) : <div />;
   }
 
@@ -206,7 +208,7 @@ class Profile extends React.Component {
     return (<div className="Profile">
       <Row>
         <Col xs={12} sm={6} md={4}>
-          <h4 className="page-header">Edit Profile</h4>
+          <h4 className="page-header">{this.t("Editar perfíl")}</h4>
           <form ref={form => (this.form = form)} onSubmit={event => event.preventDefault()}>
             {this.renderProfileForm(loading, user)}
           </form>
@@ -218,14 +220,14 @@ class Profile extends React.Component {
 
 Profile.propTypes = {
   loading: PropTypes.bool.isRequired,
-  user: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired
 };
 
-export default createContainer(() => {
+export default translate([], { wait: true })(createContainer(() => {
   const subscription = Meteor.subscribe('users.editProfile');
 
   return {
     loading: !subscription.ready(),
-    user: Meteor.user(),
+    user: Meteor.user()
   };
-}, Profile);
+}, Profile));

@@ -1,5 +1,6 @@
 import React from 'react';
 import Icon from '../../components/Icon/Icon';
+import { translate, Trans } from 'react-i18next';
 
 import './Logout.scss';
 
@@ -11,16 +12,11 @@ class Logout extends React.Component {
   render() {
     return (
       <div className="Logout">
-        <img
-          src="https://s3-us-west-2.amazonaws.com/cleverbeagle-assets/graphics/email-icon.png"
-          alt="Clever Beagle"
-        />
-        <h1>Stay safe out there.</h1>
-        <p>{'Don\'t forget to like and follow Clever Beagle elsewhere on the web:'}</p>
+        <h1><Trans parent="span">Gracias por Participar</Trans></h1>
+        <p><Trans parent="span">También puedes seguirnos en la web</Trans></p>
         <ul className="FollowUsElsewhere">
-          <li><a href="https://facebook.com/cleverbeagle"><Icon icon="facebook-official" /></a></li>
-          <li><a href="https://twitter.com/clvrbgl"><Icon icon="twitter" /></a></li>
-          <li><a href="https://github.com/cleverbeagle"><Icon icon="github" /></a></li>
+          <li><a href="https://twitter.com/TsContraElFuego"><Icon icon="twitter" /></a></li>
+          <li><a href="https://github.com/comunes/todos-contra-el-fuego"><Icon icon="github" /></a></li>
         </ul>
       </div>
     );
@@ -29,4 +25,4 @@ class Logout extends React.Component {
 
 Logout.propTypes = {};
 
-export default Logout;
+export default translate([], { wait: true })(Logout);
