@@ -77,5 +77,27 @@
   "checkVerificationEmail":
   "Check {{email}} for a verification link!",
   "checkResetEmail":
-  "Check ${email} for a reset link!"
+  "Check ${email} for a reset link!",
+  "¡Listo, gracias!":
+  "All set, thanks!",
+  "Por favor, inténtalo otra vez.":
+  "Please try again.",
+  "Verificando...":
+  "Verifying...",
+  "Introduce una nueva contraseña, por favor.":
+  "Enter a new password, please.",
+  "Repite tu nueva contraseña, por favor.":
+  "Repeat your new password, please.",
+  "Mmmm, tus contraseñas no coinciden. Inténtalo otra vez":
+  "Hmm, your passwords don't match. Try again",
+  "Para resetear tu contraseña, introduce una nueva debajo. Iniciarás la sesión con la nueva contraseña.":
+  "To reset your password, enter a new one below. You will be logged in with your new password.",
+  "Resetea tu contraseña":
+  "Reset Password",
+  "Nueva contraseña":
+  "New Password",
+  "Repite la nueva contraseña":
+  "Repeat New Password",
+  "Resetea la contraseña y entra":
+  "Reset Password &amp; Login"
 }

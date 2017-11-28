@@ -86,7 +86,7 @@ class Signup extends React.Component {
 
   render() {
     return (<div className="Signup">
-      <Row>
+      <Row className="align-items-center justify-content-center">
         <Col xs={12} sm={6} md={5} lg={4}>
           <h4 className="page-header">{this.t("Registrarse")}</h4>
           <Row>

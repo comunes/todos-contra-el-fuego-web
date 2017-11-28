@@ -16,7 +16,7 @@ const Footer = (props) => {
   return (
     <div className="Footer">
       <Grid>
-        <p className="pull-left"><span className="reverse">&copy;</span><span className="d-none d-md-inline"> Copyleft</span> {copyrightYear()} <a href="https://comunes.org/"><span className="d-none d-md-inline">{t('OrgNameFull')}</span><span className="d-inline d-md-none">{t('OrgName')}</span></a></p>
+        <p className="pull-left"><span className="reverse">&copy;</span><span className="d-none d-md-inline"> Copyleft</span> {copyrightYear()} <a href="https://comunes.org/"><span className="d-none d-md-inline">{t('OrgName')}</span><span className="d-inline d-md-none">{t('OrgName')}</span></a></p>
 
         <ul className="pull-right">
           <li><Link to="/terms"> {t('Términos')}<span className="d-none d-md-inline"> {t('de Servicio')}</span></Link></li>

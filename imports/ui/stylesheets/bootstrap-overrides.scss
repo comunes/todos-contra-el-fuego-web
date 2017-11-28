@@ -9,3 +9,7 @@
     margin-top: 20px;
   }
 }
+
+body {
+  background-color: lighten($todos-palette5, 70%);
+}

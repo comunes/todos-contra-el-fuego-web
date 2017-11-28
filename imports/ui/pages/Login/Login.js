@@ -57,7 +57,7 @@ class Login extends React.Component {
 
   render() {
     return (<div className="Login">
-      <Row>
+      <Row className="align-items-center justify-content-center">
         <Col xs={12} sm={6} md={5} lg={4}>
           <h4 className="page-header">{this.t("Iniciar sesión")}</h4>
           <Row>

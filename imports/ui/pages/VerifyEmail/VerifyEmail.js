@@ -4,10 +4,12 @@ import { Alert } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Bert } from 'meteor/themeteorchef:bert';
+import { translate } from 'react-i18next';
 
 class VerifyEmail extends React.Component {
   constructor(props) {
     super(props);
+    this.t = props.t;
     this.state = { error: null };
   }
 
@@ -16,10 +18,11 @@ class VerifyEmail extends React.Component {
     Accounts.verifyEmail(match.params.token, (error) => {
       if (error) {
         Bert.alert(error.reason, 'danger');
-        this.setState({ error: `${error.reason}. Please try again.` });
+        this.setState({ error: error.reason + ". " + this.t("Por favor, inténtalo otra vez.")});
+        // this.setState({ error: `${error.reason}. Please try again.` });
       } else {
         setTimeout(() => {
-          Bert.alert('All set, thanks!', 'success');
+          Bert.alert(this.t("¡Listo, gracias!"), 'success');
           history.push('/documents');
         }, 1500);
       }
@@ -29,7 +32,7 @@ class VerifyEmail extends React.Component {
   render() {
     return (<div className="VerifyEmail">
       <Alert bsStyle={!this.state.error ? 'info' : 'danger'}>
-        {!this.state.error ? 'Verifying...' : this.state.error}
+        {!this.state.error ? this.t('Verificando...') : this.state.error}
       </Alert>
     </div>);
   }
@@ -40,4 +43,4 @@ VerifyEmail.propTypes = {
   history: PropTypes.object.isRequired,
 };
 
-export default VerifyEmail;
+export default translate([], { wait: true })(VerifyEmail);

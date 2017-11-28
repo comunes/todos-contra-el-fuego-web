@@ -5,10 +5,12 @@ import Col from '../../components/Col/Col';
 import { Accounts } from 'meteor/accounts-base';
 import { Bert } from 'meteor/themeteorchef:bert';
 import validate from '../../../modules/validate';
+import { translate } from 'react-i18next';
 
 class ResetPassword extends React.Component {
   constructor(props) {
     super(props);
+    this.t = props.t;
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -29,12 +31,13 @@ class ResetPassword extends React.Component {
       },
       messages: {
         newPassword: {
-          required: 'Enter a new password, please.',
-          minlength: 'Use at least six characters, please.',
+          required: this.t("Introduce una nueva contraseña, por favor."),
+          minlength: this.t("Usa al menos seis caracteres."),
         },
         repeatNewPassword: {
-          required: 'Repeat your new password, please.',
-          equalTo: 'Hmm, your passwords don\'t match. Try again?',
+          required: this.t("Repite tu nueva contraseña, por favor."),
+          equalTo: this.t("Mmmm, tus contraseñas no coinciden. ¿Inténtalo otra vez?"),
+          minlength: this.t("Usa al menos seis caracteres."),
         },
       },
       submitHandler() { component.handleSubmit(); },
@@ -56,35 +59,34 @@ class ResetPassword extends React.Component {
 
   render() {
     return (<div className="ResetPassword">
-      <Row>
+      <Row className="align-items-center justify-content-center">
         <Col xs={12} sm={6} md={4}>
-          <h4 className="page-header">Reset Password</h4>
+          <h4 className="page-header">{this.t("Resetea tu contraseña")}</h4>
           <Alert bsStyle="info">
-            To reset your password, enter a new one below. You will be logged in
-with your new password.
+            { this.t("Para resetear tu contraseña, introduce una nueva debajo. Iniciarás la sesión con la nueva contraseña.") }
           </Alert>
           <form ref={form => (this.form = form)} onSubmit={event => event.preventDefault()}>
             <FormGroup>
-              <ControlLabel>New Password</ControlLabel>
+              <ControlLabel>{this.t("Nueva contraseña")}</ControlLabel>
               <input
                 type="password"
                 className="form-control"
                 ref={newPassword => (this.newPassword = newPassword)}
                 name="newPassword"
-                placeholder="New Password"
+                placeholder={this.t("Nueva contraseña")}
               />
             </FormGroup>
             <FormGroup>
-              <ControlLabel>Repeat New Password</ControlLabel>
+              <ControlLabel>{this.t("Repite la nueva contraseña")}</ControlLabel>
               <input
                 type="password"
                 className="form-control"
                 ref={repeatNewPassword => (this.repeatNewPassword = repeatNewPassword)}
                 name="repeatNewPassword"
-                placeholder="Repeat New Password"
+                placeholder={this.t("Repite la nueva contraseña")}
               />
             </FormGroup>
-            <Button type="submit" bsStyle="success">Reset Password &amp; Login</Button>
+            <Button type="submit" bsStyle="success">{this.t("Resetea la contraseña y entra")}</Button>
           </form>
         </Col>
       </Row>
@@ -97,4 +99,4 @@ ResetPassword.propTypes = {
   history: PropTypes.object.isRequired,
 };
 
-export default ResetPassword;
+export default translate([], { wait: true })(ResetPassword);

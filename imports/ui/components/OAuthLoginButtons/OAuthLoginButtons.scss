@@ -10,7 +10,8 @@
 
     .EmailMessage {
       display: inline-block;
-      background: #fff;
+      background: #fff; /* default */
+      background: lighten($todos-palette5, 70%);
       padding: 0 10px;
       position: absolute;
       bottom: -27px;

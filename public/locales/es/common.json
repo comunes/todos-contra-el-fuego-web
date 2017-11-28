@@ -78,5 +78,27 @@
   "checkVerificationEmail":
   "¡Comprueba en tu correo {{email}} el enlace de verificación!",
   "checkResetEmail":
-  "¡Comprueba en tu correo {{email}} el enlace de reseteo!"
+  "¡Comprueba en tu correo {{email}} el enlace de reseteo!",
+  "¡Listo, gracias!":
+  "¡Listo, gracias!",
+  "Por favor, inténtalo otra vez.":
+  "Por favor, inténtalo otra vez.",
+  "Verificando...":
+  "Verificando...",
+  "Introduce una nueva contraseña, por favor.":
+  "Introduce una nueva contraseña, por favor.",
+  "Repite tu nueva contraseña, por favor.":
+  "Repite tu nueva contraseña, por favor.",
+  "Mmmm, tus contraseñas no coinciden. Inténtalo otra vez":
+  "Mmmm, tus contraseñas no coinciden. Inténtalo otra vez",
+  "Para resetear tu contraseña, introduce una nueva debajo. Iniciarás la sesión con la nueva contraseña.":
+  "Para resetear tu contraseña, introduce una nueva abajo. Iniciarás la sesión con la nueva contraseña.",
+  "Resetea tu contraseña":
+  "Resetea tu contraseña",
+  "Nueva contraseña":
+  "Nueva contraseña",
+  "Repite la nueva contraseña":
+  "Repite la nueva contraseña",
+  "Resetea la contraseña y entra":
+  "Resetea la contraseña y entra"
 }

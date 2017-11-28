@@ -14,7 +14,7 @@ const Navigation = props => (
     <Navbar.Header>
       {window.location.pathname != '/'?
       <Navbar.Brand>
-        <Link to="/">{props.t('Inicio')}</Link>
+        <Link  to="/">{props.t('AppNameFull')}</Link>
       </Navbar.Brand>: ''
       }
       {/* <Navbar.Toggle/> */}
