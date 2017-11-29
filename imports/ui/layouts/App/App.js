@@ -33,6 +33,7 @@ import Reconnect from '../../components/Reconnect/Reconnect';
 // i18n
 import { I18nextProvider } from 'react-i18next';
 import i18n from '/imports/startup/client/i18n';
+import ravenLogger from '/imports/startup/client/ravenLogger';
 // https://github.com/gadicc/meteor-blaze-react-component/
 import Blaze from 'meteor/gadicc:blaze-react-component';
 
