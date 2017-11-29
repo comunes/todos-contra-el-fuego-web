@@ -207,7 +207,7 @@ class Profile extends React.Component {
   render() {
     const { loading, user } = this.props;
     return (<div className="Profile">
-      <Row>
+      <Row className="align-items-center justify-content-center">
         <Col xs={12} sm={6} md={4}>
           <h4 className="page-header">{this.t("Editar perfíl")}</h4>
           <form ref={form => (this.form = form)} onSubmit={event => event.preventDefault()}>
