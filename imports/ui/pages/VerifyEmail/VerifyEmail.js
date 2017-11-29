@@ -19,7 +19,7 @@ class VerifyEmail extends React.Component {
     Accounts.verifyEmail(match.params.token, (error) => {
       if (error) {
         Bert.alert(T9n.get(`error.accounts.${error.reason}`), 'danger');
-        this.setState({ error: error.reason + ". " + this.t("Por favor, inténtalo otra vez.")});
+        this.setState({ error: T9n.get(`error.accounts.${error.reason}`) + ". " + this.t("Por favor, inténtalo otra vez.")});
         // this.setState({ error: `${error.reason}. Please try again.` });
       } else {
         setTimeout(() => {
