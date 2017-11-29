@@ -112,7 +112,7 @@ class Index extends Component {
             <h1 id="tcefh1" className="scale--js">{this.props.t('AppName')}</h1>
           </div>
           <p>Siempre alerta a los fuegos en nuestro vecindario</p>
-          <Link className="participe-btn btn btn-lg btn-warning" role="button" to="/signup">{this.props.t('PARTICIPA')}</Link>
+          <Link className="participe-btn btn btn-lg btn-warning" role="button" to="/signup">{this.props.t('Participa')}</Link>
         </div>
       </section>
     </div>
