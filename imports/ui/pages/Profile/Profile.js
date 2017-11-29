@@ -12,6 +12,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 import InputHint from '../../components/InputHint/InputHint';
 import validate from '../../../modules/validate';
 import { translate } from 'react-i18next';
+import { T9n } from 'meteor-accounts-t9n';
 
 import './Profile.scss';
 
@@ -97,7 +98,7 @@ class Profile extends React.Component {
 
     Meteor.call('users.editProfile', profile, (error) => {
       if (error) {
-        Bert.alert(error.reason, 'danger');
+        Bert.alert(T9n.get(`error.accounts.${error.reason}`), 'danger');
       } else {
         Bert.alert(this.t("¡Perfíl actualizado!"), 'success');
       }
@@ -106,7 +107,7 @@ class Profile extends React.Component {
     if (this.newPassword.value) {
       Accounts.changePassword(this.currentPassword.value, this.newPassword.value, (error) => {
         if (error) {
-          Bert.alert(error.reason, 'danger');
+          Bert.alert(T9n.get(`error.accounts.${error.reason}`), 'danger');
         } else {
           this.currentPassword.value = '';
           this.newPassword.value = '';

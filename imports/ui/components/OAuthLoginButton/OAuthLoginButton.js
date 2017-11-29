@@ -4,6 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import { Bert } from 'meteor/themeteorchef:bert';
 import Icon from '../Icon/Icon';
 import { translate, Trans } from 'react-i18next';
+import { T9n } from 'meteor-accounts-t9n';
 
 import './OAuthLoginButton.scss';
 
@@ -49,7 +50,8 @@ const OAuthLoginButton = ({ service, callback }) => (
 
 OAuthLoginButton.defaultProps = {
   callback: (error) => {
-    if (error) Bert.alert(error.message, 'danger');
+    if (error) Bert.alert(T9n.get(`error.accounts.${error.message}`), 'danger');
+    // Bert.alert(error.message, 'danger');
   },
 };
 

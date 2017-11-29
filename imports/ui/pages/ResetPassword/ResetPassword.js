@@ -6,6 +6,7 @@ import { Accounts } from 'meteor/accounts-base';
 import { Bert } from 'meteor/themeteorchef:bert';
 import validate from '../../../modules/validate';
 import { translate } from 'react-i18next';
+import { T9n } from 'meteor-accounts-t9n';
 
 class ResetPassword extends React.Component {
   constructor(props) {
@@ -50,7 +51,7 @@ class ResetPassword extends React.Component {
 
     Accounts.resetPassword(token, this.newPassword.value, (error) => {
       if (error) {
-        Bert.alert(error.reason, 'danger');
+        Bert.alert(T9n.get(`error.accounts.${error.reason}`), 'danger');
       } else {
         history.push('/documents');
       }

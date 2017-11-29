@@ -8,6 +8,7 @@ import { Bert } from 'meteor/themeteorchef:bert';
 import AccountPageFooter from '../../components/AccountPageFooter/AccountPageFooter';
 import validate from '../../../modules/validate';
 import { translate } from 'react-i18next';
+import { T9n } from 'meteor-accounts-t9n';
 
 class RecoverPassword extends React.Component {
   constructor(props) {
@@ -28,8 +29,8 @@ class RecoverPassword extends React.Component {
       },
       messages: {
         emailAddress: {
-          required: 'Need an email address here.',
-          email: 'Is this email address correct?',
+          required: this.t("Necesitamos un correo aquí."),
+          email: this.t("¿Es este correo correcto?"),
         },
       },
       submitHandler() { component.handleSubmit(); },
@@ -43,7 +44,7 @@ class RecoverPassword extends React.Component {
 
     Accounts.forgotPassword({ email, t }, (error) => {
       if (error) {
-        Bert.alert(error.reason, 'danger');
+        Bert.alert(T9n.get(`error.accounts.${error.reason}`), 'danger');
       } else {
         Bert.alert(t("checkResetEmail", {email: email}), 'success');
         history.push('/login');

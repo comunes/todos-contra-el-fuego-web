@@ -13,6 +13,7 @@ import validate from '../../../modules/validate';
 import Icon from '../../components/Icon/Icon';
 import './Signup.scss';
 import { translate } from 'react-i18next';
+import { T9n } from 'meteor-accounts-t9n';
 
 class Signup extends React.Component {
   constructor(props) {
@@ -43,18 +44,18 @@ class Signup extends React.Component {
       },
       messages: {
         firstName: {
-          required: 'What\'s your first name?',
+          required: this.t("¿Cuál es tu nombre?"),
         },
         lastName: {
-          required: 'What\'s your last name?',
+          required: this.t("¿Cuál es tu apellido?"),
         },
         emailAddress: {
-          required: 'Need an email address here.',
-          email: 'Is this email address correct?',
+          required: this.t("Necesitamos una contraseña aquí."),
+          email: this.t("¿Es correcto este correo?"),
         },
         password: {
-          required: 'Need a password here.',
-          minlength: 'Please use at least six characters.',
+          required: this.t("Necesitamos una contraseña aquí."),
+          minlength: this.t("Usa al menos seis caracteres."),
         },
       },
       submitHandler() { component.handleSubmit(); },
@@ -75,7 +76,7 @@ class Signup extends React.Component {
       },
     }, (error) => {
       if (error) {
-        Bert.alert(error.reason, 'danger');
+        Bert.alert(T9n.get(`error.accounts.${error.reason}`), 'danger');
       } else {
         Meteor.call('users.sendVerificationEmail');
         Bert.alert('Welcome!', 'success');
@@ -90,13 +91,13 @@ class Signup extends React.Component {
         <Col xs={12} sm={6} md={5} lg={4}>
           <h4 className="page-header">{this.t("Registrarse")}</h4>
           <Row>
-            <Col xs={12}>
-                <button
-                    className={`btn btn-block btn-raised btn-primary OAuthLoginButtonDis OAuthLoginButton-telegram`}
-                    type="button" onClick={() => handleLogin(service, callback)}>
-                  <span><Icon icon="telegram" /> Usa nuestro bot de Telegram</span>
-                </button>
-            </Col>
+            {/* <Col xs={12}>
+            <button
+            className={`btn btn-block btn-raised btn-primary OAuthLoginButtonDis OAuthLoginButton-telegram`}
+            type="button" onClick={() => handleLogin(service, callback)}>
+            <span><Icon icon="telegram" /> Usa nuestro bot de Telegram</span>
+            </button>
+            </Col> */}
             <Col xs={12}>
               <OAuthLoginButtons
                 services={['telegram', 'google']}

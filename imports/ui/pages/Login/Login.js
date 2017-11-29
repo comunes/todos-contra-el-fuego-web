@@ -9,6 +9,7 @@ import OAuthLoginButtons from '../../components/OAuthLoginButtons/OAuthLoginButt
 import AccountPageFooter from '../../components/AccountPageFooter/AccountPageFooter';
 import validate from '../../../modules/validate';
 import { translate } from 'react-i18next';
+import { T9n } from 'meteor-accounts-t9n';
 
 class Login extends React.Component {
   constructor(props) {
@@ -48,7 +49,7 @@ class Login extends React.Component {
 
     Meteor.loginWithPassword(this.emailAddress.value, this.password.value, (error) => {
       if (error) {
-        Bert.alert(error.reason, 'danger');
+        Bert.alert(T9n.get(`error.accounts.${error.reason}`), 'danger');
       } else {
         Bert.alert(this.t('Bienvenid@ de nuevo'), 'success');
       }

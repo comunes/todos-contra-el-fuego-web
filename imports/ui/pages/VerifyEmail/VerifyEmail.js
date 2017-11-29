@@ -5,6 +5,7 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { translate } from 'react-i18next';
+import { T9n } from 'meteor-accounts-t9n';
 
 class VerifyEmail extends React.Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class VerifyEmail extends React.Component {
     const { match, history } = this.props;
     Accounts.verifyEmail(match.params.token, (error) => {
       if (error) {
-        Bert.alert(error.reason, 'danger');
+        Bert.alert(T9n.get(`error.accounts.${error.reason}`), 'danger');
         this.setState({ error: error.reason + ". " + this.t("Por favor, inténtalo otra vez.")});
         // this.setState({ error: `${error.reason}. Please try again.` });
       } else {

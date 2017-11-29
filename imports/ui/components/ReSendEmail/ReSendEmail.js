@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Alert, Button } from 'react-bootstrap';
 import { t, Trans, translate, Interpolate } from 'react-i18next';
+import { T9n } from 'meteor-accounts-t9n';
 
 const handleResendVerificationEmail = (emailAddress, t) => {
   Meteor.call('users.sendVerificationEmail', (error) => {
     if (error) {
-      Bert.alert(error.reason, 'danger');
+      Bert.alert(T9n.get(`error.accounts.${error.reason}`), 'danger');
     } else {
       Bert.alert(t("checkVerificationEmail", {email: emailAddress}), 'success');
     }

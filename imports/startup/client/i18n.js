@@ -2,6 +2,9 @@ import i18n from 'i18next';
 import backend from 'i18next-xhr-backend';
 import LngDetector from 'i18next-browser-languagedetector';
 import Cache from 'i18next-localstorage-cache';
+import { T9n } from 'meteor-accounts-t9n';
+import en from 'meteor-accounts-t9n/build/en';
+import es from 'meteor-accounts-t9n/build/es';
 
 // Adapted from: https://github.com/appigram/ryfma-boilerplate/blob/44c1eabfb9928b5623afab36a23997969e5beb02/imports/startup/client/i18n.js
 
@@ -41,6 +44,8 @@ var backOpts = {
   jsonIndent: 2
 };
 
+T9N_LANGUAGES='es,en';
+
 i18n.use(backend)
   .use(LngDetector)
   .use(Cache)
@@ -79,8 +84,11 @@ i18n.use(backend)
     }
   }, function(err, t) {
     // initialized and ready to
-    // console.log(t('AppName'));
     document.title = t("AppName");
+    // https://github.com/softwarerero/meteor-accounts-t9n
+    console.log("Language: " + i18n.language);
+    T9n.setLanguage(i18n.language);
+    console.log(T9n.get('error.accounts.User not found'));
   });
 
 export default i18n;

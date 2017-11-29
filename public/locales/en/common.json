@@ -12,6 +12,7 @@
   "Licencia": "License",
   "Cerrar sesión": "Logout",
   "Registrarse": "Sign Up",
+  "Regístrate": "Sign Up",
   "Iniciar sesión": "Login",
   "o regístrate con un correo": "or Sign Up with an Email Address",
   "o inicia sesión con un correo":
@@ -30,7 +31,7 @@
   "Use at least six characters.",
   "Iniciar sesión con Google":
   "Log In with Google",
-  "¿Olvidaste tu contraseña":
+  "¿Olvidaste tu contraseña?":
   "Forgot password?",
   "¿No tienes una cuenta?":
   "Don't have an account?",
