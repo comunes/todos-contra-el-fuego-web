@@ -85,10 +85,30 @@ i18n.use(backend)
   }, function(err, t) {
     // initialized and ready to
     document.title = t("AppName");
+
+    // Accounts translation
     // https://github.com/softwarerero/meteor-accounts-t9n
-    console.log("Language: " + i18n.language);
+    // console.log("Language: " + i18n.language);
     T9n.setLanguage(i18n.language);
-    console.log(T9n.get('error.accounts.User not found'));
+    // console.log(T9n.get('error.accounts.User not found'));
+
+    // cookies eu consent
+    var cookiesOpt = {
+      cookieTitle: t('Uso de Cookies'),
+      cookieMessage: t('Utilizamos cookies para asegurar un mejor uso de nuestra web. Si continúas navegando, consideramos que aceptas su uso'),
+      /* cookieMessage: t('Uso de Cookies'),
+      cookieMessageImply: t('Utilizamos cookies para asegurar un mejor uso de nuestra web. Si continúas navegando, consideramos que aceptas su uso'),*/
+      showLink: false,
+      position: 'bottom',
+      linkText: 'Lee más',
+      linkRouteName: '/',
+      acceptButtonText: 'Aceptar',
+      html: false,
+      expirationInDays: 70,
+      forceShow: false
+    };
+
+    CookieConsent.init(cookiesOpt);
   });
 
 export default i18n;
