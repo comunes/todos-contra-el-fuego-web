@@ -2,7 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Router, Switch, Route } from 'react-router-dom';
 import { Grid, Alert, Button } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
@@ -33,18 +33,25 @@ import Reconnect from '../../components/Reconnect/Reconnect';
 // i18n
 import { I18nextProvider } from 'react-i18next';
 import i18n from '/imports/startup/client/i18n';
+import '/imports/startup/client/piwik-start.js';
 import ravenLogger from '/imports/startup/client/ravenLogger';
 // https://github.com/gadicc/meteor-blaze-react-component/
 import Blaze from 'meteor/gadicc:blaze-react-component';
-
-//https://react.i18next.com/components/i18nextprovider.html
-
+import createHistory from 'history/createBrowserHistory';
+import { check } from 'meteor/check';
 
 import './App.scss';
 
+const history = createHistory()
+history.listen((location, action) => {
+  // console.log(location.pathname);
+  Meteor.Piwik.trackPage(location.pathname);
+});
+
 const App = props => (
+  /* https://react.i18next.com/components/i18nextprovider.html */
   <I18nextProvider i18n={i18n}>
-  <Router>
+  <Router history={history}>
     {!props.loading ? <div className="App">
     <Navigation {...props} />
       <ReSendEmail {...props} />

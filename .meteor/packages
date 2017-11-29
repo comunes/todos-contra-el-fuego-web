@@ -33,8 +33,10 @@ ddp-rate-limiter@1.0.7
 dynamic-import@0.1.1
 static-html
 alexwine:bootstrap-4
-selaias:cookie-consent
-gadicc:blaze-react-component
-255kb:meteor-status
-mixmax:smart-disconnect
-flowkey:raven
+
+selaias:cookie-consent        # Cookie consent
+gadicc:blaze-react-component  # Add braze to react
+255kb:meteor-status           # Connect status
+mixmax:smart-disconnect       # Disconnect on lost focus
+flowkey:raven                 # js errors
+davidsichau:piwik             # Stats
