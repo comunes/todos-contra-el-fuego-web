@@ -1,0 +1,50 @@
+#js-cookie-policy-default {
+  background-color: lighten($todos-palette3, 10%);
+}
+
+.cookie-policy {
+  position: fixed;
+  text-align: rigth;
+  vertical-align: baseline;
+  padding-top: 10px;
+  border-radius: 0px;
+  z-index: 2500;
+  width: 100%;
+  max-width: 100%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: auto;
+  margin:0 !important;
+}
+
+.cookie-policy__header {
+  /* float: left; */
+}
+
+.cookie-policy__action {
+  float: right;
+  position: absolute;
+  top: 5px;
+  right: 40px;
+}
+
+.cookie-policy > p {
+  margin-bottom: -5px;
+  color: #fff
+}
+
+.cookie-policy__header {
+  font-size: 16px;
+  margin-bottom: 5px
+}
+
+#acceptCookies {
+  font-size: 12px;
+  font-weight: normal;
+  border-radius: 5px;
+}
+
+#acceptCookies > strong {
+  font-weight: normal;
+}
