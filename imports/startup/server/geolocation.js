@@ -17,7 +17,7 @@ Meteor.methods({
       clientIP = '80.58.61.250' // Some Spain IP address
     }
     var geoData = IPGeocoder.geocode(clientIP);
-    console.log(geoData);
+    // console.log(geoData);
     return geoData;
   }
 });
