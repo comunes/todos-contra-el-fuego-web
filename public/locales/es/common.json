@@ -107,5 +107,13 @@
   "Utilizamos cookies para asegurar un mejor uso de nuestra web. Si continúas navegando, consideramos que aceptas su uso":
   "Utilizamos cookies para asegurar un mejor uso de nuestra web. Si continúas navegando, consideramos que aceptas su uso",
   "Participa":
-  "Participa"
+  "Participa",
+  "activeFires":
+  "Fuegos activos",
+  "Fuegos activos":
+  "Fuegos activos",
+  "activeFireInMapCount":
+  "Fuegos activos en el mapa {{count,number}} de un total de {{countTotal,number}} fuegos activos detectados en el mundo.",
+  "Centrar el mapa en tu ubicación":
+  "Centrar el mapa en tu ubicación"
 }

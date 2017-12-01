@@ -2,8 +2,10 @@ import { Meteor } from 'meteor/meteor';
 import { check, Match } from 'meteor/check';
 import ActiveFires from '../ActiveFires';
 
-Meteor.publish('activefires', function activefires() {
-  return ActiveFires.find();
+var counter = new Counter('countActiveFires', ActiveFires.find({}));
+
+Meteor.publish('activefirestotal', function() {
+  return counter;
 });
 
 const validZoom = Match.Where((zoom) => {
@@ -29,7 +31,6 @@ var NullOr = function (type) {
     return true;
   });
 };
-
 
 const zoomMetersPerPixel = [156412, 78206, 39103, 19551, 9776, 4888, 2444, 1222, 610.984, 305.492, 152.746, 76.373, 38.187, 19.093, 9.547, 4.773, 2.387, 1.193, 0.596, 0.298];
 

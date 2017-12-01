@@ -5,6 +5,7 @@ import Cache from 'i18next-localstorage-cache';
 import { T9n } from 'meteor-accounts-t9n';
 import en from 'meteor-accounts-t9n/build/en';
 import es from 'meteor-accounts-t9n/build/es';
+import moment from 'moment';
 
 // Adapted from: https://github.com/appigram/ryfma-boilerplate/blob/44c1eabfb9928b5623afab36a23997969e5beb02/imports/startup/client/i18n.js
 
@@ -61,6 +62,15 @@ i18n.use(backend)
     },
     interpolation: {
       escapeValue: false, // not needed for react!!
+      formatSeparator: ",",
+      format: function(value, format, lng) {
+        // https://www.i18next.com/formatting.html
+        // console.log(`Value: ${value} with format: ${format} to lang: ${lng}`);
+        if (format === 'uppercase') return value.toUpperCase();
+        if (value instanceof Date) return moment(value).format(format);
+        if (format === 'number') return Intl.NumberFormat(lng).format(value);
+        return value;
+      }
     },
     whitelist: false,
     // whitelist: ['es', 'en'], // allowed languages
@@ -84,6 +94,10 @@ i18n.use(backend)
     }
   }, function(err, t) {
     // initialized and ready to
+    if (err) {
+      console.error(err);
+      return;
+    }
     document.title = t("AppName");
 
     // Accounts translation
@@ -110,5 +124,10 @@ i18n.use(backend)
 
     CookieConsent.init(cookiesOpt);
   });
+
+i18n.on('languageChanged', function(lng) {
+  moment.locale(lng);
+  T9n.setLanguage(lng);
+});
 
 export default i18n;

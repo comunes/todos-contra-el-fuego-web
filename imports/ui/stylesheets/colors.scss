@@ -41,3 +41,10 @@ $todos-palette2: $todos-palette2b;
 $todos-palette3: $todos-palette3b;
 $todos-palette4: $todos-palette4b;
 $todos-palette5: $todos-palette5b;
+
+// It seems that we are not using bootstrap scss version so does not work
+$primary: $todos-palette1;
+$success: $todos-palette2;
+$info:    $todos-palette3;
+$warning: $todos-palette4;
+$danger:  #d9534f;

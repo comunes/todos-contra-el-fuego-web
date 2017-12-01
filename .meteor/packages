@@ -41,3 +41,5 @@ mixmax:smart-disconnect       # Disconnect on lost focus
 flowkey:raven                 # js errors
 davidsichau:piwik             # Stats
 thebakery:ipgeocoder
+mdg:geolocation
+natestrauser:publish-performant-counts

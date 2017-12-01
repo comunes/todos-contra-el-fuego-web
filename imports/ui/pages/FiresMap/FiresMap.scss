@@ -1,0 +1,40 @@
+/* https://github.com/PaulLeCam/react-leaflet/issues/108 */
+
+.leaflet-container {
+  height: 100%;
+  min-height: 75vh;
+  width: 100%;
+  min-width: 75vw;
+  display: flex;
+  margin: 30px auto;
+}
+
+.Loading {
+  position: absolute;
+  top: calc(50% - 150px);
+  left: calc(50% - 150px);
+  z-index: 1000;
+}
+
+.Loading > svg {
+  width: 300px;
+  height: 300px;
+  stroke: grey;
+}
+
+@media only screen and (max-width: 400px) {
+  /* .leaflet-container {
+     height: 500px;
+     width: 85vw;
+     } */
+}
+
+i.location {
+    background: url(/my_location.svg) no-repeat top left;
+    background-size: contain;
+    cursor: pointer;
+    display: inline-block;
+    height: 30px;
+    width: 35px;
+    vertical-align: middle;
+}

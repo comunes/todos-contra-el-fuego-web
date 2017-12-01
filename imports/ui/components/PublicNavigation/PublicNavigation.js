@@ -12,7 +12,10 @@ import { translate } from 'react-i18next';
 import NavItem from '../NavItem/NavItem';
 
 const PublicNavigation = (props) => (
-  <Nav pullRight>
+   <Nav pullRight>
+    <LinkContainer className="nav-item" anchorClassName="nav-link" to="/fires">
+      <NavItem href="/fires">{props.t('activeFires')}</NavItem>
+    </LinkContainer>
     <LinkContainer className="nav-item" anchorClassName="nav-link" to="/signup">
       <NavItem eventKey={1} href="/signup">{props.t('Registrarse')}</NavItem>
     </LinkContainer>

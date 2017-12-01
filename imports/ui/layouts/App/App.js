@@ -39,6 +39,7 @@ import ravenLogger from '/imports/startup/client/ravenLogger';
 import Blaze from 'meteor/gadicc:blaze-react-component';
 import createHistory from 'history/createBrowserHistory';
 import { check } from 'meteor/check';
+import FiresMap from  '../../pages/FiresMap/FiresMap';
 
 import './App.scss';
 
@@ -63,6 +64,7 @@ const App = props => (
           <Authenticated exact path="/documents/:_id" component={ViewDocument} {...props} />
           <Authenticated exact path="/documents/:_id/edit" component={EditDocument} {...props} />
           <Authenticated exact path="/profile" component={Profile} {...props} />
+          <Route path="/fires" component={FiresMap} {...props} />
           <Public path="/signup" component={Signup} {...props} />
           <Public path="/login" component={Login} {...props} />
           <Route path="/logout" component={Logout} {...props} />
