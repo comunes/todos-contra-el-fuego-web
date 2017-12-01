@@ -7,3 +7,6 @@ import '../../api/Users/server/methods';
 import '../../api/Users/server/publications';
 
 import '../../api/Utility/server/methods';
+
+import '../../api/ActiveFires/server/publications';
+// TODO add rate-limit to these publications

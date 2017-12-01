@@ -140,3 +140,11 @@
   color: white;
   text-transform: uppercase;
 }
+
+
+/* https://github.com/PaulLeCam/react-leaflet/issues/108 */
+.leaflet-container {
+  height: 500px;
+  width: 85%;
+  margin: 0 auto;
+}
