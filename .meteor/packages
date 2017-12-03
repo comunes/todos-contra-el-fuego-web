@@ -39,6 +39,6 @@ gadicc:blaze-react-component  # Add braze to react
 255kb:meteor-status           # Connect status
 mixmax:smart-disconnect       # Disconnect on lost focus
 flowkey:raven                 # js errors
-davidsichau:piwik             # Stats
+vjrj:piwik                    # Stats
 mdg:geolocation
 natestrauser:publish-performant-counts
