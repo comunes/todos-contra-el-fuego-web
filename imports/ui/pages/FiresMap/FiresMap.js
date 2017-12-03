@@ -23,11 +23,13 @@ const fireIcon = new Leaflet.Icon({
 
 // http://leafletjs.com/reference-1.2.0.html#icon
 const MyPopupMarker = ({ children, lat, lon}) => (
-  <Marker position={[lat, lon]} icon={fireIcon} >
+  <div><Marker position={[lat, lon]} icon={fireIcon} >
     {/* <Popup>
     <span>{children}</span>
     </Popup> */}
   </Marker>
+  <CircleMarker center={[lat, lon]} color="red" stroke={false} fillOpacity="1" fill={true} radius={1} />
+  </div>
 )
 
 const FireMark = ({ lat, lon, scan }) => (
@@ -65,7 +67,6 @@ const MyMarkersList = ({ markers }) => {
 }
 
 const FireList = ({ activefires, scale, useMarkers }) => {
-  // console.log("Scaling? :" +  scale);
   const items = activefires.map(({ _id, ...props }) => (
     useMarkers? <MyPopupMarker key={_id} {...props} />:
     scale? <Fire key={_id} {...props} />:<FireMark key={_id} {...props} />))
@@ -90,7 +91,7 @@ class FiresMap extends React.Component {
     this.state = {
       viewport: DEFAULT_VIEWPORT,
       modified: false,
-      useMarkers: true
+      useMarkers: false
     }
   }
 
@@ -201,7 +202,6 @@ class FiresMap extends React.Component {
   }
 }
 
-const geoip = new ReactiveVar('');
 const zoom = new ReactiveVar(8);
 const lat = new ReactiveVar(DEF_LAT);
 const lng = new ReactiveVar(DEF_LNG);
@@ -219,7 +219,8 @@ Meteor.call("geo", function (error, response) {
   if (error) {
     console.warn(error);
   } else {
-    geoip.set([response.location.latitude, response.location.longitude] );
+    lat.set(response.location.latitude);
+    lng.set(response.location.longitude);
   }
 });
 
@@ -229,19 +230,21 @@ export default translate([], { wait: true }) (withTracker(() => {
     // Subscribe for the current templateId (only if one is selected). Note this
     // will automatically clean up any previously subscribed data and it will
     // also stop all subscriptions when this template is destroyed.
-    if (zoom.get())
-      // TODO select position
+    if (zoom.get() || lat.get() || lng.get()) {
       subscription = Meteor.subscribe('activefiresmyloc', zoom.get(), lat.get(), lng.get(), height.get(), width.get());
+    }
   });
+
   Meteor.subscribe('activefirestotal');
   // const subscription = Meteor.subscribe('activefiresmyloc', zoom.get());
+  console.log(`Active fires ${ActiveFiresCollection.find().fetch().length} of ${Counter.get('countActiveFires')}`);
 
   return {
     loading: !subscription.ready(),
     activefires: ActiveFiresCollection.find().fetch(),
     activefirestotal: Counter.get('countActiveFires'),
     viewport: {
-      center: geoip.get(), // a point in the sea
+      center: [lat.get(), lng.get()], // a point in the sea
       zoom: zoom.get(),
     }
   };
