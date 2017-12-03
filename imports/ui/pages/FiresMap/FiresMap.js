@@ -67,7 +67,7 @@ const MyMarkersList = ({ markers }) => {
 const FireList = ({ activefires, scale, useMarkers }) => {
   // console.log("Scaling? :" +  scale);
   const items = activefires.map(({ _id, ...props }) => (
-    (useMarkers? <MyPopupMarker key={_id} {...props} />:"") +
+    useMarkers? <MyPopupMarker key={_id} {...props} />:
     scale? <Fire key={_id} {...props} />:<FireMark key={_id} {...props} />))
   return <div style={{ display: 'none' }}>{items}</div>
 }
@@ -90,7 +90,7 @@ class FiresMap extends React.Component {
     this.state = {
       viewport: DEFAULT_VIEWPORT,
       modified: false,
-      userMarkers: true
+      useMarkers: true
     }
   }
 
