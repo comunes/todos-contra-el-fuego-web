@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Row, Button } from 'react-bootstrap';
+import { Row, Button, Checkbox } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { Trans, Interpolate, translate } from 'react-i18next';
@@ -9,18 +9,25 @@ import ActiveFiresCollection from '../../../api/ActiveFires/ActiveFires';
 import { withTracker } from 'meteor/react-meteor-data';
 import Loading from '../../components/Loading/Loading';
 import './FiresMap.scss';
+import Leaflet from 'leaflet'
 
+const fireIcon = new Leaflet.Icon({
+  iconUrl: "/fire-marker.png",
+  /* shadowUrl: require('../public/marker-shadow.png'), */
+  iconSize:     [16, 24], // size of the icon
+  /* shadowSize:   [50, 64], // size of the shadow */
+  iconAnchor:   [8, 26], // point of the icon which will correspond to marker's location
+  /* shadowAnchor: [4, 62],  // the same for the shadow
+   * popupAnchor:  [-3, -76]// point from which the popup should open relative to the iconAnchor*/
+})
 
-const MyPopupMarker = ({ children, position }) => (
-  <Marker position={position}>
-    <Popup>
-      <span>{children}</span>
-    </Popup>
+// http://leafletjs.com/reference-1.2.0.html#icon
+const MyPopupMarker = ({ children, lat, lon}) => (
+  <Marker position={[lat, lon]} icon={fireIcon} >
+    {/* <Popup>
+    <span>{children}</span>
+    </Popup> */}
   </Marker>
-)
-
-const MyCircle = ({ radius, position }) => (
-  <Circle center={position} color="red" stroke={false} fillOpacity="1" fill={true} radius={radius} />
 )
 
 const FireMark = ({ lat, lon, scan }) => (
@@ -34,12 +41,8 @@ const Fire = ({ lat, lon, scan }) => (
 
 MyPopupMarker.propTypes = {
   children: MapPropTypes.children,
-  position: MapPropTypes.latlng,
-}
-
-MyCircle.propTypes = {
-  radius: PropTypes.number.isRequired,
-  position: MapPropTypes.latlng,
+  lat: PropTypes.number.isRequired,
+  lon:  PropTypes.number.isRequired,
 }
 
 Fire.propTypes = {
@@ -61,28 +64,16 @@ const MyMarkersList = ({ markers }) => {
   return <div style={{ display: 'none' }}>{items}</div>
 }
 
-const MyCirclesList = ({ circles }) => {
-  const items = circles.map(({ key, ...props }) => (
-    <MyCircle key={key} {...props} />
-  ))
-  return <div style={{ display: 'none' }}>{items}</div>
-}
-
-const FireList = ({ activefires, scale }) => {
+const FireList = ({ activefires, scale, useMarkers }) => {
   // console.log("Scaling? :" +  scale);
   const items = activefires.map(({ _id, ...props }) => (
-    scale? <Fire key={_id} {...props} />:
-    <FireMark key={_id} {...props} />
-  ))
+    (useMarkers? <MyPopupMarker key={_id} {...props} />:"") +
+    scale? <Fire key={_id} {...props} />:<FireMark key={_id} {...props} />))
   return <div style={{ display: 'none' }}>{items}</div>
 }
 
 MyMarkersList.propTypes = {
   markers: PropTypes.array.isRequired,
-}
-
-MyCirclesList.propTypes = {
-  circles: PropTypes.array.isRequired,
 }
 
 const DEF_LAT = 35.159028;
@@ -92,44 +83,53 @@ const DEFAULT_VIEWPORT = {
   zoom: 8,
 }
 
-
-
 class FiresMap extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
       viewport: DEFAULT_VIEWPORT,
-      modified: false
+      modified: false,
+      userMarkers: true
     }
   }
 
-
   centerOnUserLocation = () => {
     // https://atmospherejs.com/mdg/geolocation
+    // only with SSL:
+    // https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition
+
     // https://stackoverflow.com/questions/31608579/somethings-wrong-with-my-meteor-geolocation-functions
     var userGeoLocation = new ReactiveVar(null);
     var state = this.state;
+    var self = this;
     Tracker.autorun(function (computation) {
       userGeoLocation.set(Geolocation.latLng());
       if (userGeoLocation.get()) {
         //stop the tracker if we got something
-        computation.stop();
-        console.log(userGeoLocation.get());
-        state.viewport = {
+        var viewport = {
           center: [userGeoLocation.get().lat, userGeoLocation.get().lng],
           zoom: 11
         }
+        self.onViewportChanged(viewport);
+        // console.log(userGeoLocation.get());
+        computation.stop();
       }
     });
   }
 
+  componentDidMount() {
+    height.set(this.divElement.clientHeight);
+    width.set(this.divElement.clientWidth);
+  }
+
   onViewportChanged = viewport => {
-    // console.log(this.state.viewport);
+    // console.log(`Viewport changed: ${JSON.stringify(this.state.viewport)}`);
     zoom.set(viewport.zoom);
     lat.set(viewport.center[0]);
     lng.set(viewport.center[1]);
-    this.state = { viewport: viewport, modified: true };
+    this.state.viewport = viewport;
+    this.state.modified = true
   }
 
   onClickReset = () => {
@@ -137,24 +137,34 @@ class FiresMap extends React.Component {
     // this.setState({ viewport: DEFAULT_VIEWPORT })
   }
 
+  useMarkers = (use) => {
+    this.state.useMarkers = use;
+    this.forceUpdate();
+  }
+
   render() {
-    // const position = [this.default.lat, this.default.lng];
-    // const position = this.props.geoip || [this.default.lat, this.default.lng];
-    this.state = {
-      viewport: !this.state.modified && this.props.viewport && Array.isArray(this.props.viewport.center)? this.props.viewport: this.state.viewport,
-      modified: this.state.modified
-    }
+    this.state.viewport = !this.state.modified && this.props.viewport && Array.isArray(this.props.viewport.center)? this.props.viewport: this.state.viewport;
 
     return (
       /* Large number of markers:
          https://stackoverflow.com/questions/43015854/large-dataset-of-markers-or-dots-in-leaflet/43019740#43019740 */
-      <div>
+      <div
+         ref={ (divElement) => this.divElement = divElement}
+      >
         {this.props.loading ?
          <Row className="align-items-center justify-content-center">
            <Loading />
          </Row>
          :""}
          <h4 className="page-header"><Trans parent="span">Fuegos activos</Trans></h4>
+         <Row>
+           {this.props.activefires.length === 0?
+            <Trans parent="p" i18nKey="noActiveFireInMapCount">No hay fuegos activos en esta zona del mapa. Hay un total de <strong>{{countTotal: this.props.activefirestotal}}</strong> fuegos activos detectados en todo el mundo.</Trans>:
+           <Trans parent="p" i18nKey="activeFireInMapCount">En rojo, <strong>{{count: this.props.activefires.length}}</strong> fuegos activos en el mapa. Hay un total de <strong>{{countTotal: this.props.activefirestotal}}</strong> fuegos activos detectados en todo el mundo.</Trans>
+           }
+           <Checkbox onClick={e => this.useMarkers(e.target.checked)}>
+             <Trans parent="span">Resaltar los fuegos con un marcador</Trans></Checkbox>
+         </Row>
          <Row>
            <Map
                animate={true}
@@ -164,39 +174,20 @@ class FiresMap extends React.Component {
                onViewportChanged={this.onViewportChanged}
            >
              {/* http://wiki.openstreetmap.org/wiki/Tile_servers */}
-             {/* <TileLayer
-             attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-             url="http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
-             /> */}
-             {/* <TileLayer
-             attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-             url="http://{s}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png"
-             /> */}
              <TileLayer
                  attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
                  url="http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png"
              />
-             {/* <TileLayer
-             attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-             url="https://{s}.tiles.mapbox.com/v3/americanredcross.hcji22de/{z}/{x}/{y}.png"
+             <FireList
+                 activefires={this.props.activefires}
+                 scale={this.state.viewport.zoom > 8}
+                 useMarkers={this.state.useMarkers}
              />
-             <Circle center={position} color="red" fill={true} radius={scan*1000} />
-             <MyCirclesList circles={circles} />*/}
-
-             <FireList activefires={this.props.activefires} scale={this.state.viewport.zoom > 8} />
-
-             {/* <MyMarkersList markers={markers} /> */}
            </Map>
          </Row>
          <Row>
            <p>
-             <Interpolate i18nKey="activeFireInMapCount"
-                          count={this.props.activefires.length}
-                          countTotal={this.props.activefirestotal}
-             ></Interpolate>
-           </p>
-           <p>
-             <em><Trans parent="span">Fuentes: NASA y alertas vecinales de nuestr@s usuari@s</Trans></em>
+             <em><Trans parent="span">Fuente NASA y alertas vecinales de nuestr@s usuari@s.</Trans></em>
            </p>
          </Row>
          <Row>
@@ -214,6 +205,8 @@ const geoip = new ReactiveVar('');
 const zoom = new ReactiveVar(8);
 const lat = new ReactiveVar(DEF_LAT);
 const lng = new ReactiveVar(DEF_LNG);
+const height = new ReactiveVar(400);
+const width = new ReactiveVar(400);
 
 FiresMap.propTypes = {
   loading: PropTypes.bool.isRequired,
@@ -221,6 +214,14 @@ FiresMap.propTypes = {
   activefirestotal: PropTypes.number.isRequired,
   viewport: PropTypes.object.isRequired
 };
+
+Meteor.call("geo", function (error, response) {
+  if (error) {
+    console.warn(error);
+  } else {
+    geoip.set([response.location.latitude, response.location.longitude] );
+  }
+});
 
 export default translate([], { wait: true }) (withTracker(() => {
   var subscription;
@@ -230,17 +231,10 @@ export default translate([], { wait: true }) (withTracker(() => {
     // also stop all subscriptions when this template is destroyed.
     if (zoom.get())
       // TODO select position
-      subscription = Meteor.subscribe('activefiresmyloc', zoom.get(), lat.get(), lng.get());
+      subscription = Meteor.subscribe('activefiresmyloc', zoom.get(), lat.get(), lng.get(), height.get(), width.get());
   });
   Meteor.subscribe('activefirestotal');
   // const subscription = Meteor.subscribe('activefiresmyloc', zoom.get());
-  Meteor.call("geo", function (error, response) {
-    if (error) {
-      console.warn(error);
-    } else {
-      geoip.set([response.location.latitude, response.location.longitude] );
-    }
-  });
 
   return {
     loading: !subscription.ready(),

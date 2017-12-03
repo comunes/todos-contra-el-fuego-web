@@ -5,6 +5,7 @@ import {render} from 'react-dom';
 import { Link } from 'react-router-dom';
 // https://www.npmjs.com/package/react-resize-detector
 import ReactResizeDetector from 'react-resize-detector';
+import FiresMap from  '../FiresMap/FiresMap';
 
 import './Index.scss';
 import './Index-custom.scss';
@@ -119,6 +120,13 @@ class Index extends Component {
             <Link className="participe-btn btn btn-lg btn-warning" role="button" to="/signup">{this.props.t('Participa')}</Link>
           </div>
         </section>
+
+        <section className="py-5">
+          <div className="container">
+            <FiresMap />
+          </div>
+        </section>
+
       </div>
     );
   };

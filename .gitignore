@@ -4,4 +4,4 @@ settings-staging.json
 settings-production.json
 settings-development.json
 imports/ui/stylesheets/.sass-cache/
-public/GeoLite2-City.mmdb.gz
+private/GeoLite2-City.mmdb*

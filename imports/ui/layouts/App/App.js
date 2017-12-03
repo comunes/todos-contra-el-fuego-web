@@ -29,7 +29,7 @@ import Terms from '../../pages/Terms/Terms';
 import Privacy from '../../pages/Privacy/Privacy';
 import License from '../../pages/License/License';
 import ReSendEmail from '../../components/ReSendEmail/ReSendEmail';
-import Reconnect from '../../components/Reconnect/Reconnect';
+/* import Reconnect from '../../components/Reconnect/Reconnect';*/
 // i18n
 import { I18nextProvider } from 'react-i18next';
 import i18n from '/imports/startup/client/i18n';
@@ -79,7 +79,7 @@ const App = props => (
       </Grid>
       <Footer />
 
-      <Reconnect />
+      {/* <Reconnect /> */}
       <Blaze template="cookieConsent" />
       {/* <Blaze template="cookieConsentImply" /> */}
     </div> : ''}
