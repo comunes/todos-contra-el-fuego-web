@@ -40,6 +40,7 @@ import Blaze from 'meteor/gadicc:blaze-react-component';
 import createHistory from 'history/createBrowserHistory';
 import { check } from 'meteor/check';
 import FiresMap from  '../../pages/FiresMap/FiresMap';
+import Sandbox from  '../../pages/Sandbox/Sandbox';
 
 import './App.scss';
 
@@ -68,6 +69,7 @@ const App = props => (
           <Public path="/signup" component={Signup} {...props} />
           <Public path="/login" component={Login} {...props} />
           <Route path="/logout" component={Logout} {...props} />
+          <Route path="/sandbox" component={Sandbox} {...props} />
           <Route name="verify-email" path="/verify-email/:token" component={VerifyEmail} />
           <Route name="recover-password" path="/recover-password" component={RecoverPassword} />
           <Route name="reset-password" path="/reset-password/:token" component={ResetPassword} />
