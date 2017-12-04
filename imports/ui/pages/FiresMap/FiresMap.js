@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { Row, Col, Button, Checkbox } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
-import { Trans, Interpolate, translate } from 'react-i18next';
+import { Trans, translate } from 'react-i18next';
 import 'leaflet/dist/leaflet.css';
 import { Circle, CircleMarker, Map, Marker, Popup, TileLayer, PropTypes as MapPropTypes } from 'react-leaflet'
 import ActiveFiresCollection from '../../../api/ActiveFires/ActiveFires';
