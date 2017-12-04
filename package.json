@@ -23,7 +23,10 @@
     "jquery": "^2.2.4",
     "jquery-validation": "^1.17.0",
     "juice": "^4.1.1",
+    "leaflet-geodesy": "^0.2.1",
+    "leaflet-graphicscale": "0.0.2",
     "lodash": "^4.17.4",
+    "loms.perlin": "^1.0.1",
     "maxmind": "^2.3.0",
     "meteor-accounts-t9n": "^2.0.3",
     "meteor-node-stubs": "^0.2.11",
@@ -40,7 +43,8 @@
     "react-router-bootstrap": "^0.24.3",
     "react-router-dom": "^4.2.2",
     "reactstrap": "^5.0.0-alpha.3",
-    "simpl-schema": "^0.3.2"
+    "simpl-schema": "^0.3.2",
+    "turf-union": "^3.0.12"
   },
   "devDependencies": {
     "babel-jest": "^20.0.3",

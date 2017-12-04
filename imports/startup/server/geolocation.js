@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
-
 import maxmind from 'maxmind';
+
 
 // https://stackoverflow.com/questions/13969655/how-do-you-check-whether-the-given-ip-is-internal-or-not
 function isPrivateIP(ip) {
@@ -39,5 +39,5 @@ Meteor.methods({
       });
     })
     return promise.await();
-  }
+  },
 });

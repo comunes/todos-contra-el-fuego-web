@@ -115,9 +115,9 @@
   "noActiveFireInMapCount":
   "No hay fuegos activos en esta zona del mapa. Hay un total de <1><0>{{countTotal}}</0></1> fuegos activos detectados en todo el mundo.",
   "activeFireInMapCount":
-  "En rojo, <1><0>{{count,number}}</0></1> fuegos activos en el mapa. Hay un total de <3><0>{{countTotal,number}}</0></3> fuegos activos detectados en todo el mundo.",
+  "En rojo, <1><0>{{count,number}}</0></1> fuegos activos en el mapa. Hay un total de <3><0>{{countTotal,number}}</0></3> fuegos activos detectados en todo el mundo por la NASA.",
+  "activeNeigFireInMapCount":
+  "En naranja, los fuegos notificados por nuestros usuarios/as recientemente.",
   "Centrar el mapa en tu ubicación":
-  "Centrar el mapa en tu ubicación",
-  "Fuente NASA y alertas vecinales de nuestr@s usuari@s.":
-  "Fuente NASA y alertas vecinales de nuestr@s usuari@s."
+  "Centrar el mapa en tu ubicación"
 }

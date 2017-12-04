@@ -2,7 +2,7 @@
 
 .leaflet-container {
   height: 100%;
-  min-height: 75vh;
+  min-height: 70vh;
   width: 100%;
   min-width: 75vw;
   display: flex;
@@ -37,4 +37,8 @@ i.location {
     height: 30px;
     width: 35px;
     vertical-align: middle;
+}
+
+.mark-checkbox {
+  margin-left: 5px;
 }
