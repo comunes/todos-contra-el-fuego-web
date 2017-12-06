@@ -75,7 +75,7 @@ i18n.use(backend)
     whitelist: false,
     // whitelist: ['es', 'en'], // allowed languages
     load: 'all', // es-ES -> es, en-US -> en
-    debug: true,
+    debug: false,
     ns: 'common',
     defaultNS: 'common',
     saveMissing: true, // if true seems it's fails to getResourceBundle

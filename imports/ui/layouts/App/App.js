@@ -35,6 +35,7 @@ import { I18nextProvider } from 'react-i18next';
 import i18n from '/imports/startup/client/i18n';
 import '/imports/startup/client/piwik-start.js';
 import ravenLogger from '/imports/startup/client/ravenLogger';
+import geolocation from '/imports/startup/client/geolocation';
 // https://github.com/gadicc/meteor-blaze-react-component/
 import Blaze from 'meteor/gadicc:blaze-react-component';
 import createHistory from 'history/createBrowserHistory';

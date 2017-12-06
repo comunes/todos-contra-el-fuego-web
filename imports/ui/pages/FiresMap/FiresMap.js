@@ -16,6 +16,7 @@ import LGeo from 'leaflet-geodesy';
 import union from 'turf-union';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.css';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.js';
+import _ from 'lodash';
 
 // https://stackoverflow.com/questions/35394577/leaflet-js-union-merge-circles
 function unify(polyList) {
@@ -163,17 +164,22 @@ class FiresMap extends React.Component {
     height.set(this.divElement.clientHeight);
     width.set(this.divElement.clientWidth);
     this.addScale();
+    const self = this;
+    this.handleViewportChangeDebounced = _.debounce(function (viewport) {
+      console.log(`Viewport changed: ${JSON.stringify(this.state.viewport)}`);
+      zoom.set(viewport.zoom);
+      lat.set(viewport.center[0]);
+      lng.set(viewport.center[1]);
+      self.state.viewport = viewport;
+      self.state.modified = true;
+      self.showSubsUnion(self.state.showSubsUnion);
+    }, 2000);
   }
 
-  onViewportChanged = viewport => {
-    // console.log(`Viewport changed: ${JSON.stringify(this.state.viewport)}`);
-    zoom.set(viewport.zoom);
-    lat.set(viewport.center[0]);
-    lng.set(viewport.center[1]);
-    this.state.viewport = viewport;
-    this.state.modified = true;
-    this.showSubsUnion(this.state.showSubsUnion);
-  }
+  // https://stackoverflow.com/questions/23123138/perform-debounce-in-react-js
+  onViewportChanged = (viewport) => {
+    this.handleViewportChangeDebounced(viewport);
+  };
 
   onClickReset = () => {
     // console.log("onclick");
@@ -297,7 +303,7 @@ class FiresMap extends React.Component {
            </Map>
          </Row>
          <Row>
-           (*)&nbsp;<Trans parent="span"><em>Para preservar la privacidad de nuestros usuarios/as, los datos reflejados están aleatoriamente alterados y son solo orientativos.</em></Trans>
+           (*)&nbsp;<Trans i18nKey="mapPrivacy" parent="span"><em>Para preservar la privacidad de nuestros usuarios/as, los datos reflejados están aleatoriamente alterados y son solo orientativos.</em></Trans>
          </Row>
       </div>
     );

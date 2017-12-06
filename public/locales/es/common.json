@@ -119,5 +119,12 @@
   "activeNeigFireInMapCount":
   "En naranja, los fuegos notificados por nuestros usuarios/as recientemente.",
   "Centrar el mapa en tu ubicación":
-  "Centrar el mapa en tu ubicación"
+  "Centrar el mapa en tu ubicación",
+  "Resaltar en verde el área vigilada por nuestros usuarios/as":
+  "Resaltar en verde el área vigilada por nuestros usuarios/as",
+  "Resaltar los fuegos con un marcador":
+  "Resaltar los fuegos con un marcador",
+  "mapPrivacy":
+  "<0>Para preservar la privacidad de nuestros usuarios/as, los datos reflejados están aleatoriamente alterados y son solo orientativos.</0> <0>Para preservar la privacidad de nuestros usuarios/as, los datos reflejados están aleatoriamente alterados y son solo orientativos.</0>"
+
 }
