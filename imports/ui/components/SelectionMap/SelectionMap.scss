@@ -1,0 +1,15 @@
+.leaflet-container {
+  height: 100%;
+  min-height: 60vh;
+  width: 100%;
+  min-width: 75vw;
+  display: flex;
+  margin: 30px auto;
+}
+
+@media only screen and (max-width: 400px) {
+  .leaflet-container {
+     height: 400px;
+     width: 85vw;
+  }
+}

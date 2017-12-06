@@ -7,11 +7,11 @@ class SubsAutocomplete extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      adddress: '',
+      address: '',
     }
-    this.onChange = (address) => { this.setState({ address }) }
   }
 
+  onChange = (address) => { this.setState({ address }) }
 
   handleSelect = (address) => {
     const self = this;
@@ -54,22 +54,22 @@ class SubsAutocomplete extends React.Component {
       </div>)
 
     return (
-      <form onSubmit={this.handleSelectEnd}>
+      <form>
         <FormGroup>
           <ControlLabel>
             <Trans parent="span">Indícanos la posición a vigilar (por ej. tu pueblo, una calle, etc):</Trans>
           </ControlLabel>
           <PlacesAutocomplete
               styles={myStyles}
+              autocompleteItem={AutocompleteItem}
               classNames={{
                 root: 'form-group',
                 input: 'form-control',
                 autocompleteContainer: 'autocomplete-container'}}
               googleLogo={false}
               highlightFirstSuggestion={true}
-              onSelect={this.handleSelect}
-              onEnterKeyDown={this.handleSelect}
-              autocompleteItem={AutocompleteItem}
+              onSelect={(address) => this.handleSelect(address)}
+              onEnterKeyDown={(address) => this.handleSelect(address)}
               options={{
                 // location: new google.maps.LatLng(-34, 151),
                 // radius: 2000,
@@ -79,7 +79,7 @@ class SubsAutocomplete extends React.Component {
               inputProps={
                 {
                   value: this.state.address,
-                  onChange: this.onChange,
+                  onChange: (address) => this.onChange(address),
                   placeholder: this.props.t("Escribe aquí un lugar "),
                   onBlur:() => { /* console.log('Blur event!'); */ },
                   onFocus:() => { /* console.log('Focused!'); */ },

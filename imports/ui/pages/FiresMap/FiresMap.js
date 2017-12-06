@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Row, Col, Button, Checkbox } from 'react-bootstrap';
+import { Row, Col, Checkbox } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { Trans, translate } from 'react-i18next';
@@ -8,6 +8,7 @@ import { Circle, CircleMarker, Map, Marker, Popup, TileLayer, PropTypes as MapPr
 import ActiveFiresCollection from '../../../api/ActiveFires/ActiveFires';
 import FireAlertsCollection from '../../../api/FireAlerts/FireAlerts';
 import UserSubsToFiresCollection from '../../../api/Subscriptions/Subscriptions';
+import CenterInMyPosition from '/imports/ui/components/CenterInMyPosition/CenterInMyPosition.js';
 import { withTracker } from 'meteor/react-meteor-data';
 import Loading from '../../components/Loading/Loading';
 import './FiresMap.scss';
@@ -92,6 +93,9 @@ FireMark.propTypes = {
   nasa:  PropTypes.bool.isRequired,
 }
 
+// Below this use only pixels
+const MAXZOOM = 7;
+
 const MyMarkersList = ({ markers }) => {
   const items = markers.map(({ key, ...props }) => (
     <MyPopupMarker key={key} {...props} />
@@ -107,7 +111,7 @@ const FireList = ({ fires, scale, useMarkers, nasa }) => {
    *   }
    * }*/
   const items = fires.map(({ _id, ...props }) => (
-    useMarkers? <MyPopupMarker key={_id} nasa={nasa} {...props} />:
+    useMarkers && !scale? <MyPopupMarker key={_id} nasa={nasa} {...props} />:
     (!nasa && !scale)? <FirePixel key={_id} nasa={nasa} {...props} />:<FireMark key={_id} nasa={nasa} {...props} />))
   return <div style={{ display: 'none' }}>{items}</div>
 }
@@ -267,13 +271,10 @@ class FiresMap extends React.Component {
              <Checkbox inline={false} defaultChecked={this.state.showSubsUnion} onClick={e => this.showSubsUnion(e.target.checked)}>
                <Trans className="mark-checkbox" parent="span">Resaltar en verde el área vigilada por nuestros usuarios/as</Trans>&nbsp;(*)
              </Checkbox>
-             <Checkbox inline={false} onClick={e => this.useMarkers(e.target.checked)}>
+             <Checkbox disabled={this.state.viewport.zoom < MAXZOOM} inline={false} onClick={e => this.useMarkers(e.target.checked)}>
                <Trans className="mark-checkbox" parent="span">Resaltar los fuegos con un marcador</Trans>
              </Checkbox>
-             <Button bsStyle="default" onClick={() => this.centerOnUserLocation()}>
-               <i className="location"/>
-               <Trans className="location" parent="span">Centrar el mapa en tu ubicación</Trans>
-             </Button>
+             <CenterInMyPosition onClick={(event) => this.centerOnUserLocation(event)} />
            </Col>
          </Row>
          <Row>
@@ -290,7 +291,7 @@ class FiresMap extends React.Component {
              />
              <FireList
                  fires={this.props.activefires}
-                 scale={this.state.viewport.zoom > 7}
+                 scale={this.state.viewport.zoom > MAXZOOM}
                  useMarkers={this.state.useMarkers}
                  nasa={true}
              />

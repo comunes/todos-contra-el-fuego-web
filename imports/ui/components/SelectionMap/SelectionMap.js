@@ -8,8 +8,10 @@ import geolocation from '/imports/startup/client/geolocation';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.css';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.js';
 import Control from 'react-leaflet-control';
-import { Button } from 'react-bootstrap';
+import { Button, ButtonToolbar } from 'react-bootstrap';
 import DistanceSlider from '/imports/ui/components/DistanceSlider/DistanceSlider';
+import CenterInMyPosition from '/imports/ui/components/CenterInMyPosition/CenterInMyPosition.js';
+import './SelectionMap.scss';
 
 const positionIcon = new Leaflet.Icon({
   iconUrl: "/your-position.png",
@@ -52,6 +54,7 @@ class SelectionMap extends Component {
       marker: [ lat, lng ],
       modified: true
     });
+    this.fit();
   }
 
   fit() {
@@ -74,6 +77,10 @@ class SelectionMap extends Component {
   }
 
   doSubs = (event) => {
+    console.log(event);
+  }
+
+  centerOnUserLocation = (event) => {
     console.log(event);
   }
 
@@ -112,10 +119,13 @@ class SelectionMap extends Component {
                 fillColor="green"
                 fillOpacity={.1}
                 radius={this.state.distance * 1000} />
+
         <Control position="topright" >
-          <Button bsStyle="success" onClick={this.doSubs}>
-            {this.props.t("Subscribirme a fuegos en este rádio")}
-          </Button>
+          <ButtonToolbar>
+            <Button bsStyle="success" onClick={(event) => this.doSubs(event)}>
+              {this.props.t("Subscribirme a fuegos en este rádio")}
+            </Button>
+          </ButtonToolbar>
          </Control>
         </Map> }
       </div>

@@ -44,11 +44,11 @@ class FireSubscription extends React.Component {
             <Col xs={12} sm={12} md={6} lg={6} >
               <div>
                 <h4 className="page-header"><Trans parent="span">Suscríbete a alertas de fuegos</Trans></h4>
-                <SubsAutocomplete onChange={this.onAutocompleteChange}/>
+                <SubsAutocomplete onChange={(value) => this.onAutocompleteChange(value)}/>
               </div>
             </Col>
             <Col xs={12} sm={12} md={6} lg={6} >
-              <DistanceSlider onChange={this.onSliderChange} />
+              <DistanceSlider onChange={(value) => this.onSliderChange(value)} />
             </Col>
           </Row>
           <Row className="align-items-center justify-content-center">
