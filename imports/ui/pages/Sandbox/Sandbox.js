@@ -10,24 +10,20 @@ class Sandbox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      lat: 0,
-      lng: 0
+      init: false
     };
   }
 
-  onSliderChange = (value) => {
-    this.setState(update(this.state, {$merge: {distance: value}}));
+  componentDidMount = () => {
+    this.setState({init: true});
   }
 
   render() {
     return (
       <div>
         <FireSubscription />
-
       </div>
     )
   }
 }
-
-
 export default translate([], { wait: true }) (Sandbox);

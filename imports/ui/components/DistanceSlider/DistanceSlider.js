@@ -64,7 +64,7 @@ class DistanceSlider extends React.Component {
                 railStyle={{ backgroundColor: 'orange', height: 8 }}
                 dotStyle={{ top: 0, marginLeft: -1, width: 2, height: 8 }}
                 marks={{
-                  10:  {style: {}, label: "10"},
+                  10:  {style: {}, label: "10км"},
                   20:  {style: {}, label: "20"},
                   30:  {style: {}, label: "30"},
                   40:  {style: {}, label: "40"},
@@ -73,7 +73,7 @@ class DistanceSlider extends React.Component {
                   70:  {style: {}, label: "70"},
                   80:  {style: {}, label: "80"},
                   90:  {style: {}, label: "90"},
-                  100: {style: {}, label: "100"}
+                  100: {style: {}, label: "100км"}
                 }}
                 handleStyle={{
                   borderColor: 'green',

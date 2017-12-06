@@ -3,10 +3,13 @@ import PropTypes from 'prop-types';
 import { Map, TileLayer, Marker, Popup, CircleMarker, Circle} from 'react-leaflet';
 import Leaflet from 'leaflet';
 import { withTracker } from 'meteor/react-meteor-data';
-import { translate } from 'react-i18next';
+import { translate, Trans } from 'react-i18next';
 import geolocation from '/imports/startup/client/geolocation';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.css';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.js';
+import Control from 'react-leaflet-control';
+import { Button } from 'react-bootstrap';
+import DistanceSlider from '/imports/ui/components/DistanceSlider/DistanceSlider';
 
 const positionIcon = new Leaflet.Icon({
   iconUrl: "/your-position.png",
@@ -70,6 +73,10 @@ class SelectionMap extends Component {
     var graphicScale = L.control.graphicScale([options]).addTo(map);
   }
 
+  doSubs = (event) => {
+    console.log(event);
+  }
+
   render() {
     this.state.center = !this.state.modified && this.props.lat?
                         [this.props.lat, this.props.lng]: this.state.center;
@@ -90,6 +97,7 @@ class SelectionMap extends Component {
             onDragend={this.updatePosition}
             position={this.state.marker}
             icon={positionIcon}
+            title={this.props.t("Arrastrar para seleccionar otro punto")}
           ref="marker">
         </Marker>
         <CircleMarker
@@ -104,6 +112,11 @@ class SelectionMap extends Component {
                 fillColor="green"
                 fillOpacity={.1}
                 radius={this.state.distance * 1000} />
+        <Control position="topright" >
+          <Button bsStyle="success" onClick={this.doSubs}>
+            {this.props.t("Subscribirme a fuegos en este rádio")}
+          </Button>
+         </Control>
         </Map> }
       </div>
     )

@@ -9,9 +9,9 @@ class SubsAutocomplete extends React.Component {
     this.state = {
       adddress: '',
     }
+    this.onChange = (address) => { this.setState({ address }) }
   }
 
-  onChange = (address) => { this.setState({ address }) }
 
   handleSelect = (address) => {
     const self = this;
@@ -58,33 +58,33 @@ class SubsAutocomplete extends React.Component {
         <FormGroup>
           <ControlLabel>
             <Trans parent="span">Indícanos la posición a vigilar (por ej. tu pueblo, una calle, etc):</Trans>
-            <PlacesAutocomplete
-                styles={myStyles}
-                classNames={{
-                  root: 'form-group',
-                  input: 'form-control',
-                  autocompleteContainer: 'autocomplete-container'}}
-                googleLogo={false}
-                highlightFirstSuggestion={true}
-                onSelect={this.handleSelect}
-                onEnterKeyDown={this.handleSelect}
-                autocompleteItem={AutocompleteItem}
-                options={{
-                  // location: new google.maps.LatLng(-34, 151),
-                  // radius: 2000,
-                  // type: ['address'],
-                  language: this.props.i18n.language
-                }}
-                inputProps={
-                  {
-                    value: this.state.address,
-                    onChange: this.onChange,
-                    placeholder: this.props.t("Escribe aquí un lugar "),
-                    onBlur:() => { console.log('Blur event!'); },
-                    onFocus:() => { console.log('Focused!'); },
-                    autoFocus:true
-                  }} />
           </ControlLabel>
+          <PlacesAutocomplete
+              styles={myStyles}
+              classNames={{
+                root: 'form-group',
+                input: 'form-control',
+                autocompleteContainer: 'autocomplete-container'}}
+              googleLogo={false}
+              highlightFirstSuggestion={true}
+              onSelect={this.handleSelect}
+              onEnterKeyDown={this.handleSelect}
+              autocompleteItem={AutocompleteItem}
+              options={{
+                // location: new google.maps.LatLng(-34, 151),
+                // radius: 2000,
+                // type: ['address'],
+                language: this.props.i18n.language
+              }}
+              inputProps={
+                {
+                  value: this.state.address,
+                  onChange: this.onChange,
+                  placeholder: this.props.t("Escribe aquí un lugar "),
+                  onBlur:() => { /* console.log('Blur event!'); */ },
+                  onFocus:() => { /* console.log('Focused!'); */ },
+                  autoFocus:true
+                }} />
           <HelpBlock><Trans parent="span">También puedes seleccionar el lugar en el mapa arrastrando el puntero naranja.</Trans></HelpBlock>
         </FormGroup>
       </form>

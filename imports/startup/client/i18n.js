@@ -2,6 +2,7 @@ import i18n from 'i18next';
 import backend from 'i18next-xhr-backend';
 import LngDetector from 'i18next-browser-languagedetector';
 import Cache from 'i18next-localstorage-cache';
+import { Meteor } from 'meteor/meteor';
 import { T9n } from 'meteor-accounts-t9n';
 import en from 'meteor-accounts-t9n/build/en';
 import es from 'meteor-accounts-t9n/build/es';
@@ -47,6 +48,9 @@ var backOpts = {
 
 T9N_LANGUAGES='es,en';
 
+const forceDebug = false;
+const shouldDebug = (forceDebug && !Meteor.isProduction);
+
 i18n.use(backend)
   .use(LngDetector)
   .use(Cache)
@@ -75,10 +79,10 @@ i18n.use(backend)
     whitelist: false,
     // whitelist: ['es', 'en'], // allowed languages
     load: 'all', // es-ES -> es, en-US -> en
-    debug: false,
+    debug: shouldDebug,
     ns: 'common',
     defaultNS: 'common',
-    saveMissing: true, // if true seems it's fails to getResourceBundle
+    saveMissing: shouldDebug, // if true seems it's fails to getResourceBundle
     saveMissingTo: 'es',
     keySeparator: 'ß',
     nsSeparator: 'ð',
