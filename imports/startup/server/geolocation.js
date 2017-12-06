@@ -20,7 +20,7 @@ Meteor.methods({
     if (isPrivateIP(clientIP)) {
       clientIP = '80.58.61.250' // Some Spain IP address
     }
-    console.log(`Geolocating ${clientIP}`);
+    // console.log(`Geolocating ${clientIP}`);
 
     // https://developers.google.com/web/fundamentals/primers/promises
     var promise = new Promise(function(resolve, reject) {
