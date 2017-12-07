@@ -9,7 +9,6 @@ class CenterInMyPosition extends React.Component {
   }
 
   onClick = (event) => {
-    console.log("Click?");
     // this.props.onClick(event);
     // https://atmospherejs.com/mdg/geolocation
     // only with SSL:
@@ -27,6 +26,7 @@ class CenterInMyPosition extends React.Component {
           zoom: 11
         }
         self.props.onClick(viewport);
+        // console.log(viewport);
         // self.onViewportChanged(viewport);
         computation.stop();
       }
@@ -36,7 +36,7 @@ class CenterInMyPosition extends React.Component {
   render() {
     return (
       <Button bsStyle="default" onClick={(event) => this.onClick(event)}>
-        <i className="location"/>{this.props.t("Centrar el mapa en tu ubicación")}
+        <i className="icons icon-target"/>{this.props.t("Centrar el mapa en tu ubicación")}
       </Button>
     )
   }

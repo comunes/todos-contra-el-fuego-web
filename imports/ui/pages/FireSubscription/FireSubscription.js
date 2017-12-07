@@ -6,8 +6,9 @@ import DistanceSlider from '/imports/ui/components/DistanceSlider/DistanceSlider
 import SelectionMap from '/imports/ui/components/SelectionMap/SelectionMap';
 import update from 'immutability-helper';
 import { withTracker } from 'meteor/react-meteor-data';
-import getGKeys from '/imports/startup/client/gkeys';
+import { Gkeys  } from '/imports/startup/client/Gkeys';
 import SubsAutocomplete from './SubsAutocomplete';
+import CenterInMyPosition from '/imports/ui/components/CenterInMyPosition/CenterInMyPosition.js';
 
 class FireSubscription extends React.Component {
   constructor(props) {
@@ -18,9 +19,13 @@ class FireSubscription extends React.Component {
   }
 
   componentDidMount = () => {
-    getGKeys(function(err, key) {
+    Gkeys.load(function(err, key) {
       this.setState({init: true});
     }.bind(this));
+  }
+
+  centerOnUserLocation = (value) => {
+    this.setState(update(this.state, {$merge: {lat: value.center[0], lng: value.center[1]}}));
   }
 
   onAutocompleteChange = (value) => {
@@ -49,6 +54,9 @@ class FireSubscription extends React.Component {
             </Col>
             <Col xs={12} sm={12} md={6} lg={6} >
               <DistanceSlider onChange={(value) => this.onSliderChange(value)} />
+              <Row className="align-items-center justify-content-center">
+                <CenterInMyPosition onClick={(viewport) => this.centerOnUserLocation(viewport)} />
+              </Row>
             </Col>
           </Row>
           <Row className="align-items-center justify-content-center">

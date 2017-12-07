@@ -46,9 +46,10 @@ class SubsAutocomplete extends React.Component {
       },
     }
 
+    // http://simplelineicons.com/
     const AutocompleteItem = ({ formattedSuggestion }) => (
       <div className="suggestion-item">
-        <i className='fa fa-map-marker suggestion-icon'/>{' '}
+        <i className="icons icon-location-pin suggestion-icon"/>{' '}
         <strong>{formattedSuggestion.mainText}</strong>{' '}
         <small className="text-muted">{formattedSuggestion.secondaryText}</small>
       </div>)

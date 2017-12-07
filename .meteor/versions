@@ -75,6 +75,7 @@ modules-runtime@0.8.0
 mongo@1.2.2
 mongo-dev-server@1.0.1
 mongo-id@1.0.6
+mys:fonts@0.0.2
 natestrauser:publish-performant-counts@0.1.2
 npm-bcrypt@0.9.3
 npm-mongo@2.2.30

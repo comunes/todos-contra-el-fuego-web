@@ -50,6 +50,7 @@
     "react-router-dom": "^4.2.2",
     "reactstrap": "^5.0.0-alpha.3",
     "simpl-schema": "^0.3.2",
+    "simple-line-icons": "^2.4.1",
     "turf-union": "^3.0.12"
   },
   "devDependencies": {

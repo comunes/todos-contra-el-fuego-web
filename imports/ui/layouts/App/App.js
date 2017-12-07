@@ -43,6 +43,7 @@ import { check } from 'meteor/check';
 import FiresMap from  '../../pages/FiresMap/FiresMap';
 import Sandbox from  '../../pages/Sandbox/Sandbox';
 
+import 'simple-line-icons/css/simple-line-icons.css';
 import './App.scss';
 
 const history = createHistory()

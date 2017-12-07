@@ -140,28 +140,8 @@ class FiresMap extends React.Component {
     this.unionGroup = new L.LayerGroup();
   }
 
-  centerOnUserLocation = () => {
-    // https://atmospherejs.com/mdg/geolocation
-    // only with SSL:
-    // https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition
-
-    // https://stackoverflow.com/questions/31608579/somethings-wrong-with-my-meteor-geolocation-functions
-    var userGeoLocation = new ReactiveVar(null);
-    var state = this.state;
-    var self = this;
-    Tracker.autorun(function (computation) {
-      userGeoLocation.set(Geolocation.latLng());
-      if (userGeoLocation.get()) {
-        //stop the tracker if we got something
-        var viewport = {
-          center: [userGeoLocation.get().lat, userGeoLocation.get().lng],
-          zoom: 11
-        }
-        self.onViewportChanged(viewport);
-        // console.log(userGeoLocation.get());
-        computation.stop();
-      }
-    });
+  centerOnUserLocation = (viewport) => {
+    this.onViewportChanged(viewport);
   }
 
   componentDidMount() {
@@ -274,7 +254,7 @@ class FiresMap extends React.Component {
              <Checkbox disabled={this.state.viewport.zoom < MAXZOOM} inline={false} onClick={e => this.useMarkers(e.target.checked)}>
                <Trans className="mark-checkbox" parent="span">Resaltar los fuegos con un marcador</Trans>
              </Checkbox>
-             <CenterInMyPosition onClick={(event) => this.centerOnUserLocation(event)} />
+             <CenterInMyPosition onClick={(viewport) => this.centerOnUserLocation(viewport)} />
            </Col>
          </Row>
          <Row>
@@ -304,7 +284,7 @@ class FiresMap extends React.Component {
            </Map>
          </Row>
          <Row>
-           (*)&nbsp;<Trans i18nKey="mapPrivacy" parent="span"><em>Para preservar la privacidad de nuestros usuarios/as, los datos reflejados están aleatoriamente alterados y son solo orientativos.</em></Trans>
+           <p><span style={{paddingRight: "5px"}}>(*)</span><Trans i18nKey="mapPrivacy" parent="span"><em>Para preservar la privacidad de nuestros usuarios/as, los datos reflejados están aleatoriamente alterados y son solo orientativos.</em></Trans></p>
          </Row>
       </div>
     );

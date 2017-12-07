@@ -26,3 +26,15 @@ a.nav-link:hover {
 .navbar {
   padding: 0.3rem 0rem;
 }
+
+
+a.navbar-brand {
+  font-size: 26px;
+}
+
+@media (max-width: 480px) {
+  a.navbar-brand {
+    font-size: 16px;
+    padding: 15px 3px;
+  }
+}

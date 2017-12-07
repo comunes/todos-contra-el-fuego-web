@@ -16,17 +16,19 @@ import NavItem from '../NavItem/NavItem';
 import { Meteor } from 'meteor/meteor';
 
 const AuthenticatedNavigation = ({ name, history, props }) => (
-  <Nav pullRight>
+  <ul className="navbar-nav ml-auto ">
+    {/* <Nav pullRight> */}
     <LinkContainer className="nav-item" anchorClassName="nav-link" to="/documents">
-      <NavItem eventKey={1} href="/documents">Documents</NavItem>
+      <NavItem eventKey={3} href="/documents">Documents</NavItem>
     </LinkContainer>
     <LinkContainer className="nav-item" anchorClassName="nav-link" to="/profile">
-      <NavItem eventKey={2.1} href="/profile">{name}</NavItem>
+      <NavItem eventKey={3.1} href="/profile">{name}</NavItem>
     </LinkContainer>
     <LinkContainer className="nav-item" anchorClassName="nav-link" to="/logout">
-      <NavItem eventKey={2.2} onClick={() => history.push('/logout')} href="/logout"><Trans i18nKey="Cerrar sesión">Cerrar sesión</Trans></NavItem>
+      <NavItem eventKey={3.2} onClick={() => history.push('/logout')} href="/logout"><Trans i18nKey="Cerrar sesión">Cerrar sesión</Trans></NavItem>
     </LinkContainer>
-  </Nav>
+  {/* </Nav> */}
+  </ul>
 );
 
 AuthenticatedNavigation.propTypes = {
