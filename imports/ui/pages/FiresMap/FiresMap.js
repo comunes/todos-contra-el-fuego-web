@@ -14,7 +14,7 @@ import Loading from '../../components/Loading/Loading';
 import './FiresMap.scss';
 import Leaflet from 'leaflet'
 import LGeo from 'leaflet-geodesy';
-import union from 'turf-union';
+import union from '@turf/union';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.css';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.js';
 import _ from 'lodash';
