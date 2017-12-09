@@ -125,6 +125,8 @@
   "Resaltar los fuegos con un marcador":
   "Resaltar los fuegos con un marcador",
   "mapPrivacy":
-  "<0>Para preservar la privacidad de nuestros usuarios/as, los datos reflejados están aleatoriamente alterados y son solo orientativos.</0> <0>Para preservar la privacidad de nuestros usuarios/as, los datos reflejados están aleatoriamente alterados y son solo orientativos.</0>"
+  "<0>Para preservar la privacidad de nuestros usuarios/as, los datos reflejados están aleatoriamente alterados y son solo orientativos.</0> <0>Para preservar la privacidad de nuestros usuarios/as, los datos reflejados están aleatoriamente alterados y son solo orientativos.</0>",
+  "Nuevas notificaciones de {{app}}":
+  "Nuevas notificaciones de {{app}}"
 
 }
