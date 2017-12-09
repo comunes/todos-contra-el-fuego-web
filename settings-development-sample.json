@@ -1,6 +1,18 @@
 {
-  "public": {},
+  "gmaps": {
+    "key": ""
+  },
+  "piwik": {
+    "url": "",
+    "site_id": 1
+  },
+  "sentryPrivateDSN": "",
+  "public": {
+    "sentryPublicDSN": ""
+  },
   "private": {
+    "testEmail": "someone@example.com",
+    "testMailer": false,
     "MAIL_URL": "",
     "OAuth": {
       "facebook": {
