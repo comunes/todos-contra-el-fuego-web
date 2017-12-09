@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { Trans, translate } from 'react-i18next';
 import 'leaflet/dist/leaflet.css';
-import { Circle, CircleMarker, Map, Marker, Popup, TileLayer, PropTypes as MapPropTypes } from 'react-leaflet'
+import { Circle, CircleMarker, Map, Marker, Popup, TileLayer, PropTypes as MapPropTypes } from 'react-leaflet';
 import ActiveFiresCollection from '../../../api/ActiveFires/ActiveFires';
 import FireAlertsCollection from '../../../api/FireAlerts/FireAlerts';
 import UserSubsToFiresCollection from '../../../api/Subscriptions/Subscriptions';
@@ -12,7 +12,7 @@ import CenterInMyPosition from '/imports/ui/components/CenterInMyPosition/Center
 import { withTracker } from 'meteor/react-meteor-data';
 import Loading from '../../components/Loading/Loading';
 import './FiresMap.scss';
-import Leaflet from 'leaflet'
+import Leaflet from 'leaflet';
 import LGeo from 'leaflet-geodesy';
 import union from '@turf/union';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.css';
@@ -36,7 +36,7 @@ const fireIcon = new Leaflet.Icon({
   /* shadowUrl: require('../public/marker-shadow.png'), */
   iconSize:     [16, 24], // size of the icon
   /* shadowSize:   [50, 64], // size of the shadow */
-  iconAnchor:   [8, 26], // point of the icon which will correspond to marker's location
+  iconAnchor:   [8, 26] // point of the icon which will correspond to marker's location
   /* shadowAnchor: [4, 62],  // the same for the shadow
    * popupAnchor:  [-3, -76]// point from which the popup should open relative to the iconAnchor*/
 })
@@ -46,7 +46,7 @@ const nFireIcon = new Leaflet.Icon({
   /* shadowUrl: require('../public/marker-shadow.png'), */
   iconSize:     [16, 24], // size of the icon
   /* shadowSize:   [50, 64], // size of the shadow */
-  iconAnchor:   [8, 26], // point of the icon which will correspond to marker's location
+  iconAnchor:   [8, 26] // point of the icon which will correspond to marker's location
   /* shadowAnchor: [4, 62],  // the same for the shadow
    * popupAnchor:  [-3, -76]// point from which the popup should open relative to the iconAnchor*/
 })
@@ -60,38 +60,38 @@ const MyPopupMarker = ({ children, lat, lon, nasa}) => (
   </Marker>
   <CircleMarker center={[lat, lon]} color={nasa? "red": "#D35400"} stroke={false} fillOpacity="1" fill={true} radius={1} />
   </div>
-)
+);
 
 const FireMark = ({ lat, lon, scan, nasa }) => (
   <Circle center={[lat, lon]} color="red" stroke={false} fillOpacity="1" fill={true} radius={scan*1000} />
-)
+);
 
 /* Less acurate (1 pixel per fire) but faster */
 const FirePixel = ({ lat, lon, nasa }) => (
   <CircleMarker center={[lat, lon]} color={nasa? "red": "#D35400"}
                 stroke={false} fillOpacity="1" fill={true} radius={2} />
-)
+);
 
 MyPopupMarker.propTypes = {
   // https://github.com/PaulLeCam/react-leaflet/tree/master/src/propTypes
   children: MapPropTypes.children,
   lat: PropTypes.number.isRequired,
   lon:  PropTypes.number.isRequired,
-  nasa:  PropTypes.bool.isRequired,
-}
+  nasa:  PropTypes.bool.isRequired
+};
 
 FirePixel.propTypes = {
   lat: PropTypes.number.isRequired,
   lon:  PropTypes.number.isRequired,
-  nasa:  PropTypes.bool.isRequired,
-}
+  nasa:  PropTypes.bool.isRequired
+};
 
 FireMark.propTypes = {
   scan: PropTypes.number.isRequired,
   lat: PropTypes.number.isRequired,
   lon:  PropTypes.number.isRequired,
-  nasa:  PropTypes.bool.isRequired,
-}
+  nasa:  PropTypes.bool.isRequired
+};
 
 // Below this use only pixels
 const MAXZOOM = 7;
@@ -99,9 +99,9 @@ const MAXZOOM = 7;
 const MyMarkersList = ({ markers }) => {
   const items = markers.map(({ key, ...props }) => (
     <MyPopupMarker key={key} {...props} />
-  ))
-  return <div style={{ display: 'none' }}>{items}</div>
-}
+  ));
+  return <div style={{ display: 'none' }}>{items}</div>;
+};
 
 const FireList = ({ fires, scale, useMarkers, nasa }) => {
   /* if (nasa) {
@@ -112,20 +112,20 @@ const FireList = ({ fires, scale, useMarkers, nasa }) => {
    * }*/
   const items = fires.map(({ _id, ...props }) => (
     useMarkers && !scale? <MyPopupMarker key={_id} nasa={nasa} {...props} />:
-    (!nasa && !scale)? <FirePixel key={_id} nasa={nasa} {...props} />:<FireMark key={_id} nasa={nasa} {...props} />))
-  return <div style={{ display: 'none' }}>{items}</div>
-}
+    (!nasa && !scale)? <FirePixel key={_id} nasa={nasa} {...props} />:<FireMark key={_id} nasa={nasa} {...props} />));
+  return <div style={{ display: 'none' }}>{items}</div>;
+};
 
 MyMarkersList.propTypes = {
-  markers: PropTypes.array.isRequired,
-}
+  markers: PropTypes.array.isRequired
+};
 
 const DEF_LAT = 35.159028;
 const DEF_LNG = -46.738057;
 const DEFAULT_VIEWPORT = {
   center: [DEF_LAT, DEF_LNG], // a point in the sea
-  zoom: 8,
-}
+  zoom: 8
+};
 
 class FiresMap extends React.Component {
 
@@ -136,13 +136,13 @@ class FiresMap extends React.Component {
       modified: false,
       useMarkers: false,
       showSubsUnion: true
-    }
+    };
     this.unionGroup = new L.LayerGroup();
   }
 
   centerOnUserLocation = (viewport) => {
     this.onViewportChanged(viewport);
-  }
+  };
 
   componentDidMount() {
     height.set(this.divElement.clientHeight);
@@ -156,7 +156,9 @@ class FiresMap extends React.Component {
       lng.set(viewport.center[1]);
       self.state.viewport = viewport;
       self.state.modified = true;
-      self.showSubsUnion(self.state.showSubsUnion);
+      if (self.props.subsready && self.refs.fireMap) {
+        self.showSubsUnion(self.state.showSubsUnion);
+      }
     }, 2000);
   }
 
@@ -192,17 +194,17 @@ class FiresMap extends React.Component {
     if (show) {
       // http://leafletjs.com/reference-1.2.0.html#path
       var copts = {
-        parts: 144,
+        parts: 144
       };
       UserSubsToFiresCollection.find().forEach( function(subs){
-        var circle = LGeo.circle([subs.lat, subs.lon], subs.distance * 1000, copts)
+        var circle = LGeo.circle([subs.lat, subs.lon], subs.distance * 1000, copts);
         circle.addTo(unionGroup);
       });
       this.union = unify(unionGroup.getLayers());
       this.union.setStyle({
         color: "#145A32",
         fillColor: "green",
-        fillOpacity: .1,
+        fillOpacity: .1
       });
       this.union.addTo(map);
     }
@@ -213,15 +215,15 @@ class FiresMap extends React.Component {
     const map = this.getMap();
     var options = {
       fill: 'fill',
-      showSubunits: true,
-    }
+      showSubunits: true
+    };
     var graphicScale = L.control.graphicScale([options]).addTo(map);
   }
 
   render() {
     this.state.viewport = !this.state.modified && this.props.viewport && Array.isArray(this.props.viewport.center)? this.props.viewport: this.state.viewport;
 
-    if (this.props.subsready && this.refs['fireMap']) {
+    if (this.props.subsready && this.refs.fireMap) {
       // Show union of users
       this.showSubsUnion(this.state.showSubsUnion);
     };
@@ -240,12 +242,12 @@ class FiresMap extends React.Component {
          <h4 className="page-header"><Trans parent="span">Fuegos activos</Trans></h4>
          <Row>
            <Col xs={12} sm={6} md={6} lg={6} >
-           <p>
+             <p>
              {this.props.activefires.length === 0?
               <Trans parent="span" i18nKey="noActiveFireInMapCount">No hay fuegos activos en esta zona del mapa. Hay un total de <strong>{{countTotal: this.props.activefirestotal}}</strong> fuegos activos detectados en todo el mundo.</Trans>:<Trans parent="span" i18nKey="activeFireInMapCount">En rojo, <strong>{{count: this.props.activefires.length}}</strong> fuegos activos en el mapa. Hay un total de <strong>{{countTotal: this.props.activefirestotal}}</strong> fuegos activos detectados en todo el mundo por la NASA.</Trans>
              }
-           </p>
-           <p><Trans parent="span" i18nKey="activeNeigFireInMapCount">En naranja, los fuegos notificados por nuestros usuarios/as recientemente.</Trans></p>
+             </p>
+             <p><Trans parent="span" i18nKey="activeNeigFireInMapCount">En naranja, los fuegos notificados por nuestros usuarios/as recientemente.</Trans></p>
            </Col>
            <Col xs={12} sm={6} md={6} lg={6} >
              <Checkbox inline={false} defaultChecked={this.state.showSubsUnion} onClick={e => this.showSubsUnion(e.target.checked)}>
@@ -288,8 +290,8 @@ class FiresMap extends React.Component {
          </Row>
       </div>
     );
-  }
-}
+  };
+};
 
 const zoom = new ReactiveVar(8);
 const lat = new ReactiveVar(DEF_LAT);
@@ -343,7 +345,7 @@ export default translate([], { wait: true }) (withTracker(() => {
     userSubs: UserSubsToFiresCollection.find().fetch(),
     viewport: {
       center: [lat.get(), lng.get()], // a point in the sea
-      zoom: zoom.get(),
+      zoom: zoom.get()
     }
   };
 })(FiresMap));

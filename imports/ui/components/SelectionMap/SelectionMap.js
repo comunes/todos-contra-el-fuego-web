@@ -18,10 +18,10 @@ const positionIcon = new Leaflet.Icon({
   /* shadowUrl: require('../public/marker-shadow.png'), */
   iconSize:     [50, 77], // size of the icon
   /* shadowSize:   [50, 64], // size of the shadow */
-  iconAnchor:   [25, 82], // point of the icon which will correspond to marker's location
+  iconAnchor:   [25, 82] // point of the icon which will correspond to marker's location
   /* shadowAnchor: [4, 62],  // the same for the shadow
    * popupAnchor:  [-3, -76]// point from which the popup should open relative to the iconAnchor*/
-})
+});
 
 class SelectionMap extends Component {
   constructor(props) {
@@ -45,11 +45,11 @@ class SelectionMap extends Component {
   }
 
   toggleDraggable = () => {
-    this.setState({ draggable: !this.state.draggable })
+    this.setState({ draggable: !this.state.draggable });
   }
 
   updatePosition = () => {
-    const { lat, lng } = this.refs.marker.leafletElement.getLatLng()
+    const { lat, lng } = this.refs.marker.leafletElement.getLatLng();
     this.setState({
       marker: [ lat, lng ],
       modified: true
@@ -71,8 +71,8 @@ class SelectionMap extends Component {
     const map = this.getMap();
     var options = {
       fill: 'fill',
-      showSubunits: true,
-    }
+      showSubunits: true
+    };
     var graphicScale = L.control.graphicScale([options]).addTo(map);
   }
 
@@ -129,7 +129,7 @@ class SelectionMap extends Component {
          </Control>
         </Map> }
       </div>
-    )
+    );
   }
 }
 

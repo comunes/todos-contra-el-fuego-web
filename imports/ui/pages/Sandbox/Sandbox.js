@@ -26,7 +26,8 @@ class Sandbox extends React.Component {
       <div>
         <FireSubscription />
       </div>
-    )
+    );
   }
 }
+
 export default translate([], { wait: true }) (Sandbox);

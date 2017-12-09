@@ -19,6 +19,7 @@
     "i18next": "^10.0.7",
     "i18next-browser-languagedetector": "^2.1.0",
     "i18next-localstorage-cache": "^1.1.1",
+    "i18next-sync-fs-backend": "^1.0.0",
     "i18next-xhr-backend": "^1.5.0",
     "immutability-helper": "^2.5.1",
     "indexof": "0.0.1",
@@ -113,6 +114,10 @@
       "no-return-assign": [
         "error",
         "except-parens"
+      ],
+      "comma-dangle": [
+        "error",
+        "never"
       ],
       "no-underscore-dangle": [
         "error",

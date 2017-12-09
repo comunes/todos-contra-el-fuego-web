@@ -1,12 +1,11 @@
+/* global CookieConsent Intl */
 import i18n from 'i18next';
 import backend from 'i18next-xhr-backend';
 import LngDetector from 'i18next-browser-languagedetector';
 import Cache from 'i18next-localstorage-cache';
-import { Meteor } from 'meteor/meteor';
 import { T9n } from 'meteor-accounts-t9n';
-import en from 'meteor-accounts-t9n/build/en';
-import es from 'meteor-accounts-t9n/build/es';
 import moment from 'moment';
+import i18nOpts from '../common/i18n';
 
 // Adapted from: https://github.com/appigram/ryfma-boilerplate/blob/44c1eabfb9928b5623afab36a23997969e5beb02/imports/startup/client/i18n.js
 
@@ -21,7 +20,7 @@ const detectorOptions = {
 
   // cache user language on
   caches: ['localStorage', 'cookie'],
-  excludeCacheFor: ['cimode'], // languages to not persist (cookie, localStorage)
+  excludeCacheFor: ['cimode'] // languages to not persist (cookie, localStorage)
 };
 
 const cacheOptions = {
@@ -32,78 +31,29 @@ const cacheOptions = {
   // expiration
   expirationTime: 7 * 24 * 60 * 60 * 1000,
   // language versions
-  versions: {},
+  versions: {}
 };
 
-var backOpts = {
-  // path where resources get loaded from
-  loadPath: '/locales/{{lng}}/{{ns}}.json',
-
-  // path to post missing resources
-  addPath: '/locales/{{lng}}/{{ns}}.missing.json',
-
-  // jsonIndent to use when storing json files
-  jsonIndent: 2
+i18nOpts.cache = cacheOptions;
+i18nOpts.detection = detectorOptions;
+i18nOpts.react = {
+  wait: true
+  // https://react.i18next.com/components/i18next-instance.ht
+  /* bindI18n: 'languageChanged loaded',
+   bindStore: 'added removed',
+   nsMode: 'default' */
 };
-
-T9N_LANGUAGES='es,en';
-
-const forceDebug = false;
-const shouldDebug = (forceDebug && !Meteor.isProduction);
 
 i18n.use(backend)
   .use(LngDetector)
   .use(Cache)
-  .init({
-    backend: backOpts,
-    lng: 'es',
-    //fallbackLng: 'es',
-    fallbackLng: {
-      'en-US': ['en'],
-      'en-GB': ['en'],
-      'pt-BR': ['pt'],
-      'default': ['es']
-    },
-    interpolation: {
-      escapeValue: false, // not needed for react!!
-      formatSeparator: ",",
-      format: function(value, format, lng) {
-        // https://www.i18next.com/formatting.html
-        // console.log(`Value: ${value} with format: ${format} to lang: ${lng}`);
-        if (format === 'uppercase') return value.toUpperCase();
-        if (value instanceof Date) return moment(value).format(format);
-        if (format === 'number') return Intl.NumberFormat(lng).format(value);
-        return value;
-      }
-    },
-    whitelist: false,
-    // whitelist: ['es', 'en'], // allowed languages
-    load: 'all', // es-ES -> es, en-US -> en
-    debug: shouldDebug,
-    ns: 'common',
-    defaultNS: 'common',
-    saveMissing: shouldDebug, // if true seems it's fails to getResourceBundle
-    saveMissingTo: 'es',
-    keySeparator: 'ß',
-    nsSeparator: 'ð',
-    pluralSeparator: 'đ',
-    cache: cacheOptions,
-    detection: detectorOptions,
-    react: {
-      wait: true,
-      // https://react.i18next.com/components/i18next-instance.ht
-      /* bindI18n: 'languageChanged loaded',
-      bindStore: 'added removed',
-      nsMode: 'default' */
-    }
-  }, function(err, t) {
+  .init(i18nOpts, (err, t) => {
     // initialized and ready to
     if (err) {
       console.error(err);
       return;
     }
-    document.title = t("AppName");
-
+    document.title = t('AppName');
     // Accounts translation
     // https://github.com/softwarerero/meteor-accounts-t9n
     // console.log("Language: " + i18n.language);
@@ -111,11 +61,11 @@ i18n.use(backend)
     // console.log(T9n.get('error.accounts.User not found'));
 
     // cookies eu consent
-    var cookiesOpt = {
+    const cookiesOpt = {
       cookieTitle: t('Uso de Cookies'),
       cookieMessage: t('Utilizamos cookies para asegurar un mejor uso de nuestra web. Si continúas navegando, consideramos que aceptas su uso'),
       /* cookieMessage: t('Uso de Cookies'),
-      cookieMessageImply: t('Utilizamos cookies para asegurar un mejor uso de nuestra web. Si continúas navegando, consideramos que aceptas su uso'),*/
+       cookieMessageImply: t('Utilizamos cookies para asegurar un mejor uso de nuestra web. Si continúas navegando, consideramos que aceptas su uso'), */
       showLink: false,
       position: 'bottom',
       linkText: 'Lee más',
@@ -129,7 +79,7 @@ i18n.use(backend)
     CookieConsent.init(cookiesOpt);
   });
 
-i18n.on('languageChanged', function(lng) {
+i18n.on('languageChanged', (lng) => {
   moment.locale(lng);
   T9n.setLanguage(lng);
 });

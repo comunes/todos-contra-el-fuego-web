@@ -45,3 +45,4 @@ natestrauser:publish-performant-counts
 maximum:server-transform
 mys:fonts                     # fonst in npm
 ostrio:mailer                 # mailer
+ostrio:meteor-root
