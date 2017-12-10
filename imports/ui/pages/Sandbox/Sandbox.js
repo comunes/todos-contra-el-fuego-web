@@ -1,33 +1,28 @@
 import React from 'react';
-import { Trans, translate } from 'react-i18next';
-import DistanceSlider from '/imports/ui/components/DistanceSlider/DistanceSlider';
-import SelectionMap from '/imports/ui/components/SelectionMap/SelectionMap';
-import update from 'immutability-helper';
-import { Gkeys } from '/imports/startup/client/Gkeys';
-import FireSubscription from '/imports/ui/pages/FireSubscription/FireSubscription';
+// import PropTypes from 'prop-types';
+import { translate } from 'react-i18next';
 
 class Sandbox extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      init: false
-    };
+    /* this.state = {
+     *   init: false
+     * }; */
   }
 
-  componentDidMount = () => {
-    this.setState({init: true});
-    Gkeys.load(function(err, key) {
-      console.log(key);
-    }.bind(this));
+  componentDidMount() {
+    // this.setState({init: true});
   }
 
   render() {
     return (
-      <div>
-        <FireSubscription />
-      </div>
+      <div></div>
     );
   }
 }
+
+Sandbox.propTypes = {
+  // history: PropTypes.object.isRequired
+};
 
 export default translate([], { wait: true }) (Sandbox);

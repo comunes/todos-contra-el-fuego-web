@@ -37,7 +37,8 @@ const cacheOptions = {
 i18nOpts.cache = cacheOptions;
 i18nOpts.detection = detectorOptions;
 i18nOpts.react = {
-  wait: true
+  wait: true,
+  defaultTransParent: 'span'
   // https://react.i18next.com/components/i18next-instance.ht
   /* bindI18n: 'languageChanged loaded',
    bindStore: 'added removed',

@@ -2,9 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
+import { translate } from 'react-i18next';
 import PublicNavigation from '../PublicNavigation/PublicNavigation';
 import AuthenticatedNavigation from '../AuthenticatedNavigation/AuthenticatedNavigation';
-import { translate } from 'react-i18next';
+import NavItem from '../NavItem/NavItem';
 
 import './Navigation.scss';
 
@@ -27,6 +29,17 @@ const Navigation = props => (
     </button>
     {/* <Navbar.Collapse> */}
     <div className="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul className="navbar-nav ml-auto ">
+        <LinkContainer className="nav-item" anchorClassName="nav-link" to="/sandbox">
+          <NavItem eventKey={1.1} href="/sandbox">Sandbox</NavItem>
+        </LinkContainer>
+        <LinkContainer className="nav-item" anchorClassName="nav-link" to="/subscriptions">
+          <NavItem eventKey={1.2} href="/subscriptions">Mis alertas</NavItem>
+        </LinkContainer>
+        <LinkContainer className="nav-item" anchorClassName="nav-link" to="/fires">
+          <NavItem eventKey={2} href="/fires">{props.t('activeFires')}</NavItem>
+        </LinkContainer>
+      </ul>
       {!props.authenticated ? <PublicNavigation /> : <AuthenticatedNavigation {...props} />}
       {/* </Navbar.Collapse> */}
     </div>
@@ -35,13 +48,11 @@ const Navigation = props => (
 );
 
 Navigation.defaultProps = {
-  name: '',
+  name: ''
 };
 
 Navigation.propTypes = {
   authenticated: PropTypes.bool.isRequired
 };
-
-//  export default Navigation;
 
 export default translate([], { wait: true })(Navigation);

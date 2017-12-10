@@ -39,7 +39,7 @@ const fireIcon = new Leaflet.Icon({
   iconAnchor:   [8, 26] // point of the icon which will correspond to marker's location
   /* shadowAnchor: [4, 62],  // the same for the shadow
    * popupAnchor:  [-3, -76]// point from which the popup should open relative to the iconAnchor*/
-})
+});
 
 const nFireIcon = new Leaflet.Icon({
   iconUrl: "/n-fire-marker.png",
@@ -49,7 +49,7 @@ const nFireIcon = new Leaflet.Icon({
   iconAnchor:   [8, 26] // point of the icon which will correspond to marker's location
   /* shadowAnchor: [4, 62],  // the same for the shadow
    * popupAnchor:  [-3, -76]// point from which the popup should open relative to the iconAnchor*/
-})
+});
 
 // http://leafletjs.com/reference-1.2.0.html#icon
 const MyPopupMarker = ({ children, lat, lon, nasa}) => (

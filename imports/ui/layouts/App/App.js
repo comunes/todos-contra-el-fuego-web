@@ -1,13 +1,25 @@
-/* eslint-disable jsx-a11y/no-href*/
+/* eslint-disable jsx-a11y/no-href */
+/* eslint import/no-absolute-path: [2, { esmodule: false, commonjs: false, amd: false }] */
 
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Router, Switch, Route } from 'react-router-dom';
-import { Grid, Alert, Button } from 'react-bootstrap';
+import createHistory from 'history/createBrowserHistory';
+import { Grid } from 'react-bootstrap';
+import { I18nextProvider } from 'react-i18next';
 import { Meteor } from 'meteor/meteor';
-import { createContainer } from 'meteor/react-meteor-data';
+import { withTracker } from 'meteor/react-meteor-data';
 import { Roles } from 'meteor/alanning:roles';
-import { Bert } from 'meteor/themeteorchef:bert';
+
+// https://github.com/gadicc/meteor-blaze-react-component/
+import Blaze from 'meteor/gadicc:blaze-react-component';
+/* import Reconnect from '../../components/Reconnect/Reconnect'; */
+// i18n
+import i18n from '/imports/startup/client/i18n';
+import '/imports/startup/client/ravenLogger';
+import '/imports/startup/client/geolocation';
+import '/imports/startup/client/piwik-start.js';
+import 'simple-line-icons/css/simple-line-icons.css';
 import Navigation from '../../components/Navigation/Navigation';
 import Authenticated from '../../components/Authenticated/Authenticated';
 import Public from '../../components/Public/Public';
@@ -28,87 +40,78 @@ import Footer from '../../components/Footer/Footer';
 import Terms from '../../pages/Terms/Terms';
 import Privacy from '../../pages/Privacy/Privacy';
 import License from '../../pages/License/License';
+import FireSubscription from '../../pages/FireSubscription/FireSubscription';
 import ReSendEmail from '../../components/ReSendEmail/ReSendEmail';
-/* import Reconnect from '../../components/Reconnect/Reconnect';*/
-// i18n
-import { I18nextProvider } from 'react-i18next';
-import i18n from '/imports/startup/client/i18n';
-import '/imports/startup/client/piwik-start.js';
-import ravenLogger from '/imports/startup/client/ravenLogger';
-import geolocation from '/imports/startup/client/geolocation';
-// https://github.com/gadicc/meteor-blaze-react-component/
-import Blaze from 'meteor/gadicc:blaze-react-component';
-import createHistory from 'history/createBrowserHistory';
-import { check } from 'meteor/check';
-import FiresMap from  '../../pages/FiresMap/FiresMap';
-import Sandbox from  '../../pages/Sandbox/Sandbox';
-
-import 'simple-line-icons/css/simple-line-icons.css';
+import FiresMap from '../../pages/FiresMap/FiresMap';
+import Sandbox from '../../pages/Sandbox/Sandbox';
 import './App.scss';
 
-const history = createHistory()
-history.listen((location, action) => {
+const history = createHistory();
+history.listen((location) => { // , action ) => {
   // console.log(location.pathname);
+  // console.log(action); // PUSH, etc
   Meteor.Piwik.trackPage(location.pathname);
 });
 
 const App = props => (
   /* https://react.i18next.com/components/i18nextprovider.html */
   <I18nextProvider i18n={i18n}>
-  <Router history={history}>
-    {!props.loading ? <div className="App">
-    <Navigation {...props} />
-      <ReSendEmail {...props} />
-      <Grid> {/* bsClass="previously-container-but-disabled" > */}
-        <Switch>
-          <Route exact name="index" path="/" component={Index} />
-          <Authenticated exact path="/documents" component={Documents} {...props} />
-          <Authenticated exact path="/documents/new" component={NewDocument} {...props} />
-          <Authenticated exact path="/documents/:_id" component={ViewDocument} {...props} />
-          <Authenticated exact path="/documents/:_id/edit" component={EditDocument} {...props} />
-          <Authenticated exact path="/profile" component={Profile} {...props} />
-          <Route path="/fires" component={FiresMap} {...props} />
-          <Public path="/signup" component={Signup} {...props} />
-          <Public path="/login" component={Login} {...props} />
-          <Route path="/logout" component={Logout} {...props} />
-          <Route path="/sandbox" component={Sandbox} {...props} />
-          <Route name="verify-email" path="/verify-email/:token" component={VerifyEmail} />
-          <Route name="recover-password" path="/recover-password" component={RecoverPassword} />
-          <Route name="reset-password" path="/reset-password/:token" component={ResetPassword} />
-          <Route name="terms" path="/terms" component={Terms} />
-          <Route name="privacy" path="/privacy" component={Privacy} />
-          <Route name="license" path="/license" component={License} />
-          <Route component={NotFound} />
-        </Switch>
-      </Grid>
-      <Footer />
+    <Router history={history}>
+      { !props.loading ?
+        <div className="App">
+          <Navigation {...props} />
+          <ReSendEmail {...props} />
+          <Grid> {/* bsClass="previously-container-but-disabled" > */}
+            <Switch>
+              <Route exact name="index" path="/" component={Index} />
+              <Authenticated exact path="/documents" component={Documents} {...props} />
+              <Authenticated exact path="/documents/new" component={NewDocument} {...props} />
+              <Authenticated exact path="/documents/:_id" component={ViewDocument} {...props} />
+              <Authenticated exact path="/documents/:_id/edit" component={EditDocument} {...props} />
+              <Authenticated exact path="/profile" component={Profile} {...props} />
+              <Route path="/fires" component={FiresMap} {...props} />
+              <Public path="/signup" component={Signup} {...props} />
+              <Public path="/login" component={Login} {...props} />
+              <Route path="/logout" component={Logout} {...props} />
+              <Route path="/sandbox" component={Sandbox} {...props} />
+              <Public path="/subscriptions" component={FireSubscription} {...props} />
+              <Route name="verify-email" path="/verify-email/:token" component={VerifyEmail} />
+              <Route name="recover-password" path="/recover-password" component={RecoverPassword} />
+              <Route name="reset-password" path="/reset-password/:token" component={ResetPassword} />
+              <Route name="terms" path="/terms" component={Terms} />
+              <Route name="privacy" path="/privacy" component={Privacy} />
+              <Route name="license" path="/license" component={License} />
+              <Route component={NotFound} />
+            </Switch>
+          </Grid>
+          <Footer />
 
-      {/* <Reconnect /> */}
-      <Blaze template="cookieConsent" />
-      {/* <Blaze template="cookieConsentImply" /> */}
-    </div> : ''}
-  </Router>
+          {/* <Reconnect /> */}
+          <Blaze template="cookieConsent" />
+          {/* <Blaze template="cookieConsentImply" /> */}
+        </div> : ''}
+    </Router>
   </I18nextProvider>
 );
 
 App.defaultProps = {
   userId: '',
-  emailAddress: '',
+  emailAddress: ''
 };
 
 App.propTypes = {
   loading: PropTypes.bool.isRequired,
   userId: PropTypes.string,
   emailAddress: PropTypes.string,
-  emailVerified: PropTypes.bool.isRequired,
+  emailVerified: PropTypes.bool.isRequired
 };
 
 const getUserName = name => ({
   string: name,
-  object: `${name.first} ${name.last}`,
+  object: `${name.first} ${name.last}`
 }[typeof name]);
 
-export default createContainer(() => {
+export default withTracker(() => {
   const loggingIn = Meteor.loggingIn();
   const user = Meteor.user();
   const userId = Meteor.userId();
@@ -124,6 +127,6 @@ export default createContainer(() => {
     roles: !loading && Roles.getRolesForUser(userId),
     userId,
     emailAddress,
-    emailVerified: user && user.emails ? user && user.emails && user.emails[0].verified : true,
+    emailVerified: user && user.emails ? user && user.emails && user.emails[0].verified : true
   };
-}, App);
+})(App);

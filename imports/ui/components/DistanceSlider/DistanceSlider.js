@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Trans, translate } from 'react-i18next';
-import Slider, { Range } from 'rc-slider';
 import Tooltip from 'rc-tooltip';
-// We can just import Slider or Range to reduce bundle size
-// import Slider from 'rc-slider/lib/Slider';
-// import Range from 'rc-slider/lib/Range';
+import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
 // https://www.npmjs.com/package/rc-slider
@@ -15,13 +12,7 @@ const Handle = Slider.Handle;
 const handle = (props) => {
   const { value, dragging, index, ...restProps } = props;
   return (
-    <Tooltip
-        prefixCls="rc-slider-tooltip"
-        overlay={value}
-        visible={dragging}
-        placement="top"
-        key={index}
-    >
+    <Tooltip prefixCls="rc-slider-tooltip" overlay={value} visible={dragging} placement="top" key={index} >
       <Handle value={value} {...restProps} />
     </Tooltip>
   );
@@ -35,26 +26,27 @@ class DistanceSlider extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: 10,
+      value: 10
     };
+    this.onSliderChange = this.onSliderChange.bind(this);
+    this.onAfterChange = this.onAfterChange.bind(this);
   }
 
-  onSliderChange = (value) => {
+  onSliderChange(value) {
     // console.log(value);
     this.setState({
-      value,
+      value
     });
     this.props.onChange(value);
   }
 
-  onAfterChange = (value) => {
+  onAfterChange(value) {
     // console.log(`After change: ${value}`); //eslint-disable-line
     this.props.onChange(value);
   }
 
   render() {
     return (
-
       <div style={wrapperStyle}>
         <p><Trans parent="span">¿A que distancia a la redonda quieres recibir notificaciones?</Trans></p>
         <Slider min={5}
@@ -89,8 +81,16 @@ class DistanceSlider extends React.Component {
                 step={5}
                 handle={handle} />
       </div>
-    )
+    );
   }
 }
+
+DistanceSlider.defaultProps = {
+  onChange: null
+};
+
+DistanceSlider.propTypes = {
+  onChange: PropTypes.func
+};
 
 export default translate([], { wait: true })(DistanceSlider);

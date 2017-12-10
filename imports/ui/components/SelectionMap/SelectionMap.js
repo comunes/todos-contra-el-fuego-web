@@ -1,26 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Map, TileLayer, Marker, Popup, CircleMarker, Circle} from 'react-leaflet';
+import { Map, TileLayer, Marker, CircleMarker, Circle } from 'react-leaflet';
 import Leaflet from 'leaflet';
-import { withTracker } from 'meteor/react-meteor-data';
-import { translate, Trans } from 'react-i18next';
+import { translate } from 'react-i18next';
 import geolocation from '/imports/startup/client/geolocation';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.css';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.js';
 import Control from 'react-leaflet-control';
 import { Button, ButtonToolbar } from 'react-bootstrap';
-import DistanceSlider from '/imports/ui/components/DistanceSlider/DistanceSlider';
-import CenterInMyPosition from '/imports/ui/components/CenterInMyPosition/CenterInMyPosition.js';
 import './SelectionMap.scss';
 
 const positionIcon = new Leaflet.Icon({
-  iconUrl: "/your-position.png",
+  iconUrl: '/your-position.png',
   /* shadowUrl: require('../public/marker-shadow.png'), */
-  iconSize:     [50, 77], // size of the icon
+  iconSize: [50, 77], // size of the icon
   /* shadowSize:   [50, 64], // size of the shadow */
-  iconAnchor:   [25, 82] // point of the icon which will correspond to marker's location
+  iconAnchor: [25, 82] // point of the icon which will correspond to marker's location
   /* shadowAnchor: [4, 62],  // the same for the shadow
-   * popupAnchor:  [-3, -76]// point from which the popup should open relative to the iconAnchor*/
+   * popupAnchor:  [-3, -76]// point from which the popup should open relative to the iconAnchor */
 });
 
 class SelectionMap extends Component {
@@ -33,25 +30,35 @@ class SelectionMap extends Component {
       draggable: true,
       modified: false
     };
-    // console.log(this.state);
+
+    this.getMap = this.getMap.bind(this);
+    this.toggleDraggable = this.toggleDraggable.bind(this);
+    this.updatePosition = this.updatePosition.bind(this);
+    this.fit = this.fit.bind(this);
+    this.addScale = this.addScale.bind(this);
+    this.doSubs = this.doSubs.bind(this);
   }
 
-  componentDidUpdate = () => {
+  componentDidMount() {
+    this.addScale();
+  }
+
+  componentDidUpdate() {
     this.fit();
   }
 
-  getMap = () => {
-    return this.refs.selectionMap.leafletElement;
+  getMap() {
+    return this.selectionMap.leafletElement;
   }
 
-  toggleDraggable = () => {
+  toggleDraggable() {
     this.setState({ draggable: !this.state.draggable });
   }
 
-  updatePosition = () => {
-    const { lat, lng } = this.refs.marker.leafletElement.getLatLng();
+  updatePosition() {
+    const { lat, lng } = this.marker.leafletElement.getLatLng();
     this.setState({
-      marker: [ lat, lng ],
+      marker: [lat, lng],
       modified: true
     });
     this.fit();
@@ -59,14 +66,10 @@ class SelectionMap extends Component {
 
   fit() {
     // console.log("fit!");
-    this.getMap().fitBounds(this.refs.distanceCircle.leafletElement.getBounds(), [70, 70]);
+    this.getMap().fitBounds(this.distanceCircle.leafletElement.getBounds(), [70, 70]);
   }
 
-  componentDidMount() {
-    this.addScale();
-  }
-
-  addScale = () => {
+  addScale() {
     // https://www.npmjs.com/package/leaflet-graphicscale
     const map = this.getMap();
     var options = {
@@ -76,12 +79,11 @@ class SelectionMap extends Component {
     var graphicScale = L.control.graphicScale([options]).addTo(map);
   }
 
-  doSubs = (event) => {
-    console.log(event);
-  }
-
-  centerOnUserLocation = (event) => {
-    console.log(event);
+  doSubs() { // event param not used
+    this.props.history.push(
+      '/login',
+      { subscription: { center: this.state.center, distance: this.state.distance } }
+    );
   }
 
   render() {
@@ -94,7 +96,8 @@ class SelectionMap extends Component {
     return (
       <div>
       { this.state && this.state.center &&
-        <Map center={this.state.center} zoom={this.state.zoom} ref="selectionMap">
+        <Map center={this.state.center} zoom={this.state.zoom}
+             ref={(map) => { this.selectionMap = map; }}>
         <TileLayer
           attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -105,7 +108,7 @@ class SelectionMap extends Component {
             position={this.state.marker}
             icon={positionIcon}
             title={this.props.t("Arrastrar para seleccionar otro punto")}
-          ref="marker">
+            ref={(ref) => { this.marker = ref; }}>
         </Marker>
         <CircleMarker
             center={this.state.marker} color="red"
@@ -114,12 +117,11 @@ class SelectionMap extends Component {
             fill={true}
             radius={3} />
         <Circle center={this.state.marker}
-                ref="distanceCircle"
+                ref={(ref) => { this.distanceCircle = ref; }}
                 color="#145A32"
                 fillColor="green"
                 fillOpacity={.1}
                 radius={this.state.distance * 1000} />
-
         <Control position="topright" >
           <ButtonToolbar>
             <Button bsStyle="success" onClick={(event) => this.doSubs(event)}>
@@ -134,6 +136,7 @@ class SelectionMap extends Component {
 }
 
 SelectionMap.propTypes = {
+  history: PropTypes.object.isRequired,
   lat: PropTypes.number,
   lng: PropTypes.number,
   distance: PropTypes.number

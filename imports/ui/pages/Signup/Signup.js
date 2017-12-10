@@ -10,7 +10,6 @@ import OAuthLoginButtons from '../../components/OAuthLoginButtons/OAuthLoginButt
 import InputHint from '../../components/InputHint/InputHint';
 import AccountPageFooter from '../../components/AccountPageFooter/AccountPageFooter';
 import validate from '../../../modules/validate';
-import Icon from '../../components/Icon/Icon';
 import './Signup.scss';
 import { translate } from 'react-i18next';
 import { T9n } from 'meteor-accounts-t9n';
@@ -164,7 +163,7 @@ class Signup extends React.Component {
 }
 
 Signup.propTypes = {
-  history: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 };
 
-export default translate([], { wait: true })(Signup)
+export default translate([], { wait: true })(Signup);
