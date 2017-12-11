@@ -9,10 +9,10 @@ class SubsAutocomplete extends React.Component {
     super(props);
     this.state = {
       address: '',
-    }
+    };
   }
 
-  onChange = (address) => { this.setState({ address }) }
+  onChange = (address) => { this.setState({ address }); }
 
   handleSelect = (address) => {
     const self = this;

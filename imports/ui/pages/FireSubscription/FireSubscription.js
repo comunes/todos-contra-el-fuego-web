@@ -67,8 +67,7 @@ class FireSubscription extends React.Component {
           </Row>
           <Row className="align-items-center justify-content-center">
             <SelectionMap
-                lat={this.state.lat}
-                lng={this.state.lng}
+                center={[this.state.lat, this.state.lng]}
                 distance={this.state.distance}
                 history={this.props.history}
                 onSelection={(state) => this.onSelection(state)}

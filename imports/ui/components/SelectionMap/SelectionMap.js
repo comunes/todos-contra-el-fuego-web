@@ -1,8 +1,13 @@
+/* global setTimeout */
+/* eslint-disable react/jsx-indent-props */
+/* eslint-disable import/no-absolute-path */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Map, TileLayer, Marker, CircleMarker, Circle } from 'react-leaflet';
 import Leaflet from 'leaflet';
 import { translate } from 'react-i18next';
+import { withTracker } from 'meteor/react-meteor-data';
+import update from 'immutability-helper';
 import geolocation from '/imports/startup/client/geolocation';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.css';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.js';
@@ -25,11 +30,11 @@ class SelectionMap extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      center: geolocation.get(),
-      marker: geolocation.get(),
+      center: props.center,
+      marker: props.center,
       zoom: 11,
-      draggable: true,
-      modified: false
+      distance: props.distance,
+      draggable: true
     };
 
     this.getMap = this.getMap.bind(this);
@@ -41,7 +46,20 @@ class SelectionMap extends Component {
   }
 
   componentDidMount() {
-    this.addScale();
+    if (this.isValidState()) {
+      this.addScale();
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const nextCenter = nextProps.center[0] ? nextProps.center : this.state.center;
+    const nextMarker = nextProps.center[0] ? nextProps.center : this.state.marker;
+    this.setState({
+      center: nextCenter,
+      marker: nextMarker,
+      distance: nextProps.distance || this.state.distance
+    });
+    this.fit();
   }
 
   componentDidUpdate() {
@@ -58,19 +76,18 @@ class SelectionMap extends Component {
 
   updatePosition() {
     const { lat, lng } = this.marker.leafletElement.getLatLng();
+    // console.log(`New marker lat ${lat} and lng ${lng}`);
     const currentDistance = this.state.distance;
-    this.setState({
-      marker: [lat, lng],
-      modified: true
-    });
-    console.log(currentDistance);
+    this.setState(update(this.state, { $merge: { marker: [lat, lng] } }));
     this.props.onSelection({ lat, lng, currentDistance });
     this.fit();
   }
 
   fit() {
     // console.log("fit!");
-    this.getMap().fitBounds(this.distanceCircle.leafletElement.getBounds(), [70, 70]);
+    if (this.selectionMap && this.distanceCircle) {
+      this.getMap().fitBounds(this.distanceCircle.leafletElement.getBounds(), [70, 70]);
+    }
   }
 
   addScale() {
@@ -91,69 +108,80 @@ class SelectionMap extends Component {
     );
   }
 
+  isValidState() {
+    return this.state.center && this.state.center[0] && this.state.distance;
+  }
+
   render() {
-    this.state.center = !this.state.modified && this.props.lat? [this.props.lat, this.props.lng]: this.state.center;
-    this.state.marker = !this.state.modified && this.props.lat? [this.props.lat, this.props.lng]: this.state.marker;
-    this.state.distance = !this.state.modified? this.props.distance: this.state.distance;
-    this.state.modified = false;
+    // console.log('render map called');
     return (
       <div>
-      { this.state && this.state.center &&
-        <Map center={this.state.center} zoom={this.state.zoom}
-             ref={(map) => { this.selectionMap = map; }}
-             sleep={window.location.pathname === '/'}
-             sleepTime={10750}
-             wakeTime={750}
-             sleepNote={true}
-             hoverToWake={true}
-             wakeMessage={this.props.t('Pulsa para activar')}
-             sleepOpacity={.6}>
-        <TileLayer
-          attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        <Marker
-            draggable={this.state.draggable}
-            onDragend={this.updatePosition}
-            position={this.state.marker}
-            icon={positionIcon}
-            title={this.props.t("Arrastrar para seleccionar otro punto")}
-            ref={(ref) => { this.marker = ref; }}>
-        </Marker>
-        <CircleMarker
-            center={this.state.marker} color="red"
-            stroke={false}
-            fillOpacity="1"
-            fill={true}
-            radius={3} />
-        <Circle center={this.state.marker}
+        { this.isValidState() &&
+          <Map
+              center={this.state.center}
+              zoom={this.state.zoom}
+              ref={(map) => { this.selectionMap = map; }}
+              sleep={window.location.pathname === '/'}
+              sleepTime={10750}
+              wakeTime={750}
+              sleepNote
+              hoverToWake
+              wakeMessage={this.props.t('Pulsa para activar')}
+              sleepOpacity={0.6}
+          >
+            <TileLayer
+                attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <Marker
+                draggable={this.state.draggable}
+                onDragend={this.updatePosition}
+                position={this.state.marker}
+                icon={positionIcon}
+                title={this.props.t('Arrastrar para seleccionar otro punto')}
+                ref={(ref) => { this.marker = ref; }}
+            />
+            <CircleMarker
+                center={this.state.marker}
+                color="red"
+                stroke={false}
+                fillOpacity="1"
+                fill
+                radius={3}
+            />
+            <Circle
+                center={this.state.marker}
                 ref={(ref) => { this.distanceCircle = ref; }}
                 color="#145A32"
                 fillColor="green"
-                fillOpacity={.1}
-                radius={this.state.distance * 1000} />
-        <Control position="topright" >
-          <ButtonToolbar>
-            <Button bsStyle="success" onClick={(event) => this.doSubs(event)}>
-              {this.props.t("Subscribirme a fuegos en este rádio")}
-            </Button>
-          </ButtonToolbar>
-         </Control>
-        </Map> }
+                fillOpacity={0.1}
+                radius={this.state.distance * 1000}
+            />
+            <Control position="topright" >
+              <ButtonToolbar>
+                <Button
+                    bsStyle="success"
+                    onClick={event => this.doSubs(event)}
+                >
+                  {this.props.t('Subscribirme a fuegos en este rádio')}
+                </Button>
+              </ButtonToolbar>
+            </Control>
+          </Map> }
       </div>
     );
   }
 }
-SelectionMap.defaultProps = {
-  distance: 10
-};
 
 SelectionMap.propTypes = {
   history: PropTypes.object.isRequired,
-  lat: PropTypes.number,
-  lng: PropTypes.number,
+  t: PropTypes.func.isRequired,
+  center: PropTypes.array,
   distance: PropTypes.number,
   onSelection: PropTypes.func.isRequired
 };
 
-export default translate([], { wait: true })(SelectionMap);
+export default translate([], { wait: true })(withTracker(props => ({
+  center: props.center[0] ? props.center : geolocation.get(),
+  distance: props.distance
+}))(SelectionMap));

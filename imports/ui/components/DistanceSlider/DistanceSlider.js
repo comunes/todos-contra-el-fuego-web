@@ -30,6 +30,7 @@ class DistanceSlider extends React.Component {
     };
     this.onSliderChange = this.onSliderChange.bind(this);
     this.onAfterChange = this.onAfterChange.bind(this);
+    this.props.onChange(10);
   }
 
   onSliderChange(value) {
