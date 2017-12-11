@@ -29,6 +29,7 @@
     "leaflet": "^1.2.0",
     "leaflet-geodesy": "^0.2.1",
     "leaflet-graphicscale": "0.0.2",
+    "leaflet-sleep": "^0.5.1",
     "lodash": "^4.17.4",
     "loms.perlin": "^1.0.1",
     "maxmind": "^2.3.0",
@@ -45,6 +46,7 @@
     "react-addons-pure-render-mixin": "^15.6.2",
     "react-bootstrap": "^0.31.5",
     "react-dom": "^16.0.0",
+    "react-fullpage": "^0.1.18",
     "react-i18next": "^7.1.1",
     "react-leaflet": "^1.7.7",
     "react-leaflet-control": "^1.4.0",
@@ -52,6 +54,7 @@
     "react-resize-detector": "^1.1.0",
     "react-router-bootstrap": "^0.24.4",
     "react-router-dom": "^4.2.2",
+    "react-router-hash-link": "^1.1.1",
     "reactstrap": "^5.0.0-alpha.3",
     "simpl-schema": "^0.3.2",
     "simple-line-icons": "^2.4.1"

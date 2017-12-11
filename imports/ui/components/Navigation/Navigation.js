@@ -11,7 +11,7 @@ import NavItem from '../NavItem/NavItem';
 import './Navigation.scss';
 
 const Navigation = props => (
-  <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
     <div className="container">
     {/* <Navbar bsClass="navbar navbar-dark bg-dark"> */}
     {/* https://github.com/react-bootstrap/react-bootstrap/blob/master/src/Navbar.js */}

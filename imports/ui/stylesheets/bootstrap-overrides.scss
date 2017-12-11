@@ -12,4 +12,6 @@
 
 body {
   background-color: lighten($todos-palette5, 70%);
+  /* for fixed header */
+  padding-top: 50px;
 }

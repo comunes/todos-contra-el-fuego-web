@@ -6,6 +6,7 @@ import { translate } from 'react-i18next';
 import geolocation from '/imports/startup/client/geolocation';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.css';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.js';
+import 'leaflet-sleep/Leaflet.Sleep.js';
 import Control from 'react-leaflet-control';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 import './SelectionMap.scss';
@@ -97,7 +98,14 @@ class SelectionMap extends Component {
       <div>
       { this.state && this.state.center &&
         <Map center={this.state.center} zoom={this.state.zoom}
-             ref={(map) => { this.selectionMap = map; }}>
+        ref={(map) => { this.selectionMap = map; }}
+        sleep={true}
+        sleepTime={10750}
+        wakeTime={750}
+        sleepNote={true}
+        hoverToWake={true}
+        wakeMessage={this.props.t('Pulsa para activar')}
+        sleepOpacity={.6}>
         <TileLayer
           attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

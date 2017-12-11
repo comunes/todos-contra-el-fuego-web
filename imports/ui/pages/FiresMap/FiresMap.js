@@ -10,6 +10,7 @@ import FireAlertsCollection from '../../../api/FireAlerts/FireAlerts';
 import UserSubsToFiresCollection from '../../../api/Subscriptions/Subscriptions';
 import CenterInMyPosition from '/imports/ui/components/CenterInMyPosition/CenterInMyPosition.js';
 import { withTracker } from 'meteor/react-meteor-data';
+import 'leaflet-sleep/Leaflet.Sleep.js';
 import Loading from '../../components/Loading/Loading';
 import './FiresMap.scss';
 import Leaflet from 'leaflet';
@@ -263,13 +264,21 @@ class FiresMap extends React.Component {
            </Col>
          </Row>
          <Row>
+           // https://github.com/CliffCloud/Leaflet.Sleep
            <Map ref="fireMap"
                 animate={true}
                 minZoom={5}
                 preferCanvas={true}
                 onClick={this.onClickReset}
                 viewport={this.state.viewport}
-                onViewportChanged={this.onViewportChanged}>
+                onViewportChanged={this.onViewportChanged}
+                sleep={true}
+                sleepTime={750}
+                wakeTime={750}
+                sleepNote={true}
+                hoverToWake={true}
+                wakeMessage={this.props.t('Pulsa para activar')}
+                sleepOpacity={.6}>
              {/* http://wiki.openstreetmap.org/wiki/Tile_servers */}
              <TileLayer
                  attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
