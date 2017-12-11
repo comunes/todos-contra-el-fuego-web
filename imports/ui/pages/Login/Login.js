@@ -75,7 +75,7 @@ class Login extends React.Component {
                   services={['google']}
                   emailMessage={{
                     offset: 100,
-                    text: this.t('o inicia sesión con un correo')
+                    text: this.t('o con un correo')
                   }}
                 />
               </Col>

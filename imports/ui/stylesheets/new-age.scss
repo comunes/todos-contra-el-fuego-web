@@ -14,13 +14,13 @@ body {
 }
 
 a {
-  color: #fdcc52;
+  /* color: #fdcc52; */
   -webkit-transition: all .35s;
   -moz-transition: all .35s;
   transition: all .35s; }
 
 a:hover, a:focus {
-  color: #fcbd20; }
+  /* color: #fcbd20; */ }
 
 hr {
   max-width: 100px;
@@ -263,22 +263,6 @@ section.contact ul.list-social li.social-google-plus a {
 section.contact ul.list-social li.social-google-plus a:hover {
   background-color: #d73925; }
 
-footer {
-  padding: 25px 0;
-  text-align: center;
-  color: rgba(255, 255, 255, 0.3);
-  background-color: #222222; }
-footer p {
-  font-size: 12px;
-  margin: 0; }
-footer ul {
-  margin-bottom: 0; }
-footer ul li a {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.3); }
-footer ul li a:hover, footer ul li a:focus, footer ul li a:active, footer ul li a.active {
-  text-decoration: none; }
-
 .bg-primary {
   background: #fdcc52;
   background: -webkit-linear-gradient(#fdcc52, #fdc539);
@@ -301,11 +285,34 @@ footer ul li a:hover, footer ul li a:focus, footer ul li a:active, footer ul li 
   background-color: #fdcc52; }
 
 .btn {
-  border-radius: 300px;
+  /* border-radius: 300px; */
   font-family: 'Lato', 'Helvetica', 'Arial', 'sans-serif';
-  letter-spacing: 2px;
-  text-transform: uppercase; }
+  /* text-transform: uppercase; */ }
+
+@media (min-width: 480px) {
+  .btn {
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+}
+
+.EmailMessage {
+  font-size: 16px;
+}
+
+.OAuthLoginButtons > .btn {
+  letter-spacing: inherit;
+  text-transform: none;
+}
+
+h1 {
+  font-family: 'Lato', 'Helvetica', 'Arial', 'sans-serif';
+}
 
 .btn-xl {
   font-size: 11px;
   padding: 15px 45px; }
+
+a.feature-link:hover {
+  text-decoration: none;
+}

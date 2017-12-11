@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import ReactResizeDetector from 'react-resize-detector';
 import FiresMap from  '../FiresMap/FiresMap';
 import FireSubscription from '/imports/ui/pages/FireSubscription/FireSubscription';
-import './new-age.js';
+// disabled import './new-age.js';
 
 import './Index.scss';
 import './Index-custom.scss';
@@ -123,12 +123,12 @@ class Index extends Component {
           </div>
         </section>
 
-        <section className="download bg-primary text-center" id="download">
+        <section className="download text-center bg-image-full" id="download">
           <div className="container">
             <div className="row">
               <div className="col-md-8 mx-auto">
-                <h2 className="section-heading">Discover what all the buzz is about!</h2>
-                <p>Our app is available on any mobile device! Download now to get started!</p>
+                <h2 className="section-heading">Colaboración masiva contra los incendios</h2>
+                <p><Trans>Imágenes capturadas por los satélites de la NASA muestran el humo de grandes incendios que se extienden sobre el Océano Pacífico. La actividad del fuego está delineada en rojo.</Trans></p>
                 <div className="badges">
                   <a className="badge-link" href="#"><img src="img/google-play-badge.svg" alt=""/></a>
                   <a className="badge-link" href="#"><img src="img/app-store-badge.svg" alt=""/></a>
@@ -141,8 +141,8 @@ class Index extends Component {
         <section className="features" id="features">
           <div className="container">
             <div className="section-heading text-center">
-              <h2>Unlimited Features, Unlimited Fun</h2>
-              <p className="text-muted">Check out what you can do with this app theme!</p>
+              <h2><Trans>Somos muchos ojos</Trans></h2>
+              <p className="text-muted"><Trans>Usamos diferentes fuentes de datos para notificarte de fuegos activos en tus zonas de interés</Trans></p>
               <hr/>
             </div>
             <div className="row">
@@ -165,11 +165,11 @@ class Index extends Component {
                 <div className="container-fluid">
                   <div className="row">
                     <div className="col-lg-6">
-                      <div className="feature-item">
+                      <a className="feature-link"target="_blank" href="https://t.me/TodosContraElFuego_bot"><div className="feature-item">
                         <i className="fa fa-telegram text-primary"></i>
                         <h3>Telegram</h3>
-                        <p className="text-muted"><Trans>Usa nuestro bot de Telegram</Trans></p>
-                      </div>
+                        <p className="text-muted"><Trans>Usa nuestro bot de Telegram para estar al tanto de los fuegos en tus área</Trans></p>
+                      </div></a>
                     </div>
                     <div className="col-lg-6">
                       <div className="feature-item">
@@ -204,8 +204,7 @@ class Index extends Component {
         <section className="cta">
           <div className="cta-content">
             <div className="container">
-              <h2>Stop waiting.<br/>Start building.</h2>
-              <a href="#contact" className="btn btn-outline btn-xl js-scroll-trigger">Let's Get Started!</a>
+               <FiresMap />
             </div>
           </div>
           <div className="overlay"></div>
@@ -213,38 +212,7 @@ class Index extends Component {
 
         <section className="contact bg-primary" id="contact">
           <div className="container">
-            <h2>We
-              <i className="fa fa-heart"></i>
-              new friends!</h2>
-            <ul className="list-inline list-social">
-              <li className="list-inline-item social-twitter">
-                <a href="#">
-                  <i className="fa fa-twitter"></i>
-                </a>
-              </li>
-              {/* <li className="list-inline-item social-facebook">
-              <a href="#">
-              <i className="fa fa-facebook"></i>
-              </a>
-              </li>
-              <li className="list-inline-item social-google-plus">
-              <a href="#">
-              <i className="fa fa-google-plus"></i>
-              </a>
-              </li> */}
-            </ul>
-          </div>
-        </section>
-
-        <section className="py-5">
-          <div className="container">
-            <FireSubscription history={this.props.history} />
-          </div>
-        </section>
-
-        <section className="py-5">
-          <div className="container">
-            <FiresMap />
+            <FireSubscription history={this.props.history} focusInput={false} />
           </div>
         </section>
 

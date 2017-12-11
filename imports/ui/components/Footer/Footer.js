@@ -22,6 +22,7 @@ const Footer = (props) => {
           <li><Link to="/terms"> {t('Términos')}<span className="d-none d-md-inline"> {t('de Servicio')}</span></Link></li>
           <li><Link to="/privacy"><span className="d-none d-md-inline">{t('Política de')} </span>{t('Privacidad')}</Link></li>
           <li><span className="d-none d-md-inline"><Link to="/license">{t('Licencia')}</Link></span></li>
+          <li><span className="d-none d-md-inline"><Link to="/credits">{t('Créditos')}</Link></span></li>
         </ul>
       </Grid>
     </div>

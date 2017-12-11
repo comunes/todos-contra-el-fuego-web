@@ -140,3 +140,31 @@
   color: white;
   text-transform: uppercase;
 }
+
+.bg-image-full {
+  color: white;
+  text-shadow: 2px 2px 1px #280B0B;
+  background: no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  background-image: url('/home-fires.jpg');
+}
+
+@media only screen and (max-width: 767px) {
+  .bg-image-full {
+    background-image: url('/home-fires-800.jpg');
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .bg-image-full {
+    background-image: url('/home-fires-400.jpg');
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .bg-image-full {
+    background-image: url('/home-fires-1000.jpg'); }
+}

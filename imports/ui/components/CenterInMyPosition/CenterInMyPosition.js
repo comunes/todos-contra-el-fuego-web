@@ -24,7 +24,7 @@ class CenterInMyPosition extends React.Component {
         var viewport = {
           center: [userGeoLocation.get().lat, userGeoLocation.get().lng],
           zoom: 11
-        }
+        };
         self.props.onClick(viewport);
         // console.log(viewport);
         // self.onViewportChanged(viewport);

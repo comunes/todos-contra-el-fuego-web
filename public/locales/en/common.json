@@ -15,8 +15,8 @@
   "Regístrate": "Sign Up",
   "Iniciar sesión": "Login",
   "o regístrate con un correo": "or Sign Up with an Email Address",
-  "o inicia sesión con un correo":
-  "or Log In with an Email Address",
+  "o con un correo":
+  "or with an Email Address",
   "Nombre":
   "First Name",
   "Apellidos":
@@ -100,5 +100,9 @@
   "Repite la nueva contraseña":
   "Repeat New Password",
   "Resetea la contraseña y entra":
-  "Reset Password &amp; Login"
+  "Reset Password &amp; Login",
+  "Imágenes capturadas por los satélites de la NASA muestran el humo de grandes incendios que se extienden sobre el Océano Pacífico. La actividad del fuego está delineada en rojo.":
+  "Images captured by NASA satellites show the smoke of large fires spreading over the Pacific Ocean. Fire activity is outlined in red.",
+  "Colaboración masiva contra los incendios":
+  "Corwdsourcing against wildfires"
 }

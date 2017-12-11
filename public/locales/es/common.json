@@ -16,8 +16,8 @@
   "Iniciar sesión": "Iniciar sesión",
   "o regístrate con un correo":
   "o regístrate con un correo",
-  "o inicia sesión con un correo":
-  "o inicia sesión con un correo",
+  "o con un correo":
+  "o con un correo",
   "Nombre":
   "Nombre",
   "Apellidos":
@@ -127,5 +127,9 @@
   "mapPrivacy":
   "<0>Para preservar la privacidad de nuestros usuarios/as, los datos reflejados están aleatoriamente alterados y son solo orientativos.</0> <0>Para preservar la privacidad de nuestros usuarios/as, los datos reflejados están aleatoriamente alterados y son solo orientativos.</0>",
   "Nuevas notificaciones de {{app}}":
-  "Nuevas notificaciones de {{app}}"
+  "Nuevas notificaciones de {{app}}",
+  "Imágenes capturadas por los satélites de la NASA muestran el humo de grandes incendios que se extienden sobre el Océano Pacífico. La actividad del fuego está delineada en rojo.":
+  "Imágenes capturadas por los satélites de la NASA muestran el humo de grandes incendios que se extienden sobre el Océano Pacífico. La actividad del fuego está delineada en rojo.",
+  "Colaboración masiva contra los incendios":
+  "Colaboración masiva contra los incendios"
 }

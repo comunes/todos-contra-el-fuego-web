@@ -94,7 +94,7 @@ FireMark.propTypes = {
 };
 
 // Below this use only pixels
-const MAXZOOM = 7;
+const MAXZOOM = 6;
 
 const MyMarkersList = ({ markers }) => {
   const items = markers.map(({ key, ...props }) => (
@@ -111,7 +111,7 @@ const FireList = ({ fires, scale, useMarkers, nasa }) => {
    *   }
    * }*/
   const items = fires.map(({ _id, ...props }) => (
-    useMarkers && !scale? <MyPopupMarker key={_id} nasa={nasa} {...props} />:
+    useMarkers && scale? <MyPopupMarker key={_id} nasa={nasa} {...props} />:
     (!nasa && !scale)? <FirePixel key={_id} nasa={nasa} {...props} />:<FireMark key={_id} nasa={nasa} {...props} />));
   return <div style={{ display: 'none' }}>{items}</div>;
 };
@@ -141,30 +141,33 @@ class FiresMap extends React.Component {
   }
 
   centerOnUserLocation = (viewport) => {
-    this.onViewportChanged(viewport);
+    this.handleViewportChange(viewport);
   };
+
+  handleViewportChange = function (viewport) {
+    console.log(`Viewport changed: ${JSON.stringify(viewport)}`);
+    zoom.set(viewport.zoom);
+    lat.set(viewport.center[0]);
+    lng.set(viewport.center[1]);
+    this.state.viewport = viewport;
+    this.state.modified = true;
+    if (this.props.subsready && this.refs.fireMap) {
+      this.showSubsUnion(this.state.showSubsUnion);
+    }
+  }
 
   componentDidMount() {
     height.set(this.divElement.clientHeight);
     width.set(this.divElement.clientWidth);
     this.addScale();
     const self = this;
-    this.handleViewportChangeDebounced = _.debounce(function (viewport) {
-      console.log(`Viewport changed: ${JSON.stringify(this.state.viewport)}`);
-      zoom.set(viewport.zoom);
-      lat.set(viewport.center[0]);
-      lng.set(viewport.center[1]);
-      self.state.viewport = viewport;
-      self.state.modified = true;
-      if (self.props.subsready && self.refs.fireMap) {
-        self.showSubsUnion(self.state.showSubsUnion);
-      }
-    }, 2000);
+    // viewportchange
+    this.debounceView = _.debounce(function(viewport) {this.handleViewportChange(viewport); }.bind(this), 2000);
   }
 
   // https://stackoverflow.com/questions/23123138/perform-debounce-in-react-js
   onViewportChanged = (viewport) => {
-    this.handleViewportChangeDebounced(viewport);
+    this.debounceView(viewport);
   };
 
   onClickReset = () => {
@@ -253,15 +256,16 @@ class FiresMap extends React.Component {
              <Checkbox inline={false} defaultChecked={this.state.showSubsUnion} onClick={e => this.showSubsUnion(e.target.checked)}>
                <Trans className="mark-checkbox" parent="span">Resaltar en verde el área vigilada por nuestros usuarios/as</Trans>&nbsp;(*)
              </Checkbox>
-             <Checkbox disabled={this.state.viewport.zoom < MAXZOOM} inline={false} onClick={e => this.useMarkers(e.target.checked)}>
+             {(this.state.viewport.zoom >= MAXZOOM) && <Checkbox inline={false} onClick={e => this.useMarkers(e.target.checked)}>
                <Trans className="mark-checkbox" parent="span">Resaltar los fuegos con un marcador</Trans>
-             </Checkbox>
+             </Checkbox>}
              <CenterInMyPosition onClick={(viewport) => this.centerOnUserLocation(viewport)} />
            </Col>
          </Row>
          <Row>
            <Map ref="fireMap"
                 animate={true}
+                minZoom={5}
                 preferCanvas={true}
                 onClick={this.onClickReset}
                 viewport={this.state.viewport}
@@ -273,7 +277,7 @@ class FiresMap extends React.Component {
              />
              <FireList
                  fires={this.props.activefires}
-                 scale={this.state.viewport.zoom > MAXZOOM}
+                 scale={this.state.viewport.zoom >= MAXZOOM}
                  useMarkers={this.state.useMarkers}
                  nasa={true}
              />

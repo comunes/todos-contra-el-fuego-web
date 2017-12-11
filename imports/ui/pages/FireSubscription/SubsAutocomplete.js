@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Trans, translate } from 'react-i18next';
-import PlacesAutocomplete, { geocodeByAddress, geocodeByPlaceId, getLatLng } from 'react-places-autocomplete'
+import PlacesAutocomplete, { geocodeByAddress, geocodeByPlaceId, getLatLng } from 'react-places-autocomplete';
 import { FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap';
 
 class SubsAutocomplete extends React.Component {
@@ -84,7 +85,7 @@ class SubsAutocomplete extends React.Component {
                   placeholder: this.props.t("Escribe aquí un lugar "),
                   onBlur:() => { /* console.log('Blur event!'); */ },
                   onFocus:() => { /* console.log('Focused!'); */ },
-                  autoFocus:true
+                  autoFocus: this.props.focusInput
                 }} />
           <HelpBlock><Trans parent="span">También puedes seleccionar el lugar en el mapa arrastrando el puntero naranja.</Trans></HelpBlock>
         </FormGroup>
@@ -93,5 +94,8 @@ class SubsAutocomplete extends React.Component {
   }
 }
 
+SubsAutocomplete.propTypes = {
+  focusInput: PropTypes.bool.isRequired
+};
 
 export default translate([], { wait: true }) (SubsAutocomplete);

@@ -40,6 +40,7 @@ import Footer from '../../components/Footer/Footer';
 import Terms from '../../pages/Terms/Terms';
 import Privacy from '../../pages/Privacy/Privacy';
 import License from '../../pages/License/License';
+import Credits from '../../pages/Credits/Credits';
 import FireSubscription from '../../pages/FireSubscription/FireSubscription';
 import ReSendEmail from '../../components/ReSendEmail/ReSendEmail';
 import FiresMap from '../../pages/FiresMap/FiresMap';
@@ -74,13 +75,14 @@ const App = props => (
               <Public path="/login" component={Login} {...props} />
               <Route path="/logout" component={Logout} {...props} />
               <Route path="/sandbox" component={Sandbox} {...props} />
-              <Public path="/subscriptions" component={FireSubscription} {...props} />
+              <Public path="/subscriptions" component={FireSubscription} focusInput {...props} />
               <Route name="verify-email" path="/verify-email/:token" component={VerifyEmail} />
               <Route name="recover-password" path="/recover-password" component={RecoverPassword} />
               <Route name="reset-password" path="/reset-password/:token" component={ResetPassword} />
               <Route name="terms" path="/terms" component={Terms} />
               <Route name="privacy" path="/privacy" component={Privacy} />
               <Route name="license" path="/license" component={License} />
+              <Route name="credits" path="/credits" component={Credits} />
               <Route component={NotFound} />
             </Switch>
           </Grid>

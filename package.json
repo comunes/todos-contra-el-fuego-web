@@ -45,7 +45,7 @@
     "react-addons-pure-render-mixin": "^15.6.2",
     "react-bootstrap": "^0.31.5",
     "react-dom": "^16.0.0",
-    "react-i18next": "^6.1.0",
+    "react-i18next": "^7.1.1",
     "react-leaflet": "^1.7.7",
     "react-leaflet-control": "^1.4.0",
     "react-places-autocomplete": "^5.4.3",

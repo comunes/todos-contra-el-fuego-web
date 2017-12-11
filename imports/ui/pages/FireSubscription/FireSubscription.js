@@ -50,6 +50,7 @@ class FireSubscription extends React.Component {
               <div>
                 <h4 className="page-header"><Trans parent="span">Suscríbete a alertas de fuegos</Trans></h4>
                 <SubsAutocomplete
+                    focusInput={this.props.focusInput}
                     onChange={ (value) => this.onAutocompleteChange(value) }/>
               </div>
             </Col>
@@ -75,7 +76,8 @@ class FireSubscription extends React.Component {
 }
 
 FireSubscription.propTypes = {
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  focusInput: PropTypes.bool.isRequired
 };
 
 export default translate([], { wait: true })(FireSubscription);
