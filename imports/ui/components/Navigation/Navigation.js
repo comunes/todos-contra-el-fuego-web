@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
-import { translate } from 'react-i18next';
+import { Trans, translate } from 'react-i18next';
 import PublicNavigation from '../PublicNavigation/PublicNavigation';
 import AuthenticatedNavigation from '../AuthenticatedNavigation/AuthenticatedNavigation';
 import NavItem from '../NavItem/NavItem';
@@ -30,11 +30,13 @@ const Navigation = props => (
     {/* <Navbar.Collapse> */}
     <div className="collapse navbar-collapse" id="navbarNavDropdown">
       <ul className="navbar-nav ml-auto ">
-        <LinkContainer className="nav-item" anchorClassName="nav-link" to="/sandbox">
-          <NavItem eventKey={1.1} href="/sandbox">Sandbox</NavItem>
-        </LinkContainer>
+        {/* <LinkContainer className="nav-item" anchorClassName="nav-link" to="/sandbox">
+        <NavItem eventKey={1.1} href="/sandbox">Sandbox</NavItem>
+        </LinkContainer> */}
         <LinkContainer className="nav-item" anchorClassName="nav-link" to="/subscriptions">
-          <NavItem eventKey={1.2} href="/subscriptions">Mis alertas</NavItem>
+          <NavItem eventKey={1.2} href="/subscriptions">
+            {props.authenticated ? <Trans>Mis alertas</Trans>:<Trans>Participar</Trans>}
+          </NavItem>
         </LinkContainer>
         <LinkContainer className="nav-item" anchorClassName="nav-link" to="/fires">
           <NavItem eventKey={2} href="/fires">{props.t('activeFires')}</NavItem>

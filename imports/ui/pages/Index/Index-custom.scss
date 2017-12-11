@@ -168,3 +168,7 @@
   .bg-image-full {
     background-image: url('/home-fires-1000.jpg'); }
 }
+
+.device[data-device=iPhone6][data-orientation=portrait][data-color=white] {
+  background-image: url(/mobile.png);
+}

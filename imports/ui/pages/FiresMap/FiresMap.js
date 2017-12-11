@@ -264,7 +264,7 @@ class FiresMap extends React.Component {
            </Col>
          </Row>
          <Row>
-           // https://github.com/CliffCloud/Leaflet.Sleep
+           {/* https://github.com/CliffCloud/Leaflet.Sleep */}
            <Map ref="fireMap"
                 animate={true}
                 minZoom={5}
@@ -272,7 +272,7 @@ class FiresMap extends React.Component {
                 onClick={this.onClickReset}
                 viewport={this.state.viewport}
                 onViewportChanged={this.onViewportChanged}
-                sleep={true}
+                sleep={window.location.pathname === '/'}
                 sleepTime={750}
                 wakeTime={750}
                 sleepNote={true}

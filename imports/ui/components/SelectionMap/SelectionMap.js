@@ -98,14 +98,14 @@ class SelectionMap extends Component {
       <div>
       { this.state && this.state.center &&
         <Map center={this.state.center} zoom={this.state.zoom}
-        ref={(map) => { this.selectionMap = map; }}
-        sleep={true}
-        sleepTime={10750}
-        wakeTime={750}
-        sleepNote={true}
-        hoverToWake={true}
-        wakeMessage={this.props.t('Pulsa para activar')}
-        sleepOpacity={.6}>
+             ref={(map) => { this.selectionMap = map; }}
+             sleep={window.location.pathname === '/'}
+             sleepTime={10750}
+             wakeTime={750}
+             sleepNote={true}
+             hoverToWake={true}
+             wakeMessage={this.props.t('Pulsa para activar')}
+             sleepOpacity={.6}>
         <TileLayer
           attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

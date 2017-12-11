@@ -9,7 +9,7 @@ import ReactResizeDetector from 'react-resize-detector';
 import {ScrollToTopOnMount, SectionsContainer, Section} from 'react-fullpage';
 import FiresMap from  '../FiresMap/FiresMap';
 import FireSubscription from '/imports/ui/pages/FireSubscription/FireSubscription';
-
+import 'html5-device-mockups/dist/device-mockups.min.css';
 
 import './Index.scss';
 import './Index-custom.scss';
@@ -56,8 +56,12 @@ class Index extends Component {
     this.myScaleFunction();
   };
 
-  componentDidMount() {
+  componentDidMount = () => {
     $('.carousel').carousel();
+  }
+
+  handleBtnClick = (event) => {
+    window.open('https://t.me/TodosContraElFuego_bot', '_blank');
   }
 
   render() {
@@ -68,7 +72,7 @@ class Index extends Component {
       arrowNavigation:      false, // use arrow keys (true after development)
       className:            'section-container', // the class name for the section container
       delay:                1000, // the scroll animation speed
-      navigation:           false, // use dots navigation
+      navigation:           true, // use dots navigation
       scrollBar:            false, // use the browser default scrollbar
       sectionClassName:     'section', // the section class name
       sectionPaddingTop:    '0', // the section top padding
@@ -169,20 +173,16 @@ class Index extends Component {
               </div>
               <div className="row">
                 <div className="col-lg-4 my-auto">
-                  <div className="device-container">
-                    <div className="device-mockup iphone6_plus portrait white">
-                      <div className="device">
+                    <div className="device-wrapper">
+                      <div className="device" data-device="iPhone6" data-orientation="portrait" data-color="white">
                         <div className="screen">
                           {/* Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! */}
-                          <img src="img/demo-screen-1.jpg" className="img-fluid" alt=""/>
+                          <img src="/telegram-screen.png" className="img-fluid" alt=""/>
                         </div>
-                        <div className="button">
-                          {/* You can hook the "home button" to some JavaScript events or just remove it  */}
-                        </div>
+                        <div className="button" onClick={(event) => this.handleBtnClick(event)}></div>
                       </div>
                     </div>
                   </div>
-                </div>
                 <div className="col-lg-8 my-auto">
                   <div className="container-fluid">
                     <div className="row">
@@ -204,16 +204,16 @@ class Index extends Component {
                     <div className="row">
                       <div className="col-lg-6">
                         <div className="feature-item">
-                          <i className="icon-lock-open text-primary"></i>
-                          <h3>Open Source</h3>
-                          <p className="text-muted">Since this theme is MIT licensed, you can use it commercially!</p>
+                          <i className="icon-screen-smartphone text-primary"></i>
+                          <h3><Trans>Otros dispositivos</Trans></h3>
+                          <p className="text-muted"><Trans i18nKey="support-us-home">Estamos desarrollando nuestras herramientas para otros dispositivos. Puedes <a href="https://comunes.org/donate">contribuir a hacerlo posible.</a></Trans></p>
                         </div>
                       </div>
                       <div className="col-lg-6">
                         <div className="feature-item">
-                          <i className="icon-screen-smartphone text-primary"></i>
-                          <h3>Device Mockups</h3>
-                          <p className="text-muted">Ready to use HTML/CSS device mockups, no Photoshop required!</p>
+                          <i className="icon-lock-open text-primary"></i>
+                          <h3><Trans>Software Libre</Trans></h3>
+                          <p className="text-muted"><Trans i18nKey="dev-with-us-home">Todo nuestro trabajo es sofware libre. <a href="https://github.com/comunes/todos-contra-el-fuego" target="_blank">Traductoræs y desarrolladoræs siempre bienvenid@s</a>.</Trans></p>
                         </div>
                       </div>
                     </div>
