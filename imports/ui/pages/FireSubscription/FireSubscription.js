@@ -36,6 +36,10 @@ class FireSubscription extends React.Component {
     this.setState(update(this.state, {$merge: {distance: value}}));
   }
 
+  onSelection(value) {
+    this.setState(update(this.state, {$merge: {lat: value.lat, lng: value.lng, distance: value.distance}}));
+  }
+
   render() {
     // https://developers.google.com/places/web-service/search
     // https://github.com/kenny-hibino/react-places-autocomplete/blob/master/demo/Demo.js
@@ -65,8 +69,9 @@ class FireSubscription extends React.Component {
             <SelectionMap
                 lat={this.state.lat}
                 lng={this.state.lng}
-                distance={this.state.distance || 10}
+                distance={this.state.distance}
                 history={this.props.history}
+                onSelection={(state) => this.onSelection(state)}
             />
           </Row>
         </div>

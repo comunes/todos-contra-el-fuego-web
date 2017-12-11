@@ -58,10 +58,13 @@ class SelectionMap extends Component {
 
   updatePosition() {
     const { lat, lng } = this.marker.leafletElement.getLatLng();
+    const currentDistance = this.state.distance;
     this.setState({
       marker: [lat, lng],
       modified: true
     });
+    console.log(currentDistance);
+    this.props.onSelection({ lat, lng, currentDistance });
     this.fit();
   }
 
@@ -73,11 +76,12 @@ class SelectionMap extends Component {
   addScale() {
     // https://www.npmjs.com/package/leaflet-graphicscale
     const map = this.getMap();
-    var options = {
+    const options = {
       fill: 'fill',
       showSubunits: true
     };
-    var graphicScale = L.control.graphicScale([options]).addTo(map);
+    // var graphicScale =
+    Leaflet.control.graphicScale([options]).addTo(map);
   }
 
   doSubs() { // event param not used
@@ -88,11 +92,9 @@ class SelectionMap extends Component {
   }
 
   render() {
-    this.state.center = !this.state.modified && this.props.lat?
-                        [this.props.lat, this.props.lng]: this.state.center;
-    this.state.marker = !this.state.modified && this.props.lat?
-                        [this.props.lat, this.props.lng]: this.state.marker;
-    this.state.distance = this.props.distance;
+    this.state.center = !this.state.modified && this.props.lat? [this.props.lat, this.props.lng]: this.state.center;
+    this.state.marker = !this.state.modified && this.props.lat? [this.props.lat, this.props.lng]: this.state.marker;
+    this.state.distance = !this.state.modified? this.props.distance: this.state.distance;
     this.state.modified = false;
     return (
       <div>
@@ -142,12 +144,16 @@ class SelectionMap extends Component {
     );
   }
 }
+SelectionMap.defaultProps = {
+  distance: 10
+};
 
 SelectionMap.propTypes = {
   history: PropTypes.object.isRequired,
   lat: PropTypes.number,
   lng: PropTypes.number,
-  distance: PropTypes.number
+  distance: PropTypes.number,
+  onSelection: PropTypes.func.isRequired
 };
 
 export default translate([], { wait: true })(SelectionMap);
