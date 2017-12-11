@@ -3,6 +3,6 @@ settings-demo.json
 settings-staging.json
 settings-production.json
 settings-development.json
-imports/ui/stylesheets/.sass-cache/
 private/GeoLite2-City.mmdb*
 npm-debug.log
+**/.sass-cache

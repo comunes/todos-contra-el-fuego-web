@@ -53,12 +53,6 @@ class Login extends React.Component {
         Bert.alert(T9n.get(`error.accounts.${error.reason}`), 'danger');
       } else {
         Bert.alert(this.t('Bienvenid@ de nuevo'), 'success');
-        console.log(this.props.location.state);
-        if (this.props.location.state &&
-            this.props.location.state.center &&
-            this.props.location.state.distance) {
-          this.props.history.push('/subscriptions', this.props.location.state);
-        }
       }
     });
   }

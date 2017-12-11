@@ -1,16 +1,24 @@
+/* eslint-disable react/jsx-indent-props */
+/* eslint-disable import/no-absolute-path */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Trans, translate } from 'react-i18next';
 import Tooltip from 'rc-tooltip';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
+import './DistanceSlider.scss';
 
 // https://www.npmjs.com/package/rc-slider
 const createSliderWithTooltip = Slider.createSliderWithTooltip;
 const Handle = Slider.Handle;
 
 const handle = (props) => {
-  const { value, dragging, index, ...restProps } = props;
+  const {
+    value,
+    dragging,
+    index,
+    ...restProps
+  } = props;
   return (
     <Tooltip prefixCls="rc-slider-tooltip" overlay={value} visible={dragging} placement="top" key={index} >
       <Handle value={value} {...restProps} />
@@ -18,10 +26,7 @@ const handle = (props) => {
   );
 };
 
-const wrapperStyle = { width: 400, margin: 50 };
-
 // https://github.com/react-component/slider/tree/master/examples
-
 class DistanceSlider extends React.Component {
   constructor(props) {
     super(props);
@@ -48,39 +53,46 @@ class DistanceSlider extends React.Component {
 
   render() {
     return (
-      <div style={wrapperStyle}>
+      <div className="dist-slider">
         <p><Trans parent="span">¿A que distancia a la redonda quieres recibir notificaciones?</Trans></p>
-        <Slider min={5}
-                max={105}
-                value={this.state.value}
-                trackStyle={{ backgroundColor: 'green', height: 8 }}
-                railStyle={{ backgroundColor: 'orange', height: 8 }}
-                dotStyle={{ top: 0, marginLeft: -1, width: 2, height: 8 }}
-                marks={{
-                  10:  {style: {}, label: "10км"},
-                  20:  {style: {}, label: "20"},
-                  30:  {style: {}, label: "30"},
-                  40:  {style: {}, label: "40"},
-                  50:  {style: {}, label: "50"},
-                  60:  {style: {}, label: "60"},
-                  70:  {style: {}, label: "70"},
-                  80:  {style: {}, label: "80"},
-                  90:  {style: {}, label: "90"},
-                  100: {style: {}, label: "100км"}
-                }}
-                handleStyle={{
-                  borderColor: 'green',
-                  height: 20,
-                  width: 20,
-                  marginLeft: -10,
-                  marginTop: -6,
-                  /* backgroundColor: 'gray', */
-                }}
-                onAfterChange={this.onAfterChange}
-                onChange={this.onSliderChange}
-                defaultValue={10}
-                step={5}
-                handle={handle} />
+        <Slider
+            min={5}
+            max={105}
+            value={this.state.value}
+            trackStyle={{ backgroundColor: 'green', height: 8 }}
+            railStyle={{ backgroundColor: 'orange', height: 8 }}
+            dotStyle={{
+              top: 0,
+              marginLeft: -1,
+              width: 2,
+              height: 8
+            }}
+            marks={{
+              10: { label: '10км' },
+              20: { label: '20' },
+              30: { label: '30' },
+              40: { label: '40' },
+              50: { label: '50' },
+              60: { label: '60' },
+              70: { label: '70' },
+              80: { label: '80' },
+              90: { label: '90' },
+              100: { label: '100км' }
+            }}
+            handleStyle={{
+              borderColor: 'green',
+              height: 20,
+              width: 20,
+              marginLeft: -10,
+              marginTop: -6
+              /* backgroundColor: 'gray', */
+            }}
+            onAfterChange={this.onAfterChange}
+            onChange={this.onSliderChange}
+            defaultValue={10}
+            step={5}
+            handle={handle}
+        />
       </div>
     );
   }

@@ -75,7 +75,7 @@ const App = props => (
               <Public path="/login" component={Login} {...props} />
               <Route path="/logout" component={Logout} {...props} />
               <Route path="/sandbox" component={Sandbox} {...props} />
-              <Public path="/subscriptions" component={FireSubscription} focusInput {...props} />
+              <Route path="/subscriptions" render={props => <FireSubscription focusInput {...props} />} />
               <Route name="verify-email" path="/verify-email/:token" component={VerifyEmail} />
               <Route name="recover-password" path="/recover-password" component={RecoverPassword} />
               <Route name="reset-password" path="/reset-password/:token" component={ResetPassword} />
@@ -87,7 +87,6 @@ const App = props => (
             </Switch>
           </Grid>
           <Footer />
-
           {/* <Reconnect /> */}
           <Blaze template="cookieConsent" />
           {/* <Blaze template="cookieConsentImply" /> */}
