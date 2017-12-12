@@ -7,19 +7,21 @@ import FireCircleMark from '/imports/ui/components/Maps/FireCircleMark';
 import FireIconMark from '/imports/ui/components/Maps/FireIconMark';
 import FirePixel from '/imports/ui/components/Maps/FirePixel';
 
-const FireList = ({
-  fires,
-  scale,
-  useMarkers,
-  nasa }) => {
-    const items = fires.map(({ _id, ...props }) => (
-      (useMarkers && scale) ?
-        <FireIconMark key={_id} nasa={nasa} {...props} /> :
-      (!nasa && !scale) ?
-      <FirePixel key={_id} nasa={nasa} {...props} /> :
-      <FireCircleMark key={_id} nasa={nasa} {...props} />));
-    return <div style={{ display: 'none' }}>{items}</div>;
-  };
+export default function FireList(props) {
+  const {
+    fires, scale, useMarkers, nasa
+  } = props;
+  const items = fires.map(({ _id, ...otherProps }) => {
+    if (useMarkers && scale) {
+      return (<FireIconMark key={_id} nasa={nasa} {...otherProps} />);
+    }
+    if (!nasa && !scale) {
+      return (<FirePixel key={_id} nasa={nasa} {...otherProps} />);
+    }
+    return (<FireCircleMark key={_id} nasa={nasa} {...otherProps} />);
+  });
+  return (<div style={{ display: 'none' }}>{items}</div>);
+}
 
 FireList.propTypes = {
   fires: PropTypes.array.isRequired,
@@ -27,5 +29,3 @@ FireList.propTypes = {
   useMarkers: PropTypes.bool.isRequired,
   nasa: PropTypes.bool.isRequired
 };
-
-export default FireList;
