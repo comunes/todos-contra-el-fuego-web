@@ -9,22 +9,13 @@ import { translate } from 'react-i18next';
 import { withTracker } from 'meteor/react-meteor-data';
 import update from 'immutability-helper';
 import geolocation from '/imports/startup/client/geolocation';
+import { positionIcon } from '/imports/ui/components/Maps/Icons';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.css';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.js';
 import 'leaflet-sleep/Leaflet.Sleep.js';
 import Control from 'react-leaflet-control';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 import './SelectionMap.scss';
-
-const positionIcon = new Leaflet.Icon({
-  iconUrl: '/your-position.png',
-  /* shadowUrl: require('../public/marker-shadow.png'), */
-  iconSize: [50, 77], // size of the icon
-  /* shadowSize:   [50, 64], // size of the shadow */
-  iconAnchor: [25, 82] // point of the icon which will correspond to marker's location
-  /* shadowAnchor: [4, 62],  // the same for the shadow
-   * popupAnchor:  [-3, -76]// point from which the popup should open relative to the iconAnchor */
-});
 
 class SelectionMap extends Component {
   constructor(props) {

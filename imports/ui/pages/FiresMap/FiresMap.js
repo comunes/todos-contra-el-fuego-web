@@ -9,23 +9,24 @@ import { Meteor } from 'meteor/meteor';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Trans, translate } from 'react-i18next';
-import { Circle, CircleMarker, Map, Marker, TileLayer, PropTypes as MapPropTypes } from 'react-leaflet';
-import Leaflet from 'leaflet';
+import { Map, TileLayer } from 'react-leaflet';
 import LGeo from 'leaflet-geodesy';
-import union from '@turf/union';
 import _ from 'lodash';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.css';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.js';
 import 'leaflet-sleep/Leaflet.Sleep.js';
 import geolocation from '/imports/startup/client/geolocation';
-import CenterInMyPosition from '/imports/ui/components/CenterInMyPosition/CenterInMyPosition.js';
-import ActiveFiresCollection from '../../../api/ActiveFires/ActiveFires';
-import FireAlertsCollection from '../../../api/FireAlerts/FireAlerts';
-import UserSubsToFiresCollection from '../../../api/Subscriptions/Subscriptions';
-import Loading from '../../components/Loading/Loading';
+import CenterInMyPosition from '/imports/ui/components/CenterInMyPosition/CenterInMyPosition';
+import FireList from '/imports/ui/components/Maps/FireList';
+import { unify } from '/imports/ui/components/Maps/Utils';
+import Loading from '/imports/ui/components/Loading/Loading';
+import ActiveFiresCollection from '/imports/api/ActiveFires/ActiveFires';
+import FireAlertsCollection from '/imports/api/FireAlerts/FireAlerts';
+import UserSubsToFiresCollection from '/imports/api/Subscriptions/Subscriptions';
 import './FiresMap.scss';
 
+const MAXZOOM = 6;
 const DEF_LAT = 35.159028;
 const DEF_LNG = -46.738057;
 const DEFAULT_VIEWPORT = {
@@ -37,116 +38,6 @@ const lat = new ReactiveVar(DEF_LAT);
 const lng = new ReactiveVar(DEF_LNG);
 const height = new ReactiveVar(400);
 const width = new ReactiveVar(400);
-
-// https://stackoverflow.com/questions/35394577/leaflet-js-union-merge-circles
-function unify(polyList) {
-  let unionTemp;
-  for (let i = 0; i < polyList.length; i += 1) {
-    if (i === 0) {
-      unionTemp = polyList[i].toGeoJSON();
-    } else {
-      unionTemp = union(unionTemp, polyList[i].toGeoJSON());
-    }
-  }
-  return L.geoJson(unionTemp);
-}
-
-const fireIcon = new Leaflet.Icon({
-  iconUrl: '/fire-marker.png',
-  /* shadowUrl: require('../public/marker-shadow.png'), */
-  iconSize: [16, 24], // size of the icon
-  /* shadowSize:   [50, 64], // size of the shadow */
-  iconAnchor: [8, 26] // point of the icon which will correspond to marker's location
-  /* shadowAnchor: [4, 62],  // the same for the shadow
-   * popupAnchor:  [-3, -76]// point from which the popup should open relative to the iconAnchor */
-});
-
-const nFireIcon = new Leaflet.Icon({
-  iconUrl: '/n-fire-marker.png',
-  /* shadowUrl: require('../public/marker-shadow.png'), */
-  iconSize: [16, 24], // size of the icon
-  /* shadowSize:   [50, 64], // size of the shadow */
-  iconAnchor: [8, 26] // point of the icon which will correspond to marker's location
-  /* shadowAnchor: [4, 62],  // the same for the shadow
-   * popupAnchor:  [-3, -76]// point from which the popup should open relative to the iconAnchor */
-});
-
-// http://leafletjs.com/reference-1.2.0.html#icon
-const MyPopupMarker = ({
-  lat,
-  lon,
-  nasa
-}) => (
-  <div>
-    <Marker position={[lat, lon]} icon={nasa ? fireIcon : nFireIcon} >
-      {/* <Popup>
-      <span>{children}</span>
-      </Popup> */}
-    </Marker>
-    <CircleMarker center={[lat, lon]} color={nasa ? 'red' : '#D35400'} stroke={false} fillOpacity="1" fill radius={1} />
-  </div>
-);
-
-const FireMark = ({
-  lat,
-  lon,
-  scan
-}) => (
-  <Circle center={[lat, lon]} color="red" stroke={false} fillOpacity="1" fill radius={scan * 1000} />
-);
-
-/* Less acurate (1 pixel per fire) but faster */
-const FirePixel = ({ lat, lon, nasa }) => (
-  <CircleMarker center={[lat, lon]} color={nasa ? 'red' : '#D35400'} stroke={false} fillOpacity="1" fill radius={2} />
-);
-
-MyPopupMarker.propTypes = {
-  // https://github.com/PaulLeCam/react-leaflet/tree/master/src/propTypes
-  children: MapPropTypes.children,
-  lat: PropTypes.number.isRequired,
-  lon: PropTypes.number.isRequired,
-  nasa: PropTypes.bool.isRequired
-};
-
-FirePixel.propTypes = {
-  lat: PropTypes.number.isRequired,
-  lon: PropTypes.number.isRequired,
-  nasa: PropTypes.bool.isRequired
-};
-
-FireMark.propTypes = {
-  scan: PropTypes.number.isRequired,
-  lat: PropTypes.number.isRequired,
-  lon: PropTypes.number.isRequired
-};
-
-// Below this use only pixels
-const MAXZOOM = 6;
-
-const MyMarkersList = ({ markers }) => {
-  const items = markers.map(({ key, ...props }) => (
-    <MyPopupMarker key={key} {...props} />
-  ));
-  return <div style={{ display: 'none' }}>{items}</div>;
-};
-
-const FireList = ({
-  fires,
-  scale,
-  useMarkers,
-  nasa }) => {
-    const items = fires.map(({ _id, ...props }) => (
-      (useMarkers && scale) ?
-        <MyPopupMarker key={_id} nasa={nasa} {...props} /> :
-      (!nasa && !scale) ?
-      <FirePixel key={_id} nasa={nasa} {...props} /> :
-      <FireMark key={_id} nasa={nasa} {...props} />));
-    return <div style={{ display: 'none' }}>{items}</div>;
-  };
-
-MyMarkersList.propTypes = {
-  markers: PropTypes.array.isRequired
-};
 
 class FiresMap extends React.Component {
   constructor(props) {
