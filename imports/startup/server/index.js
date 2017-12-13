@@ -3,4 +3,4 @@ import './accounts';
 import './api';
 import './fixtures';
 import './email';
-import './geolocation';
+import './IPGeocoder';

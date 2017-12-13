@@ -1,12 +1,15 @@
+/* global Counter */
+/* eslint-disable import/no-absolute-path */
+
 import { Meteor } from 'meteor/meteor';
 import { check, Match } from 'meteor/check';
+import IPGeocoder from '/imports/startup/server/IPGeocoder';
 import ActiveFires from '../ActiveFires';
 
-var counter = new Counter('countActiveFires', ActiveFires.find({}));
+const counter = new Counter('countActiveFires', ActiveFires.find({}));
 
-Meteor.publish('activefirestotal', function() {
-  return counter;
-});
+
+Meteor.publish('activefirestotal', () => counter);
 
 const validZoom = Match.Where((zoom) => {
   // http://wiki.openstreetmap.org/wiki/Zoom_levels
@@ -15,74 +18,80 @@ const validZoom = Match.Where((zoom) => {
 });
 
 // https://github.com/3stack-software/meteor-match-library
-var NumberBetween = function (min, max) {
-  return Match.Where(function (x) {
+function NumberBetween(min, max) {
+  return Match.Where((x) => {
     check(x, Number);
     return min <= x && x <= max;
   });
-};
+}
 
-var NullOr = function (type) {
-  return Match.Where(function (x) {
+function NullOr(type) {
+  return Match.Where((x) => {
     if (x === null) {
       return true;
     }
     check(x, type);
     return true;
   });
-};
+}
 
 // http://wiki.openstreetmap.org/wiki/Zoom_levels
 // http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#Resolution_and_Scale
-const zoomMetersPerPixel = [156412, 78206, 39103, 19551, 9776, 4888, 2444, 1222, 610.984, 305.492, 152.746, 76.373, 38.187, 19.093, 9.547, 4.773, 2.387, 1.193, 0.596, 0.298];
 
 // http://cwestblog.com/2012/11/12/javascript-degree-and-radian-conversion/
-Math.radians = function(degrees) {
-  return degrees * Math.PI / 180;
+Math.radians = (degrees) => {
+  const rad = (degrees * Math.PI) / 180;
+  return rad;
 };
 
-var activefires = function(zoom, lat, lng, height, width) {
+const activefires = (zoom, lat, lng, height, width) => {
   // latitude -90 and 90 and the longitude between -180 and 180
   check(lat, NumberBetween(-90, 90));
   check(lng, NumberBetween(-180, 180));
 
   // console.log("Zoom: " + zoom + " lat: " + lat + " lng: " + lng);
-  var resolution = 156543.03 * Math.cos(Math.radians(lat)) / Math.pow(2,zoom);
-  // console.log(`Meters per pixel ${zoomMetersPerPixel[zoom]}, resolution ${resolution} meters x pixel`);
-  var distance = Math.trunc(Math.max(resolution*height, resolution*width));
+  const resolution = (156543.03 * Math.cos(Math.radians(lat))) / (2 ** zoom);
+  const distUnt = resolution * Math.max(height, width);
+  const distance = Math.trunc(distUnt);
   // console.log(`so ${height}x${width} gives ${Math.trunc(resolution*height/1000)} x ${Math.trunc(resolution*width/1000)} km, so looking in ${distance}`);
+  console.log(`so ${height}x${width} gives ${resolution} of resolution, so looking in ${distance}`);
 
-  // console.log(geoData);
   return ActiveFires.find({
     ourid: {
-      $near : {
+      $near: {
         $geometry: {
-          type: "Point",
-          coordinates: [ lng, lat]
+          type: 'Point',
+          coordinates: [lng, lat]
         },
         $minDistance: 0,
         $maxDistance: distance
       }
     }
+  }, {
+    fields: {
+      lat: 1,
+      lon: 1,
+      scan: 1
+    }
   });
-}
+};
 
-Meteor.publish('activefiresmyloc', function(zoom, lat, lng, height, width) {
+Meteor.publish('activefiresmyloc', (zoom, lat, lng, height, width) => {
   check(zoom, validZoom);
   check(lat, NullOr(Number));
   check(lng, NullOr(Number));
   check(height, NullOr(Number));
   check(width, NullOr(Number));
-  console.log(`Check active fires in ${lat},${lng} with zoom ${zoom} pixels in ${height}x${width} map`)
+  console.log(`Check active fires in ${lat},${lng} with zoom ${zoom} pixels in ${height}x${width} map`);
   if (lat === null || lng === null) {
-    var clientIP = this.connection.clientAddress;
+    let clientIP = this.connection.clientAddress;
     if (clientIP === '127.0.0.1') {
-      clientIP = '80.58.61.250' // Some Spain IP address
+      clientIP = '80.58.61.250'; // Some Spain IP address
     }
-    var geoData = IPGeocoder.geocode(clientIP);
-    var location = geoData.location;
-    lat = location.latitude;
-    lng = location.longitude;
+    // https://www.npmjs.com/package/maxmind
+    const location = IPGeocoder.get(clientIP);
+    console.log(location);
+    return activefires(zoom, location.latitude, location.longitude, height, width);
   }
   return activefires(zoom, lat, lng, height, width);
 });
