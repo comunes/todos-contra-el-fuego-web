@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { ReactiveVar } from 'meteor/reactive-var';
-import i18n from 'i18next';
 import { Tracker } from 'meteor/tracker';
+import GoogleMapsLoader from 'google-maps';
 
 class GkeysC {
   constructor() {
@@ -10,16 +10,14 @@ class GkeysC {
     this.callbacks = [];
     Meteor.startup(() => {
       Meteor.call('getMapKey', (error, key) => {
-        const script = document.createElement('script');
-        script.type = 'text/javascript';
-        script.onload = () => {
+        // console.log(google.maps);
+        GoogleMapsLoader.KEY = key;
+        GoogleMapsLoader.LIBRARIES = ['places'];
+        GoogleMapsLoader.load(() => {
           self.gmapkey.set(key);
           console.log('GMaps script just loaded');
           self.doCallbacks(key);
-        };
-        // https://stackoverflow.com/questions/28130114/google-maps-places-autocomplete-language-output
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=places&language=${i18n.language}`;
-        document.body.appendChild(script);
+        });
       });
     });
   }
@@ -37,7 +35,7 @@ class GkeysC {
       const key = this.gmapkey.get();
       if (key) {
         // already loaded
-        console.log(`GMaps already loaded:`);
+        console.log('GMaps already loaded');
         this.doCallbacks(key);
         computation.stop();
       } else {

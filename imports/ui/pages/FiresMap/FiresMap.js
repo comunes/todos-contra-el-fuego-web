@@ -9,7 +9,7 @@ import { Meteor } from 'meteor/meteor';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Trans, translate } from 'react-i18next';
-import { Map, TileLayer } from 'react-leaflet';
+import { Map, TileLayer, LayersControl } from 'react-leaflet';
 import LGeo from 'leaflet-geodesy';
 import _ from 'lodash';
 import 'leaflet/dist/leaflet.css';
@@ -24,22 +24,29 @@ import Loading from '/imports/ui/components/Loading/Loading';
 import ActiveFiresCollection from '/imports/api/ActiveFires/ActiveFires';
 import FireAlertsCollection from '/imports/api/FireAlerts/FireAlerts';
 import UserSubsToFiresCollection from '/imports/api/Subscriptions/Subscriptions';
+import Gkeys from '/imports/startup/client/Gkeys';
+import { GoogleLayer } from 'react-leaflet-google/lib/';
 import './FiresMap.scss';
+
+const { BaseLayer } = LayersControl;
 
 const MAXZOOM = 6;
 const zoom = new ReactiveVar(8);
 const lat = new ReactiveVar();
 const lng = new ReactiveVar();
-const height = new ReactiveVar();
-const width = new ReactiveVar();
+const height = new ReactiveVar(400);
+const width = new ReactiveVar(400);
 
+// TODO share only the used part of fires data
+// Remove map in subscription
 class FiresMap extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       viewport: this.props.viewport,
       useMarkers: false,
-      showSubsUnion: true
+      showSubsUnion: true,
+      gkey: null
     };
     const self = this;
     // viewportchange
@@ -51,6 +58,10 @@ class FiresMap extends React.Component {
   }
 
   componentDidMount() {
+    const self = this;
+    Gkeys.load((err, key) => {
+      self.setState({ gkey: key });
+    });
     height.set(this.divElement.clientHeight);
     width.set(this.divElement.clientWidth);
     this.addScale();
@@ -141,6 +152,14 @@ class FiresMap extends React.Component {
       this.showSubsUnion(this.state.showSubsUnion);
     }
     console.log('Rendering map');
+    const { t } = this.props;
+    const osmlayer = (
+      <BaseLayer checked name={t('Mapa gris de OpenStreetMap')}>
+        <TileLayer
+            attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+            url="http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png"
+        />
+      </BaseLayer>);
     return (
       /* Large number of markers:
          https://stackoverflow.com/questions/43015854/large-dataset-of-markers-or-dots-in-leaflet/43019740#43019740 */
@@ -193,10 +212,6 @@ class FiresMap extends React.Component {
                sleepOpacity={0.6}
            >
              {/* http://wiki.openstreetmap.org/wiki/Tile_servers */}
-             <TileLayer
-                 attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                 url="http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png"
-             />
              <FireList
                  fires={this.props.activefires}
                  scale={this.state.viewport.zoom >= MAXZOOM}
@@ -209,6 +224,21 @@ class FiresMap extends React.Component {
                  useMarkers={this.state.useMarkers}
                  nasa={false}
              />
+             <LayersControl position="topright">
+               {osmlayer}
+               { this.state.gkey &&
+                 <BaseLayer name={t('Mapa de carreteras de Google')}>
+                   <GoogleLayer googlekey={this.state.gkey} maptype="ROADMAP" />
+                 </BaseLayer>}
+               { this.state.gkey &&
+                 <BaseLayer name={t('Mapa de terreno de Google')}>
+                   <GoogleLayer googlekey={this.state.gkey} maptype="TERRAIN" />
+                 </BaseLayer>}
+               { this.state.gkey &&
+                 <BaseLayer name={t('Mapa de satélite de Google')}>
+                   <GoogleLayer googlekey={this.state.gkey} maptype="SATELLITE" />
+                 </BaseLayer>}
+             </LayersControl>
            </Map>
          </Row>
          <Row>
