@@ -3,18 +3,18 @@
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 
-const Subscriptions  = new Mongo.Collection('subscriptions');
+const Subscriptions = new Mongo.Collection('subscriptions');
 
 Subscriptions.allow({
   insert: () => false,
   update: () => false,
-  remove: () => false,
+  remove: () => false
 });
 
 Subscriptions.deny({
   insert: () => true,
   update: () => true,
-  remove: () => true,
+  remove: () => true
 });
 
 
@@ -41,9 +41,8 @@ Subscriptions.schema = new SimpleSchema({
   location: Object,
   'location.lat': SimpleSchema.Integer,
   'location.lon': SimpleSchema.Integer,
-  distance: Number,
-  }
-);
+  distance: Number
+});
 
 Subscriptions.attachSchema(Subscriptions.schema);
 
