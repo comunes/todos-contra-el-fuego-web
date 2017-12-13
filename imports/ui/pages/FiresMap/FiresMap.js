@@ -179,7 +179,7 @@ class FiresMap extends React.Component {
            <Map
                ref={(map) => { this.fireMap = map; }}
                animate
-               minZoom={4}
+               // minZoom={4}
                preferCanvas
                onClick={this.onClickReset}
                viewport={this.state.viewport}
