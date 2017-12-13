@@ -3,18 +3,18 @@
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 
-const ActiveFires  = new Mongo.Collection('activefires');
+const ActiveFires = new Mongo.Collection('activefires');
 
 ActiveFires.allow({
   insert: () => false,
   update: () => false,
-  remove: () => false,
+  remove: () => false
 });
 
 ActiveFires.deny({
   insert: () => true,
   update: () => true,
-  remove: () => true,
+  remove: () => true
 });
 
 /* Sample:
@@ -57,8 +57,7 @@ ActiveFires.schema = new SimpleSchema({
   when: Date,
   createdAt: Date,
   updatedAt: Date
-  }
-);
+});
 
 ActiveFires.attachSchema(ActiveFires.schema);
 
