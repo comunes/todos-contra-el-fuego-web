@@ -84,7 +84,13 @@ Meteor.publish('activefiresmyloc', (zoom, lat, lng, height, width) => {
   check(width, NullOr(Number));
   console.log(`Check active fires in ${lat},${lng} with zoom ${zoom} pixels in ${height}x${width} map`);
   if (lat === null || lng === null) {
-    let clientIP = this.connection.clientAddress;
+    let clientIP;
+    if (this.connection && this.connection.clientAddress) {
+      clientIP = this.connection.clientAddress;
+    } else {
+      console.warn('We cannot get this meteor connection IP');
+      clientIP = '127.0.0.1';
+    }
     if (clientIP === '127.0.0.1') {
       clientIP = '80.58.61.250'; // Some Spain IP address
     }
