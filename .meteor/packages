@@ -46,3 +46,5 @@ maximum:server-transform
 mys:fonts                     # fonst in npm
 ostrio:mailer                 # mailer
 ostrio:meteor-root
+mizzao:user-status
+babrahams:constellation
