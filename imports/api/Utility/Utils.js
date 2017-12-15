@@ -1,9 +1,11 @@
 /* eslint-disable consistent-return */
+/* eslint-disable prefer-arrow-callback */
 
 export const defaultCreatedAt = {
   type: Date,
   // autoform: { type: 'hidden' },
-  autoValue: () => {
+  // Prefer normal function: https://github.com/aldeed/meteor-simple-schema/issues/562
+  autoValue: function autovalue() {
     if (this.isInsert) {
       return new Date();
     }
@@ -15,7 +17,7 @@ export const defaultCreatedAt = {
 export const defaultUpdateAt = {
   type: Date,
   // autoform: { type: 'hidden' },
-  autoValue: () => {
+  autoValue: function autovalue() {
     if (this.isUpdate || this.isInsert) {
       return new Date();
     }
