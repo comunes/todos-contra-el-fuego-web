@@ -35,7 +35,7 @@ class GkeysC {
       const key = this.gmapkey.get();
       if (key) {
         // already loaded
-        console.log('GMaps already loaded');
+        // console.log('GMaps already loaded');
         this.doCallbacks(key);
         computation.stop();
       } else {
