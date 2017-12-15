@@ -1,3 +1,5 @@
+/* eslint-disable prefer-arrow-callback */
+
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import Documents from '../Documents';
