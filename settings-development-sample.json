@@ -30,6 +30,7 @@
         "secret": "",
         "loginStyle": "popup"
       }
-    }
+    },
+    "proxies_count": 0
   }
 }
