@@ -1,15 +1,17 @@
 /* global Counter */
 /* eslint-disable import/no-absolute-path */
+/* eslint-disable prefer-arrow-callback */
 
 import { Meteor } from 'meteor/meteor';
 import { check, Match } from 'meteor/check';
-import IPGeocoder from '/imports/startup/server/IPGeocoder';
+import { localize } from '/imports/startup/server/IPGeocoder';
 import ActiveFires from '../ActiveFires';
 
 const counter = new Counter('countActiveFires', ActiveFires.find({}));
 
-
-Meteor.publish('activefirestotal', () => counter);
+Meteor.publish('activefirestotal', function total() {
+  return counter;
+});
 
 const validZoom = Match.Where((zoom) => {
   // http://wiki.openstreetmap.org/wiki/Zoom_levels
@@ -54,9 +56,9 @@ const activefires = (zoom, lat, lng, height, width) => {
   const distUnt = resolution * Math.max(height, width);
   const distance = Math.trunc(distUnt);
   // console.log(`so ${height}x${width} gives ${Math.trunc(resolution*height/1000)} x ${Math.trunc(resolution*width/1000)} km, so looking in ${distance}`);
-  console.log(`so ${height}x${width} gives ${resolution} of resolution, so looking in ${distance}`);
+  console.log(`So ${height}x${width} gives ${Math.trunc(resolution)} of resolution, so looking in ${Math.trunc(distance / 1000)}km`);
 
-  return ActiveFires.find({
+  const fires = ActiveFires.find({
     ourid: {
       $near: {
         $geometry: {
@@ -74,9 +76,42 @@ const activefires = (zoom, lat, lng, height, width) => {
       scan: 1
     }
   });
+  console.log(`Fires total: ${fires.count()}`);
+  return fires;
 };
 
-Meteor.publish('activefiresmyloc', (zoom, lat, lng, height, width) => {
+
+Meteor.publish('allActiveFires', function allActive() {
+  // latitude -90 and 90 and the longitude between -180 and 180
+
+  const { latitude, longitude } = localize().location;
+  console.log(`${latitude}, ${longitude}`);
+  check(latitude, NumberBetween(-90, 90));
+  check(longitude, NumberBetween(-180, 180));
+  // https://docs.meteor.com/api/collections.html#Mongo-Collection-find
+  return ActiveFires.find({
+    ourid: {
+      $near: {
+        $geometry: {
+          type: 'Point',
+          coordinates: [longitude, latitude]
+        },
+        $minDistance: 0,
+        $maxDistance: 1000 // 156412000
+      }
+    }
+  }, {
+    fields: {
+      _id: 0,
+      lat: 1,
+      lon: 1,
+      scan: 1
+    },
+    maxTimeMs: 30000
+  });
+});
+
+Meteor.publish('activefiresmyloc', function activeInMyLoc(zoom, lat, lng, height, width) {
   check(zoom, validZoom);
   check(lat, NullOr(Number));
   check(lng, NullOr(Number));
@@ -84,19 +119,8 @@ Meteor.publish('activefiresmyloc', (zoom, lat, lng, height, width) => {
   check(width, NullOr(Number));
   console.log(`Check active fires in ${lat},${lng} with zoom ${zoom} pixels in ${height}x${width} map`);
   if (lat === null || lng === null) {
-    let clientIP;
-    if (this.connection && this.connection.clientAddress) {
-      clientIP = this.connection.clientAddress;
-    } else {
-      console.warn('We cannot get this meteor connection IP');
-      clientIP = '127.0.0.1';
-    }
-    if (clientIP === '127.0.0.1') {
-      clientIP = '80.58.61.250'; // Some Spain IP address
-    }
-    // https://www.npmjs.com/package/maxmind
-    const location = IPGeocoder.get(clientIP);
-    console.log(location);
+    const location = localize();
+    console.log(`${location.latitude}, ${location.longitude}`);
     return activefires(zoom, location.latitude, location.longitude, height, width);
   }
   return activefires(zoom, lat, lng, height, width);

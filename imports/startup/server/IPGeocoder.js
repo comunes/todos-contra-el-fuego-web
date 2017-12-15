@@ -1,5 +1,12 @@
+/* eslint-disable prefer-arrow-callback */
+
 import { Meteor } from 'meteor/meteor';
 import maxmind from 'maxmind';
+
+process.env.HTTP_FORWARDED_COUNT = Meteor.settings.private.proxies_count;
+if (!Meteor.isDevelopment) {
+  console.log(`Number or proxies (needed for client IP lookup): ${process.env.HTTP_FORWARDED_COUNT}`);
+}
 
 // https://stackoverflow.com/questions/13969655/how-do-you-check-whether-the-given-ip-is-internal-or-not
 function isPrivateIP(ip) {
@@ -13,22 +20,30 @@ function isPrivateIP(ip) {
 const IPGeocoder = maxmind.openSync(`${process.env.PWD}/private/GeoLite2-City.mmdb`);
 export default IPGeocoder;
 
+// Warning: Meteor cannot access to this.connection with arrow functions
+export function localize() {
+  // https://stackoverflow.com/questions/14843232/how-to-get-the-user-ip-address-in-meteor-server/22657421#22657421
+  let clientIP;
+  if (this.connection && this.connection.clientAddress) {
+    clientIP = this.connection.clientAddress;
+  } else {
+    console.warn(`We cannot get this meteor connection IP for this connection (${this.connection})`);
+    clientIP = '127.0.0.1';
+  }
+  if (isPrivateIP(clientIP)) {
+    clientIP = '80.58.61.250'; // Some Spain IP address
+  }
+  // console.log(`Geolocating ${clientIP}`);
+
+  // TODO: cron download GeoLite-City
+  // http://dev.maxmind.com/geoip/geoip2/geolite2/
+  const location = IPGeocoder.get(clientIP);
+  // console.log(location);
+  return location;
+}
+
 Meteor.methods({
-  geo() {
-    // https://stackoverflow.com/questions/14843232/how-to-get-the-user-ip-address-in-meteor-server/22657421#22657421
-    let clientIP = this.connection.clientAddress;
-
-    if (isPrivateIP(clientIP)) {
-      clientIP = '80.58.61.250'; // Some Spain IP address
-    }
-    // console.log(`Geolocating ${clientIP}`);
-
-    // TODO: cron download GeoLite-City
-    // http://dev.maxmind.com/geoip/geoip2/geolite2/
-    const location = IPGeocoder.get(clientIP);
-    // console.log(location);
-    return location;
-  },
+  geo: localize,
   getMapKey() {
     // http://meteorpedia.com/read/Environment_Variables
     // https://developers.google.com/maps/documentation/javascript/get-api-key

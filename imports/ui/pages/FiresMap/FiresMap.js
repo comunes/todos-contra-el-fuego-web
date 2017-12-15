@@ -31,13 +31,11 @@ import './FiresMap.scss';
 const { BaseLayer } = LayersControl;
 
 const MAXZOOM = 6;
+const MAXZOOMREACTIVE = 6;
 const zoom = new ReactiveVar(8);
-const lat = new ReactiveVar();
-const lng = new ReactiveVar();
-const height = new ReactiveVar(400);
-const width = new ReactiveVar(400);
+const center = new ReactiveVar([null, null]);
+const mapSize = new ReactiveVar([400, 400]);
 
-// TODO share only the used part of fires data
 // Remove map in subscription
 class FiresMap extends React.Component {
   constructor(props) {
@@ -62,10 +60,25 @@ class FiresMap extends React.Component {
     Gkeys.load((err, key) => {
       self.setState({ gkey: key });
     });
-    height.set(this.divElement.clientHeight);
-    width.set(this.divElement.clientWidth);
+    mapSize.set([this.divElement.clientHeight, this.divElement.clientWidth]);
     this.addScale();
   }
+
+  /* componentWillReceiveProps(nextProps) {
+   *   if (nextProps.loading) {
+   *     // console.log('Loading new fires');
+   *   }
+   *   // this.setState({ loading: nextProps.loading });
+   * }
+   */
+
+  /* shouldComponentUpdate(nextProps, nextState) {
+   *   if (nextProps.loading) {
+   *     return true; // false;
+   *   }
+   *   return true;
+   * }
+   */
 
   onViewportChanged(viewport) {
     this.debounceView(viewport);
@@ -81,7 +94,6 @@ class FiresMap extends React.Component {
   }
 
   setShowSubsUnion(show) {
-    this.setState({ showSubsUnion: show });
     this.showSubsUnion(show);
   }
 
@@ -115,35 +127,38 @@ class FiresMap extends React.Component {
 
   handleViewportChange(viewport) {
     console.log(`Viewport changed: ${JSON.stringify(viewport)}`);
+    if (viewport.center === this.state.viewport.center &&
+        viewport.zoom === this.state.viewport.zoom) {
+      // Do nothing, in same point
+      return;
+    }
     zoom.set(viewport.zoom);
-    lat.set(viewport.center[0]);
-    lng.set(viewport.center[1]);
+    center.set(viewport.center);
     this.setState({ viewport });
-    /* this.state.viewport = viewport;
-     * this.state.modified = true; */
     if (this.props.subsready && this.fireMap) {
       this.showSubsUnion(this.state.showSubsUnion);
     }
   }
 
   centerOnUserLocation(viewport) {
-    this.handleViewportChange(viewport);
+    this.setState({ viewport });
+    // this.handleViewportChange(viewport);
   }
 
   useMarkers(use) {
     this.setState({ useMarkers: use });
-    // this.state.useMarkers = use;
-    // this.forceUpdate();
   }
 
   addScale() {
-    // https://www.npmjs.com/package/leaflet-graphicscale
-    const map = this.getMap();
-    const options = {
-      fill: 'fill',
-      showSubunits: true
-    };
-    L.control.graphicScale([options]).addTo(map);
+    if (this.fireMap) {
+      // https://www.npmjs.com/package/leaflet-graphicscale
+      const map = this.getMap();
+      const options = {
+        fill: 'fill',
+        showSubunits: true
+      };
+      L.control.graphicScale([options]).addTo(map);
+    }
   }
 
   render() {
@@ -151,7 +166,7 @@ class FiresMap extends React.Component {
       // Show union of users
       this.showSubsUnion(this.state.showSubsUnion);
     }
-    console.log('Rendering map');
+    console.log(`Rendering ${this.props.loading ? 'loading' : 'LOADED'} map ${this.props.activefires.length} of ${this.props.activefirestotal} total. Subs users ready ${this.props.subsready}, reactive ${this.state.viewport.zoom >= MAXZOOMREACTIVE}`);
     const { t } = this.props;
     const osmlayer = (
       <BaseLayer checked name={t('Mapa gris de OpenStreetMap')}>
@@ -175,10 +190,10 @@ class FiresMap extends React.Component {
          <Row>
            <Col xs={12} sm={6} md={6} lg={6} >
              <p>
-             { this.props.activefires.length === 0 ?
-               <Trans parent="span" i18nKey="noActiveFireInMapCount">No hay fuegos activos en esta zona del mapa. Hay un total de <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos detectados en todo el mundo.</Trans> :
-               <Trans parent="span" i18nKey="activeFireInMapCount">En rojo, <strong>{{ count: this.props.activefires.length }}</strong> fuegos activos en el mapa. Hay un total de <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos detectados en todo el mundo por la NASA.</Trans>
-             }
+               { this.props.activefires.length === 0 ?
+                 <Trans parent="span" i18nKey="noActiveFireInMapCount">No hay fuegos activos en esta zona del mapa. Hay un total de <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos detectados en todo el mundo.</Trans> :
+                 <Trans parent="span" i18nKey="activeFireInMapCount">En rojo, <strong>{{ count: this.props.activefires.length }}</strong> fuegos activos en el mapa. Hay un total de <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos detectados en todo el mundo por la NASA.</Trans>
+               }
              </p>
              <p><Trans parent="span" i18nKey="activeNeigFireInMapCount">En naranja, los fuegos notificados por nuestros usuarios/as recientemente.</Trans></p>
            </Col>
@@ -188,17 +203,25 @@ class FiresMap extends React.Component {
              </Checkbox>
              {(this.state.viewport.zoom >= MAXZOOM) &&
               <Checkbox inline={false} onClick={e => this.useMarkers(e.target.checked)}>
-               <Trans className="mark-checkbox" parent="span">Resaltar los fuegos con un marcador</Trans>
+                <Trans className="mark-checkbox" parent="span">Resaltar los fuegos con un marcador</Trans>
               </Checkbox>}
               <CenterInMyPosition onClick={viewport => this.centerOnUserLocation(viewport)} />
+              <p>
+                <em>{ this.state.viewport.zoom >= MAXZOOMREACTIVE ?
+                     <Trans>Los fuegos activos se actualizan en tiempo real.</Trans> :
+                     <Trans>Haga zoom en una zona de su interés si quiere que los fuegos se actualicen en tiempo real.</Trans>
+                    }
+                </em>
+              </p>
            </Col>
          </Row>
          <Row>
            {/* https://github.com/CliffCloud/Leaflet.Sleep */}
+
            <Map
                ref={(map) => { this.fireMap = map; }}
                animate
-               // minZoom={4}
+               minZoom={5}
                preferCanvas
                onClick={this.onClickReset}
                viewport={this.state.viewport}
@@ -212,32 +235,34 @@ class FiresMap extends React.Component {
                sleepOpacity={0.6}
            >
              {/* http://wiki.openstreetmap.org/wiki/Tile_servers */}
+             {!this.props.loading &&
              <FireList
                  fires={this.props.activefires}
                  scale={this.state.viewport.zoom >= MAXZOOM}
                  useMarkers={this.state.useMarkers}
                  nasa
-             />
+             />}
+             {!this.props.loading &&
              <FireList
                  fires={this.props.firealerts}
                  scale={false}
                  useMarkers={this.state.useMarkers}
                  nasa={false}
-             />
+             />}
              <LayersControl position="topright">
                {osmlayer}
                { this.state.gkey &&
-                 <BaseLayer name={t('Mapa de carreteras de Google')}>
-                   <GoogleLayer googlekey={this.state.gkey} maptype="ROADMAP" />
-                 </BaseLayer>}
+               <BaseLayer name={t('Mapa de carreteras de Google')}>
+                 <GoogleLayer googlekey={this.state.gkey} maptype="ROADMAP" />
+               </BaseLayer>}
                { this.state.gkey &&
-                 <BaseLayer name={t('Mapa de terreno de Google')}>
-                   <GoogleLayer googlekey={this.state.gkey} maptype="TERRAIN" />
-                 </BaseLayer>}
+               <BaseLayer name={t('Mapa de terreno de Google')}>
+                 <GoogleLayer googlekey={this.state.gkey} maptype="TERRAIN" />
+               </BaseLayer>}
                { this.state.gkey &&
-                 <BaseLayer name={t('Mapa de satélite de Google')}>
-                   <GoogleLayer googlekey={this.state.gkey} maptype="SATELLITE" />
-                 </BaseLayer>}
+               <BaseLayer name={t('Mapa de satélite de Google')}>
+                 <GoogleLayer googlekey={this.state.gkey} maptype="SATELLITE" />
+               </BaseLayer>}
              </LayersControl>
            </Map>
          </Row>
@@ -261,13 +286,21 @@ FiresMap.propTypes = {
 
 export default translate([], { wait: true })(withTracker(() => {
   let subscription;
+  let init = true;
   Meteor.autorun(() => {
-    if (geolocation.get()) {
-      lat.set(geolocation.get()[0]);
-      lng.set(geolocation.get()[1]);
+    if (geolocation.get() && init) {
+      center.set(geolocation.get());
+      init = false;
     }
-    if (zoom.get() || lat.get() || lng.get()) {
-      subscription = Meteor.subscribe('activefiresmyloc', zoom.get(), lat.get(), lng.get(), height.get(), width.get());
+    if (mapSize.get()) {
+      subscription = Meteor.subscribe(
+        'activefiresmyloc',
+        zoom.get(),
+        center.get()[0],
+        center.get()[1],
+        mapSize.get()[0],
+        mapSize.get()[1]
+      );
     }
   });
 
@@ -276,18 +309,21 @@ export default translate([], { wait: true })(withTracker(() => {
   Meteor.subscribe('fireAlerts');
   const userSubs = Meteor.subscribe('userSubsToFires');
   // const subscription = Meteor.subscribe('activefiresmyloc', zoom.get());
-  console.log(`Active fires ${ActiveFiresCollection.find().fetch().length} of ${Counter.get('countActiveFires')}`);
+  // Warning with the performance of this log:
+  // console.log(`Active fires ${ActiveFiresCollection.find().count()} of ${Counter.get('countActiveFires')}`);
   // console.log(`Active neighborhood fires ${FireAlertsCollection.find().fetch().length} and users subscribed ${UserSubsToFiresCollection.find().fetch().length}`);
   // console.log(UserSubsToFiresCollection.find().fetch());
   return {
     loading: !subscription.ready(),
+    userSubs: UserSubsToFiresCollection.find().fetch(),
     subsready: userSubs.ready(),
-    activefires: ActiveFiresCollection.find().fetch(),
+    // Not reactive query depending on zoom level
+    activefires: ActiveFiresCollection.find({}, { reactive: zoom.get() >= MAXZOOMREACTIVE }).fetch(),
+    // activefires: ActiveFiresCollection.find({}).fetch(),
     activefirestotal: Counter.get('countActiveFires'),
     firealerts: FireAlertsCollection.find().fetch().map(doc => (
       { _id: doc._id, lat: doc.location.lat, lon: doc.location.lon }
     )),
-    userSubs: UserSubsToFiresCollection.find().fetch(),
     viewport: {
       center: geolocation.get(),
       zoom: zoom.get()
