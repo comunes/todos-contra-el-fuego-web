@@ -33,7 +33,7 @@ class SelectionMap extends Component {
     this.updatePosition = this.updatePosition.bind(this);
     this.fit = this.fit.bind(this);
     this.addScale = this.addScale.bind(this);
-    this.doSubs = this.doSubs.bind(this);
+    this.onSubs = this.onSubs.bind(this);
   }
 
   componentDidMount() {
@@ -55,6 +55,13 @@ class SelectionMap extends Component {
 
   componentDidUpdate() {
     this.fit();
+  }
+
+  onSubs() {
+    this.props.onSubs({
+      location: { lat: this.state.center[0], lon: this.state.center[1] },
+      distance: this.state.distance
+    });
   }
 
   getMap() {
@@ -90,13 +97,6 @@ class SelectionMap extends Component {
     };
     // var graphicScale =
     Leaflet.control.graphicScale([options]).addTo(map);
-  }
-
-  doSubs() { // event param not used
-    this.props.history.push(
-      '/login',
-      { subscription: { center: this.state.center, distance: this.state.distance } }
-    );
   }
 
   isValidState() {
@@ -152,9 +152,9 @@ class SelectionMap extends Component {
               <ButtonToolbar>
                 <Button
                     bsStyle="success"
-                    onClick={event => this.doSubs(event)}
+                    onClick={event => this.onSubs(event)}
                 >
-                  {this.props.t('Subscribirme a fuegos en este rádio')}
+                  {this.props.subsBtn}
                 </Button>
               </ButtonToolbar>
             </Control>
@@ -165,11 +165,12 @@ class SelectionMap extends Component {
 }
 
 SelectionMap.propTypes = {
-  history: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
-  center: PropTypes.array,
+  center: PropTypes.arrayOf(PropTypes.number),
   distance: PropTypes.number,
-  onSelection: PropTypes.func.isRequired
+  onSelection: PropTypes.func.isRequired,
+  subsBtn: PropTypes.string.isRequired,
+  onSubs: PropTypes.func.isRequired
 };
 
 export default translate([], { wait: true })(withTracker(props => ({

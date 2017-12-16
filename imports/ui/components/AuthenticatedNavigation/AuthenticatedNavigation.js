@@ -19,6 +19,9 @@ const AuthenticatedNavigation = ({ name, history, props }) => (
     <LinkContainer className="nav-item" anchorClassName="nav-link" to="/documents">
       <NavItem eventKey={5} href="/documents">Documents</NavItem>
     </LinkContainer>
+    <LinkContainer className="nav-item" anchorClassName="nav-link" to="/documents">
+      <NavItem eventKey={5.01} href="/subscriptions">Subscriptions</NavItem>
+    </LinkContainer>
     <LinkContainer className="nav-item" anchorClassName="nav-link" to="/profile">
       <NavItem eventKey={5.1} href="/profile">{name}</NavItem>
     </LinkContainer>
@@ -30,7 +33,7 @@ const AuthenticatedNavigation = ({ name, history, props }) => (
 );
 
 AuthenticatedNavigation.propTypes = {
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
 
 };
 

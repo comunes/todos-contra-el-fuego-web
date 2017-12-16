@@ -48,3 +48,4 @@ ostrio:mailer                 # mailer
 ostrio:meteor-root
 mizzao:user-status
 babrahams:constellation
+percolate:migrations

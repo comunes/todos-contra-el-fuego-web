@@ -34,3 +34,13 @@ Meteor.publishTransformed('userSubsToFires', function transform() {
     return doc;
   });
 });
+
+Meteor.publish('subscriptions', function subscriptions() {
+  return Subscriptions.find({ owner: this.userId });
+});
+
+// Note: subscriptions.view is also used when editing an existing subscription.
+Meteor.publish('subscriptions.view', function subscriptionsView(subscriptionId) {
+  check(subscriptionId, String);
+  return Subscriptions.find({ _id: subscriptionId, owner: this.userId });
+});

@@ -3,7 +3,7 @@
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 
-const ActiveFires = new Mongo.Collection('activefires');
+const ActiveFires = new Mongo.Collection('activefires', { idGeneration: 'MONGO' });
 
 ActiveFires.allow({
   insert: () => false,

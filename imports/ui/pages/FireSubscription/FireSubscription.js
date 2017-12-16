@@ -3,7 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
-import { Trans, translate } from 'react-i18next';
+import { translate } from 'react-i18next';
 import DistanceSlider from '/imports/ui/components/DistanceSlider/DistanceSlider';
 import SelectionMap from '/imports/ui/components/SelectionMap/SelectionMap';
 import Gkeys from '/imports/startup/client/Gkeys';
@@ -14,7 +14,9 @@ class FireSubscription extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      init: false
+      init: false,
+      center: this.props.center,
+      distance: this.props.distance
     };
     // console.log(this.props.location.state);
   }
@@ -27,7 +29,7 @@ class FireSubscription extends React.Component {
   }
 
   onAutocompleteChange(value) {
-    this.setState({ lat: value.lat, lng: value.lng });
+    this.setState({ center: [value.lat, value.lng] });
   }
 
   onSliderChange(value) {
@@ -35,11 +37,15 @@ class FireSubscription extends React.Component {
   }
 
   onSelection(value) {
-    this.setState({ lat: value.lat, lng: value.lng, distance: value.distance });
+    this.setState({ center: [value.lat, value.lng], distance: value.distance });
+  }
+
+  onSubs(value) {
+    this.props.onSubs(value);
   }
 
   centerOnUserLocation(value) {
-    this.setState({ lat: value.center[0], lng: value.center[1] });
+    this.setState({ center: value.center });
   }
 
   render() {
@@ -54,7 +60,6 @@ class FireSubscription extends React.Component {
         <Row>
           <Col xs={12} sm={12} md={6} lg={6} >
             <div>
-              <h4 className="page-header"><Trans parent="span">Suscríbete a alertas de fuegos</Trans></h4>
               <SubsAutocomplete
                   focusInput={this.props.focusInput}
                   onChange={value => this.onAutocompleteChange(value)}
@@ -70,10 +75,11 @@ class FireSubscription extends React.Component {
         </Row>
         <Row className="align-items-center justify-content-center">
           <SelectionMap
-              center={[this.state.lat, this.state.lng]}
+              center={this.state.center}
               distance={this.state.distance}
-              history={this.props.history}
+              subsBtn={this.props.subsBtn}
               onSelection={state => this.onSelection(state)}
+              onSubs={state => this.onSubs(state)}
           />
         </Row>
       </div>
@@ -82,8 +88,12 @@ class FireSubscription extends React.Component {
 }
 
 FireSubscription.propTypes = {
-  history: PropTypes.object.isRequired,
-  focusInput: PropTypes.bool.isRequired
+  t: PropTypes.func.isRequired,
+  center: PropTypes.arrayOf(PropTypes.number),
+  distance: PropTypes.number,
+  focusInput: PropTypes.bool.isRequired,
+  subsBtn: PropTypes.string.isRequired,
+  onSubs: PropTypes.func.isRequired
 };
 
 export default translate([], { wait: true })(FireSubscription);

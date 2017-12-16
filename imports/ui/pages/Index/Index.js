@@ -12,7 +12,7 @@ import ReactResizeDetector from 'react-resize-detector';
 import _ from 'lodash';
 import { ScrollToTopOnMount, SectionsContainer, Section } from 'react-fullpage';
 import 'html5-device-mockups/dist/device-mockups.min.css';
-import FireSubscription from '/imports/ui/pages/FireSubscription/FireSubscription';
+import SubscriptionEditor from '/imports/ui/components/SubscriptionEditor/SubscriptionEditor';
 import FiresMap from '../FiresMap/FiresMap';
 
 import './Index.scss';
@@ -218,7 +218,8 @@ class Index extends Component {
 
           <Section className="">
             <div className="container">
-              <FireSubscription history={this.props.history} focusInput={false} />
+              <h4 className="page-header"><Trans parent="span">Suscríbete a alertas de fuegos</Trans></h4>
+              <SubscriptionEditor history={this.props.history} />
             </div>
             <div className="overlay" />
           </Section>

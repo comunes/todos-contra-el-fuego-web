@@ -3,18 +3,18 @@
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 
-const FireAlerts  = new Mongo.Collection('avisosfuego');
+const FireAlerts = new Mongo.Collection('avisosfuego', { idGeneration: 'MONGO' });
 
 FireAlerts.allow({
   insert: () => false,
   update: () => false,
-  remove: () => false,
+  remove: () => false
 });
 
 FireAlerts.deny({
   insert: () => true,
   update: () => true,
-  remove: () => true,
+  remove: () => true
 });
 
 /* Sample:
@@ -42,9 +42,8 @@ FireAlerts.schema = new SimpleSchema({
   location: Object,
   'location.lat': SimpleSchema.Integer,
   'location.lon': SimpleSchema.Integer,
-  aviso: Date,
-  }
-);
+  aviso: Date
+});
 
 FireAlerts.attachSchema(FireAlerts.schema);
 

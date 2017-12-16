@@ -28,6 +28,10 @@ import Documents from '../../pages/Documents/Documents';
 import NewDocument from '../../pages/NewDocument/NewDocument';
 import ViewDocument from '../../pages/ViewDocument/ViewDocument';
 import EditDocument from '../../pages/EditDocument/EditDocument';
+import Subscriptions from '../../pages/Subscriptions/Subscriptions';
+import NewSubscription from '../../pages/NewSubscription/NewSubscription';
+import ViewSubscription from '../../pages/ViewSubscription/ViewSubscription';
+import EditSubscription from '../../pages/EditSubscription/EditSubscription';
 import Signup from '../../pages/Signup/Signup';
 import Login from '../../pages/Login/Login';
 import Logout from '../../pages/Logout/Logout';
@@ -69,13 +73,20 @@ const App = props => (
               <Authenticated exact path="/documents/new" component={NewDocument} {...props} />
               <Authenticated exact path="/documents/:_id" component={ViewDocument} {...props} />
               <Authenticated exact path="/documents/:_id/edit" component={EditDocument} {...props} />
+
+              <Authenticated exact path="/subscriptions" component={Subscriptions} {...props} />
+              <Authenticated exact path="/subscriptions/new" component={NewSubscription} {...props} />
+              <Authenticated exact path="/subscriptions/:_id" component={ViewSubscription} {...props} />
+              <Authenticated exact path="/subscriptions/:_id/edit" component={EditSubscription} {...props} />
+
               <Authenticated exact path="/profile" component={Profile} {...props} />
               <Route path="/fires" component={FiresMap} {...props} />
               <Public path="/signup" component={Signup} {...props} />
               <Public path="/login" component={Login} {...props} />
               <Route path="/logout" component={Logout} {...props} />
               <Route path="/sandbox" component={Sandbox} {...props} />
-              <Route path="/subscriptions" render={props => <FireSubscription focusInput {...props} />} />
+              {/* <Route path="/subscriptions" render={props => <FireSubscription focusInput {...props} />} /> */}
+
               <Route name="verify-email" path="/verify-email/:token" component={VerifyEmail} />
               <Route name="recover-password" path="/recover-password" component={RecoverPassword} />
               <Route name="reset-password" path="/reset-password/:token" component={ResetPassword} />
