@@ -18,7 +18,7 @@ Meteor.methods({
   },
   'subscriptions.update': function subscriptionsUpdate(doc) {
     check(doc, {
-      _id: String,
+      _id: Meteor.Collection.ObjectID,
       location: Match.ObjectIncluding({ lat: Number, lon: Number }),
       distance: Number
     });

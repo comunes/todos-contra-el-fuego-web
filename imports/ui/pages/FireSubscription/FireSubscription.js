@@ -68,7 +68,7 @@ class FireSubscription extends React.Component {
           </Col>
           <Col xs={12} sm={12} md={6} lg={6} >
             <DistanceSlider onChange={value => this.onSliderChange(value)} />
-            <Row className="align-items-center justify-content-center">
+            <Row className="center-in-my-pos">
               <CenterInMyPosition onClick={viewport => this.centerOnUserLocation(viewport)} />
             </Row>
           </Col>

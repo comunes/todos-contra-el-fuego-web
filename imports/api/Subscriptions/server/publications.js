@@ -1,6 +1,8 @@
 /* eslint-disable prefer-arrow-callback */
 
 import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
+import { check } from 'meteor/check';
 import Perlin from 'loms.perlin';
 import Subscriptions from '../Subscriptions';
 
@@ -42,5 +44,7 @@ Meteor.publish('subscriptions', function subscriptions() {
 // Note: subscriptions.view is also used when editing an existing subscription.
 Meteor.publish('subscriptions.view', function subscriptionsView(subscriptionId) {
   check(subscriptionId, String);
-  return Subscriptions.find({ _id: subscriptionId, owner: this.userId });
+  const id = new Mongo.ObjectID(subscriptionId);
+  check(id, Meteor.Collection.ObjectID);
+  return Subscriptions.find({ _id: id, owner: this.userId });
 });

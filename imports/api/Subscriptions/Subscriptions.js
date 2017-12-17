@@ -39,12 +39,12 @@ Subscriptions.deny({
 
 Subscriptions.schema = new SimpleSchema({
   location: Object,
-  'location.lat': SimpleSchema.Integer,
-  'location.lon': SimpleSchema.Integer,
+  'location.lat': Number,
+  'location.lon': Number,
   distance: Number,
   owner: String
 });
 
-// Subscriptions.attachSchema(Subscriptions.schema);
+Subscriptions.attachSchema(Subscriptions.schema);
 
 export default Subscriptions;

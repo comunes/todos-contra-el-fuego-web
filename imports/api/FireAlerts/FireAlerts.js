@@ -40,8 +40,8 @@ FireAlerts.deny({
 
 FireAlerts.schema = new SimpleSchema({
   location: Object,
-  'location.lat': SimpleSchema.Integer,
-  'location.lon': SimpleSchema.Integer,
+  'location.lat': Number,
+  'location.lon': Number,
   aviso: Date
 });
 

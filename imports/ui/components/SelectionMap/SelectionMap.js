@@ -174,6 +174,6 @@ SelectionMap.propTypes = {
 };
 
 export default translate([], { wait: true })(withTracker(props => ({
-  center: props.center[0] ? props.center : geolocation.get(),
+  center: props.center[0] !== null ? props.center : geolocation.get(),
   distance: props.distance
 }))(SelectionMap));

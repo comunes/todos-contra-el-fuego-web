@@ -45,7 +45,6 @@ import Terms from '../../pages/Terms/Terms';
 import Privacy from '../../pages/Privacy/Privacy';
 import License from '../../pages/License/License';
 import Credits from '../../pages/Credits/Credits';
-import FireSubscription from '../../pages/FireSubscription/FireSubscription';
 import ReSendEmail from '../../components/ReSendEmail/ReSendEmail';
 import FiresMap from '../../pages/FiresMap/FiresMap';
 import Sandbox from '../../pages/Sandbox/Sandbox';

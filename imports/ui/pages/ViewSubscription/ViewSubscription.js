@@ -60,6 +60,6 @@ export default createContainer(({ match }) => {
 
   return {
     loading: !subscription.ready(),
-    doc: Subscriptions.findOne(subscriptionId)
+    doc: Subscriptions.findOne(new Meteor.Collection.ObjectID(subscriptionId))
   };
 }, ViewSubscription);

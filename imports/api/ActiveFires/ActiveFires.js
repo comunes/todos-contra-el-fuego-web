@@ -48,8 +48,8 @@ ActiveFires.deny({
  * */
 
 ActiveFires.schema = new SimpleSchema({
-  lat: SimpleSchema.Integer,
-  lon: SimpleSchema.Integer,
+  lat: Number,
+  lon: Number,
   scan: Number,
   type: String,
   acq_date: String,
