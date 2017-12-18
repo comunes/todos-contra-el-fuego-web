@@ -11,7 +11,8 @@ export const defaultCreatedAt = {
     }
     // Prevent user from supplying their own value
     this.unset();
-  }
+  },
+  optional: true // TODO: Use migration for users
 };
 
 export const defaultUpdateAt = {

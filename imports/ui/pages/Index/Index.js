@@ -59,7 +59,7 @@ class Index extends Component {
     const fullPageOptions = {
       activeClass:          'active', // the class that is appended to the sections links
       anchors:              ['home', 'crowdsourcing', 'platforms', 'participe', 'fires'], // the anchors for each sections
-      arrowNavigation:      false, // use arrow keys (true after development)
+      arrowNavigation:      true, // use arrow keys (true after development)
       className:            'section-container', // the class name for the section container
       delay:                1000, // the scroll animation speed
       navigation:           true, // use dots navigation
@@ -219,7 +219,7 @@ class Index extends Component {
           <Section className="">
             <div className="container">
               <h4 className="page-header"><Trans parent="span">Suscríbete a alertas de fuegos</Trans></h4>
-              <SubscriptionEditor history={this.props.history} />
+              <SubscriptionEditor history={this.props.history} focusInput={false} />
             </div>
             <div className="overlay" />
           </Section>

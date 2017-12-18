@@ -7,6 +7,11 @@
   margin: 30px auto;
 }
 
+div.leaflet-container {
+  position: relative;
+  margin: 0;
+}
+
 @media only screen and (max-width: 400px) {
   .leaflet-container {
      height: 400px;
@@ -20,4 +25,24 @@
 
 .center-in-my-pos {
   margin: 10px;
+}
+.sidebar-tabs>li>a,
+.sidebar-tabs>ul>li>a {
+  display: inline-block;
+}
+
+.sidebar {
+  width: 300px;
+}
+
+.sidebar-left~.sidebar-map .leaflet-left {
+  left: 315px;
+}
+
+.sidebar-tab-btn-group {
+  margin-top: 10px;
+}
+
+div.sidebar-tab-btn-group > button > i {
+  margin-right: 3px;
 }

@@ -1,11 +1,13 @@
 /* global setTimeout */
 /* eslint-disable react/jsx-indent-props */
 /* eslint-disable import/no-absolute-path */
+/* eslint-disable import/no-absolute-path */
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Map, TileLayer, Marker, CircleMarker, Circle } from 'react-leaflet';
 import Leaflet from 'leaflet';
-import { translate } from 'react-i18next';
+import { Trans, translate } from 'react-i18next';
 import { withTracker } from 'meteor/react-meteor-data';
 import update from 'immutability-helper';
 import geolocation from '/imports/startup/client/geolocation';
@@ -15,6 +17,8 @@ import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.js';
 import 'leaflet-sleep/Leaflet.Sleep.js';
 import Control from 'react-leaflet-control';
 import { Button, ButtonToolbar } from 'react-bootstrap';
+import { Sidebar, Tab } from 'react-leaflet-sidebarv2';
+import '/imports/ui/stylesheets/leaflet-sidebar.min.css';
 import './SelectionMap.scss';
 
 class SelectionMap extends Component {
@@ -25,7 +29,9 @@ class SelectionMap extends Component {
       marker: props.center,
       zoom: 11,
       distance: props.distance,
-      draggable: true
+      draggable: true,
+      sidebarCollapsed: true,
+      sidebarSelected: 'home'
     };
 
     this.getMap = this.getMap.bind(this);
@@ -79,6 +85,7 @@ class SelectionMap extends Component {
     this.setState(update(this.state, { $merge: { marker: [lat, lng] } }));
     this.props.onSelection({ lat, lng, currentDistance });
     this.fit();
+    // this.addScale();
   }
 
   fit() {
@@ -103,62 +110,120 @@ class SelectionMap extends Component {
     return this.state.center && this.state.center[0] && this.state.distance;
   }
 
+  onSidebarClose() {
+    this.setState({ sidebarCollapsed: true });
+  }
+
+  onSidebarOpen(id) {
+    this.setState({
+      sidebarCollapsed: false,
+      sidebarSelected: id
+    });
+  }
+
+  aTab(oid, name) {
+    return (
+      <Tab id={`sidetab-${oid}`} header={name} icon="fa fa-map-marker">
+        <div className="btn-group-vertical sidebar-tab-btn-group">
+          <Button
+              bsStyle="default"
+          ><i className="fa fa-pencil-square-o" />
+            <Trans>Editar</Trans>
+          </Button>
+          <Button
+              bsStyle="default"
+          ><i className="icons icon-target" />
+            <Trans>Centrar aquí</Trans>
+          </Button>
+          <Button
+              bsStyle="default"
+          >
+            <Trans>Desahabilitar</Trans>
+          </Button>
+          <Button
+              bsStyle="danger"
+          ><i className="fa fa-times" />
+            <Trans>Borrar</Trans>
+          </Button>
+        </div>
+      </Tab>
+    );
+  }
+
   render() {
     // console.log('render map called');
     return (
       <div>
         { this.isValidState() &&
-          <Map
-              center={this.state.center}
-              zoom={this.state.zoom}
-              ref={(map) => { this.selectionMap = map; }}
-              sleep={window.location.pathname === '/'}
-              sleepTime={10750}
-              wakeTime={750}
-              sleepNote
-              hoverToWake
-              wakeMessage={this.props.t('Pulsa para activar')}
-              sleepOpacity={0.6}
-          >
-            <TileLayer
-                attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            <Marker
-                draggable={this.state.draggable}
-                onDragend={this.updatePosition}
-                position={this.state.marker}
-                icon={positionIcon}
-                title={this.props.t('Arrastrar para seleccionar otro punto')}
-                ref={(ref) => { this.marker = ref; }}
-            />
-            <CircleMarker
-                center={this.state.marker}
-                color="red"
-                stroke={false}
-                fillOpacity="1"
-                fill
-                radius={3}
-            />
-            <Circle
-                center={this.state.marker}
-                ref={(ref) => { this.distanceCircle = ref; }}
-                color="#145A32"
-                fillColor="green"
-                fillOpacity={0.1}
-                radius={this.state.distance * 1000}
-            />
-            <Control position="topright" >
-              <ButtonToolbar>
-                <Button
-                    bsStyle="success"
-                    onClick={event => this.onSubs(event)}
-                >
-                  {this.props.subsBtn}
-                </Button>
-              </ButtonToolbar>
-            </Control>
-          </Map> }
+          <div className="leaflet-container">
+            <Sidebar
+                id="sidebar"
+                collapsed={this.state.sidebarCollapsed}
+                selected={this.state.sidebarSelected}
+                closeIcon="fa fa-chevron-left"
+                onOpen={this.onSidebarOpen.bind(this)}
+                onClose={this.onSidebarClose.bind(this)}
+            >
+              <Tab id="home" header="Suscripciones" icon="fa fa-bars">
+                <p>Pulsa en alguna de tus suscripciones para editarlas, etc.</p>
+              </Tab>
+              {this.aTab('someid2', 'Some fire')}
+              {this.aTab('someid3', 'Some another fire')}
+            </Sidebar>
+            <Map
+                className="sidebar-map"
+                center={this.state.center}
+                zoom={this.state.zoom}
+                ref={(map) => { this.selectionMap = map; }}
+                sleep={window.location.pathname === '/'}
+                sleepTime={10750}
+                wakeTime={750}
+                sleepNote
+                hoverToWake
+                wakeMessage={this.props.t('Pulsa para activar')}
+                sleepOpacity={0.6}
+            >
+              <TileLayer
+                  attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+              <Marker
+                  draggable={this.state.draggable}
+                  onDragend={this.updatePosition}
+                  position={this.state.marker}
+                  icon={positionIcon}
+                  title={this.props.t('Arrastrar para seleccionar otro punto')}
+                  ref={(ref) => { this.marker = ref; }}
+              />
+              <CircleMarker
+                  center={this.state.marker}
+                  color="red"
+                  stroke={false}
+                  fillOpacity="1"
+                  fill
+                  radius={3}
+              />
+              <Circle
+                  center={this.state.marker}
+                  ref={(ref) => { this.distanceCircle = ref; }}
+                  color="#145A32"
+                  fillColor="green"
+                  fillOpacity={0.1}
+                  radius={this.state.distance * 1000}
+              />
+              <Control position="topright" >
+                <ButtonToolbar>
+                  <Button
+                      bsStyle="success"
+                      onClick={event => this.onSubs(event)}
+                  >
+                    {this.props.subsBtn}
+                  </Button>
+                </ButtonToolbar>
+              </Control>
+            </Map>
+          </div>
+        }
       </div>
     );
   }

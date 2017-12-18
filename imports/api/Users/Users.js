@@ -6,7 +6,10 @@ import { defaultCreatedAt, defaultUpdateAt } from '/imports/api/Utility/Utils.js
 import i18n from 'i18next';
 
 const schemaUserProfile = new SimpleSchema({
-  name: { type: String, optional: true },
+  // name: { type: String, optional: true },
+  name: Object,
+  'name.first': String,
+  'name.last': String,
   lang: { type: String, optional: true },
   telegramChatId: { type: Number, optional: true },
   telegramUsername: { type: String, optional: true },

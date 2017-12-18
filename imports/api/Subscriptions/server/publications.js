@@ -37,7 +37,7 @@ Meteor.publishTransformed('userSubsToFires', function transform() {
   });
 });
 
-Meteor.publish('subscriptions', function subscriptions() {
+Meteor.publish('mysubscriptions', function subscriptions() {
   return Subscriptions.find({ owner: this.userId });
 });
 

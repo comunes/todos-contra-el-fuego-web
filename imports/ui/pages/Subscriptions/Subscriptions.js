@@ -96,10 +96,10 @@ Subscriptions.propTypes = {
 
 
 export default translate([], { wait: true })(withTracker(() => {
-  const subscription = Meteor.subscribe('subscriptions');
+  const subscription = Meteor.subscribe('mysubscriptions');
   // console.log(UserSubsToFiresCollection.find().fetch());
   return {
     loading: !subscription.ready(),
-    subscriptions: UserSubsToFiresCollection.find().fetch()
+    subscriptions: UserSubsToFiresCollection.find({ owner: Meteor.userId() }).fetch()
   };
 })(Subscriptions));

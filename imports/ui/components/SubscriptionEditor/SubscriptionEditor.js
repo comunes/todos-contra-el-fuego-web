@@ -40,7 +40,7 @@ class SubscriptionEditor extends React.Component {
       <FireSubscription
           center={[doc.location.lat, doc.location.lon]}
           distance={doc.distance}
-          focusInput={!isEdit}
+          focusInput={this.props.focusInput ? this.props.focusInput : !isEdit}
           subsBtn={isEdit ? t('Actualizar') : t('Subscribirme a fuegos en este rádio')}
           onSubs={state => this.onSubs(state)}
       />
@@ -54,7 +54,8 @@ SubscriptionEditor.defaultProps = {
 SubscriptionEditor.propTypes = {
   doc: PropTypes.object,
   t: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  focusInput: PropTypes.bool
 };
 
 export default translate([], { wait: true })(SubscriptionEditor);
