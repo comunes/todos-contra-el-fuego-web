@@ -35,7 +35,7 @@ const Navigation = props => (
           </LinkContainer> */}
           <LinkContainer className="nav-item" anchorClassName="nav-link" to="/subscriptions">
             <NavItem eventKey={1.2} href="/subscriptions">
-              {props.authenticated ? <Trans>Mis alertas</Trans> : <Trans>Participar</Trans>}
+              {props.authenticated ? <Trans>Mis zonas</Trans> : <Trans>Participar</Trans>}
             </NavItem>
           </LinkContainer>
           <LinkContainer className="nav-item" anchorClassName="nav-link" to="/fires">

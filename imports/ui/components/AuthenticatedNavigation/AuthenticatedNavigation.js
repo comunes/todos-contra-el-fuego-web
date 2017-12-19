@@ -16,12 +16,12 @@ import NavItem from '../NavItem/NavItem';
 const AuthenticatedNavigation = ({ name, history, props }) => (
   <ul className="navbar-nav">
     {/* <Nav pullRight> */}
-    <LinkContainer className="nav-item" anchorClassName="nav-link" to="/documents">
-      <NavItem eventKey={5} href="/documents">Documents</NavItem>
-    </LinkContainer>
-    <LinkContainer className="nav-item" anchorClassName="nav-link" to="/documents">
-      <NavItem eventKey={5.01} href="/subscriptions">Subscriptions</NavItem>
-    </LinkContainer>
+    {/* <LinkContainer className="nav-item" anchorClassName="nav-link" to="/documents">
+    <NavItem eventKey={5} href="/documents">Documents</NavItem>
+    </LinkContainer> */}
+    {/* <LinkContainer className="nav-item" anchorClassName="nav-link" to="/subscriptions">
+    <NavItem eventKey={5} href="/subscriptions"><Trans>Mis alertas</Trans></NavItem>
+    </LinkContainer> */}
     <LinkContainer className="nav-item" anchorClassName="nav-link" to="/profile">
       <NavItem eventKey={5.1} href="/profile">{name}</NavItem>
     </LinkContainer>
@@ -34,7 +34,6 @@ const AuthenticatedNavigation = ({ name, history, props }) => (
 
 AuthenticatedNavigation.propTypes = {
   name: PropTypes.string.isRequired
-
 };
 
 export default translate([], { wait: true })(withRouter(AuthenticatedNavigation));

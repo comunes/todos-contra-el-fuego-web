@@ -26,9 +26,10 @@ class SubscriptionEditor extends React.Component {
       if (error) {
         Bert.alert(error.reason, 'danger');
       } else {
-        const confirmation = existingSubscription ? t('Suscripción actualizada') : t('Suscripción añadida');
+        const confirmation = existingSubscription ? t('Zona actualizada') : t('Zona añadida');
         Bert.alert(confirmation, 'success');
-        history.push(`/subscriptions/${subscriptionId}`);
+        // history.push(`/subscriptions/${subscriptionId}`);
+        history.push('/subscriptions');
       }
     });
   }
@@ -36,11 +37,12 @@ class SubscriptionEditor extends React.Component {
   render() {
     const { doc, t } = this.props;
     const isEdit = doc && doc._id;
+    const focus = typeof this.props.focusInput !== 'undefined' ? this.props.focusInput : !isEdit;
     return (
       <FireSubscription
           center={[doc.location.lat, doc.location.lon]}
           distance={doc.distance}
-          focusInput={this.props.focusInput ? this.props.focusInput : !isEdit}
+          focusInput={focus}
           subsBtn={isEdit ? t('Actualizar') : t('Subscribirme a fuegos en este rádio')}
           onSubs={state => this.onSubs(state)}
       />

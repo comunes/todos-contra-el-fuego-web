@@ -9,9 +9,10 @@ Meteor.methods({
       location: Match.ObjectIncluding({ lat: Number, lon: Number }),
       distance: Number
     });
+    const type = 'web';
 
     try {
-      return Subscriptions.insert({ owner: this.userId, ...doc });
+      return Subscriptions.insert({ owner: this.userId, type, ...doc });
     } catch (exception) {
       throw new Meteor.Error('500', exception);
     }

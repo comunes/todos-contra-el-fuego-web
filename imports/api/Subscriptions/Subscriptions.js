@@ -42,7 +42,8 @@ Subscriptions.schema = new SimpleSchema({
   'location.lat': Number,
   'location.lon': Number,
   distance: Number,
-  owner: String
+  owner: String,
+  type: String
 });
 
 Subscriptions.attachSchema(Subscriptions.schema);

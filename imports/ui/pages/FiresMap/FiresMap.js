@@ -10,7 +10,6 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Trans, translate } from 'react-i18next';
 import { Map, TileLayer, LayersControl } from 'react-leaflet';
-import LGeo from 'leaflet-geodesy';
 import _ from 'lodash';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.css';
@@ -19,7 +18,7 @@ import 'leaflet-sleep/Leaflet.Sleep.js';
 import geolocation from '/imports/startup/client/geolocation';
 import CenterInMyPosition from '/imports/ui/components/CenterInMyPosition/CenterInMyPosition';
 import FireList from '/imports/ui/components/Maps/FireList';
-import { unify } from '/imports/ui/components/Maps/Utils';
+import subsUnion from '/imports/ui/components/Maps/SubsUnion/SubsUnion';
 import Loading from '/imports/ui/components/Loading/Loading';
 import ActiveFiresCollection from '/imports/api/ActiveFires/ActiveFires';
 import FireAlertsCollection from '/imports/api/FireAlerts/FireAlerts';
@@ -61,68 +60,24 @@ class FiresMap extends React.Component {
       self.setState({ gkey: key });
     });
     mapSize.set([this.divElement.clientHeight, this.divElement.clientWidth]);
-    this.addScale();
+    if (this.fireMap) {
+      this.addScale();
+    }
   }
-
-  /* componentWillReceiveProps(nextProps) {
-   *   if (nextProps.loading) {
-   *     // console.log('Loading new fires');
-   *   }
-   *   // this.setState({ loading: nextProps.loading });
-   * }
-   */
-
-  /* shouldComponentUpdate(nextProps, nextState) {
-   *   if (nextProps.loading) {
-   *     return true; // false;
-   *   }
-   *   return true;
-   * }
-   */
 
   onViewportChanged(viewport) {
     this.debounceView(viewport);
   }
 
   onClickReset() {
-    // console.log("onclick");
-    // this.setState({ viewport: DEFAULT_VIEWPORT })
   }
 
   getMap() {
     return this.fireMap.leafletElement;
   }
 
-  setShowSubsUnion(show) {
-    this.showSubsUnion(show);
-  }
-
-  showSubsUnion(show) {
-    const map = this.getMap();
-    // http://leafletjs.com/reference-1.2.0.html#layergroup
-    const unionGroup = new L.LayerGroup();
-
-    if (this.union) {
-      map.removeLayer(this.union);
-    }
-
-    if (show) {
-      // http://leafletjs.com/reference-1.2.0.html#path
-      const copts = {
-        parts: 144
-      };
-      UserSubsToFiresCollection.find().forEach((subs) => {
-        const circle = LGeo.circle([subs.lat, subs.lon], subs.distance * 1000, copts);
-        circle.addTo(unionGroup);
-      });
-      this.union = unify(unionGroup.getLayers());
-      this.union.setStyle({
-        color: '#145A32',
-        fillColor: 'green',
-        fillOpacity: 0.1
-      });
-      this.union.addTo(map);
-    }
+  setShowSubsUnion(showSubsUnion) {
+    this.setState({ showSubsUnion });
   }
 
   handleViewportChange(viewport) {
@@ -135,14 +90,10 @@ class FiresMap extends React.Component {
     zoom.set(viewport.zoom);
     center.set(viewport.center);
     this.setState({ viewport });
-    if (this.props.subsready && this.fireMap) {
-      this.showSubsUnion(this.state.showSubsUnion);
-    }
   }
 
   centerOnUserLocation(viewport) {
     this.setState({ viewport });
-    // this.handleViewportChange(viewport);
   }
 
   useMarkers(use) {
@@ -150,22 +101,29 @@ class FiresMap extends React.Component {
   }
 
   addScale() {
-    if (this.fireMap) {
-      // https://www.npmjs.com/package/leaflet-graphicscale
-      const map = this.getMap();
-      const options = {
-        fill: 'fill',
-        showSubunits: true
-      };
-      L.control.graphicScale([options]).addTo(map);
+    // https://www.npmjs.com/package/leaflet-graphicscale
+    const map = this.getMap();
+    const options = {
+      fill: 'fill',
+      showSubunits: true
+    };
+    L.control.graphicScale([options]).addTo(map);
+  }
+
+  handleLeafletLoad(map) {
+    console.log('Map loading');
+    console.log(map);
+    if (map) {
+      this.state.union = subsUnion(this.state.union, {
+        map,
+        subs: this.props.userSubs,
+        show: this.state.showSubsUnion,
+        fit: false
+      });
     }
   }
 
   render() {
-    if (this.props.subsready && this.fireMap) {
-      // Show union of users
-      this.showSubsUnion(this.state.showSubsUnion);
-    }
     console.log(`Rendering ${this.props.loading ? 'loading' : 'LOADED'} map ${this.props.activefires.length} of ${this.props.activefirestotal} total. Subs users ready ${this.props.subsready}, reactive ${this.state.viewport.zoom >= MAXZOOMREACTIVE}`);
     const { t } = this.props;
     const osmlayer = (
@@ -181,7 +139,7 @@ class FiresMap extends React.Component {
       <div
           ref={(divElement) => { this.divElement = divElement; }}
       >
-        {this.props.loading ?
+        {this.props.loading || !this.props.subsready ?
          <Row className="align-items-center justify-content-center">
            <Loading />
          </Row>
@@ -217,9 +175,11 @@ class FiresMap extends React.Component {
          </Row>
          <Row>
            {/* https://github.com/CliffCloud/Leaflet.Sleep */}
-
            <Map
-               ref={(map) => { this.fireMap = map; }}
+               ref={(map) => {
+                   this.fireMap = map;
+                   this.handleLeafletLoad(map);
+                   }}
                animate
                minZoom={5}
                preferCanvas
@@ -277,6 +237,7 @@ class FiresMap extends React.Component {
 FiresMap.propTypes = {
   loading: PropTypes.bool.isRequired,
   subsready: PropTypes.bool.isRequired,
+  userSubs: PropTypes.arrayOf(PropTypes.object).isRequired,
   activefires: PropTypes.arrayOf(PropTypes.object).isRequired,
   firealerts: PropTypes.arrayOf(PropTypes.object).isRequired,
   activefirestotal: PropTypes.number.isRequired,
@@ -312,7 +273,7 @@ export default translate([], { wait: true })(withTracker(() => {
   // Warning with the performance of this log:
   // console.log(`Active fires ${ActiveFiresCollection.find().count()} of ${Counter.get('countActiveFires')}`);
   // console.log(`Active neighborhood fires ${FireAlertsCollection.find().fetch().length} and users subscribed ${UserSubsToFiresCollection.find().fetch().length}`);
-  // console.log(UserSubsToFiresCollection.find().fetch());
+  console.log(UserSubsToFiresCollection.find().fetch());
   return {
     loading: !subscription.ready(),
     userSubs: UserSubsToFiresCollection.find().fetch(),

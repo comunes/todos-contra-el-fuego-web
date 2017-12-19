@@ -60,7 +60,7 @@ class SubsAutocomplete extends React.Component {
       <form>
         <FormGroup>
           <ControlLabel>
-            <Trans parent="span">Indícanos la posición a vigilar (por ej. tu pueblo, una calle, etc):</Trans>
+            <Trans parent="span">Indícanos la posición de la zona a vigilar (por ej. tu pueblo, una calle, etc):</Trans>
           </ControlLabel>
           <PlacesAutocomplete
               styles={myStyles}
@@ -90,7 +90,7 @@ class SubsAutocomplete extends React.Component {
                   autoFocus: this.props.focusInput
                 }}
           />
-          <HelpBlock><Trans parent="span">También puedes seleccionar el lugar en el mapa arrastrando el puntero naranja.</Trans></HelpBlock>
+          <HelpBlock><Trans parent="span">También puedes seleccionar la zona en el mapa arrastrando el puntero naranja.</Trans></HelpBlock>
         </FormGroup>
       </form>
     );

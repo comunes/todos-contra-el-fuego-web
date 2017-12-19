@@ -5,7 +5,7 @@ import SubscriptionEditor from '../../components/SubscriptionEditor/Subscription
 
 const NewSubscription = ({ history }) => (
   <div className="NewSubscription">
-    <h4 className="page-header"><Trans>Nueva suscripción</Trans></h4>
+    <h4 className="page-header"><Trans>Nueva zona</Trans></h4>
     <SubscriptionEditor history={history} />
   </div>
 );

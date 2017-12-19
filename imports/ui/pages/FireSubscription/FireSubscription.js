@@ -28,6 +28,16 @@ class FireSubscription extends React.Component {
     });
   }
 
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.init &&
+        nextState.center === this.state.center &&
+        nextState.distance === this.state.distance) {
+      return false;
+    }
+    return true;
+  }
+
   onAutocompleteChange(value) {
     this.setState({ center: [value.lat, value.lng] });
   }
@@ -51,7 +61,7 @@ class FireSubscription extends React.Component {
   render() {
     // https://developers.google.com/places/web-service/search
     // https://github.com/kenny-hibino/react-places-autocomplete/blob/master/demo/Demo.js
-
+    console.log(`Focus autocomplete input: ${this.props.focusInput}`);
     if (!this.state.init) {
       return <div />;
     }
@@ -77,9 +87,11 @@ class FireSubscription extends React.Component {
           <SelectionMap
               center={this.state.center}
               distance={this.state.distance}
-              subsBtn={this.props.subsBtn}
+              fstBtn={this.props.subsBtn}
+              onFstBtn={state => this.onSubs(state)}
               onSelection={state => this.onSelection(state)}
-              onSubs={state => this.onSubs(state)}
+              readOnly={false}
+              edit={false}
           />
         </Row>
       </div>

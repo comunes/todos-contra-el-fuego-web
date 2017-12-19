@@ -5,6 +5,9 @@ import LngDetector from 'i18next-browser-languagedetector';
 import Cache from 'i18next-localstorage-cache';
 import { T9n } from 'meteor-accounts-t9n';
 import moment from 'moment';
+import 'moment/locale/es';
+import 'moment/locale/pt';
+import 'moment/locale/gl';
 import i18nOpts from '../common/i18n';
 
 // Adapted from: https://github.com/appigram/ryfma-boilerplate/blob/44c1eabfb9928b5623afab36a23997969e5beb02/imports/startup/client/i18n.js
@@ -60,6 +63,8 @@ i18n.use(backend)
     // console.log("Language: " + i18n.language);
     T9n.setLanguage(i18n.language);
     // console.log(T9n.get('error.accounts.User not found'));
+
+    moment.locale(i18n.language);
 
     // cookies eu consent
     const cookiesOpt = {

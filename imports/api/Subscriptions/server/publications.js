@@ -18,21 +18,24 @@ Meteor.publishTransformed('userSubsToFires', function transform() {
     const location = doc.location;
     /* doc.lat = location.lat;
      * doc.lon = location.lon; */
+    let lat;
+    let lon;
     if (location) {
-      doc.lat = Math.round(location.lat * 10) / 10;
-      doc.lon = Math.round(location.lon * 10) / 10;
+      lat = Math.round(location.lat * 10) / 10;
+      lon = Math.round(location.lon * 10) / 10;
+      // console.log(`[${lat}, ${lon}]`);
+      const noiseBase = Perlin.perlin2(lat, lon);
+      const noise = Math.abs(noiseBase / 3);
+      // console.log(`Noise ${noise}, abs: ${Math.abs(noise)}`);
+      lat += noise;
+      lon += noise;
+      doc.location.lat = lat;
+      doc.location.lon = lon;
+      doc.distance += noiseBase;
     }
-    // console.log(`[${doc.lat}, ${doc.lon}]`);
-    const noiseBase = Perlin.perlin2(doc.lat, doc.lon);
-    const noise = Math.abs(noiseBase / 3);
-    // console.log(`Noise ${noise}, abs: ${Math.abs(noise)}`);
-    doc.lat += noise;
-    doc.lon += noise;
-    doc.distance += noiseBase;
     // console.log(`with noise: [${doc.lat}, ${doc.lon}]`);
     delete doc.chatId;
     delete doc.geo;
-    delete doc.location;
     return doc;
   });
 });
