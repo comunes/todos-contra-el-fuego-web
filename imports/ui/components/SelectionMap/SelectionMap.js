@@ -4,7 +4,7 @@
 /* eslint-disable import/no-absolute-path */
 /* eslint-disable import/no-absolute-path */
 
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Map, Marker, CircleMarker, Circle } from 'react-leaflet';
 import Leaflet from 'leaflet';
@@ -21,6 +21,12 @@ import Control from 'react-leaflet-control';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import subsUnion from '/imports/ui/components/Maps/SubsUnion/SubsUnion';
 import './SelectionMap.scss';
+
+export const action = {
+  view: 0,
+  add: 1,
+  edit: 2
+};
 
 class SelectionMap extends Component {
   constructor(props) {
@@ -137,7 +143,7 @@ class SelectionMap extends Component {
         fit: this.state.subsFit,
         subs: this.props.currentSubs
       };
-      if (!this.props.readOnly) {
+      if (this.props.action === action.add) {
         subsOpts.color = '#F2F2F2';
       }
       this.state.union = subsUnion(this.state.union, subsOpts);
@@ -166,52 +172,53 @@ class SelectionMap extends Component {
                 wakeMessage={this.props.t('Pulsa para activar')}
                 sleepOpacity={0.6}
             >
-          <DefMapLayers gray={false} />
-              {!this.props.readOnly &&
-              <Marker
-                  draggable={this.state.draggable}
-                  onDragend={this.updatePosition}
-                  position={this.state.marker}
-                  icon={positionIcon}
-                  title={this.props.t('Arrastrar para seleccionar otro punto')}
-                  ref={(ref) => { this.marker = ref; }}
-              /> }
-              {!this.props.readOnly &&
-              <CircleMarker
-                  center={this.state.marker}
-                  color="red"
-                  stroke={false}
-                  fillOpacity="1"
-                  fill
-                  radius={3}
-              /> }
-              {!this.props.readOnly &&
-              <Circle
-                  center={this.state.marker}
-                  ref={(ref) => { this.distanceCircle = ref; }}
-                  color="#145A32"
-                  fillColor="green"
-                  fillOpacity={0.1}
-                  radius={this.state.distance * 1000}
-              /> }
-              <Control position="topright" >
-                <ButtonGroup>
-                  { this.props.sndBtn && this.props.onSndBtn &&
-                    <Button
-                        bsStyle="warning"
-                        onClick={event => this.onSndBtn(event)}
-                    >
-                      {this.props.sndBtn}
-                    </Button>
-                  }
-                    <Button
-                        bsStyle="success"
-                        onClick={event => this.onFstBtn(event)}
-                    >
-                      {this.props.fstBtn}
-                    </Button>
-                </ButtonGroup>
-              </Control>
+              <DefMapLayers gray={false} />
+              {this.props.action === action.add &&
+               <Fragment>
+                 <Marker
+                     draggable={this.state.draggable}
+                     onDragend={this.updatePosition}
+                     position={this.state.marker}
+                     icon={positionIcon}
+                     title={this.props.t('Arrastrar para seleccionar otro punto')}
+                     ref={(ref) => { this.marker = ref; }}
+                 />
+                 <CircleMarker
+                     center={this.state.marker}
+                     color="red"
+                     stroke={false}
+                     fillOpacity="1"
+                     fill
+                     radius={3}
+                 />
+                 <Circle
+                     center={this.state.marker}
+                     ref={(ref) => { this.distanceCircle = ref; }}
+                     color="#145A32"
+                     fillColor="green"
+                     fillOpacity={0.1}
+                     radius={this.state.distance * 1000}
+                 />
+               </Fragment>
+              }
+               <Control position="topright" >
+                 <ButtonGroup>
+                   { this.props.sndBtn && this.props.onSndBtn &&
+                     <Button
+                         bsStyle="warning"
+                         onClick={event => this.onSndBtn(event)}
+                     >
+                       {this.props.sndBtn}
+                     </Button>
+                   }
+                     <Button
+                         bsStyle="success"
+                         onClick={event => this.onFstBtn(event)}
+                     >
+                       {this.props.fstBtn}
+                     </Button>
+                 </ButtonGroup>
+               </Control>
             </Map>
           </div>
         }
@@ -235,8 +242,7 @@ SelectionMap.propTypes = {
   onFstBtn: PropTypes.func.isRequired,
   sndBtn: PropTypes.string,
   onSndBtn: PropTypes.func,
-  readOnly: PropTypes.bool.isRequired,
-  edit: PropTypes.bool.isRequired,
+  action: PropTypes.number.isRequired,
   loadingSubs: PropTypes.bool,
   currentSubs: PropTypes.arrayOf(PropTypes.shape({
     location: PropTypes.shape({ latitude: PropTypes.number, longitude: PropTypes.number }).isRequired,

@@ -7,7 +7,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Row, Col } from 'react-bootstrap';
 import { translate } from 'react-i18next';
 import DistanceSlider from '/imports/ui/components/DistanceSlider/DistanceSlider';
-import SelectionMap from '/imports/ui/components/SelectionMap/SelectionMap';
+import SelectionMap, { action } from '/imports/ui/components/SelectionMap/SelectionMap';
 import Gkeys from '/imports/startup/client/Gkeys';
 import CenterInMyPosition from '/imports/ui/components/CenterInMyPosition/CenterInMyPosition.js';
 import UserSubsToFiresCollection from '/imports/api/Subscriptions/Subscriptions';
@@ -95,8 +95,7 @@ class FireSubscription extends React.Component {
               fstBtn={this.props.subsBtn}
               onFstBtn={state => this.onSubs(state)}
               onSelection={state => this.onSelection(state)}
-              readOnly={false}
-              edit={false}
+              action={action.add}
               loadingSubs={this.props.loading}
               currentSubs={this.props.subscriptions}
           />

@@ -12,7 +12,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Trans, translate } from 'react-i18next';
 import { Bert } from 'meteor/themeteorchef:bert';
 import UserSubsToFiresCollection from '/imports/api/Subscriptions/Subscriptions';
-import SelectionMap from '/imports/ui/components/SelectionMap/SelectionMap';
+import SelectionMap, { action } from '/imports/ui/components/SelectionMap/SelectionMap';
 import Loading from '../../components/Loading/Loading';
 import './Subscriptions.scss';
 
@@ -21,7 +21,7 @@ class Subscriptions extends Component {
     super(props);
     this.t = props.t;
     this.state = {
-      edit: false
+      action: action.view
     };
     this.onViewportChanged = this.onViewportChanged.bind(this);
     this.onFstBtn = this.onFstBtn.bind(this);
@@ -29,12 +29,12 @@ class Subscriptions extends Component {
   }
 
   onFstBtn() {
-    console.log(this.state);
+    // console.log(this.state);
     this.props.history.push(`${this.props.match.url}/new`, { center: this.state.center, zoom: this.state.zoom });
   }
 
   onSndBtn() {
-    this.state.edit = true;
+    this.setState({ action: action.edit });
   }
 
   onViewportChanged(viewport) {
@@ -66,14 +66,12 @@ class Subscriptions extends Component {
       <div className="Subscriptions">
         <div className="page-header clearfix">
           <h4 className="pull-left"><Trans>Suscripciones a fuegos en zonas de mi interés</Trans></h4>
-          <Link className="btn btn-success pull-right" to={`${match.url}/new`}><Trans>Añadir zona</Trans></Link>
         </div>
         <br />
         <SelectionMap
             center={[null, null]}
             zoom={11}
-            readOnly
-            edit={this.state.edit}
+            action={this.state.action}
             fstBtn={t('Añadir zona')}
             onFstBtn={state => this.onFstBtn(state)}
             sndBtn={this.props.subscriptions.length > 1 ? t('Editar') : null}
