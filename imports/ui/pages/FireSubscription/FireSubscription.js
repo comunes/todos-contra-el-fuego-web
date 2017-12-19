@@ -2,12 +2,15 @@
 /* eslint-disable react/jsx-indent-props */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Meteor } from 'meteor/meteor';
+import { withTracker } from 'meteor/react-meteor-data';
 import { Row, Col } from 'react-bootstrap';
 import { translate } from 'react-i18next';
 import DistanceSlider from '/imports/ui/components/DistanceSlider/DistanceSlider';
 import SelectionMap from '/imports/ui/components/SelectionMap/SelectionMap';
 import Gkeys from '/imports/startup/client/Gkeys';
 import CenterInMyPosition from '/imports/ui/components/CenterInMyPosition/CenterInMyPosition.js';
+import UserSubsToFiresCollection from '/imports/api/Subscriptions/Subscriptions';
 import SubsAutocomplete from './SubsAutocomplete';
 
 class FireSubscription extends React.Component {
@@ -16,6 +19,7 @@ class FireSubscription extends React.Component {
     this.state = {
       init: false,
       center: this.props.center,
+      zoom: this.props.zoom,
       distance: this.props.distance
     };
     // console.log(this.props.location.state);
@@ -61,7 +65,7 @@ class FireSubscription extends React.Component {
   render() {
     // https://developers.google.com/places/web-service/search
     // https://github.com/kenny-hibino/react-places-autocomplete/blob/master/demo/Demo.js
-    console.log(`Focus autocomplete input: ${this.props.focusInput}`);
+    // console.log(`Focus autocomplete input: ${this.props.focusInput}`);
     if (!this.state.init) {
       return <div />;
     }
@@ -86,12 +90,15 @@ class FireSubscription extends React.Component {
         <Row className="align-items-center justify-content-center">
           <SelectionMap
               center={this.state.center}
+              zoom={this.state.zoom}
               distance={this.state.distance}
               fstBtn={this.props.subsBtn}
               onFstBtn={state => this.onSubs(state)}
               onSelection={state => this.onSelection(state)}
               readOnly={false}
               edit={false}
+              loadingSubs={this.props.loading}
+              currentSubs={this.props.subscriptions}
           />
         </Row>
       </div>
@@ -101,11 +108,21 @@ class FireSubscription extends React.Component {
 
 FireSubscription.propTypes = {
   t: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  subscriptions: PropTypes.arrayOf(PropTypes.object).isRequired,
   center: PropTypes.arrayOf(PropTypes.number),
+  zoom: PropTypes.number,
   distance: PropTypes.number,
   focusInput: PropTypes.bool.isRequired,
   subsBtn: PropTypes.string.isRequired,
   onSubs: PropTypes.func.isRequired
 };
 
-export default translate([], { wait: true })(FireSubscription);
+export default translate([], { wait: true })(withTracker(() => {
+  const subscription = Meteor.subscribe('mysubscriptions');
+  // console.log(UserSubsToFiresCollection.find().fetch());
+  return {
+    loading: !subscription.ready(),
+    subscriptions: UserSubsToFiresCollection.find({ owner: Meteor.userId() }).fetch()
+  };
+})(FireSubscription));

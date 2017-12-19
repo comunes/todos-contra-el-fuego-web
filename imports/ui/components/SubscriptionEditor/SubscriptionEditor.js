@@ -11,6 +11,14 @@ import FireSubscription from '/imports/ui/pages/FireSubscription/FireSubscriptio
 import { translate } from 'react-i18next';
 
 class SubscriptionEditor extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      center: props.center || [null, null],
+      zoom: props.zoom || null
+    };
+  }
+
   onSubs(value) {
     const { t, history } = this.props;
     const existingSubscription = this.props.doc && this.props.doc._id;
@@ -40,7 +48,8 @@ class SubscriptionEditor extends React.Component {
     const focus = typeof this.props.focusInput !== 'undefined' ? this.props.focusInput : !isEdit;
     return (
       <FireSubscription
-          center={[doc.location.lat, doc.location.lon]}
+          center={this.state.center}
+          zoom={this.state.zoom}
           distance={doc.distance}
           focusInput={focus}
           subsBtn={isEdit ? t('Actualizar') : t('Subscribirme a fuegos en este rádio')}
@@ -57,6 +66,8 @@ SubscriptionEditor.propTypes = {
   doc: PropTypes.object,
   t: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
+  center: PropTypes.arrayOf(PropTypes.number),
+  zoom: PropTypes.number,
   focusInput: PropTypes.bool
 };
 

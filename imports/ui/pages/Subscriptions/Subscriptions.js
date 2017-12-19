@@ -28,8 +28,9 @@ class Subscriptions extends Component {
     this.onSndBtn = this.onSndBtn.bind(this);
   }
 
-  onFstBtn(value) {
-    // ${match.url}/new
+  onFstBtn() {
+    console.log(this.state);
+    this.props.history.push(`${this.props.match.url}/new`, { center: this.state.center, zoom: this.state.zoom });
   }
 
   onSndBtn() {

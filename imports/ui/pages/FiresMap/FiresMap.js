@@ -2,14 +2,14 @@
 /* eslint-disable import/no-absolute-path */
 /* eslint-disable react/jsx-indent-props */
 /* eslint-disable react/jsx-indent */
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Checkbox } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Trans, translate } from 'react-i18next';
-import { Map, TileLayer, LayersControl } from 'react-leaflet';
+import { Map } from 'react-leaflet';
 import _ from 'lodash';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.css';
@@ -19,15 +19,13 @@ import geolocation from '/imports/startup/client/geolocation';
 import CenterInMyPosition from '/imports/ui/components/CenterInMyPosition/CenterInMyPosition';
 import FireList from '/imports/ui/components/Maps/FireList';
 import subsUnion from '/imports/ui/components/Maps/SubsUnion/SubsUnion';
+import DefMapLayers from '/imports/ui/components/Maps/DefMapLayers';
 import Loading from '/imports/ui/components/Loading/Loading';
 import ActiveFiresCollection from '/imports/api/ActiveFires/ActiveFires';
 import FireAlertsCollection from '/imports/api/FireAlerts/FireAlerts';
 import UserSubsToFiresCollection from '/imports/api/Subscriptions/Subscriptions';
-import Gkeys from '/imports/startup/client/Gkeys';
-import { GoogleLayer } from 'react-leaflet-google/lib/';
-import './FiresMap.scss';
 
-const { BaseLayer } = LayersControl;
+import './FiresMap.scss';
 
 const MAXZOOM = 6;
 const MAXZOOMREACTIVE = 6;
@@ -42,8 +40,7 @@ class FiresMap extends React.Component {
     this.state = {
       viewport: this.props.viewport,
       useMarkers: false,
-      showSubsUnion: true,
-      gkey: null
+      showSubsUnion: true
     };
     const self = this;
     // viewportchange
@@ -55,10 +52,6 @@ class FiresMap extends React.Component {
   }
 
   componentDidMount() {
-    const self = this;
-    Gkeys.load((err, key) => {
-      self.setState({ gkey: key });
-    });
     mapSize.set([this.divElement.clientHeight, this.divElement.clientWidth]);
     if (this.fireMap) {
       this.addScale();
@@ -111,8 +104,8 @@ class FiresMap extends React.Component {
   }
 
   handleLeafletLoad(map) {
-    console.log('Map loading');
-    console.log(map);
+    // console.log('Map loading');
+    // console.log(map);
     if (map) {
       this.state.union = subsUnion(this.state.union, {
         map,
@@ -125,14 +118,7 @@ class FiresMap extends React.Component {
 
   render() {
     console.log(`Rendering ${this.props.loading ? 'loading' : 'LOADED'} map ${this.props.activefires.length} of ${this.props.activefirestotal} total. Subs users ready ${this.props.subsready}, reactive ${this.state.viewport.zoom >= MAXZOOMREACTIVE}`);
-    const { t } = this.props;
-    const osmlayer = (
-      <BaseLayer checked name={t('Mapa gris de OpenStreetMap')}>
-        <TileLayer
-            attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-            url="http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png"
-        />
-      </BaseLayer>);
+
     return (
       /* Large number of markers:
          https://stackoverflow.com/questions/43015854/large-dataset-of-markers-or-dots-in-leaflet/43019740#43019740 */
@@ -187,7 +173,7 @@ class FiresMap extends React.Component {
                viewport={this.state.viewport}
                onViewportChanged={this.onViewportChanged}
                sleep={window.location.pathname === '/'}
-               sleepTime={750}
+               sleepTime={10750}
                wakeTime={750}
                sleepNote
                hoverToWake
@@ -196,34 +182,21 @@ class FiresMap extends React.Component {
            >
              {/* http://wiki.openstreetmap.org/wiki/Tile_servers */}
              {!this.props.loading &&
-             <FireList
-                 fires={this.props.activefires}
-                 scale={this.state.viewport.zoom >= MAXZOOM}
-                 useMarkers={this.state.useMarkers}
-                 nasa
-             />}
-             {!this.props.loading &&
-             <FireList
-                 fires={this.props.firealerts}
-                 scale={false}
-                 useMarkers={this.state.useMarkers}
-                 nasa={false}
-             />}
-             <LayersControl position="topright">
-               {osmlayer}
-               { this.state.gkey &&
-               <BaseLayer name={t('Mapa de carreteras de Google')}>
-                 <GoogleLayer googlekey={this.state.gkey} maptype="ROADMAP" />
-               </BaseLayer>}
-               { this.state.gkey &&
-               <BaseLayer name={t('Mapa de terreno de Google')}>
-                 <GoogleLayer googlekey={this.state.gkey} maptype="TERRAIN" />
-               </BaseLayer>}
-               { this.state.gkey &&
-               <BaseLayer name={t('Mapa de satélite de Google')}>
-                 <GoogleLayer googlekey={this.state.gkey} maptype="SATELLITE" />
-               </BaseLayer>}
-             </LayersControl>
+              <Fragment>
+                <FireList
+                    fires={this.props.activefires}
+                    scale={this.state.viewport.zoom >= MAXZOOM}
+                    useMarkers={this.state.useMarkers}
+                    nasa
+                />
+                <FireList
+                    fires={this.props.firealerts}
+                    scale={false}
+                    useMarkers={this.state.useMarkers}
+                    nasa={false}
+                />
+              </Fragment> }
+             <DefMapLayers />
            </Map>
          </Row>
          <Row>
@@ -273,7 +246,7 @@ export default translate([], { wait: true })(withTracker(() => {
   // Warning with the performance of this log:
   // console.log(`Active fires ${ActiveFiresCollection.find().count()} of ${Counter.get('countActiveFires')}`);
   // console.log(`Active neighborhood fires ${FireAlertsCollection.find().fetch().length} and users subscribed ${UserSubsToFiresCollection.find().fetch().length}`);
-  console.log(UserSubsToFiresCollection.find().fetch());
+  // console.log(UserSubsToFiresCollection.find().fetch());
   return {
     loading: !subscription.ready(),
     userSubs: UserSubsToFiresCollection.find().fetch(),

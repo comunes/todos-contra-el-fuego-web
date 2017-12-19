@@ -28,7 +28,7 @@ export function localize() {
     clientIP = this.connection.clientAddress;
   } else {
     console.warn(`We cannot get this meteor connection IP for this connection (${this.connection})`);
-    clientIP = '127.0.0.1';
+    clientIP = '80.58.61.250';
   }
   if (isPrivateIP(clientIP)) {
     clientIP = '80.58.61.250'; // Some Spain IP address

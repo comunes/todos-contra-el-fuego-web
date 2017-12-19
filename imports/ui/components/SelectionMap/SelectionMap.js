@@ -6,13 +6,14 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Map, TileLayer, Marker, CircleMarker, Circle } from 'react-leaflet';
+import { Map, Marker, CircleMarker, Circle } from 'react-leaflet';
 import Leaflet from 'leaflet';
 import { translate } from 'react-i18next';
 import { withTracker } from 'meteor/react-meteor-data';
 import update from 'immutability-helper';
 import geolocation from '/imports/startup/client/geolocation';
 import { positionIcon } from '/imports/ui/components/Maps/Icons';
+import DefMapLayers from '/imports/ui/components/Maps/DefMapLayers';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.css';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.js';
 import 'leaflet-sleep/Leaflet.Sleep.js';
@@ -27,9 +28,10 @@ class SelectionMap extends Component {
     this.state = {
       center: props.center,
       marker: props.center,
-      zoom: props.zoom,
+      zoom: props.zoom || 11,
       distance: props.distance,
-      draggable: true
+      draggable: true,
+      subsFit: true
     };
 
     this.getMap = this.getMap.bind(this);
@@ -55,7 +57,7 @@ class SelectionMap extends Component {
       marker: nextMarker,
       distance: nextProps.distance || this.state.distance
     });
-    // this.fit();
+    this.fit();
   }
 
   componentDidUpdate() {
@@ -77,6 +79,9 @@ class SelectionMap extends Component {
     if (this.props.onViewportChanged) {
       this.props.onViewportChanged(viewport);
     }
+    this.state.subsFit = false;
+    this.state.center = viewport.center;
+    this.state.zoom = viewport.zoom;
   }
 
   getMap() {
@@ -100,8 +105,8 @@ class SelectionMap extends Component {
 
   fit() {
     // console.log("fit!");
-    if (this.subsUnionElement) {
-      // has autofit
+    if (this.props.currentSubs.length > 0 && this.state.subsFit) {
+      // has autofit, do nothing
     } else if (this.selectionMap && this.distanceCircle) {
       this.getMap().fitBounds(this.distanceCircle.leafletElement.getBounds(), [70, 70]);
     }
@@ -125,13 +130,17 @@ class SelectionMap extends Component {
   }
 
   handleLeafletLoad(map) {
-    if (this.props.readOnly && this.props.currentSubs && map && !this.props.loadingSubs) {
-      this.state.union = subsUnion(this.state.union, {
+    if (this.props.currentSubs && map && !this.props.loadingSubs) {
+      const subsOpts = {
         map,
         show: true,
-        fit: true,
+        fit: this.state.subsFit,
         subs: this.props.currentSubs
-      });
+      };
+      if (!this.props.readOnly) {
+        subsOpts.color = '#F2F2F2';
+      }
+      this.state.union = subsUnion(this.state.union, subsOpts);
     }
   }
 
@@ -157,10 +166,7 @@ class SelectionMap extends Component {
                 wakeMessage={this.props.t('Pulsa para activar')}
                 sleepOpacity={0.6}
             >
-              <TileLayer
-                  attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              />
+          <DefMapLayers gray={false} />
               {!this.props.readOnly &&
               <Marker
                   draggable={this.state.draggable}
