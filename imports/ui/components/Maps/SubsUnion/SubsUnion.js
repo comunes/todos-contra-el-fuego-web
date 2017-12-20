@@ -38,7 +38,7 @@ const subsUnion = (union, options) => {
   const fillColor = options.fillColor || 'green';
   const opacity = options.options || 0.1;
 
-  if (options.subs.length > 0) {
+  if (options.subs) {
     const lmap = options.map.leafletElement;
     // http://leafletjs.com/reference-1.2.0.html#layergroup
     // FeatureGroup has getBounds
@@ -49,7 +49,7 @@ const subsUnion = (union, options) => {
     }
     union = null;
 
-    if (options.show) {
+    if (options.subs.length > 0 && options.show) {
       // http://leafletjs.com/reference-1.2.0.html#path
       const copts = {
         parts: 144

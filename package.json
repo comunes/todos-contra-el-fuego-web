@@ -47,6 +47,7 @@
     "react": "^16.0.0",
     "react-addons-pure-render-mixin": "^15.6.2",
     "react-bootstrap": "^0.31.5",
+    "react-confirm": "^0.1.16",
     "react-dom": "^16.0.0",
     "react-fullpage": "^0.1.18",
     "react-i18next": "^7.1.1",

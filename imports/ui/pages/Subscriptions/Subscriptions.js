@@ -4,14 +4,14 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Table, Alert, Button } from 'react-bootstrap';
-import { timeago } from '@cleverbeagle/dates';
+import { Alert } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Trans, translate } from 'react-i18next';
 import { Bert } from 'meteor/themeteorchef:bert';
 import UserSubsToFiresCollection from '/imports/api/Subscriptions/Subscriptions';
 import SelectionMap, { action } from '/imports/ui/components/SelectionMap/SelectionMap';
+import confirm from '/imports/ui/components/Prompt/Confirm';
 import Loading from '../../components/Loading/Loading';
 import './Subscriptions.scss';
 
@@ -33,7 +33,6 @@ class Subscriptions extends Component {
   }
 
   onSndBtn() {
-    console.log('Snd btn pressed');
     this.setState({ action: action.edit });
   }
 
@@ -43,24 +42,29 @@ class Subscriptions extends Component {
   }
 
   handleRemove(subscriptionId) {
-    if (confirm('Are you sure? This is permanent!')) {
-      Meteor.call('subscriptions.remove', subscriptionId, (error) => {
-        if (error) {
-          Bert.alert(error.reason, 'danger');
-        } else {
-          Bert.alert('Subscription deleted!', 'success');
-        }
-      });
-    }
+    const { t } = this.props;
+    confirm(t('Dejarás de recibir notificaciones de fuegos en esa área ¿Estás seguro/a? '), { okBtn: t('Sí'), cancelBtn: t('No') }).then(
+      () => {
+        // `proceed` callback
+        Meteor.call('subscriptions.remove', subscriptionId, (error) => {
+          if (error) {
+            Bert.alert(error.reason, 'danger');
+          } else {
+            Bert.alert('Subscription deleted!', 'success');
+          }
+        });
+      },
+      () => {
+        // `cancel` callback
+      }
+    );
   }
 
   render() {
     const {
       loading,
       t,
-      subscriptions,
-      match,
-      history
+      subscriptions
     } = this.props;
     return (!loading ? (
       <div className="Subscriptions">
@@ -68,22 +72,23 @@ class Subscriptions extends Component {
           <h4 className="pull-left"><Trans>Suscripciones a fuegos en zonas de mi interés</Trans></h4>
         </div>
         <br />
+        { subscriptions.length === 0 &&
+          <Alert bsStyle="warning"><Trans>No estás suscrito a fuegos en ninguna zona</Trans></Alert>
+        }
+        <br />
         <SelectionMap
             center={[null, null]}
             zoom={11}
             action={this.state.action}
             fstBtn={t('Añadir zona')}
             onFstBtn={state => this.onFstBtn(state)}
-            sndBtn={this.props.subscriptions.length > 1 ? t('Editar') : null}
+            sndBtn={this.props.subscriptions.length >= 1 ? t('Editar') : null}
             onSndBtn={() => this.onSndBtn()}
             onViewportChanged={viewport => this.onViewportChanged(viewport)}
             loadingSubs={this.props.loading}
             currentSubs={this.props.subscriptions}
             onRemove={(id) => { this.handleRemove(id); }}
         />
-        { subscriptions.length === 0 &&
-          <Alert bsStyle="warning"><Trans>No estás suscrito a fuegos en ninguna zona</Trans></Alert>
-        }
       </div>
     ) : <Loading />);
   }

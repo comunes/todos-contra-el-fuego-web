@@ -56,7 +56,7 @@ const activefires = (zoom, lat, lng, height, width) => {
   const distUnt = resolution * Math.max(height, width);
   const distance = Math.trunc(distUnt);
   // console.log(`so ${height}x${width} gives ${Math.trunc(resolution*height/1000)} x ${Math.trunc(resolution*width/1000)} km, so looking in ${distance}`);
-  console.log(`So ${height}x${width} gives ${Math.trunc(resolution)} of resolution, so looking in ${Math.trunc(distance / 1000)}km`);
+  // console.log(`So ${height}x${width} gives ${Math.trunc(resolution)} of resolution, so looking in ${Math.trunc(distance / 1000)}km`);
 
   const fires = ActiveFires.find({
     ourid: {
@@ -76,7 +76,7 @@ const activefires = (zoom, lat, lng, height, width) => {
       scan: 1
     }
   });
-  console.log(`Fires total: ${fires.count()}`);
+  // console.log(`Fires total: ${fires.count()}`);
   return fires;
 };
 
@@ -85,7 +85,7 @@ Meteor.publish('allActiveFires', function allActive() {
   // latitude -90 and 90 and the longitude between -180 and 180
 
   const { latitude, longitude } = localize().location;
-  console.log(`${latitude}, ${longitude}`);
+  // console.log(`${latitude}, ${longitude}`);
   check(latitude, NumberBetween(-90, 90));
   check(longitude, NumberBetween(-180, 180));
   // https://docs.meteor.com/api/collections.html#Mongo-Collection-find
@@ -117,10 +117,10 @@ Meteor.publish('activefiresmyloc', function activeInMyLoc(zoom, lat, lng, height
   check(lng, NullOr(Number));
   check(height, NullOr(Number));
   check(width, NullOr(Number));
-  console.log(`Check active fires in ${lat},${lng} with zoom ${zoom} pixels in ${height}x${width} map`);
+  // console.log(`Check active fires in ${lat},${lng} with zoom ${zoom} pixels in ${height}x${width} map`);
   if (lat === null || lng === null) {
     const location = localize();
-    console.log(`${location.latitude}, ${location.longitude}`);
+    // console.log(`${location.latitude}, ${location.longitude}`);
     return activefires(zoom, location.latitude, location.longitude, height, width);
   }
   return activefires(zoom, lat, lng, height, width);
