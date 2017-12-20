@@ -12,7 +12,7 @@ import { translate } from 'react-i18next';
 import { withTracker } from 'meteor/react-meteor-data';
 import update from 'immutability-helper';
 import geolocation from '/imports/startup/client/geolocation';
-import { positionIcon } from '/imports/ui/components/Maps/Icons';
+import { positionIcon, removeIcon } from '/imports/ui/components/Maps/Icons';
 import DefMapLayers from '/imports/ui/components/Maps/DefMapLayers';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.css';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.js';
@@ -151,6 +151,7 @@ class SelectionMap extends Component {
   }
 
   render() {
+    const { t, onRemove } = this.props;
     return (
       <div>
         { this.isValidState() &&
@@ -169,10 +170,22 @@ class SelectionMap extends Component {
                 onViewportChanged={this.onViewportChanged}
                 sleepNote
                 hoverToWake
-                wakeMessage={this.props.t('Pulsa para activar')}
+                wakeMessage={t('Pulsa para activar')}
                 sleepOpacity={0.6}
             >
               <DefMapLayers gray={false} />
+              {this.props.action === action.edit &&
+               this.props.currentSubs.map(subs => (
+                   <Marker
+                       key={subs._id}
+                       draggable={false}
+                       position={[subs.location.lat, subs.location.lon]}
+                       icon={removeIcon}
+                       title={t('Pulsa para borrar')}
+                       onClick={() => { onRemove(subs._id); }}
+                   />
+               ))
+              }
               {this.props.action === action.add &&
                <Fragment>
                  <Marker
@@ -180,7 +193,7 @@ class SelectionMap extends Component {
                      onDragend={this.updatePosition}
                      position={this.state.marker}
                      icon={positionIcon}
-                     title={this.props.t('Arrastrar para seleccionar otro punto')}
+                     title={t('Arrastrar para seleccionar otro punto')}
                      ref={(ref) => { this.marker = ref; }}
                  />
                  <CircleMarker
@@ -242,6 +255,7 @@ SelectionMap.propTypes = {
   onFstBtn: PropTypes.func.isRequired,
   sndBtn: PropTypes.string,
   onSndBtn: PropTypes.func,
+  onRemove: PropTypes.func,
   action: PropTypes.number.isRequired,
   loadingSubs: PropTypes.bool,
   currentSubs: PropTypes.arrayOf(PropTypes.shape({

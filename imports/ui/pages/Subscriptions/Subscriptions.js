@@ -4,7 +4,6 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { Table, Alert, Button } from 'react-bootstrap';
 import { timeago } from '@cleverbeagle/dates';
 import { Meteor } from 'meteor/meteor';
@@ -34,6 +33,7 @@ class Subscriptions extends Component {
   }
 
   onSndBtn() {
+    console.log('Snd btn pressed');
     this.setState({ action: action.edit });
   }
 
@@ -79,51 +79,10 @@ class Subscriptions extends Component {
             onViewportChanged={viewport => this.onViewportChanged(viewport)}
             loadingSubs={this.props.loading}
             currentSubs={this.props.subscriptions}
+            onRemove={(id) => { this.handleRemove(id); }}
         />
-        {subscriptions.length ?
-         <Table responsive>
-           <thead>
-             <tr>
-               <th><Trans>Lugar</Trans></th>
-               <th><Trans>Actualizado</Trans></th>
-               <th><Trans>Creado</Trans>
-               </th>
-               <th />
-               <th />
-             </tr>
-           </thead>
-           <tbody>
-             {subscriptions.map(({
-                _id,
-                location,
-                createdAt,
-                updatedAt
-              }) => (
-                <tr key={_id}>
-                  <td>{location.lat},{location.lon}</td>
-                  <td>{timeago(updatedAt)}</td>
-                  <td>{timeago(createdAt)}</td>
-                  <td>
-                    <Button
-                        bsStyle="primary"
-                        onClick={() => history.push(`${match.url}/${_id}`)}
-                        block
-                    >View
-                    </Button>
-                  </td>
-                  <td>
-                    <Button
-                        bsStyle="danger"
-                        onClick={() => this.handleRemove(_id)}
-                        block
-                    >Delete
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-           </tbody>
-         </Table> :
-         <Alert bsStyle="warning"><Trans>No estás suscrito a fuegos en ninguna zona</Trans></Alert>
+        { subscriptions.length === 0 &&
+          <Alert bsStyle="warning"><Trans>No estás suscrito a fuegos en ninguna zona</Trans></Alert>
         }
       </div>
     ) : <Loading />);
