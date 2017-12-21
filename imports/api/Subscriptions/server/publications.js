@@ -35,13 +35,13 @@ Meteor.publishTransformed('userSubsToFires', function transform() {
     }
     // console.log(`with noise: [${doc.lat}, ${doc.lon}]`);
     delete doc.chatId;
-    delete doc.geo;
+    // delete doc.geo;
     return doc;
   });
 });
 
 Meteor.publish('mysubscriptions', function subscriptions() {
-  return Subscriptions.find({ owner: this.userId });
+  return Subscriptions.find({ owner: this.userId, type: 'web' });
 });
 
 // Note: subscriptions.view is also used when editing an existing subscription.
@@ -49,5 +49,5 @@ Meteor.publish('subscriptions.view', function subscriptionsView(subscriptionId) 
   check(subscriptionId, String);
   const id = new Mongo.ObjectID(subscriptionId);
   check(id, Meteor.Collection.ObjectID);
-  return Subscriptions.find({ _id: id, owner: this.userId });
+  return Subscriptions.find({ _id: id, owner: this.userId, type: 'web' });
 });

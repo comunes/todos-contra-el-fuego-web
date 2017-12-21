@@ -29,7 +29,11 @@ class Subscriptions extends Component {
 
   onFstBtn() {
     // console.log(this.state);
-    this.props.history.push(`${this.props.match.url}/new`, { center: this.state.center, zoom: this.state.zoom });
+    if (this.state.action === action.view) {
+      this.props.history.push(`${this.props.match.url}/new`, { center: this.state.center, zoom: this.state.zoom });
+    } else if (this.state.action === action.edit) {
+      this.setState({ action: action.view });
+    }
   }
 
   onSndBtn() {
@@ -42,15 +46,19 @@ class Subscriptions extends Component {
   }
 
   handleRemove(subscriptionId) {
-    const { t } = this.props;
+    const { t, subscriptions } = this.props;
     confirm(t('Dejarás de recibir notificaciones de fuegos en esa área ¿Estás seguro/a? '), { okBtn: t('Sí'), cancelBtn: t('No') }).then(
       () => {
         // `proceed` callback
+        const num = subscriptions.length;
         Meteor.call('subscriptions.remove', subscriptionId, (error) => {
           if (error) {
             Bert.alert(error.reason, 'danger');
           } else {
             Bert.alert('Subscription deleted!', 'success');
+            if (num === 1) { // it was 1, now deleted
+              this.setState({ action: action.view });
+            }
           }
         });
       },
@@ -66,23 +74,25 @@ class Subscriptions extends Component {
       t,
       subscriptions
     } = this.props;
+    const firstBtnTitle = ['Añadir zona', '', 'Terminar']; // view, add, edit
     return (!loading ? (
       <div className="Subscriptions">
         <div className="page-header clearfix">
-          <h4 className="pull-left"><Trans>Suscripciones a fuegos en zonas de mi interés</Trans></h4>
+          <h4 className="pull-left"><Trans>Suscripciones a alertas de fuegos en zonas de mi interés</Trans></h4>
         </div>
         <br />
-        { subscriptions.length === 0 &&
-          <Alert bsStyle="warning"><Trans>No estás suscrito a fuegos en ninguna zona</Trans></Alert>
+      { subscriptions.length === 0 ?
+        <Alert bsStyle="warning"><Trans>No estás suscrito a fuegos en ninguna zona</Trans></Alert> :
+        <Alert bsStyle="success"><Trans>En verde, áreas de las que recibirás alertas de fuegos</Trans></Alert>
         }
         <br />
         <SelectionMap
             center={[null, null]}
             zoom={11}
             action={this.state.action}
-            fstBtn={t('Añadir zona')}
+            fstBtn={t(firstBtnTitle[this.state.action])}
             onFstBtn={state => this.onFstBtn(state)}
-            sndBtn={this.props.subscriptions.length >= 1 ? t('Editar') : null}
+            sndBtn={this.state.action === action.view && this.props.subscriptions.length >= 1 ? t('Editar') : null}
             onSndBtn={() => this.onSndBtn()}
             onViewportChanged={viewport => this.onViewportChanged(viewport)}
             loadingSubs={this.props.loading}

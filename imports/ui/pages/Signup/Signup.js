@@ -17,8 +17,10 @@ import { T9n } from 'meteor-accounts-t9n';
 class Signup extends React.Component {
   constructor(props) {
     super(props);
-    this.t = this.props.t;
+    this.t = props.t;
     this.handleSubmit = this.handleSubmit.bind(this);
+    // console.log(props.location.state);
+    this.state = props.location.state;
   }
 
   componentDidMount() {
@@ -27,37 +29,37 @@ class Signup extends React.Component {
     validate(component.form, {
       rules: {
         firstName: {
-          required: true,
+          required: true
         },
         lastName: {
-          required: true,
+          required: true
         },
         emailAddress: {
           required: true,
-          email: true,
+          email: true
         },
         password: {
           required: true,
-          minlength: 6,
-        },
+          minlength: 6
+        }
       },
       messages: {
         firstName: {
-          required: this.t("¿Cuál es tu nombre?"),
+          required: this.t('¿Cuál es tu nombre?')
         },
         lastName: {
-          required: this.t("¿Cuál es tu apellido?"),
+          required: this.t('¿Cuál es tu apellido?')
         },
         emailAddress: {
-          required: this.t("Necesitamos una contraseña aquí."),
-          email: this.t("¿Es correcto este correo?"),
+          required: this.t('Necesitamos una contraseña aquí.'),
+          email: this.t('¿Es correcto este correo?')
         },
         password: {
-          required: this.t("Necesitamos una contraseña aquí."),
-          minlength: this.t("Usa al menos seis caracteres."),
-        },
+          required: this.t('Necesitamos una contraseña aquí.'),
+          minlength: this.t('Usa al menos seis caracteres.')
+        }
       },
-      submitHandler() { component.handleSubmit(); },
+      submitHandler() { component.handleSubmit(); }
     });
   }
 
@@ -70,16 +72,16 @@ class Signup extends React.Component {
       profile: {
         name: {
           first: this.firstName.value,
-          last: this.lastName.value,
-        },
-      },
+          last: this.lastName.value
+        }
+      }
     }, (error) => {
       if (error) {
         Bert.alert(T9n.get(`error.accounts.${error.reason}`), 'danger');
       } else {
         Meteor.call('users.sendVerificationEmail');
         Bert.alert('Welcome!', 'success');
-        history.push('/documents');
+        history.push('/subscriptions');
       }
     });
   }
@@ -88,7 +90,7 @@ class Signup extends React.Component {
     return (<div className="Signup">
       <Row className="align-items-center justify-content-center">
         <Col xs={12} sm={6} md={5} lg={4}>
-          <h4 className="page-header">{this.t("Registrarse")}</h4>
+          <h4 className="page-header">{this.t('Registrarse')}</h4>
           <Row>
             {/* <Col xs={12}>
             <button
@@ -102,7 +104,7 @@ class Signup extends React.Component {
                 services={['telegram', 'google']}
                 emailMessage={{
                   offset: 97,
-                  text: this.t('o regístrate con un correo'),
+                  text: this.t('o regístrate con un correo')
                 }}
               />
             </Col>
@@ -111,7 +113,7 @@ class Signup extends React.Component {
             <Row>
               <Col xs={6}>
                 <FormGroup>
-                  <ControlLabel>{this.t("Nombre")}</ControlLabel>
+                  <ControlLabel>{this.t('Nombre')}</ControlLabel>
                   <input
                     type="text"
                     name="firstName"
@@ -122,7 +124,7 @@ class Signup extends React.Component {
               </Col>
               <Col xs={6}>
                 <FormGroup>
-                  <ControlLabel>{this.t("Apellidos")}</ControlLabel>
+                  <ControlLabel>{this.t('Apellidos')}</ControlLabel>
                   <input
                     type="text"
                     name="lastName"
@@ -133,7 +135,7 @@ class Signup extends React.Component {
               </Col>
             </Row>
             <FormGroup>
-              <ControlLabel>{this.t("Correo electrónico")}</ControlLabel>
+              <ControlLabel>{this.t('Correo electrónico')}</ControlLabel>
               <input
                 type="email"
                 name="emailAddress"
@@ -142,18 +144,18 @@ class Signup extends React.Component {
               />
             </FormGroup>
             <FormGroup>
-              <ControlLabel>{this.t("Contraseña")}</ControlLabel>
+              <ControlLabel>{this.t('Contraseña')}</ControlLabel>
               <input
                 type="password"
                 name="password"
                 ref={password => (this.password = password)}
                 className="form-control"
               />
-              <InputHint>{this.t("Usa al menos seis caracteres.")}</InputHint>
+              <InputHint>{this.t('Usa al menos seis caracteres.')}</InputHint>
             </FormGroup>
-            <Button type="submit" bsStyle="success">{this.t("Registrarse")}</Button>
+            <Button type="submit" bsStyle="success">{this.t('Registrarse')}</Button>
             <AccountPageFooter>
-              <p>{this.t("¿Ya tienes un cuenta?")} <Link to="/login">{this.t("Iniciar sesión")}</Link>.</p>
+              <p>{this.t('¿Ya tienes un cuenta?')} <Link to={{ pathname: '/login', state: this.state }} >{this.t('Iniciar sesión')}</Link>.</p>
             </AccountPageFooter>
           </form>
         </Col>

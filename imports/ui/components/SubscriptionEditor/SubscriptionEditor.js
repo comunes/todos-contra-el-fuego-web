@@ -30,16 +30,22 @@ class SubscriptionEditor extends React.Component {
 
     if (existingSubscription) doc._id = existingSubscription;
 
-    Meteor.call(methodToCall, doc, (error, subscriptionId) => {
-      if (error) {
-        Bert.alert(error.reason, 'danger');
-      } else {
-        const confirmation = existingSubscription ? t('Zona actualizada') : t('Zona añadida');
-        Bert.alert(confirmation, 'success');
-        // history.push(`/subscriptions/${subscriptionId}`);
-        history.push('/subscriptions');
-      }
-    });
+    const authenticated = !!Meteor.userId();
+
+    if (authenticated) {
+      Meteor.call(methodToCall, doc, (error, subscriptionId) => {
+        if (error) {
+          Bert.alert(error.reason, 'danger');
+        } else {
+          const confirmation = existingSubscription ? t('Zona actualizada') : t('Zona añadida');
+          Bert.alert(confirmation, 'success');
+          // history.push(`/subscriptions/${subscriptionId}`);
+          history.push('/subscriptions');
+        }
+      });
+    } else {
+      this.props.history.push('/signup', doc);
+    }
   }
 
   render() {

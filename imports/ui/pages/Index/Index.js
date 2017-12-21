@@ -219,7 +219,10 @@ class Index extends Component {
           <Section className="">
             <div className="container">
               <h4 className="page-header"><Trans parent="span">Suscríbete a alertas de fuegos</Trans></h4>
-              <SubscriptionEditor history={this.props.history} focusInput={false} />
+              <SubscriptionEditor
+                  focusInput={false}
+                  history={this.props.history}
+              />
             </div>
             <div className="overlay" />
           </Section>

@@ -2,7 +2,6 @@
 /* eslint-disable react/jsx-indent-props */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Row, Col } from 'react-bootstrap';
 import { translate } from 'react-i18next';
@@ -10,7 +9,6 @@ import DistanceSlider from '/imports/ui/components/DistanceSlider/DistanceSlider
 import SelectionMap, { action } from '/imports/ui/components/SelectionMap/SelectionMap';
 import Gkeys from '/imports/startup/client/Gkeys';
 import CenterInMyPosition from '/imports/ui/components/CenterInMyPosition/CenterInMyPosition.js';
-import UserSubsToFiresCollection from '/imports/api/Subscriptions/Subscriptions';
 import SubsAutocomplete from './SubsAutocomplete';
 
 class FireSubscription extends React.Component {
@@ -96,8 +94,6 @@ class FireSubscription extends React.Component {
               onFstBtn={state => this.onSubs(state)}
               onSelection={state => this.onSelection(state)}
               action={action.add}
-              loadingSubs={this.props.loading}
-              currentSubs={this.props.subscriptions}
           />
         </Row>
       </div>
@@ -106,9 +102,6 @@ class FireSubscription extends React.Component {
 }
 
 FireSubscription.propTypes = {
-  t: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
-  subscriptions: PropTypes.arrayOf(PropTypes.object).isRequired,
   center: PropTypes.arrayOf(PropTypes.number),
   zoom: PropTypes.number,
   distance: PropTypes.number,
@@ -117,11 +110,4 @@ FireSubscription.propTypes = {
   onSubs: PropTypes.func.isRequired
 };
 
-export default translate([], { wait: true })(withTracker(() => {
-  const subscription = Meteor.subscribe('mysubscriptions');
-  // console.log(UserSubsToFiresCollection.find().fetch());
-  return {
-    loading: !subscription.ready(),
-    subscriptions: UserSubsToFiresCollection.find({ owner: Meteor.userId() }).fetch()
-  };
-})(FireSubscription));
+export default translate([], { wait: true })(FireSubscription);

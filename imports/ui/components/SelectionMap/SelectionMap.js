@@ -6,7 +6,8 @@
 
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Map, Marker, CircleMarker, Circle } from 'react-leaflet';
+import { Meteor } from 'meteor/meteor';
+import { Map, Marker, CircleMarker, Circle, Tooltip } from 'react-leaflet';
 import Leaflet from 'leaflet';
 import { translate } from 'react-i18next';
 import { withTracker } from 'meteor/react-meteor-data';
@@ -20,6 +21,7 @@ import 'leaflet-sleep/Leaflet.Sleep.js';
 import Control from 'react-leaflet-control';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import subsUnion from '/imports/ui/components/Maps/SubsUnion/SubsUnion';
+import UserSubsToFiresCollection from '/imports/api/Subscriptions/Subscriptions';
 import './SelectionMap.scss';
 
 export const action = {
@@ -114,7 +116,12 @@ class SelectionMap extends Component {
     if (this.props.currentSubs.length > 0 && this.state.subsFit) {
       // has autofit, do nothing
     } else if (this.selectionMap && this.distanceCircle) {
-      this.getMap().fitBounds(this.distanceCircle.leafletElement.getBounds(), [70, 70]);
+      if (!this.getMap().getBounds().contains(this.distanceCircle.leafletElement.getBounds())) {
+        // console.log('New area circle not visible');
+        this.getMap().fitBounds(this.distanceCircle.leafletElement.getBounds()); // padding , [70, 70]);
+      } else {
+        // console.log('New area circle visible');
+      }
     }
   }
 
@@ -132,7 +139,7 @@ class SelectionMap extends Component {
   }
 
   isValidState() {
-    return this.state.center && this.state.center[0];
+    return !this.props.loadingSubs && this.state.center && this.state.center[0];
   }
 
   handleLeafletLoad(map) {
@@ -175,7 +182,7 @@ class SelectionMap extends Component {
             >
               <DefMapLayers gray={false} />
               {this.props.action === action.edit &&
-               this.props.currentSubs.map(subs => (
+               this.props.currentSubs.map((subs, index) => (
                    <Marker
                        key={subs._id}
                        draggable={false}
@@ -183,7 +190,18 @@ class SelectionMap extends Component {
                        icon={removeIcon}
                        title={t('Pulsa para borrar')}
                        onClick={() => { onRemove(subs._id); }}
-                   />
+                   >
+                     {index === 0 &&
+                      <Tooltip
+                       permanent
+                       direction="right"
+                       /* Use .openTooltip(); in the future */
+                       offset={[10, -10]}
+                      >
+                       <span>{t('Pulsa aquí para borrar la zona')}</span>
+                      </Tooltip>
+                     }
+                   </Marker>
                ))
               }
               {this.props.action === action.add &&
@@ -257,14 +275,20 @@ SelectionMap.propTypes = {
   onSndBtn: PropTypes.func,
   onRemove: PropTypes.func,
   action: PropTypes.number.isRequired,
-  loadingSubs: PropTypes.bool,
+  loadingSubs: PropTypes.bool.isRequired,
   currentSubs: PropTypes.arrayOf(PropTypes.shape({
     location: PropTypes.shape({ latitude: PropTypes.number, longitude: PropTypes.number }).isRequired,
     distance: PropTypes.number.isRequired
   }))
 };
 
-export default translate([], { wait: true })(withTracker(props => ({
-  center: props.center[0] !== null ? props.center : geolocation.get(),
-  distance: props.distance
-}))(SelectionMap));
+export default translate([], { wait: true })(withTracker((props) => {
+  const subscription = Meteor.subscribe('mysubscriptions');
+  // console.log(props.loadingSubs);
+  return {
+    center: props.center[0] !== null ? props.center : geolocation.get(),
+    distance: props.distance,
+    loadingSubs: !subscription.ready(),
+    currentSubs: UserSubsToFiresCollection.find({ owner: Meteor.userId(), type: 'web' }).fetch()
+  };
+})(SelectionMap));

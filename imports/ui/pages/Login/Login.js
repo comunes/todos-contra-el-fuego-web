@@ -16,7 +16,7 @@ class Login extends React.Component {
     super(props);
     this.t = props.t;
     this.handleSubmit = this.handleSubmit.bind(this);
-    console.log(this.props.location.state);
+    // console.log(this.props.location.state);
   }
 
   componentDidMount() {

@@ -56,7 +56,7 @@ class DistanceSlider extends React.Component {
       <div className="dist-slider">
         <p><Trans parent="span">¿A que distancia a la redonda quieres recibir notificaciones?</Trans></p>
         <Slider
-            min={5}
+            min={1}
             max={105}
             value={this.state.value}
             trackStyle={{ backgroundColor: 'green', height: 8 }}
@@ -68,7 +68,8 @@ class DistanceSlider extends React.Component {
               height: 8
             }}
             marks={{
-              10: { label: '10км' },
+              1: { label: '1км' },
+              10: { label: '10' },
               20: { label: '20' },
               30: { label: '30' },
               40: { label: '40' },
@@ -90,7 +91,7 @@ class DistanceSlider extends React.Component {
             onAfterChange={this.onAfterChange}
             onChange={this.onSliderChange}
             defaultValue={10}
-            step={5}
+            step={1}
             handle={handle}
         />
       </div>
