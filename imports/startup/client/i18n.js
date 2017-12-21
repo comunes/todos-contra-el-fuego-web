@@ -1,5 +1,6 @@
 /* global CookieConsent Intl */
 import i18n from 'i18next';
+import { Meteor } from 'meteor/meteor';
 import backend from 'i18next-xhr-backend';
 import LngDetector from 'i18next-browser-languagedetector';
 import Cache from 'i18next-localstorage-cache';
@@ -47,6 +48,15 @@ i18nOpts.react = {
    bindStore: 'added removed',
    nsMode: 'default' */
 };
+
+const sendMissing = false;
+if (sendMissing && !Meteor.isProduction) {
+  i18nOpts.sendMissing = true;
+  i18nOpts.sendMissingTo = 'fallback';
+  i18nOpts.missingKeyHandler = function miss(lng, ns, key, defaultValue, lngs) {
+    Meteor.call('utility.saveMissingI18n', key, defaultValue);
+  };
+}
 
 i18n.use(backend)
   .use(LngDetector)

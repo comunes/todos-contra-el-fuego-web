@@ -4,7 +4,7 @@ import moment from 'moment';
 import es from 'meteor-accounts-t9n/build/es';
 import en from 'meteor-accounts-t9n/build/en';
 
-var backOpts = {
+const backOpts = {
   // path where resources get loaded from
   loadPath: '/locales/{{lng}}/{{ns}}.json',
 
@@ -15,10 +15,10 @@ var backOpts = {
   jsonIndent: 2
 };
 
-const forceDebug = false;
+const forceDebug = true;
 const shouldDebug = (forceDebug && !Meteor.isProduction);
 
-var i18nOpts = {
+const i18nOpts = {
   backend: backOpts,
   lng: 'es',
   // fallbackLng: 'es',
@@ -26,12 +26,12 @@ var i18nOpts = {
     'en-US': ['en'],
     'en-GB': ['en'],
     'pt-BR': ['pt'],
-    'default': ['es']
+    default: ['es']
   },
   interpolation: {
     escapeValue: false, // not needed for react!!
     formatSeparator: ',',
-    format: function (value, format, lng) {
+    format: function f(value, format, lng) {
       // https://www.i18next.com/formatting.html
       // console.log(`Value: ${value} with format: ${format} to lang: ${lng}`);
       if (format === 'uppercase') return value.toUpperCase();

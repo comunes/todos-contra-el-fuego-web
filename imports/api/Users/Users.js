@@ -36,7 +36,7 @@ const schemaUser = new SimpleSchema({
   emails: {
     type: Array,
     min: 1,
-    label() { return i18n.t('Lista de emails de contacto'); },
+    // label() { return i18n.t('Lista de emails de contacto'); },
     // For accounts-password, either emails or username is required,
     // but not both.
     // It is OK to make this optional here because the accounts-password
