@@ -5,18 +5,11 @@ import SimpleSchema from 'simpl-schema';
 import { defaultCreatedAt, defaultUpdateAt } from '/imports/api/Utility/Utils.js';
 
 const schemaUserProfile = new SimpleSchema({
-  /* Our users has a name of type Object while Google Service, for instance, not */
+  /* Our users has a name of type Object while Google Service, for instance, String, so blackbox in true in profile */
   /* name: { type: String, optional: true }, */
-  /* name: Object,
+  name: { type: Object, optional: true },
   'name.first': String,
-  'name.last': String, */
-  lang: { type: String, optional: true },
-  telegramChatId: { type: Number, optional: true },
-  telegramUsername: { type: String, optional: true },
-  telegramFirstName: { type: String, optional: true },
-  telegramLanguageCode: { type: String, optional: true },
-  createdAt: defaultCreatedAt,
-  updatedAt: defaultUpdateAt
+  'name.last': String
 });
 
 const schemaUser = new SimpleSchema({
@@ -59,11 +52,6 @@ const schemaUser = new SimpleSchema({
     type: Boolean,
     optional: true // if not present === notVerified
   },
-  profile: {
-    type: schemaUserProfile,
-    // i18nLabel: 'Otros datos',
-    optional: true
-  },
   // Make sure this services field is in your schema
   // if you're using any of the accounts packages
   services: {
@@ -103,7 +91,26 @@ const schemaUser = new SimpleSchema({
   slug: {
     type: String,
     optional: true
-  }
+  },
+  profile: {
+    type: schemaUserProfile,
+    optional: true,
+    blackbox: true
+  },
+  // https://guide.meteor.com/accounts.html#custom-user-data
+
+  /* Our users has a name of type Object while Google Service, for instance, not */
+  /* name: { type: String, optional: true }, */
+  /* name: Object,
+  'name.first': String,
+  'name.last': String, */
+  lang: { type: String, optional: true },
+  telegramChatId: { type: Number, optional: true },
+  telegramUsername: { type: String, optional: true },
+  telegramFirstName: { type: String, optional: true },
+  telegramLanguageCode: { type: String, optional: true },
+  createdAt: defaultCreatedAt,
+  updatedAt: defaultUpdateAt
 });
 
 Meteor.users.attachSchema(schemaUser);

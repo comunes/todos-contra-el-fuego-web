@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Bert } from 'meteor/themeteorchef:bert';
-import randomHex from 'random-hexadecimal';
+import randomHex from 'crypto-random-hex';
 import Icon from '../../components/Icon/Icon';
 import OAuthLoginButtons from '../../components/OAuthLoginButtons/OAuthLoginButtons';
 import InputHint from '../../components/InputHint/InputHint';
@@ -86,7 +86,6 @@ class Signup extends React.Component {
         Meteor.call('users.sendVerificationEmail');
         Bert.alert(t('Bienvenid@!'), 'success');
         history.push('/subscriptions');
-
       }
     });
   }
@@ -102,7 +101,7 @@ class Signup extends React.Component {
               <button
                   className="btn btn-block btn-raised btn-primary OAuthLoginButtonDis OAuthLoginButton-telegram"
                   type="button"
-                  onClick={() => { const hex = randomHex({ max: 20 }); window.open(`https://t.me/TodosContraElFuego_bot?start=${hex}`); }}
+                  onClick={() => { const hex = randomHex(20); console.log(hex); window.open(`https://t.me/TodosContraElFuego_bot?start=${hex}`); }}
               >
                 <span><Icon icon="telegram" /> {t('Iniciar sesión con Telegram')}</span>
               </button>

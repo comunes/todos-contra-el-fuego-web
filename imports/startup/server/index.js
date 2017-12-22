@@ -4,3 +4,4 @@ import './api';
 import './fixtures';
 import './email';
 import './IPGeocoder';
+import './migrations';
