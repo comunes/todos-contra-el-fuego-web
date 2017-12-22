@@ -118,10 +118,10 @@ Meteor.publish('activefiresmyloc', function activeInMyLoc(zoom, lat, lng, height
   check(height, NullOr(Number));
   check(width, NullOr(Number));
   // console.log(`Check active fires in ${lat},${lng} with zoom ${zoom} pixels in ${height}x${width} map`);
-  if (lat === null || lng === null) {
-    const location = localize();
-    // console.log(`${location.latitude}, ${location.longitude}`);
-    return activefires(zoom, location.latitude, location.longitude, height, width);
+  if (lat && lng) {
+    return activefires(zoom, lat, lng, height, width);
   }
-  return activefires(zoom, lat, lng, height, width);
+  const location = localize();
+  // console.log(`${location.latitude}, ${location.longitude}`);
+  return activefires(zoom, location.latitude, location.longitude, height, width);
 });

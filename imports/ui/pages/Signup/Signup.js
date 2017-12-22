@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-indent-props */
+
 import React from 'react';
 import { Row, FormGroup, ControlLabel, Button } from 'react-bootstrap';
 import Col from '../../components/Col/Col';
@@ -6,6 +8,8 @@ import { Link } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Bert } from 'meteor/themeteorchef:bert';
+import randomHex from 'random-hexadecimal';
+import Icon from '../../components/Icon/Icon';
 import OAuthLoginButtons from '../../components/OAuthLoginButtons/OAuthLoginButtons';
 import InputHint from '../../components/InputHint/InputHint';
 import AccountPageFooter from '../../components/AccountPageFooter/AccountPageFooter';
@@ -64,7 +68,7 @@ class Signup extends React.Component {
   }
 
   handleSubmit() {
-    const { history } = this.props;
+    const { history, t } = this.props;
 
     Accounts.createUser({
       email: this.emailAddress.value,
@@ -80,31 +84,35 @@ class Signup extends React.Component {
         Bert.alert(T9n.get(`error.accounts.${error.reason}`), 'danger');
       } else {
         Meteor.call('users.sendVerificationEmail');
-        Bert.alert('Welcome!', 'success');
+        Bert.alert(t('Bienvenid@!'), 'success');
         history.push('/subscriptions');
+
       }
     });
   }
 
   render() {
+    const { t, history } = this.props;
     return (<div className="Signup">
       <Row className="align-items-center justify-content-center">
         <Col xs={12} sm={6} md={5} lg={4}>
-          <h4 className="page-header">{this.t('Registrarse')}</h4>
+          <h4 className="page-header">{t('Registrarse')}</h4>
           <Row>
-            {/* <Col xs={12}>
-            <button
-            className={`btn btn-block btn-raised btn-primary OAuthLoginButtonDis OAuthLoginButton-telegram`}
-            type="button" onClick={() => handleLogin(service, callback)}>
-            <span><Icon icon="telegram" /> Usa nuestro bot de Telegram</span>
-            </button>
-            </Col> */}
+            <Col xs={12}>
+              <button
+                  className="btn btn-block btn-raised btn-primary OAuthLoginButtonDis OAuthLoginButton-telegram"
+                  type="button"
+                  onClick={() => { const hex = randomHex({ max: 20 }); window.open(`https://t.me/TodosContraElFuego_bot?start=${hex}`); }}
+              >
+                <span><Icon icon="telegram" /> {t('Iniciar sesión con Telegram')}</span>
+              </button>
+            </Col>
             <Col xs={12}>
               <OAuthLoginButtons
                 services={['telegram', 'google']}
                 emailMessage={{
                   offset: 97,
-                  text: this.t('o regístrate con un correo')
+                  text: t('o regístrate con un correo')
                 }}
               />
             </Col>
@@ -113,7 +121,7 @@ class Signup extends React.Component {
             <Row>
               <Col xs={6}>
                 <FormGroup>
-                  <ControlLabel>{this.t('Nombre')}</ControlLabel>
+                  <ControlLabel>{t('Nombre')}</ControlLabel>
                   <input
                     type="text"
                     name="firstName"
@@ -124,7 +132,7 @@ class Signup extends React.Component {
               </Col>
               <Col xs={6}>
                 <FormGroup>
-                  <ControlLabel>{this.t('Apellidos')}</ControlLabel>
+                  <ControlLabel>{t('Apellidos')}</ControlLabel>
                   <input
                     type="text"
                     name="lastName"
@@ -135,7 +143,7 @@ class Signup extends React.Component {
               </Col>
             </Row>
             <FormGroup>
-              <ControlLabel>{this.t('Correo electrónico')}</ControlLabel>
+              <ControlLabel>{t('Correo electrónico')}</ControlLabel>
               <input
                 type="email"
                 name="emailAddress"
@@ -144,18 +152,18 @@ class Signup extends React.Component {
               />
             </FormGroup>
             <FormGroup>
-              <ControlLabel>{this.t('Contraseña')}</ControlLabel>
+              <ControlLabel>{t('Contraseña')}</ControlLabel>
               <input
                 type="password"
                 name="password"
                 ref={password => (this.password = password)}
                 className="form-control"
               />
-              <InputHint>{this.t('Usa al menos seis caracteres.')}</InputHint>
+              <InputHint>{t('Usa al menos seis caracteres.')}</InputHint>
             </FormGroup>
-            <Button type="submit" bsStyle="success">{this.t('Registrarse')}</Button>
+            <Button type="submit" bsStyle="success">{t('Registrarse')}</Button>
             <AccountPageFooter>
-              <p>{this.t('¿Ya tienes un cuenta?')} <Link to={{ pathname: '/login', state: this.state }} >{this.t('Iniciar sesión')}</Link>.</p>
+              <p>{t('¿Ya tienes un cuenta?')} <Link to={{ pathname: '/login', state: this.state }} >{t('Iniciar sesión')}</Link>.</p>
             </AccountPageFooter>
           </form>
         </Col>
@@ -165,7 +173,8 @@ class Signup extends React.Component {
 }
 
 Signup.propTypes = {
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object
 };
 
 export default translate([], { wait: true })(Signup);

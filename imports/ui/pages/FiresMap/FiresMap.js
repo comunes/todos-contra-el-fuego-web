@@ -38,7 +38,10 @@ class FiresMap extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      viewport: this.props.viewport,
+      viewport: {
+        center: props.center,
+        zoom: props.zoom
+      },
       useMarkers: false,
       showSubsUnion: true
     };
@@ -214,7 +217,8 @@ FiresMap.propTypes = {
   activefires: PropTypes.arrayOf(PropTypes.object).isRequired,
   firealerts: PropTypes.arrayOf(PropTypes.object).isRequired,
   activefirestotal: PropTypes.number.isRequired,
-  viewport: PropTypes.object.isRequired,
+  center: PropTypes.arrayOf(PropTypes.number),
+  zoom: PropTypes.number,
   t: PropTypes.func.isRequired
 };
 
@@ -224,6 +228,7 @@ export default translate([], { wait: true })(withTracker(() => {
   Meteor.autorun(() => {
     if (geolocation.get() && init) {
       center.set(geolocation.get());
+      // console.log(`Geolocation ${geolocation.get()}`);
       init = false;
     }
     if (mapSize.get()) {
@@ -258,9 +263,7 @@ export default translate([], { wait: true })(withTracker(() => {
     firealerts: FireAlertsCollection.find().fetch().map(doc => (
       { _id: doc._id, lat: doc.location.lat, lon: doc.location.lon }
     )),
-    viewport: {
-      center: geolocation.get(),
-      zoom: zoom.get()
-    }
+    center: geolocation.get(),
+    zoom: zoom.get()
   };
 })(FiresMap));

@@ -16,7 +16,8 @@ class Login extends React.Component {
     super(props);
     this.t = props.t;
     this.handleSubmit = this.handleSubmit.bind(this);
-    // console.log(this.props.location.state);
+    console.log(this.props.location.state);
+    this.state = props.location.state;
   }
 
   componentDidMount() {
@@ -110,6 +111,7 @@ class Login extends React.Component {
 Login.propTypes = {
   history: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
+  location: PropTypes.object
 };
 
 export default translate([], { wait: true })(Login);

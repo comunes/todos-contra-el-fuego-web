@@ -11,7 +11,15 @@ class NewSubscription extends Component {
     const pushState = this.props.location.state;
     this.state = {
       center: pushState ? pushState.center : [null, null],
-      zoom: pushState ? pushState.zoom : null
+      zoom: pushState ? pushState.zoom : null,
+      // we have a subscription from home?
+      doc: pushState && pushState.location ? {
+        location: {
+          lat: pushState.location.lat,
+          lot: pushState.location.lon
+        },
+        distance: pushState.distance
+      } : undefined
     };
   }
 
@@ -24,6 +32,7 @@ class NewSubscription extends Component {
             history={history}
             center={this.state.center}
             zoom={this.state.zoom}
+            doc={this.state.doc}
         />
       </div>
     );

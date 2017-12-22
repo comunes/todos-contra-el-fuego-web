@@ -20,7 +20,10 @@ class FireSubscription extends React.Component {
       zoom: this.props.zoom,
       distance: this.props.distance
     };
-    // console.log(this.props.location.state);
+    if (props.location) {
+      console.log(props.location.state);
+    }
+    console.log(this.state);
   }
 
   componentDidMount() {

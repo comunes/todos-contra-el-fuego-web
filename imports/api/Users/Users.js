@@ -3,13 +3,13 @@
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import { defaultCreatedAt, defaultUpdateAt } from '/imports/api/Utility/Utils.js';
-import i18n from 'i18next';
 
 const schemaUserProfile = new SimpleSchema({
-  // name: { type: String, optional: true },
-  name: Object,
+  /* Our users has a name of type Object while Google Service, for instance, not */
+  /* name: { type: String, optional: true }, */
+  /* name: Object,
   'name.first': String,
-  'name.last': String,
+  'name.last': String, */
   lang: { type: String, optional: true },
   telegramChatId: { type: Number, optional: true },
   telegramUsername: { type: String, optional: true },

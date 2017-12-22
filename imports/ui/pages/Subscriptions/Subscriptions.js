@@ -19,9 +19,16 @@ class Subscriptions extends Component {
   constructor(props) {
     super(props);
     this.t = props.t;
-    this.state = {
-      action: action.view
-    };
+    if (props.location.state) {
+      const received = props.location.state;
+      props.history.push(`${this.props.match.url}/new`, {
+        location: received.location,
+        distance: received.distance,
+        center: [received.location.lat, received.location.lon]
+      });
+    }
+    this.state = {};
+    this.state.action = action.view;
     this.onViewportChanged = this.onViewportChanged.bind(this);
     this.onFstBtn = this.onFstBtn.bind(this);
     this.onSndBtn = this.onSndBtn.bind(this);
@@ -109,7 +116,8 @@ Subscriptions.propTypes = {
   subscriptions: PropTypes.arrayOf(PropTypes.object).isRequired,
   match: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object
 };
 
 export default translate([], { wait: true })(withTracker(() => {

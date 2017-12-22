@@ -74,7 +74,7 @@ class SelectionMap extends Component {
 
   onFstBtn() {
     this.props.onFstBtn({
-      location: { lat: this.state.center[0], lon: this.state.center[1] },
+      location: { lat: this.state.marker[0], lon: this.state.marker[1] },
       distance: this.state.distance
     });
   }
@@ -113,7 +113,7 @@ class SelectionMap extends Component {
 
   fit() {
     // console.log("fit!");
-    if (this.props.currentSubs.length > 0 && this.state.subsFit) {
+    if (this.props.currentSubs.length > 0 && this.state.subsFit && this.props.action !== action.add) {
       // has autofit, do nothing
     } else if (this.selectionMap && this.distanceCircle) {
       if (!this.getMap().getBounds().contains(this.distanceCircle.leafletElement.getBounds())) {
