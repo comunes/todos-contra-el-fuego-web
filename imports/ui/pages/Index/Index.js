@@ -155,6 +155,24 @@ class Index extends Component {
               </div>
             </div>
           </Section>
+
+          <Section className="">
+            <div className="container">
+              <h4 className="page-header"><Trans parent="span">Suscríbete a alertas de fuegos</Trans></h4>
+              <SubscriptionEditor
+                  focusInput={false}
+                  history={this.props.history}
+              />
+            </div>
+            <div className="overlay" />
+          </Section>
+
+          <Section className="">
+            <div className="container">
+              <FiresMap />
+            </div>
+          </Section>
+
           <Section className="platf">
             <div className="container">
               <div className="section-heading text-center">
@@ -216,22 +234,6 @@ class Index extends Component {
             </div>
           </Section>
 
-          <Section className="">
-            <div className="container">
-              <h4 className="page-header"><Trans parent="span">Suscríbete a alertas de fuegos</Trans></h4>
-              <SubscriptionEditor
-                  focusInput={false}
-                  history={this.props.history}
-              />
-            </div>
-            <div className="overlay" />
-          </Section>
-
-          <Section className="">
-            <div className="container">
-              <FiresMap />
-            </div>
-          </Section>
         </SectionsContainer>
       </div>
     );
