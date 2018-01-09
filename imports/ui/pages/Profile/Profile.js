@@ -26,6 +26,7 @@ class Profile extends React.Component {
     this.renderOAuthUser = this.renderOAuthUser.bind(this);
     this.renderPasswordUser = this.renderPasswordUser.bind(this);
     this.renderProfileForm = this.renderProfileForm.bind(this);
+    this.onLangSelect = this.onLangSelect.bind(this);
   }
 
   componentDidMount() {
@@ -75,6 +76,18 @@ class Profile extends React.Component {
         },
       },
       submitHandler() { component.handleSubmit(); },
+    });
+  }
+
+  onLangSelect(lang) {
+    // console.log(lang);
+    Meteor.call('users.setLang', lang, (error) => {
+      if (error) {
+        console.error(error);
+      } else {
+        this.props.i18n.changeLanguage(lang);
+        // Bert.alert(this.t("¡Perfíl actualizado!"), 'success');
+      }
     });
   }
 
@@ -137,6 +150,8 @@ class Profile extends React.Component {
   }
 
   renderPasswordUser(loading, user) {
+    const {t, i18n} = this.props;
+    const langName = { 'en': 'English', 'es': 'Español', 'gl': 'Galego', 'ast': 'Asturianu', 'ca': 'Català' };
     return !loading ? (<div>
       <Row>
         <Col xs={6}>
@@ -173,6 +188,26 @@ class Profile extends React.Component {
           ref={emailAddress => (this.emailAddress = emailAddress)}
           className="form-control"
         />
+      </FormGroup>
+      <FormGroup>
+      <ControlLabel>{this.t("Idioma")}</ControlLabel>
+      <div className="btn-group">
+        <button className="btn btn-secondary btn-sm dropdown-toggle lang-selector" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {langName[i18n.language]}
+        </button>
+        <div className="dropdown-menu">
+          {i18n.languages.map(lang => (
+             <button
+                 className="dropdown-item"
+                 onClick={() => this.onLangSelect(lang)}
+                 key={lang}
+                 type="button">
+               {langName[lang]}
+             </button>
+           ))
+          }
+        </div>
+      </div>
       </FormGroup>
       <FormGroup>
         <ControlLabel>{this.t("Contraseña actual")}</ControlLabel>
@@ -221,7 +256,9 @@ class Profile extends React.Component {
 
 Profile.propTypes = {
   loading: PropTypes.bool.isRequired,
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired,
+  i18n: PropTypes.object.isRequired
 };
 
 export default translate([], { wait: true })(createContainer(() => {

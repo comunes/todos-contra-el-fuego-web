@@ -47,13 +47,17 @@ class Login extends React.Component {
   }
 
   handleSubmit = () => {
-    const { history } = this.props;
+    const { history, i18n } = this.props;
 
     Meteor.loginWithPassword(this.emailAddress.value, this.password.value, (error) => {
       if (error) {
         Bert.alert(T9n.get(`error.accounts.${error.reason}`), 'danger');
       } else {
         Bert.alert(this.t('Bienvenid@ de nuevo'), 'success');
+        const userLang = Meteor.user().lang
+        if (typeof userLang === 'string' && i18n.language !== userLang) {
+          i18n.changeLanguage(userLang);
+        }
       }
     });
   }
@@ -111,6 +115,7 @@ class Login extends React.Component {
 Login.propTypes = {
   history: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
+  i18n: PropTypes.object.isRequired,
   location: PropTypes.object
 };
 

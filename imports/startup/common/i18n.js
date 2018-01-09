@@ -20,14 +20,8 @@ const shouldDebug = (forceDebug && !Meteor.isProduction);
 
 const i18nOpts = {
   backend: backOpts,
-  lng: 'es',
-  // fallbackLng: 'es',
-  fallbackLng: {
-    'en-US': ['en'],
-    'en-GB': ['en'],
-    'pt-BR': ['pt'],
-    default: ['es']
-  },
+  //  lng: 'es',
+  fallbackLng: ['es', 'en'],
   interpolation: {
     escapeValue: false, // not needed for react!!
     formatSeparator: ',',

@@ -1,6 +1,7 @@
 /* global CookieConsent Intl */
 import i18n from 'i18next';
 import { Meteor } from 'meteor/meteor';
+import { Tracker } from 'meteor/tracker';
 import backend from 'i18next-xhr-backend';
 import LngDetector from 'i18next-browser-languagedetector';
 import Cache from 'i18next-localstorage-cache';
@@ -98,6 +99,22 @@ i18n.use(backend)
 i18n.on('languageChanged', (lng) => {
   moment.locale(lng);
   T9n.setLanguage(lng);
+  Tracker.autorun(() => {
+    if (Meteor.userId()) {
+      // logged
+      if (Meteor.user() && (typeof Meteor.user().lang === 'undefined' ||
+                            Meteor.user().lang !== lng)
+      ) {
+        // Set the autodetected/changed lang
+        console.log(`Setting the autodetected lang ${lng}`);
+        Meteor.call('users.setLang', lng, (error) => {
+          if (error) {
+            console.error(error);
+          }
+        });
+      }
+    }
+  });
 });
 
 export default i18n;
