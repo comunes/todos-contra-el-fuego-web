@@ -10,16 +10,15 @@ import { I18nextProvider } from 'react-i18next';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Roles } from 'meteor/alanning:roles';
-
 // https://github.com/gadicc/meteor-blaze-react-component/
 import Blaze from 'meteor/gadicc:blaze-react-component';
-/* import Reconnect from '../../components/Reconnect/Reconnect'; */
 // i18n
 import i18n from '/imports/startup/client/i18n';
 import '/imports/startup/client/ravenLogger';
 import '/imports/startup/client/geolocation';
 import '/imports/startup/client/piwik-start.js';
 import 'simple-line-icons/css/simple-line-icons.css';
+import Reconnect from '../../components/Reconnect/Reconnect';
 import Navigation from '../../components/Navigation/Navigation';
 import Authenticated from '../../components/Authenticated/Authenticated';
 import Public from '../../components/Public/Public';
@@ -93,7 +92,7 @@ const App = props => (
             </Switch>
           </Grid>
           <Footer />
-          {/* <Reconnect /> */}
+          <Reconnect />
           <Blaze template="cookieConsent" />
           {/* <Blaze template="cookieConsentImply" /> */}
         </div> : ''}
