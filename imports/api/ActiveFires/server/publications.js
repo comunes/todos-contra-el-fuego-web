@@ -121,7 +121,7 @@ Meteor.publish('activefiresmyloc', function activeInMyLoc(zoom, lat, lng, height
   if (lat && lng) {
     return activefires(zoom, lat, lng, height, width);
   }
-  const location = localize();
+  const geo = localize();
   // console.log(`${location.latitude}, ${location.longitude}`);
-  return activefires(zoom, location.latitude, location.longitude, height, width);
+  return activefires(zoom, geo.location.latitude, geo.location.longitude, height, width);
 });

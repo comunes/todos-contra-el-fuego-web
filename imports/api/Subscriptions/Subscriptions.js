@@ -1,7 +1,9 @@
 /* eslint-disable consistent-return */
+/* eslint-disable import/no-absolute-path */
 
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
+import { defaultCreatedAt, defaultUpdateAt } from '/imports/api/Utility/Utils.js';
 
 const Subscriptions = new Mongo.Collection('subscriptions', { idGeneration: 'MONGO' });
 
@@ -74,8 +76,11 @@ Subscriptions.schema = new SimpleSchema({
   'location.lon': Number,
   geo: LocationSchema,
   distance: Number,
+  chatId: { type: Number, optional: true }, // only in 'telegram' type
   owner: String,
-  type: String
+  type: String,
+  createdAt: defaultCreatedAt,
+  updatedAt: defaultUpdateAt
 });
 
 Subscriptions.attachSchema(Subscriptions.schema);

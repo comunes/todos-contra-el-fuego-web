@@ -2,6 +2,7 @@
 
 import { Meteor } from 'meteor/meteor';
 import maxmind from 'maxmind';
+import fs from 'fs';
 
 process.env.HTTP_FORWARDED_COUNT = Meteor.settings.private.proxies_count;
 if (!Meteor.isDevelopment) {
@@ -17,7 +18,14 @@ function isPrivateIP(ip) {
       (parts[0] === '192' && parts[1] === '168');
 }
 
-const IPGeocoder = maxmind.openSync(`${process.env.PWD}/private/GeoLite2-City.mmdb`);
+const dbpath = '/usr/local/share/maxmind-geolite2/GeoLite2-City.mmdb';
+// const dbpath = `${process.env.PWD}/private/GeoLite2-City.mmdb`;
+
+if (!fs.existsSync(dbpath)) {
+  console.error(`Maxmind db not found ${dbpath}, download via cron with https://www.npmjs.com/package/maxmind-geolite2-mirror`);
+}
+
+const IPGeocoder = maxmind.openSync(dbpath);
 export default IPGeocoder;
 
 // Warning: Meteor cannot access to this.connection with arrow functions
@@ -37,9 +45,13 @@ export function localize() {
 
   // TODO: cron download GeoLite-City
   // http://dev.maxmind.com/geoip/geoip2/geolite2/
-  const location = IPGeocoder.get(clientIP);
-  // console.log(location);
-  return location;
+  const geo = IPGeocoder.get(clientIP);
+  // console.warn(geo);
+  if (geo.location && geo.location.latitude && geo.location.longitude) {
+    return geo;
+  }
+  // geoIP fallback, Madrid
+  return { location: { latitude: 40.4146500, longitude: -3.7004000 } };
 }
 
 Meteor.methods({

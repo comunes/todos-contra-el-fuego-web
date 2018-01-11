@@ -1,5 +1,6 @@
 /* eslint-disable consistent-return */
 /* eslint-disable import/no-absolute-path */
+
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import { defaultCreatedAt, defaultUpdateAt } from '/imports/api/Utility/Utils.js';
@@ -105,7 +106,7 @@ const schemaUser = new SimpleSchema({
   'name.first': String,
   'name.last': String, */
   lang: { type: String, optional: true },
-  telegramChatId: { type: Number, optional: true },
+  telegramChatId: { type: SimpleSchema.Integer, optional: true },
   telegramUsername: { type: String, optional: true },
   telegramFirstName: { type: String, optional: true },
   telegramLanguageCode: { type: String, optional: true },
