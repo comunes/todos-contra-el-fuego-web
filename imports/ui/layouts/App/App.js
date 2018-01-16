@@ -4,7 +4,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Router, Switch, Route } from 'react-router-dom';
-import createHistory from 'history/createBrowserHistory';
 import { Grid } from 'react-bootstrap';
 import { I18nextProvider } from 'react-i18next';
 import { Meteor } from 'meteor/meteor';
@@ -41,16 +40,12 @@ import Privacy from '../../pages/Privacy/Privacy';
 import License from '../../pages/License/License';
 import Credits from '../../pages/Credits/Credits';
 import ReSendEmail from '../../components/ReSendEmail/ReSendEmail';
+import history from '../../components/History/History';
+import '../../components/NotificationsObserver/NotificationsObserver';
 import FiresMap from '../../pages/FiresMap/FiresMap';
+import Fires from '../../pages/Fires/Fires';
 import Sandbox from '../../pages/Sandbox/Sandbox';
 import './App.scss';
-
-const history = createHistory();
-history.listen((location) => { // , action ) => {
-  // console.log(location.pathname);
-  // console.log(action); // PUSH, etc
-  Meteor.Piwik.trackPage(location.pathname);
-});
 
 const App = props => (
   /* https://react.i18next.com/components/i18nextprovider.html */
@@ -72,9 +67,9 @@ const App = props => (
               <Authenticated exact path="/subscriptions/new" component={NewSubscription} {...props} />
               <Authenticated exact path="/subscriptions/:_id" component={ViewSubscription} {...props} />
               <Authenticated exact path="/subscriptions/:_id/edit" component={EditSubscription} {...props} />
-
               <Authenticated exact path="/profile" component={Profile} {...props} />
               <Route path="/fires" component={FiresMap} {...props} />
+              <Route path="/fire/:id" component={Fires} {...props} />
               <Public path="/signup" component={Signup} {...props} />
               <Public path="/login" component={Login} {...props} />
               <Route path="/logout" component={Logout} {...props} />

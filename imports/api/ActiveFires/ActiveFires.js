@@ -2,6 +2,7 @@
 
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
+import firesCommonSchema from '../Common/FiresSchema';
 
 const ActiveFires = new Mongo.Collection('activefires', { idGeneration: 'MONGO' });
 
@@ -16,6 +17,13 @@ ActiveFires.deny({
   update: () => true,
   remove: () => true
 });
+
+
+ActiveFires.schema = new SimpleSchema(firesCommonSchema);
+
+ActiveFires.attachSchema(ActiveFires.schema);
+
+export default ActiveFires;
 
 /* Sample:
  *     {
@@ -46,19 +54,3 @@ ActiveFires.deny({
  *         "createdAt" : ISODate("2017-11-30T08:07:33.720Z")
  *     }
  * */
-
-ActiveFires.schema = new SimpleSchema({
-  lat: Number,
-  lon: Number,
-  scan: Number,
-  type: String,
-  acq_date: String,
-  acq_time: String,
-  when: Date,
-  createdAt: Date,
-  updatedAt: Date
-});
-
-ActiveFires.attachSchema(ActiveFires.schema);
-
-export default ActiveFires;

@@ -5,3 +5,4 @@ import './fixtures';
 import './email';
 import './IPGeocoder';
 import './migrations';
+import './notificationsObserver';

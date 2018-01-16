@@ -7,6 +7,8 @@ import templateToHTML from './handlebars-email-to-html';
 const sendEmail = (options, { resolve, reject }) => {
   try {
     Meteor.defer(() => {
+      // TODO: replace with import sendMail from '/imports/startup/server/email';
+      console.log(`Email options: ${options}`);
       Email.send(options);
       resolve();
     });
@@ -15,13 +17,15 @@ const sendEmail = (options, { resolve, reject }) => {
   }
 };
 
-export default ({ text, html, template, templateVars, ...rest }) => {
+export default ({
+  text, html, template, templateVars, ...rest
+}) => {
   if (text || html || template) {
     return new Promise((resolve, reject) => {
       sendEmail({
         ...rest,
         text: template ? templateToText(getPrivateFile(`email-templates/${template}.txt`), (templateVars || {})) : text,
-        html: template ? templateToHTML(getPrivateFile(`email-templates/${template}.html`), (templateVars || {})) : html,
+        html: template ? templateToHTML(getPrivateFile(`email-templates/${template}.html`), (templateVars || {})) : html
       }, { resolve, reject });
     });
   }

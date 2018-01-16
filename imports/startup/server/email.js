@@ -18,7 +18,7 @@ const db = Meteor.users.rawDatabase(); // new Mongo.Collection('__mailTimeQueue_
 // db.getCollection("__mailTimeQueue__").count()
 
 // https://litmus.com/community/discussions/4633-is-there-a-reliable-1px-horizontal-rule-method
-const hr = `<table cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100% !important;">
+export const hr = `<table cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100% !important;">
         <tr>
             <td align="left" valign="top" width="600px" height="1" style="background-color: #f0f0f0; border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; mso-line-height-rule: exactly; line-height: 1px;"><!--[if gte mso 15]>&nbsp;<![endif]--></td>
         </tr>
@@ -32,7 +32,11 @@ const MailQueue = new MailTime({
   from(transport) {
     // To pass spam-filters `from` field should be correctly set
     // for each transport, check `transport` object for more options
-    return `"${i18n.t('AppName')}" <${transport.options.auth.user}>`;
+    if (!Meteor.isProduction) {
+      // only for test purposes
+      return `${i18n.t('AppName')} <notify@example.org>`;
+    }
+    return `${i18n.t('AppName')} <${transport.options.auth.user}>`;
   },
   debug: true,
   concatEmails: true, // Concatenate emails to the same addressee

@@ -185,5 +185,9 @@
   "Iniciar sesión con Telegram":
   "Iniciar sesión con Telegram",
   "Idioma":
-  "Idioma"
+  "Idioma",
+  "fireDetected":
+  "fuego detectado {{when}}",
+  "fireDetectedAt":
+  "fuego detectado el {{when}}"
 }

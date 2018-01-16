@@ -19,12 +19,12 @@ class VerifyEmail extends React.Component {
     Accounts.verifyEmail(match.params.token, (error) => {
       if (error) {
         Bert.alert(T9n.get(`error.accounts.${error.reason}`), 'danger');
-        this.setState({ error: T9n.get(`error.accounts.${error.reason}`) + ". " + this.t("Por favor, inténtalo otra vez.")});
+        this.setState({ error: `${T9n.get(`error.accounts.${error.reason}`)}. ${this.t('Por favor, inténtalo otra vez.')}` });
         // this.setState({ error: `${error.reason}. Please try again.` });
       } else {
         setTimeout(() => {
-          Bert.alert(this.t("¡Listo, gracias!"), 'success');
-          history.push('/documents');
+          Bert.alert(this.t('¡Listo, gracias!'), 'success');
+          history.push('/subscriptions');
         }, 1500);
       }
     });
@@ -41,7 +41,7 @@ class VerifyEmail extends React.Component {
 
 VerifyEmail.propTypes = {
   match: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 };
 
 export default translate([], { wait: true })(VerifyEmail);

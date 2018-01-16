@@ -13,4 +13,11 @@ import '../../api/FireAlerts/server/publications';
 
 import '../../api/Subscriptions/methods';
 import '../../api/Subscriptions/server/publications';
+
 // TODO add rate-limit to these publications
+
+import '../../api/Notifications/methods';
+import '../../api/Notifications/server/publications';
+
+import '../../api/Fires/methods';
+import '../../api/Fires/server/publications';

@@ -5,6 +5,7 @@ import i18nOpts from '../common/i18n';
 // import moment from 'moment';
 // import { T9n } from 'meteor-accounts-t9n';
 
+// vi ostrio:meteor-root
 i18nOpts.backend.loadPath = `${Meteor.absolutePath}/public${i18nOpts.backend.loadPath}`;
 i18nOpts.backend.addPath = `${Meteor.absolutePath}/public${i18nOpts.backend.addPath}`;
 

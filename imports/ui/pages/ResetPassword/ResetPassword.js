@@ -53,7 +53,7 @@ class ResetPassword extends React.Component {
       if (error) {
         Bert.alert(T9n.get(`error.accounts.${error.reason}`), 'danger');
       } else {
-        history.push('/documents');
+        history.push('/subscriptions');
       }
     });
   }

@@ -37,7 +37,7 @@ alexwine:bootstrap-4
 selaias:cookie-consent        # Cookie consent
 gadicc:blaze-react-component  # Add braze to react
 255kb:meteor-status           # Connect status
-mixmax:smart-disconnect       # Disconnect on lost focus
+# mixmax:smart-disconnect       # Disconnect on lost focus (disabled to get notif)
 flowkey:raven                 # js errors
 vjrj:piwik                    # Stats
 mdg:geolocation
@@ -45,7 +45,9 @@ natestrauser:publish-performant-counts
 maximum:server-transform
 mys:fonts                     # fonst in npm
 ostrio:mailer                 # mailer
+mizzao:user-status            # user status (online, etc)
+# babrahams:constellation     # dev utility
+percolate:migrations          # db migrations
 ostrio:meteor-root
-mizzao:user-status
-babrahams:constellation
-percolate:migrations
+meteortesting:mocha
+practicalmeteor:chai
