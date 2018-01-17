@@ -45,18 +45,27 @@ describe('url encoding', () => {
     };
 
     const sealed = await urlEnc.encrypt(obj);
-    console.log(encodeURI(sealed));
+    const sealed2 = await urlEnc.encrypt(obj);
+    // console.log(encodeURI(sealed));
 
     const unsealed = await urlEnc.decrypt(sealed);
     chai.expect(unsealed).to.deep.equal(obj);
     chai.expect(sealed).to.equal(encodeURI(sealed));
+    chai.expect(sealed).to.not.equal(sealed2);
   });
 
-  // This fails because Date is return as String (not as Date)
-  /* it('should encrypt and dcrypt collection objects', async () => {
+  // This fails because Date is return as String (not as Date) and because _id
+  it('should encrypt and dcrypt collection objects', async () => {
     const obj = ActiveFiresCollection.findOne();
+    delete obj._id;
     const sealed = await urlEnc.encrypt(obj);
     const unsealed = await urlEnc.decrypt(sealed);
+    const w = unsealed.when;
+    unsealed.when = new Date(w);
+    const c = unsealed.createdAt;
+    unsealed.createdAt = new Date(c);
+    const u = unsealed.updatedAt;
+    unsealed.updatedAt = new Date(u);
     chai.expect(unsealed).to.deep.equal(obj);
-  }); */
+  });
 });

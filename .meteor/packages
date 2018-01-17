@@ -51,3 +51,12 @@ percolate:migrations          # db migrations
 ostrio:meteor-root
 meteortesting:mocha
 practicalmeteor:chai
+aldeed:schema-deny
+aldeed:template-extension
+dburles:collection-helpers
+less
+markdown
+mongo-livedata
+reywood:publish-composite
+barbatus:stars-rating
+arkham:comments-ui

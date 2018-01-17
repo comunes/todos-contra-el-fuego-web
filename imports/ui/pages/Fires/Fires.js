@@ -6,31 +6,22 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import { translate } from 'react-i18next';
-import { Col, Row } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
-import { Map, CircleMarker, Circle } from 'react-leaflet';
+import { Map, Circle } from 'react-leaflet';
+import moment from 'moment-timezone';
+import Blaze from 'meteor/gadicc:blaze-react-component';
 import DefMapLayers from '/imports/ui/components/Maps/DefMapLayers';
-import moment from 'moment';
 import FiresCollection from '/imports/api/Fires/Fires';
+import '/imports/startup/client/comments';
+
+import './Fires.scss';
 
 class Fire extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
     };
-  }
-
-  /* componentDidUpdate() {
-   *   const map = this.firemap.leafletElement;
-   *   map.invalidateSize();
-   * } */
-
-  handleLeafletLoad(map) {
-    console.log(map);
-    if (map) {
-      // map.leafletELement.invalidateSize();
-      // map.invalidateSize();
-    }
+    // console.log(moment.tz.guess());
   }
 
   render() {
@@ -40,50 +31,52 @@ class Fire extends React.Component {
         {!loading &&
          <Fragment>
            <h4 className="page-header">
-             {t('Información sobre fuego detectado el día {{when}}', { when: moment(fire.when).format('LLLL') })}
+             {fire.address ?
+              t('Información adicional sobre fuego detectado en {{where}} el {{when}}', { where: fire.address, when: moment(fire.when).tz(moment.tz.guess()).format('LLLL (z)') }) :
+              t('Información adicional sobre fuego detectado el {{when}}', { when: moment.utc(fire.when).format('LLLL') })}
            </h4>
-           <Row>
-             <Col xs={12} sm={6} md={6} lg={6} >
-               {(fire.type === 'modis' || fire.type === 'virrs') &&
-                <p>{t('Detectado por satélites de la NASA')}
-                </p>
-               }
-                <h5>Comentarios</h5>
-                <p>{t('Añade un comentario si tienes información adicional sobre este fuego (por ejemplo, si está aún activo cómo acceder a él, o si conoces el motivo por el que comenzó el fuego, o si quieres denunciar algún tipo de ilegalidad relacionada con el fuego)')}
-                </p>
-             </Col>
-             <Col xs={12} sm={6} md={6} lg={6} >
-               <Map
-                   ref={(map) => {
-                       this.fireMap = map;
-                       this.handleLeafletLoad(map);
-                     }}
-                   animate
-                   sleep={false}
-                   center={[fire.lat, fire.lon]}
-                   zoom={8}
-               >
-                 <Fragment>
-                   <CircleMarker
-                       center={[fire.lat, fire.lon]}
-                       color="red"
-                       stroke={false}
-                       fillOpacity="1"
-                       fill
-                       radius={3}
-                   />
-                   <Circle
-                       center={[fire.lat, fire.lon]}
-                       color="red"
-                       fillColor="red"
-                       fillOpacity={0.1}
-                       radius={fire.scan * 1000}
-                   />
-                 </Fragment>
-                 <DefMapLayers />
-               </Map>
-             </Col>
-           </Row>
+
+            <Map
+                ref={(map) => {
+                    this.fireMap = map;
+                  }}
+                animate
+                sleep={false}
+                center={[fire.lat, fire.lon]}
+                className="fire-leaflet-container"
+                zoom={8}
+            >
+              <Fragment>
+                <Circle
+                    center={[fire.lat, fire.lon]}
+                    color="red"
+                    fillColor="red"
+                    fillOpacity={0.1}
+                    radius={fire.scan * 1000}
+                />
+              </Fragment>
+              <DefMapLayers />
+            </Map>
+            <p>{t('Coordenadas:')} {fire.lat}, {fire.lon}</p>
+            {(fire.type === 'modis' || fire.type === 'virrs') &&
+             <p>{t('Fuego detectado por satélites de la NASA {{when}}', { when: moment(fire.when).fromNow() })}</p>
+            }
+            {/* TODO: marcar tipo de fuego, industria, etc */}
+            <h4>{t('Comentarios')}</h4>
+            <div className="comments-info">
+              {t('Puedes añadir un comentario si tienes información adicional sobre este fuego.')}
+              {' '}
+              {t('Por ejemplo:')}
+              <ul>
+                <li>{t('si conoces esta zona y cómo acceder a el fuego (esto puede de ser de ayuda para apagarlo si sigue activo o para investigarlo en un futuro)')}</li>
+                <li>{t('si conoces el motivo por el que comenzó el fuego')}</li>
+                <li>{t('si quieres denunciar algún tipo de ilegalidad, incluso anónimamente')}</li>
+                <li>{t('etc')}</li>
+              </ul>
+            </div>
+            <div className="comments-section">
+              <Blaze template="commentsBox" id={`fire-${fire._id}`} />
+            </div>
          </Fragment>
         }
       </div>

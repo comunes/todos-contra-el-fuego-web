@@ -1,0 +1,29 @@
+.comments-section {
+  width: 100%;
+}
+
+.comments-box {
+  max-width: inherit;
+  padding: 0;
+}
+
+p.comment-content {
+  /* white-space: pre-line; */
+}
+
+/* remove comment btn danger style */
+
+div.media-body.comment> div> div> div.btn.btn-danger.remove-action {
+  background-color: white;
+  border: 1px solid rgb(204, 204, 204);
+  color: rgb(51, 51, 51);
+}
+
+/* text-area height */
+.form-control .create-comment {
+  height: 9em;
+}
+
+.img-avatar {
+    margin-right: 5px;
+}

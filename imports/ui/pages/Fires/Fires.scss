@@ -1,0 +1,29 @@
+.fire-leaflet-container {
+  min-height: 30vh;
+  min-width: 40vw;
+  width: 50%;
+  margin: 0 0 10px 10px !important;
+  display: flex;
+  float: right !important;
+}
+
+.ViewFire > h4.page-header {
+    line-height: 1.5em;
+}
+
+@media (max-width: 768px) {
+    .leaflet-container {
+        width: 100%;
+    }
+}
+
+
+.comments-info {
+    font-size: 14px;
+    color: #818182;
+    /* display: inline-flex; */
+    /* background-color: #fefefe;
+    border-color: #fdfdfe;
+    padding: 10px;
+    border-radius: 3px; */
+}

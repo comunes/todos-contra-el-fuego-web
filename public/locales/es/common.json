@@ -189,5 +189,18 @@
   "fireDetected":
   "fuego detectado {{when}}",
   "fireDetectedAt":
-  "fuego detectado el {{when}}"
+  "fuego detectado el {{when}}",
+  "Comentarios": "Comentarios",
+  "Guardar": "Guardar",
+  "Responder": "Responder",
+  "Editar": "Editar",
+  "Borrar": "Borrar",
+  "Añadir un comentario": "Añadir un comentario",
+  "Añadir una respuesta": "Añadir una respuesta",
+  "Añadir comentario": "Añadir comentario",
+  "Necesitas iniciar sesión para" :"Necesitas iniciar sesión para",
+  "añadir comentarios": "añadir comentarios",
+  "puntuar comentarios": "puntuar comentarios",
+  "responder": "responder",
+  "Más comentarios": "Más comentarios"
 }

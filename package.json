@@ -42,6 +42,7 @@
     "meteor-node-stubs": "^0.3.2",
     "moment": "^2.19.1",
     "moment-timezone": "^0.5.14",
+    "node-geocoder": "^3.21.1",
     "nodemailer": "^4.4.1",
     "popper.js": "^1.12.7",
     "prop-types": "^15.6.0",

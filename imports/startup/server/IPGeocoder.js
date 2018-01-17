@@ -54,6 +54,9 @@ export function localize() {
   return { location: { latitude: 40.4146500, longitude: -3.7004000 } };
 }
 
+export const gmapKey = process.env.GMAPS_KEY || Meteor.settings.gmaps.key;
+export const gmapServerKey = Meteor.settings.gmaps.serverKey;
+
 Meteor.methods({
   geo: localize,
   getMapKey() {
@@ -61,6 +64,6 @@ Meteor.methods({
     // https://developers.google.com/maps/documentation/javascript/get-api-key
     // https://console.developers.google.com/
     // export GMAPS_KEY=SomeGMapsKey
-    return process.env.GMAPS_KEY || Meteor.settings.gmaps.key;
+    return gmapKey;
   }
 });

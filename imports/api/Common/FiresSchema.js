@@ -7,6 +7,7 @@ const firesCommonSchema = {
   ourid: LocationSchema,
   lat: Number,
   lon: Number,
+  address: { type: String, optional: true },
   scan: Number,
   type: String,
   when: Date,
