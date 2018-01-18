@@ -260,9 +260,7 @@ export default translate([], { wait: true })(withTracker(() => {
     activefires: ActiveFiresCollection.find({}, { reactive: zoom.get() >= MAXZOOMREACTIVE }).fetch(),
     // activefires: ActiveFiresCollection.find({}).fetch(),
     activefirestotal: Counter.get('countActiveFires'),
-    firealerts: FireAlertsCollection.find().fetch().map(doc => (
-      { _id: doc._id, lat: doc.location.lat, lon: doc.location.lon }
-    )),
+    firealerts: FireAlertsCollection.find().fetch(),
     center: geolocation.get(),
     zoom: zoom.get()
   };

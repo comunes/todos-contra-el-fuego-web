@@ -5,12 +5,12 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import urlEnc from '/imports/modules/url-encode';
 import { Promise } from 'meteor/promise';
-import FiresCollection from '../Fires';
 import NodeGeocoder from 'node-geocoder';
 import { gmapServerKey } from '/imports/startup/server/IPGeocoder';
+import FiresCollection from '../Fires';
 
 function findFire(unsealed) {
-  const fire = FiresCollection.find({ ourid: { type: 'Point', coordinates: [unsealed.lon, unsealed.lat] } });
+  const fire = FiresCollection.find({ ourid: { type: 'Point', coordinates: [unsealed.lon, unsealed.lat] }, when: unsealed.when, type: unsealed.type });
   return fire;
 }
 
@@ -30,22 +30,32 @@ Meteor.publish('fireFromHash', function fireFromHash(fireEnc) {
     // console.log(fireEnc);
     const unsealed = Promise.await(urlEnc.decrypt(fireEnc));
     const w = unsealed.when;
+    // console.log(w);
     unsealed.when = new Date(w);
+    // console.log(unsealed.when);
+    const c = unsealed.createdAt;
+    unsealed.createdAt = new Date(c);
+    const u = unsealed.updatedAt;
+    unsealed.updatedAt = new Date(u);
     // console.log(unsealed);
     FiresCollection.schema.validate(unsealed);
     const fire = findFire(unsealed);
-    try {
-      const rev = Promise.await(geocoder.reverse({ lat: unsealed.lat, lon: unsealed.lon }));
-      if (rev[0]) {
-        unsealed.address = rev[0].formattedAddress;
+    // console.log(`Found: ${fire.count()}`);
+    if (!unsealed.address) {
+      try {
+        const rev = Promise.await(geocoder.reverse({ lat: unsealed.lat, lon: unsealed.lon }));
+        if (rev[0]) {
+          unsealed.address = rev[0].formattedAddress;
+        }
+        // console.log(unsealed.address);
+      } catch (reve) {
+        console.error(reve);
       }
-      // console.log(unsealed.address);
-    } catch (reve) {
-      console.error(reve);
     }
     if (fire.count() === 0) {
-      const result = FiresCollection.upsert({ ourid: unsealed.ourid }, { $set: unsealed }, { multi: false, upsert: true });
-      console.log(JSON.stringify(result));
+      // const result =
+      FiresCollection.upsert({ ourid: unsealed.ourid, when: unsealed.when, type: unsealed.type }, { $set: unsealed }, { multi: false, upsert: true });
+      // console.log(JSON.stringify(result));
     }
     return findFire(unsealed);
     /* console.log(`fires: ${fire.count()}`);

@@ -26,14 +26,17 @@ class Fire extends React.Component {
 
   render() {
     const { loading, fire, t } = this.props;
+    if (fire && fire.when) {
+      this.when = moment.tz(fire.when, moment.tz.guess());
+    }
     return (
       <div className="ViewFire">
         {!loading &&
          <Fragment>
            <h4 className="page-header">
              {fire.address ?
-              t('Información adicional sobre fuego detectado en {{where}} el {{when}}', { where: fire.address, when: moment(fire.when).tz(moment.tz.guess()).format('LLLL (z)') }) :
-              t('Información adicional sobre fuego detectado el {{when}}', { when: moment.utc(fire.when).format('LLLL') })}
+              t('Información adicional sobre fuego detectado en {{where}} el {{when}}', { where: fire.address, when: this.when.format('LLLL (z)') }) :
+              t('Información adicional sobre fuego detectado el {{when}}', { when: this.when.format('LLLL (z)') })}
            </h4>
 
             <Map
@@ -44,7 +47,7 @@ class Fire extends React.Component {
                 sleep={false}
                 center={[fire.lat, fire.lon]}
                 className="fire-leaflet-container"
-                zoom={8}
+                zoom={12}
             >
               <Fragment>
                 <Circle
@@ -52,15 +55,18 @@ class Fire extends React.Component {
                     color="red"
                     fillColor="red"
                     fillOpacity={0.1}
-                    radius={fire.scan * 1000}
+                    radius={fire.scan ? fire.scan * 1000 : 300}
                 />
               </Fragment>
               <DefMapLayers />
             </Map>
             <p>{t('Coordenadas:')} {fire.lat}, {fire.lon}</p>
-            {(fire.type === 'modis' || fire.type === 'virrs') &&
-             <p>{t('Fuego detectado por satélites de la NASA {{when}}', { when: moment(fire.when).fromNow() })}</p>
+            {(fire.type === 'modis' || fire.type === 'viirs') &&
+             <p>{t('Fuego detectado por satélites de la NASA {{when}}', { when: this.when.fromNow() })}</p>
             }
+             {(fire.type === 'vecinal') &&
+              <p>{t('Fuego notificado por uno de nuestros usuarios/as {{when}}', { when: this.when.fromNow() })}</p>
+             }
             {/* TODO: marcar tipo de fuego, industria, etc */}
             <h4>{t('Comentarios')}</h4>
             <div className="comments-info">
@@ -71,7 +77,7 @@ class Fire extends React.Component {
                 <li>{t('si conoces esta zona y cómo acceder a el fuego (esto puede de ser de ayuda para apagarlo si sigue activo o para investigarlo en un futuro)')}</li>
                 <li>{t('si conoces el motivo por el que comenzó el fuego')}</li>
                 <li>{t('si quieres denunciar algún tipo de ilegalidad, incluso anónimamente')}</li>
-                <li>{t('etc')}</li>
+                <li>{t('o cualquier otra información')}</li>
               </ul>
             </div>
             <div className="comments-section">

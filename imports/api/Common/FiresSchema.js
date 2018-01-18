@@ -7,15 +7,22 @@ const firesCommonSchema = {
   ourid: LocationSchema,
   lat: Number,
   lon: Number,
-  address: { type: String, optional: true },
-  scan: Number,
   type: String,
   when: Date,
+
+  // Neighbour notified fires
+
+  owner: { type: String, optional: true },
+  dateformat: { type: String, optional: true },
+
+  // NASA types
+  address: { type: String, optional: true }, // reverse geo
+  scan: { type: Number, optional: true },
   track: { type: Number, optional: true },
   acq_date: { type: String, optional: true },
   acq_time: { type: String, optional: true },
   satellite: { type: String, optional: true },
-  confidence: { type: Number, optional: true },
+  confidence: { type: String, optional: true },
   version: { type: String, optional: true },
   frp: { type: Number, optional: true },
   daynight: { type: String, optional: true },
@@ -23,6 +30,8 @@ const firesCommonSchema = {
   bright_t31: { type: Number, optional: true },
   bright_ti4: { type: Number, optional: true },
   bright_ti5: { type: Number, optional: true },
+
+  // common
   createdAt: defaultCreatedAt,
   updatedAt: defaultUpdateAt
 };

@@ -4,6 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import randomHex from 'crypto-random-hex';
 import UserSubsToFiresCollection from '/imports/api/Subscriptions/Subscriptions';
+import FireAlertsCollection from '/imports/api/FireAlerts/FireAlerts';
 
 Meteor.startup(() => {
   // https://github.com/percolatestudio/meteor-migrations
@@ -69,6 +70,18 @@ Meteor.startup(() => {
     }
   });
 
+  Migrations.add({
+    version: 4,
+    up: function deleteOldAlertFiresAndIndexes() {
+      FireAlertsCollection.remove({ createdAd: null });
+      const raw = FireAlertsCollection.rawCollection();
+      raw.createIndex({ ourid: '2dsphere' });
+      raw.createIndex({ when: 1 });
+      raw.createIndex({ updatedAt: 1 });
+      raw.createIndex({ createdAt: 1 });
+      raw.createIndex({ ourid: 1, type: 1 });
+    }
+  });
 
   // Set createdAt in users & subs
   Migrations.migrateTo('latest');
