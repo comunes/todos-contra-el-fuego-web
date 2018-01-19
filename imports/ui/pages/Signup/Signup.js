@@ -97,6 +97,7 @@ class Signup extends React.Component {
         <Col xs={12} sm={6} md={5} lg={4}>
           <h4 className="page-header">{t('Registrarse')}</h4>
           <Row>
+            { false && // disabled
             <Col xs={12}>
               <button
                   className="btn btn-block btn-raised btn-primary OAuthLoginButtonDis OAuthLoginButton-telegram"
@@ -105,7 +106,7 @@ class Signup extends React.Component {
               >
                 <span><Icon icon="telegram" /> {t('Iniciar sesión con Telegram')}</span>
               </button>
-            </Col>
+            </Col> }
             <Col xs={12}>
               <OAuthLoginButtons
                 services={['telegram', 'google']}

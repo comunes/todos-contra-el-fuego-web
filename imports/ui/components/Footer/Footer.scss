@@ -72,3 +72,9 @@ body {
   -webkit-transform: rotate(-180deg);
   transform: rotate(-180deg);
 }
+
+@include breakpoint(mobile) {
+  .Footer, .Footer p {
+    font-size: 14px;
+  }
+}

@@ -17,7 +17,9 @@ const Navigation = props => (
       {/* https://github.com/react-bootstrap/react-bootstrap/blob/master/src/Navbar.js */}
       <Navbar.Header>
         <Navbar.Brand>
-          <Link to="/">{props.t('AppNameFull')}</Link>
+          <Link to="/" className={window.location.pathname === '/' ? 'hide-brand' : ''} >
+            {props.t('AppNameFull')}
+          </Link>
         </Navbar.Brand>
         {/* <Navbar.Toggle/> */}
         <button className="sr-only navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,6 +56,7 @@ Navigation.defaultProps = {
 };
 
 Navigation.propTypes = {
+  t: PropTypes.func.isRequired,
   authenticated: PropTypes.bool.isRequired
 };
 

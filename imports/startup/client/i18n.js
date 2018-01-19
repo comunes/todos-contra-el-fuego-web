@@ -50,7 +50,7 @@ i18nOpts.react = {
    nsMode: 'default' */
 };
 
-const sendMissing = false;
+const sendMissing = true;
 if (sendMissing && !Meteor.isProduction) {
   i18nOpts.sendMissing = true;
   i18nOpts.sendMissingTo = 'fallback';

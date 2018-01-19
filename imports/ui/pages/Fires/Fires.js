@@ -74,7 +74,7 @@ class Fire extends React.Component {
               {' '}
               {t('Por ejemplo:')}
               <ul>
-                <li>{t('si conoces esta zona y cómo acceder a el fuego (esto puede de ser de ayuda para apagarlo si sigue activo o para investigarlo en un futuro)')}</li>
+                <li>{t('si conoces esta zona y cómo acceder al fuego (esto puede de ser de ayuda para apagarlo si sigue activo o para investigarlo en un futuro)')}</li>
                 <li>{t('si conoces el motivo por el que comenzó el fuego')}</li>
                 <li>{t('si quieres denunciar algún tipo de ilegalidad, incluso anónimamente')}</li>
                 <li>{t('o cualquier otra información')}</li>

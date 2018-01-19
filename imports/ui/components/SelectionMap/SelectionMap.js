@@ -162,9 +162,9 @@ class SelectionMap extends Component {
     return (
       <div>
         { this.isValidState() &&
-          <div className="leaflet-container">
+          <Fragment>
             <Map
-                /* className="sidebar-map" */
+                className="selectionmap-leaflet-container"
                 center={this.state.center}
                 zoom={this.state.zoom}
                 ref={(map) => {
@@ -251,7 +251,7 @@ class SelectionMap extends Component {
                  </ButtonGroup>
                </Control>
             </Map>
-          </div>
+          </Fragment>
         }
       </div>
     );

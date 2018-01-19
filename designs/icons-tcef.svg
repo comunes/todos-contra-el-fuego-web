@@ -247,12 +247,12 @@
      inkscape:pageshadow="2"
      inkscape:zoom="0.25"
      inkscape:cx="-324.9908"
-     inkscape:cy="1157.3585"
+     inkscape:cy="997.3585"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g22554-45"
      showgrid="false"
      inkscape:window-width="1920"
-     inkscape:window-height="1016"
+     inkscape:window-height="983"
      inkscape:window-x="0"
      inkscape:window-y="867"
      inkscape:window-maximized="1" />
@@ -484,18 +484,82 @@
     <flowRoot
        xml:space="preserve"
        id="flowRoot8482"
-       style="font-style:normal;font-weight:normal;font-size:192px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;"
+       style="font-style:normal;font-weight:normal;font-size:192px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none"
        transform="matrix(0.26458333,0,0,0.26458333,433.29892,-64.826953)"
        inkscape:export-filename="/mnt/md1/proyectos/dev/todos-contra-el-fuego-web/public/remove-marker.png"
        inkscape:export-xdpi="14.000002"
        inkscape:export-ydpi="14.000002"><flowRegion
          id="flowRegion8484"
-         style="font-size:192px;fill:#ff0000;"><rect
+         style="font-size:192px;fill:#ff0000"><rect
            id="rect8486"
            width="476.79202"
            height="367.69553"
            x="-1499.0664"
            y="-142.19131"
-           style="font-size:192px;fill:#ff0000;" /></flowRegion><flowPara
-         id="flowPara8488"></flowPara></flowRoot>  </g>
+           style="font-size:192px;fill:#ff0000" /></flowRegion><flowPara
+         id="flowPara8488"></flowPara></flowRoot>    <g
+       id="g22554-45"
+       transform="rotate(-104.78334,-231.82318,51.6182)"
+       inkscape:export-filename="/mnt/md1/proyectos/dev/todos-contra-el-fuego-web/public/fire-marker.png"
+       inkscape:export-xdpi="4.0856881"
+       inkscape:export-ydpi="4.0856881">
+      <g
+         id="g8559">
+        <g
+           inkscape:export-ydpi="4.0856881"
+           inkscape:export-xdpi="4.0856881"
+           inkscape:export-filename="/mnt/md1/proyectos/dev/todos-contra-el-fuego-web/public/fire-marker.png"
+           transform="rotate(-144.74008,-66.772616,119.34544)"
+           id="g22554-2">
+          <path
+             sodipodi:nodetypes="cszzcczasc"
+             inkscape:connector-curvature="0"
+             id="path5329-8"
+             d="m -25.638382,38.048346 c 11.566313,13.887908 17.1215844,22.244854 13.751242,33.868326 -2.465387,8.50265 -8.895424,18.626534 -18.100172,25.532106 -9.204776,6.905572 -20.549951,13.517692 -24.263404,17.728802 -3.71348,4.21108 -9.835779,11.6046 -10.976769,21.82688 -2.725208,24.7073 15.038044,45.63926 39.702238,48.35952 11.289242,1.2311 26.6324564,-5.2645 34.2331684,-10.31973 C 16.308659,169.98901 28.520768,152.76263 31.570884,138.81099 35.854436,119.21732 35.065926,96.385127 23.626002,79.16853 12.946123,63.095807 3.8673424,50.775037 -25.638382,38.048346 Z"
+             style="fill:#d41300;fill-opacity:1;stroke:none;stroke-width:10.58333302;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+          <path
+             sodipodi:nodetypes="cszzcczcsc"
+             inkscape:connector-curvature="0"
+             id="path5331-30"
+             d="m -7.5198746,101.09834 c 4.018254,8.70077 3.821166,14.69136 0.49964,20.18233 -2.429696,4.01667 -7.1125824,8.31964 -12.7749834,10.59336 -5.662401,2.27373 -12.38086,4.1034 -14.860826,5.75067 -2.479966,1.64727 -6.630512,4.59399 -8.617877,9.67322 -4.786736,12.28103 1.27127,26.11038 13.530846,30.8887 5.613373,2.17993 11.515354,2.13146 17.442629,-0.0849 5.9272234,-2.21636 14.0405914,-9.44377 18.0234704,-15.42084 6.3490206,-9.59829 8.9531296,-23.76395 5.4565016,-34.15229 -3.2643496,-9.69812 -4.6224286,-12.3603 -18.6994006,-27.43025 z"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:10.58333302;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        </g>
+        <g
+           inkscape:export-ydpi="4.0856881"
+           inkscape:export-xdpi="4.0856881"
+           inkscape:export-filename="/mnt/md1/proyectos/dev/todos-contra-el-fuego-web/public/fire-marker.png"
+           transform="rotate(96.689458,-75.070103,121.00438)"
+           id="g22554-5">
+          <path
+             sodipodi:nodetypes="cszzcczasc"
+             inkscape:connector-curvature="0"
+             id="path5329-4"
+             d="m -25.638382,38.048346 c 11.566313,13.887908 17.1215844,22.244854 13.751242,33.868326 -2.465387,8.50265 -8.895424,18.626534 -18.100172,25.532106 -9.204776,6.905572 -20.549951,13.517692 -24.263404,17.728802 -3.71348,4.21108 -9.835779,11.6046 -10.976769,21.82688 -2.725208,24.7073 15.038044,45.63926 39.702238,48.35952 11.289242,1.2311 26.6324564,-5.2645 34.2331684,-10.31973 C 16.308659,169.98901 28.520768,152.76263 31.570884,138.81099 35.854436,119.21732 35.065926,96.385127 23.626002,79.16853 12.946123,63.095807 3.8673424,50.775037 -25.638382,38.048346 Z"
+             style="fill:#d41300;fill-opacity:1;stroke:none;stroke-width:10.58333302;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+          <path
+             sodipodi:nodetypes="cszzcczcsc"
+             inkscape:connector-curvature="0"
+             id="path5331-9"
+             d="m -7.5198746,101.09834 c 4.018254,8.70077 3.821166,14.69136 0.49964,20.18233 -2.429696,4.01667 -7.1125824,8.31964 -12.7749834,10.59336 -5.662401,2.27373 -12.38086,4.1034 -14.860826,5.75067 -2.479966,1.64727 -6.630512,4.59399 -8.617877,9.67322 -4.786736,12.28103 1.27127,26.11038 13.530846,30.8887 5.613373,2.17993 11.515354,2.13146 17.442629,-0.0849 5.9272234,-2.21636 14.0405914,-9.44377 18.0234704,-15.42084 6.3490206,-9.59829 8.9531296,-23.76395 5.4565016,-34.15229 -3.2643496,-9.69812 -4.6224286,-12.3603 -18.6994006,-27.43025 z"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:10.58333302;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        </g>
+        <g
+           transform="rotate(-22.690691,-35.704234,120.074)"
+           id="g8542">
+          <path
+             style="fill:#d41300;fill-opacity:1;stroke:none;stroke-width:10.58333302;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             d="m -25.638382,38.048346 c 11.566313,13.887908 17.1215844,22.244854 13.751242,33.868326 -2.465387,8.50265 -8.895424,18.626534 -18.100172,25.532106 -9.204776,6.905572 -20.549951,13.517692 -24.263404,17.728802 -3.71348,4.21108 -9.835779,11.6046 -10.976769,21.82688 -2.725208,24.7073 15.038044,45.63926 39.702238,48.35952 11.289242,1.2311 26.6324564,-5.2645 34.2331684,-10.31973 C 16.308659,169.98901 28.520768,152.76263 31.570884,138.81099 35.854436,119.21732 35.065926,96.385127 23.626002,79.16853 12.946123,63.095807 3.8673424,50.775037 -25.638382,38.048346 Z"
+             id="path5329-9"
+             inkscape:connector-curvature="0"
+             sodipodi:nodetypes="cszzcczasc" />
+          <path
+             style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:10.58333302;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             d="m -7.5198746,101.09834 c 4.018254,8.70077 3.821166,14.69136 0.49964,20.18233 -2.429696,4.01667 -7.1125824,8.31964 -12.7749834,10.59336 -5.662401,2.27373 -12.38086,4.1034 -14.860826,5.75067 -2.479966,1.64727 -6.630512,4.59399 -8.617877,9.67322 -4.786736,12.28103 1.27127,26.11038 13.530846,30.8887 5.613373,2.17993 11.515354,2.13146 17.442629,-0.0849 5.9272234,-2.21636 14.0405914,-9.44377 18.0234704,-15.42084 6.3490206,-9.59829 8.9531296,-23.76395 5.4565016,-34.15229 -3.2643496,-9.69812 -4.6224286,-12.3603 -18.6994006,-27.43025 z"
+             id="path5331-35"
+             inkscape:connector-curvature="0"
+             sodipodi:nodetypes="cszzcczcsc" />
+        </g>
+      </g>
+    </g>
+  </g>
 </svg>

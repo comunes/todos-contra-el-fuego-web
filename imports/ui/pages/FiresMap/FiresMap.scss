@@ -1,12 +1,23 @@
+@import '../../stylesheets/mixins';
+@import '../../stylesheets/colors';
+
 /* https://github.com/PaulLeCam/react-leaflet/issues/108 */
 
-.leaflet-container {
+.firesmap-leaflet-container {
   height: 100%;
   min-height: 60vh;
   width: 100%;
-  min-width: 75vw;
+  /* min-width: 75vw; */
   display: flex;
-  margin: 30px auto;
+  margin: 20px auto;
+}
+
+@include breakpoint(mobile) {
+  .firesmap-leaflet-container {
+    height: 80%;
+    min-width: 85vw;
+    margin: 10px auto;
+  }
 }
 
 .Loading {
@@ -22,13 +33,6 @@
   stroke: grey;
 }
 
-@media only screen and (max-width: 400px) {
-  .leaflet-container {
-     height: 400px;
-     width: 85vw;
-  }
-}
-
 .mark-checkbox {
   margin-left: 5px;
 }
@@ -37,7 +41,21 @@
   background-image: url(/images/layers.png);
 }
 
+.leaflet-retina .leaflet-control-layers-toggle {
+  background-image: url(/images/layers.png);
+  background-size: 26px 26px;
+}
 
 .glyphicon .glyphicon-thumbs-up {
 
+}
+
+.firesmap-legend {
+  font-size: 16px;
+}
+
+.firesmap-note,
+.firesmap-footnote {
+  font-size: 14px;
+  color: $light;
 }

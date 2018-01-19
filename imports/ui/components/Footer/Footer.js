@@ -31,4 +31,4 @@ const Footer = (props) => {
 
 Footer.propTypes = {};
 
-export default translate([], { wait: true })(Footer)
+export default translate([], { wait: true })(Footer);

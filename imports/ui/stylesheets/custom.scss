@@ -1,3 +1,6 @@
+@import './mixins';
+@import './colors';
+
 a, a:hover  {
   color: $todos-palette5;
 }
@@ -8,4 +11,14 @@ a, a:hover  {
 
 h4.page-header {
   line-height: 2em;
+}
+
+@include breakpoint(mobile) {
+  h4.page-header {
+    line-height: 1.3em;
+  }
+}
+
+.page-header {
+  margin-top: 25px;
 }

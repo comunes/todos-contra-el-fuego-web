@@ -24,6 +24,7 @@ import Loading from '/imports/ui/components/Loading/Loading';
 import ActiveFiresCollection from '/imports/api/ActiveFires/ActiveFires';
 import FireAlertsCollection from '/imports/api/FireAlerts/FireAlerts';
 import UserSubsToFiresCollection from '/imports/api/Subscriptions/Subscriptions';
+import { isNotHomeAndMobile } from '/imports/ui/components/Utils/isMobile';
 
 import './FiresMap.scss';
 
@@ -136,15 +137,18 @@ class FiresMap extends React.Component {
          <h4 className="page-header"><Trans parent="span">Fuegos activos</Trans></h4>
          <Row>
            <Col xs={12} sm={6} md={6} lg={6} >
-             <p>
+             <p className="firesmap-legend">
                { this.props.activefires.length === 0 ?
                  <Trans parent="span" i18nKey="noActiveFireInMapCount">No hay fuegos activos en esta zona del mapa. Hay un total de <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos detectados en todo el mundo.</Trans> :
                  <Trans parent="span" i18nKey="activeFireInMapCount">En rojo, <strong>{{ count: this.props.activefires.length }}</strong> fuegos activos en el mapa. Hay un total de <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos detectados en todo el mundo por la NASA.</Trans>
                }
              </p>
-             <p><Trans parent="span" i18nKey="activeNeigFireInMapCount">En naranja, los fuegos notificados por nuestros usuarios/as recientemente.</Trans></p>
+             {isNotHomeAndMobile &&
+              <p className="firesmap-legend"><Trans parent="span" i18nKey="activeNeigFireInMapCount">En naranja, los fuegos notificados por nuestros usuarios/as recientemente.</Trans></p> }
            </Col>
            <Col xs={12} sm={6} md={6} lg={6}>
+              {isNotHomeAndMobile &&
+             <Fragment>
              <Checkbox inline={false} defaultChecked={this.state.showSubsUnion} onClick={e => this.setShowSubsUnion(e.target.checked)}>
                <Trans className="mark-checkbox" parent="span">Resaltar en verde el área vigilada por nuestros usuarios/as</Trans>&nbsp;(*)
              </Checkbox>
@@ -153,7 +157,8 @@ class FiresMap extends React.Component {
                 <Trans className="mark-checkbox" parent="span">Resaltar los fuegos con un marcador</Trans>
               </Checkbox>}
               <CenterInMyPosition onClick={viewport => this.centerOnUserLocation(viewport)} />
-              <p>
+             </Fragment>}
+              <p className="firesmap-note">
                 <em>{ this.state.viewport.zoom >= MAXZOOMREACTIVE ?
                      <Trans>Los fuegos activos se actualizan en tiempo real.</Trans> :
                      <Trans>Haga zoom en una zona de su interés si quiere que los fuegos se actualicen en tiempo real.</Trans>
@@ -162,48 +167,49 @@ class FiresMap extends React.Component {
               </p>
            </Col>
          </Row>
+         {/* https://github.com/CliffCloud/Leaflet.Sleep */}
+         <Map
+             ref={(map) => {
+                 this.fireMap = map;
+                 this.handleLeafletLoad(map);
+                 }}
+             className="firesmap-leaflet-container"
+             animate
+             minZoom={5}
+             preferCanvas
+             onClick={this.onClickReset}
+             viewport={this.state.viewport}
+             onViewportChanged={this.onViewportChanged}
+             sleep={window.location.pathname === '/'}
+             sleepTime={10750}
+             wakeTime={750}
+             sleepNote
+             hoverToWake
+             wakeMessage={this.props.t('Pulsa para activar')}
+             sleepOpacity={0.6}
+         >
+           {/* http://wiki.openstreetmap.org/wiki/Tile_servers */}
+           {!this.props.loading &&
+           <Fragment>
+             <FireList
+                 fires={this.props.activefires}
+                 scale={this.state.viewport.zoom >= MAXZOOM}
+                 useMarkers={this.state.useMarkers}
+                 nasa
+             />
+             <FireList
+                 fires={this.props.firealerts}
+                 scale={false}
+                 useMarkers={this.state.useMarkers}
+                 nasa={false}
+             />
+           </Fragment> }
+           <DefMapLayers />
+         </Map>
          <Row>
-           {/* https://github.com/CliffCloud/Leaflet.Sleep */}
-           <Map
-               ref={(map) => {
-                   this.fireMap = map;
-                   this.handleLeafletLoad(map);
-                   }}
-               animate
-               minZoom={5}
-               preferCanvas
-               onClick={this.onClickReset}
-               viewport={this.state.viewport}
-               onViewportChanged={this.onViewportChanged}
-               sleep={window.location.pathname === '/'}
-               sleepTime={10750}
-               wakeTime={750}
-               sleepNote
-               hoverToWake
-               wakeMessage={this.props.t('Pulsa para activar')}
-               sleepOpacity={0.6}
-           >
-             {/* http://wiki.openstreetmap.org/wiki/Tile_servers */}
-             {!this.props.loading &&
-              <Fragment>
-                <FireList
-                    fires={this.props.activefires}
-                    scale={this.state.viewport.zoom >= MAXZOOM}
-                    useMarkers={this.state.useMarkers}
-                    nasa
-                />
-                <FireList
-                    fires={this.props.firealerts}
-                    scale={false}
-                    useMarkers={this.state.useMarkers}
-                    nasa={false}
-                />
-              </Fragment> }
-             <DefMapLayers />
-           </Map>
-         </Row>
-         <Row>
-           <p><span style={{ paddingRight: '5px' }}>(*)</span><Trans i18nKey="mapPrivacy" parent="span"><em>Para preservar la privacidad de nuestros usuarios/as, los datos reflejados están aleatoriamente alterados y son solo orientativos.</em></Trans></p>
+           <Col xs={12} sm={12} md={12} lg={12}>
+             <p className="firesmap-footnote"><span style={{ paddingRight: '5px' }}>(*)</span><Trans i18nKey="mapPrivacy" parent="span"><em>Para preservar la privacidad de nuestros usuarios/as, los datos reflejados están aleatoriamente alterados y son solo orientativos.</em></Trans></p>
+           </Col>
          </Row>
       </div>
     );

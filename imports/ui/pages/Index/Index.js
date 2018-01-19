@@ -12,6 +12,7 @@ import ReactResizeDetector from 'react-resize-detector';
 import _ from 'lodash';
 import { ScrollToTopOnMount, SectionsContainer, Section } from 'react-fullpage';
 import 'html5-device-mockups/dist/device-mockups.min.css';
+import { isAnyMobile } from '/imports/ui/components/Utils/isMobile';
 import SubscriptionEditor from '/imports/ui/components/SubscriptionEditor/SubscriptionEditor';
 import FiresMap from '../FiresMap/FiresMap';
 
@@ -58,12 +59,12 @@ class Index extends Component {
     // https://github.com/subtirelumihail/react-fullpage
     const fullPageOptions = {
       activeClass:          'active', // the class that is appended to the sections links
-      anchors:              ['home', 'crowdsourcing', 'platforms', 'participe', 'fires'], // the anchors for each sections
+      anchors:              ['home', 'crowdsourcing', 'participe', 'fires', 'platforms'], // the anchors for each sections
       arrowNavigation:      true, // use arrow keys (true after development)
       className:            'section-container', // the class name for the section container
       delay:                1000, // the scroll animation speed
-      navigation:           true, // use dots navigation
-      scrollBar:            false, // use the browser default scrollbar
+      navigation:           true, // !isMobile, // use dots navigation
+      scrollBar:            isAnyMobile, // use the browser default scrollbar
       sectionClassName:     'section', // the section class name
       sectionPaddingTop:    '0', // the section top padding
       sectionPaddingBottom: '0', // the section bottom padding
@@ -84,6 +85,7 @@ class Index extends Component {
                   className="carousel slide"
                   ref={(ref) => { this.slides = ref; }}
               >
+                {/* for dev: data-interval=false */}
                 <ol className="carousel-indicators">
                   <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active" />
                   <li data-target="#carouselExampleIndicators" data-slide-to="1" />
@@ -95,7 +97,7 @@ class Index extends Component {
                   <div className="carousel-item carousel-item-1 active">
                     <div className="slide-1-icon" />
                     <div className="carousel-caption">
-                      <h3><i className="fa fa-map-pointer" aria-hidden="true" />Elige un lugar</h3>
+                      <h3><i className="fa fa-map-pointer" aria-hidden="true" /><Trans>Elige un lugar</Trans></h3>
                       <p />
                     </div>
                   </div>
@@ -103,7 +105,7 @@ class Index extends Component {
                   <div className="carousel-item carousel-item-2">
                     <div className="slide-2-icon" />
                     <div className="carousel-caption">
-                      <h3><i className="fa fa-dot-circle-o" aria-hidden="true" />Elige un radio de vigilancia</h3>
+                      <h3><i className="fa fa-dot-circle-o" aria-hidden="true" /><Trans>Elige un radio de vigilancia</Trans></h3>
                       <p />
                     </div>
                   </div>
@@ -111,7 +113,7 @@ class Index extends Component {
                   <div className="carousel-item carousel-item-3">
                     <div className="slide-3-icon" />
                     <div className="carousel-caption">
-                      <h3><i className="fa fa-podcast" aria-hidden="true" />Recibe alertas de fuegos en esa zona</h3>
+                      <h3><i className="fa fa-podcast" aria-hidden="true" /><Trans>Recibe alertas de fuegos en esa zona</Trans></h3>
                       <p />
                     </div>
                   </div>
@@ -119,18 +121,18 @@ class Index extends Component {
                   <div className="carousel-item carousel-item-4">
                     <div className="slide-4-icon" />
                     <div className="carousel-caption">
-                      <h3><i className="fa fa-bell-o" aria-hidden="true" />Alerta cuando hay un fuego</h3>
+                      <h3><i className="fa fa-bell-o" aria-hidden="true" /><Trans>Alerta cuando hay un fuego</Trans></h3>
                       <p />
                     </div>
                   </div>
                 </div>
                 <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                   <span className="carousel-control-prev-icon" aria-hidden="true" />
-                  <span className="sr-only">Previous</span>
+                  <span className="sr-only"><Trans>Anterior</Trans></span>
                 </a>
                 <a className="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
                   <span className="carousel-control-next-icon" aria-hidden="true" />
-                  <span className="sr-only">Next</span>
+                  <span className="sr-only"><Trans>Siguiente</Trans></span>
                 </a>
               </div>
             </header>
@@ -139,7 +141,7 @@ class Index extends Component {
                 <div className="scale__container--js">
                   <h1 id="tcefh1" className="scale--js">{this.props.t('AppName')}</h1>
                 </div>
-                <p>Siempre alerta a los fuegos en nuestro vecindario</p>
+                <p className="moto"><Trans>Siempre alerta a los fuegos en nuestro vecindario</Trans></p>
                 {/* <Link className="participe-btn btn btn-lg btn-warning" role="button" to="/#platforms">{this.props.t('Participa')}</Link> */}
               </div>
             </section>
@@ -149,7 +151,7 @@ class Index extends Component {
             <div className="container">
               <div className="row">
                 <div className="col-md-8 mx-auto">
-                  <h2 className="section-heading">Colaboración masiva contra los incendios</h2>
+                  <h2 className="section-heading"><Trans>Colaboración masiva contra los incendios</Trans></h2>
                   <p><Trans>Imágenes capturadas por los satélites de la NASA muestran el humo de grandes incendios que se extienden sobre el Océano Pacífico. La actividad del fuego está delineada en rojo.</Trans></p>
                 </div>
               </div>
@@ -207,8 +209,8 @@ class Index extends Component {
                       <div className="col-lg-6">
                         <div className="feature-item">
                           <i className="icon-envelope-open text-primary" />
-                          <h3><Trans>Correo electronico</Trans></h3>
-                          <p className="text-muted"><Trans>Recibe nuestras notificaciones de fuegos por correo</Trans></p>
+                          <h3><Trans>Notificaciones</Trans></h3>
+                          <p className="text-muted"><Trans>Recibe nuestras notificaciones de fuegos por correo o en tu navegador</Trans></p>
                         </div>
                       </div>
                     </div>

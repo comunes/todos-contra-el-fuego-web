@@ -6,3 +6,4 @@ settings-development.json
 private/GeoLite2-City.mmdb*
 npm-debug.log
 **/.sass-cache
+.deploy/

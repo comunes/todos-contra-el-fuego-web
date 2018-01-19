@@ -1,3 +1,6 @@
+@import '../../stylesheets/colors';
+@import '../../stylesheets/mixins';
+
 .fire-leaflet-container {
   min-height: 30vh;
   min-width: 40vw;
@@ -8,19 +11,18 @@
 }
 
 .ViewFire > h4.page-header {
-    line-height: 1.5em;
+    line-height: 1.3em;
 }
 
 @media (max-width: 768px) {
-    .leaflet-container {
+    .fire-leaflet-container {
         width: 100%;
     }
 }
 
-
 .comments-info {
     font-size: 14px;
-    color: #818182;
+    color: $light;
     /* display: inline-flex; */
     /* background-color: #fefefe;
     border-color: #fdfdfe;

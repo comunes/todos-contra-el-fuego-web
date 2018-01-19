@@ -12,12 +12,12 @@ const propTypes = {
   href: PropTypes.string,
   onClick: PropTypes.func,
   onSelect: PropTypes.func,
-  eventKey: PropTypes.any,
+  eventKey: PropTypes.any
 };
 
 const defaultProps = {
   active: false,
-  disabled: false,
+  disabled: false
 };
 
 class NavItem extends React.Component {
@@ -38,7 +38,9 @@ class NavItem extends React.Component {
   }
 
   render() {
-    const { active, disabled, onClick, className, anchorClassName, style, ...props } =
+    const {
+      active, disabled, onClick, className, anchorClassName, style, ...props
+    } =
       this.props;
 
     delete props.onSelect;
@@ -58,13 +60,15 @@ class NavItem extends React.Component {
     return (
       <li
         role="presentation"
+        data-toggle="collapse"
+        data-target=".navbar-collapse.show"
         className={classNames(className, { active, disabled })}
         style={style}
       >
         <SafeAnchor
           {...props}
-            disabled={disabled}
-            className={anchorClassName}
+          disabled={disabled}
+          className={anchorClassName}
           onClick={createChainedFunction(onClick, this.handleClick)}
         />
       </li>

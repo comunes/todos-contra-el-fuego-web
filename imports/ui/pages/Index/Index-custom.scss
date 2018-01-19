@@ -1,3 +1,4 @@
+@import '../../stylesheets/mixins';
 @import '../../stylesheets/colors';
 
 .carousel-item {
@@ -29,6 +30,12 @@
   text-shadow: 2px 2px 1px #280B0B;
 }
 
+@include breakpoint(mobile) {
+    .carousel-caption > h3 {
+        font-size: 2.0rem;
+    }
+}
+
 .py-5 > .container > {
   div > h1 {
     color: #280B0B;
@@ -38,15 +45,35 @@
   }
   p {
     padding-top: 10px;
-    font-size: 1.5em;
+    font-size: 1.7em;
   }
+}
+
+@include breakpoint(mobile) {
+    .py-5 > .container > {
+        p {
+            font-size: 1.2em;
+        }
+    }
+
+    .pt-5, .py-5 {
+        padding-top: 1rem !important;
+    }
+
+    .moto {
+        margin-top: 5px;
+        margin-left: 5px;
+    }
+
+    .sectionTESTINGGGGG { // don't scroll sections in mobiles
+      overflow: visible !important;
+    }
 }
 
 .slide-2-icon {
   border-radius: 50%;
   position: relative;
   width: 30%;
-  top: 25%;
   left: 35%;
   border: 14px solid #FFF;
   opacity: .5;
@@ -70,6 +97,20 @@
   opacity: .7;
   right: 35%;
   text-shadow: 1px 1px #280B0B;
+}
+
+@include breakpoint(mobile) {
+    .slide-1-icon:before,
+    .slide-2-icon:before,
+    .slide-3-icon:before,
+    .slide-4-icon:before {
+        font-size: 100px;
+    }
+
+    .slide-3-icon:before,
+    .slide-4-icon:before {
+        top: -50px;
+    }
 }
 
 .slide-1-icon:before {
@@ -124,7 +165,7 @@
 .full-width {
   position: relative;
   width: 100vw;
-  margin-left: calc(-50vw + 50% - 8px);
+  margin-left: calc(-50vw + 50%);
   position: relative;
   /*
     width: 100vw;

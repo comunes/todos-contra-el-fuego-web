@@ -2,7 +2,6 @@
 /* eslint-disable react/jsx-indent-props */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withTracker } from 'meteor/react-meteor-data';
 import { Row, Col } from 'react-bootstrap';
 import { translate } from 'react-i18next';
 import DistanceSlider from '/imports/ui/components/DistanceSlider/DistanceSlider';
@@ -10,6 +9,7 @@ import SelectionMap, { action } from '/imports/ui/components/SelectionMap/Select
 import Gkeys from '/imports/startup/client/Gkeys';
 import CenterInMyPosition from '/imports/ui/components/CenterInMyPosition/CenterInMyPosition.js';
 import SubsAutocomplete from './SubsAutocomplete';
+import { isNotHomeAndMobile } from '/imports/ui/components/Utils/isMobile';
 
 class FireSubscription extends React.Component {
   constructor(props) {
@@ -73,6 +73,7 @@ class FireSubscription extends React.Component {
     return (
       <div>
         <Row>
+          {isNotHomeAndMobile &&
           <Col xs={12} sm={12} md={6} lg={6} >
             <div>
               <SubsAutocomplete
@@ -80,12 +81,14 @@ class FireSubscription extends React.Component {
                   onChange={value => this.onAutocompleteChange(value)}
               />
             </div>
-          </Col>
+          </Col> }
           <Col xs={12} sm={12} md={6} lg={6} >
             <DistanceSlider onChange={value => this.onSliderChange(value)} />
+            {isNotHomeAndMobile &&
             <Row className="center-in-my-pos">
               <CenterInMyPosition onClick={viewport => this.centerOnUserLocation(viewport)} />
             </Row>
+            }
           </Col>
         </Row>
         <Row className="align-items-center justify-content-center">

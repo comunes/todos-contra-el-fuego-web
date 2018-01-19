@@ -1,11 +1,17 @@
+@import '../../stylesheets/mixins';
+
 .dist-slider {
     width: 400px;
     margin: 30px;
 }
 
-@media only screen and (max-width: 400px) {
-    .dist-slider {
-        width: 200px;
-        margin: 10px;
-    }
+@include breakpoint(mobile) {
+  .dist-slider {
+    width: 100%;
+    margin: 10px;
+  }
+
+  .rc-slider {
+    margin: 0 0 0 -10px;
+  }
 }

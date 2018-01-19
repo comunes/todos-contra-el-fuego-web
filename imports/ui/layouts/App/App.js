@@ -55,7 +55,7 @@ const App = props => (
         <div className="App">
           <Navigation {...props} />
           <ReSendEmail {...props} />
-          <Grid> {/* bsClass="previously-container-but-disabled" > */}
+          <Grid>
             <Switch>
               <Route exact name="index" path="/" component={Index} />
               {/* <Authenticated exact path="/documents" component={Documents} {...props} />
