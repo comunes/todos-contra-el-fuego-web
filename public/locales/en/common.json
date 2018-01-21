@@ -110,5 +110,6 @@
   "Suscripción añadida":
   "Subscription added",
   "Suscripción actualizada":
-  "Subscription updated"
+  "Subscription updated",
+  "Última actualización, {{when}}": "Last updated, {{when}}"
 }

@@ -160,8 +160,7 @@ class SelectionMap extends Component {
   render() {
     const { t, onRemove } = this.props;
     return (
-      <div>
-        { this.isValidState() &&
+      this.isValidState() ?
           <Fragment>
             <Map
                 className="selectionmap-leaflet-container"
@@ -251,10 +250,8 @@ class SelectionMap extends Component {
                  </ButtonGroup>
                </Control>
             </Map>
-          </Fragment>
-        }
-      </div>
-    );
+          </Fragment> :
+      <div />);
   }
 }
 

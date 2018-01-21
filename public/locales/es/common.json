@@ -219,5 +219,10 @@
   "o cualquier otra información": "o cualquier otra información",
   "Haga zoom en una zona de su interés si quiere que los fuegos se actualicen en tiempo real.": "Haga zoom en una zona de su interés si quiere que los fuegos se actualicen en tiempo real.",
   "Notificaciones": "Notificaciones",
-  "Recibe nuestras notificaciones de fuegos por correo o en tu navegador": "Recibe nuestras notificaciones de fuegos por correo o en tu navegador"
+  "Recibe nuestras notificaciones de fuegos por correo o en tu navegador": "Recibe nuestras notificaciones de fuegos por correo o en tu navegador",
+  "Fuego notificado por uno de nuestros usuarios/as {{when}}": "Fuego notificado por uno de nuestros usuarios/as {{when}}",
+  "No recibirás notificaciones de fuegos en este equipo, solo por correo": "No recibirás notificaciones de fuegos en este equipo, solo por correo",
+  "not-found": "Upppps: Esta página no existe",
+  "Más información sobre este fuego": "Más información sobre este fuego",
+  "Última actualización, {{when}}": "Última actualización, {{when}}"
 }

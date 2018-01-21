@@ -8,12 +8,12 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { translate } from 'react-i18next';
 import { Meteor } from 'meteor/meteor';
 import { Map, Circle } from 'react-leaflet';
-import moment from 'moment-timezone';
 import Blaze from 'meteor/gadicc:blaze-react-component';
 import DefMapLayers from '/imports/ui/components/Maps/DefMapLayers';
+import NotFound from '/imports/ui/pages/NotFound/NotFound';
 import FiresCollection from '/imports/api/Fires/Fires';
+import { dateLongFormat, dateFromNow } from '/imports/api/Common/dates';
 import '/imports/startup/client/comments';
-
 import './Fires.scss';
 
 class Fire extends React.Component {
@@ -27,16 +27,17 @@ class Fire extends React.Component {
   render() {
     const { loading, fire, t } = this.props;
     if (fire && fire.when) {
-      this.when = moment.tz(fire.when, moment.tz.guess());
+      this.dateLongFormat = dateLongFormat(fire.when);
+      this.dateFromNow = dateFromNow(fire.when);
     }
-    return (
-      <div className="ViewFire">
+    return (fire ?
+      (<div className="ViewFire">
         {!loading &&
          <Fragment>
            <h4 className="page-header">
              {fire.address ?
-              t('Información adicional sobre fuego detectado en {{where}} el {{when}}', { where: fire.address, when: this.when.format('LLLL (z)') }) :
-              t('Información adicional sobre fuego detectado el {{when}}', { when: this.when.format('LLLL (z)') })}
+              t('Información adicional sobre fuego detectado en {{where}} el {{when}}', { where: fire.address, when: this.dateLongFormat }) :
+              t('Información adicional sobre fuego detectado el {{when}}', { when: this.dateLongFormat })}
            </h4>
 
             <Map
@@ -62,10 +63,10 @@ class Fire extends React.Component {
             </Map>
             <p>{t('Coordenadas:')} {fire.lat}, {fire.lon}</p>
             {(fire.type === 'modis' || fire.type === 'viirs') &&
-             <p>{t('Fuego detectado por satélites de la NASA {{when}}', { when: this.when.fromNow() })}</p>
+             <p>{t('Fuego detectado por satélites de la NASA {{when}}', { when: this.dateFromNow })}</p>
             }
              {(fire.type === 'vecinal') &&
-              <p>{t('Fuego notificado por uno de nuestros usuarios/as {{when}}', { when: this.when.fromNow() })}</p>
+              <p>{t('Fuego notificado por uno de nuestros usuarios/as {{when}}', { when: this.dateFromNow })}</p>
              }
             {/* TODO: marcar tipo de fuego, industria, etc */}
             <h4>{t('Comentarios')}</h4>
@@ -85,8 +86,8 @@ class Fire extends React.Component {
             </div>
          </Fragment>
         }
-      </div>
-    );
+       </div>
+      ) : <NotFound />);
   }
 }
 

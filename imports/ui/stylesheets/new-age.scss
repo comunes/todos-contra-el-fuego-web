@@ -49,9 +49,14 @@ p {
   margin-bottom: 20px; }
 
 div.section.platf > div.container {
-  padding: 70px 0; }
+  padding: 30px 0; }
 div.section h2 {
   font-size: 50px; }
+
+@include breakpoint(mobile) {
+  div.section h2 {
+    font-size: 40px; }
+}
 
 div.section.crowd > div.container {
   position: relative;
@@ -84,6 +89,17 @@ div.section.platf .feature-item {
   max-width: 325px;
   margin: 0 auto; }
 
+@include breakpoint(mobile) {
+  div.section.platf .device-container,
+  div.section.platf .feature-item {
+    margin: 10px auto;
+  }
+
+  .device-wrapper {
+    margin: 10px auto;
+  }
+}
+
 div.section.platf .device-container {
   margin-bottom: 100px; }
 @media (min-width: 992px) {
@@ -94,6 +110,13 @@ div.section.platf .feature-item {
   padding-top: 50px;
   padding-bottom: 50px;
   text-align: center; }
+
+@include breakpoint(mobile) {
+  div.section.platf .feature-item {
+    padding-top: 15px;
+    padding-bottom: 15px; }
+}
+
 div.section.platf .feature-item h3 {
   font-size: 30px; }
 div.section.platf .feature-item i {

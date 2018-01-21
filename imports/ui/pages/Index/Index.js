@@ -208,7 +208,7 @@ class Index extends Component {
                       </div>
                       <div className="col-lg-6">
                         <div className="feature-item">
-                          <i className="icon-envelope-open text-primary" />
+                          <i className="icon-speech text-primary" />
                           <h3><Trans>Notificaciones</Trans></h3>
                           <p className="text-muted"><Trans>Recibe nuestras notificaciones de fuegos por correo o en tu navegador</Trans></p>
                         </div>

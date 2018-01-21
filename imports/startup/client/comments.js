@@ -28,12 +28,12 @@ i18n.init((err, t) => {
   Comments.ui.config({
     limit: 20, // default 10
     loadMoreCount: 20, // default 20
-    generateAvatar: function genAvatar(user, isAnonymous) {
+    /* generateAvatar: function genAvatar(user, isAnonymous) {
       if (isAnonymous) {
         return i18n.t('Anónimo');
       }
       return user.profile && user.profile.name && user.profile.name.first ? user.profile.name.first : null;
-    },
+    }, */
     template: 'bootstrap', // default 'semantic-ui'
     // default 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'
     defaultAvatar: '/default-avatar.png',

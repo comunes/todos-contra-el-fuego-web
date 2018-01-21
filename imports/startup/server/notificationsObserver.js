@@ -3,6 +3,7 @@
 import i18n from 'i18next';
 import { Meteor } from 'meteor/meteor';
 import moment from 'moment';
+import { dateLongFormat } from '/imports/api/Common/dates';
 import Notifications from '/imports/api/Notifications/Notifications';
 import sendMail from '/imports/startup/server/email';
 import { hr } from '/imports/startup/server/email';
@@ -58,19 +59,28 @@ Meteor.startup(() => {
         user && user.emails[0] && user.emails[0].verified ? user.emails[0].address : null;
       if (emailAddress) {
         const img = imgEl(notif.geo.coordinates[1], notif.geo.coordinates[0]);
-        const url = imgUrl(notif.geo.coordinates[1], notif.geo.coordinates[0]);
+        //    const url = imgUrl(notif.geo.coordinates[1], notif.geo.coordinates[0]);
+        const fireUrl = `${Meteor.absoluteUrl('fire/')}${notif.sealed}`;
+        const fireHtmlUrl = `<a href="${fireUrl}">${i18n.t('Más información sobre este fuego')}</a>`;
+        // TODO get _id of fire
+        const fireTextUrl = `${i18n.t('Más información sobre este fuego')}:\n${fireUrl}`;
         // FIXME use our map as url and static map as img
         moment.locale(user.lang);
-        const message = `${trim(notif.content)} (${i18n.t('fireDetectedAt', { when: moment(notif.when).format('LLL') })}).`;
+        // moment user tz ?
+        const message = `${trim(notif.content)} (${i18n.t('fireDetectedAt', { when: dateLongFormat(notif.when) })}).`;
+
+        // TODO unsubscribe link
+        // TODO Address
+
         const emailOpts = {
           to: emailAddress,
           userName: firstName,
           sendAt: new Date(),
           subject: truncate.apply(message, [50, true]),
-          text: `${message} ${url}`,
+          text: `${message}\n\n${fireTextUrl}\n\n`,
           template: '<body><h2>{{appName}}</h2>{{{html}}}</body>',
           appName: i18n.t('AppName'),
-          html: `<p>${message}</p>${hr}<p>${img}</p>`
+          html: `<p>${message}</p><p>${fireHtmlUrl}</p>${hr}<p>${img}</p>`
         };
         sendMail(emailOpts, true);
         Notifications.update(notif._id, { $set: { emailNotified: true, emailNotifiedAt: new Date() } });

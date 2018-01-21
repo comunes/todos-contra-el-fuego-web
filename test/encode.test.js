@@ -3,7 +3,6 @@
 
 import { chai } from 'meteor/practicalmeteor:chai';
 import ActiveFiresCollection from '/imports/api/ActiveFires/ActiveFires';
-import Iron from 'iron';
 import urlEnc from '/imports/modules/url-encode';
 
 describe('url encoding', () => {

@@ -5,6 +5,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { ReactiveVar } from 'meteor/reactive-var';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import Content from '../../components/Content/Content';
+import i18n from '/imports/startup/client/i18n';
 
 import './Page.scss';
 
@@ -16,13 +17,13 @@ const Page = ({ title, subtitle, content }) => (
 );
 
 Page.defaultProps = {
-  subtitle: '',
+  subtitle: ''
 };
 
 Page.propTypes = {
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string,
-  content: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired
 };
 
 const pageContent = new ReactiveVar('');
@@ -30,7 +31,7 @@ const pageContent = new ReactiveVar('');
 export default createContainer(({ content, page }) => {
   window.scrollTo(0, 0); // Force window to top of page.
 
-  Meteor.call('utility.getPage', page, (error, response) => {
+  Meteor.call('utility.getPage', page, i18n.language, (error, response) => {
     if (error) {
       console.warn(error);
     } else {
@@ -39,6 +40,6 @@ export default createContainer(({ content, page }) => {
   });
 
   return {
-    content: content || pageContent.get(),
+    content: content || pageContent.get()
   };
 }, Page);

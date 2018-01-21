@@ -30,6 +30,7 @@ Notifications.schema = new SimpleSchema({
   emailNotified: { type: Boolean, optional: true },
   emailNotifiedAt: { type: Date, optional: true },
   when: Date,
+  sealed: String,
   createdAt: defaultCreatedAt,
   updatedAt: defaultUpdateAt
 });

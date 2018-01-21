@@ -2,7 +2,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Tracker } from 'meteor/tracker';
 import { Bert } from 'meteor/themeteorchef:bert';
-import moment from 'moment';
+import { dateFromNow } from '/imports/api/Common/dates';
 import Notifications from '/imports/api/Notifications/Notifications';
 import Push from 'push.js/bin/push.min.js';
 import i18n from '/imports/startup/client/i18n';
@@ -14,13 +14,13 @@ function process(notif) {
   if (Push.Permission.has()) {
     if (!notif.webNotified) {
       Push.create(i18n.t('AppName'), {
-        body: `${trim(notif.content)} (${i18n.t('fireDetected', { when: moment(notif.when).fromNow() })})`,
+        body: `${trim(notif.content)} (${i18n.t('fireDetected', { when: dateFromNow(notif.when) })})`,
         icon: '/n-fire-marker.png',
         requireInteraction: true,
         onClick: function onClickFocus() {
           window.focus();
           this.close();
-          history.push('/fires');
+          history.push(`/fire/${notif.sealed}`);
         }
       });
 

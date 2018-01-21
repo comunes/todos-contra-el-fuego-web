@@ -166,6 +166,7 @@
   position: relative;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
+  margin-top: -21px;
   position: relative;
   /*
     width: 100vw;
@@ -212,4 +213,8 @@
 
 .device[data-device=iPhone6][data-orientation=portrait][data-color=white] {
   background-image: url(/mobile.png);
+}
+
+.full-width .page-header { // section titles
+  margin-top: 20px;
 }

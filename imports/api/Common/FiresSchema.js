@@ -14,6 +14,7 @@ const firesCommonSchema = {
 
   owner: { type: String, optional: true },
   dateformat: { type: String, optional: true },
+  ourversion: { type: String, optional: true },
 
   // NASA types
   address: { type: String, optional: true }, // reverse geo
