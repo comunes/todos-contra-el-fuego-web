@@ -3,7 +3,15 @@ import sendWelcomeEmail from '../../../api/Users/server/send-welcome-email';
 
 Accounts.onCreateUser((options, user) => {
   const userToCreate = user;
-  if (options.profile) userToCreate.profile = options.profile;
-  sendWelcomeEmail(options, user);
+  console.log(JSON.stringify(user));
+  console.log(JSON.stringify(options));
+  if (options.profile) {
+    userToCreate.profile = options.profile;
+    userToCreate.lang = options.profile.lang;
+    delete options.profile.lang;
+  } else {
+    // TODO others (google, etc) ?
+  }
+  sendWelcomeEmail(options, userToCreate);
   return userToCreate;
 });

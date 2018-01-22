@@ -3,7 +3,7 @@
 <head>
 <meta name="viewport" content="width=device-width" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>[{{applicationName}}] Reset Your Password</title>
+<title>[{{applicationName}}] Verifica tu dirección de correo</title>
 <style>
   /* -------------------------------------
     GLOBAL
@@ -271,35 +271,30 @@
 		<td></td>
 		<td class="container" width="600">
 			<div class="content">
-				<table class="main" width="100%" cellpadding="0" cellspacing="0" itemprop="action" itemscope itemtype="http://schema.org/UpdateAction">
+				<table class="main" width="100%" cellpadding="0" cellspacing="0" itemprop="action" itemscope itemtype="http://schema.org/ConfirmAction">
 					<tr>
 						<td class="content-wrap">
-							<meta itemprop="name" content="Reset Password"/>
+							<meta itemprop="name" content="Verify Email Address"/>
 							<table width="100%" cellpadding="0" cellspacing="0">
 								<tr>
 									<td class="content-block">
-										Hey, {{firstName}}!
+										Hola, {{firstName}}!
 									</td>
 								</tr>
 								<tr>
 									<td class="content-block">
-                    A password reset has been requested for the account related to this email address ({{emailAddress}}).
+										¿Nos puedes hacer un favor y verificar tu correo electrónico?
 									</td>
 								</tr>
-                <tr>
-                  <td class="content-block">
-                    To reset the password, visit the following link:
-                  </td>
-                </tr>
 								<tr>
 									<td class="content-block" itemprop="handler" itemscope itemtype="http://schema.org/HttpActionHandler">
-										<a href="{{resetUrl}}" class="btn-primary" itemprop="url">Reset Password</a>
+										<a href="{{verifyUrl}}" class="btn-primary" itemprop="url">Verificar correo electrónico</a>
 									</td>
 								</tr>
 								<tr>
 									<td class="content-block">
-                    Cheers, <br />
-										{{applicationName}} Team
+                    Gracias! <br />
+										El equipo de {{applicationName}}
 									</td>
 								</tr>
 							</table>
@@ -309,7 +304,7 @@
 				<div class="footer">
 					<table width="100%">
 						<tr>
-							<td class="aligncenter content-block">Follow <a href="http://twitter.com/application">@application</a> on Twitter.</td>
+							<td class="aligncenter content-block">Sigue a <a href="http://twitter.com/TsContraElFuego">@TsContraElFuego</a> en Twitter.</td>
 						</tr>
 					</table>
 				</div></div>

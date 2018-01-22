@@ -1,17 +1,20 @@
+import i18n from 'i18next';
 import sendEmail from '../../../modules/server/send-email';
 import getOAuthProfile from '../../../modules/get-oauth-profile';
 
 export default (options, user) => {
   const OAuthProfile = getOAuthProfile(options, user);
 
-  const applicationName = '¡Tod@s contra el Fuego!';
+  const applicationName = i18n.t('AppName');
   const firstName = OAuthProfile ? OAuthProfile.name.first : options.profile.name.first;
   const emailAddress = OAuthProfile ? OAuthProfile.email : options.email;
+  const { lang } = user.lang;
 
   return sendEmail({
     to: emailAddress,
     from: `${applicationName} <noreply@comunes.org>`,
     subject: `[${applicationName}] Welcome, ${firstName}!`,
+    lang,
     template: 'welcome',
     templateVars: {
       applicationName,

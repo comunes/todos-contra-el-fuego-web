@@ -11,7 +11,7 @@ const Privacy = props => (
   <div className="Privacy">
     <Page
         title={props.t('Política de Privacidad')}
-        subtitle={props.t('Última actualización, {{when}}', { when: dateParseShortFormat('2017-01-19') })}
+        subtitle={props.t('Última actualización, {{when}}', { when: dateParseShortFormat('2018-01-19') })}
         page="privacy"
     />
   </div>

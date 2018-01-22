@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-indent-props */
 
 import React from 'react';
-import { Row, FormGroup, ControlLabel, Button } from 'react-bootstrap';
+import { Row, FormGroup, ControlLabel, Button, Checkbox } from 'react-bootstrap';
 import Col from '../../components/Col/Col';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -15,7 +15,7 @@ import InputHint from '../../components/InputHint/InputHint';
 import AccountPageFooter from '../../components/AccountPageFooter/AccountPageFooter';
 import validate from '../../../modules/validate';
 import './Signup.scss';
-import { translate } from 'react-i18next';
+import { translate, Trans } from 'react-i18next';
 import { T9n } from 'meteor-accounts-t9n';
 
 class Signup extends React.Component {
@@ -24,7 +24,8 @@ class Signup extends React.Component {
     this.t = props.t;
     this.handleSubmit = this.handleSubmit.bind(this);
     // console.log(props.location.state);
-    this.state = props.location.state;
+    this.state = props.location.state ? props.location.state : {};
+    this.state.termsAccept = false;
   }
 
   componentDidMount() {
@@ -68,12 +69,13 @@ class Signup extends React.Component {
   }
 
   handleSubmit() {
-    const { history, t } = this.props;
+    const { history, t, i18n } = this.props;
 
     Accounts.createUser({
       email: this.emailAddress.value,
       password: this.password.value,
       profile: {
+        lang: i18n.language,
         name: {
           first: this.firstName.value,
           last: this.lastName.value
@@ -88,6 +90,10 @@ class Signup extends React.Component {
         history.push('/subscriptions');
       }
     });
+  }
+
+  setTermsAccept(termsAccept) {
+    this.setState({ termsAccept });
   }
 
   render() {
@@ -161,7 +167,11 @@ class Signup extends React.Component {
               />
               <InputHint>{t('Usa al menos seis caracteres.')}</InputHint>
             </FormGroup>
-            <Button type="submit" bsStyle="success">{t('Registrarse')}</Button>
+            <Checkbox inline={false} defaultChecked={this.state.termsAccept} onClick={e => this.setTermsAccept(e.target.checked)}>
+              <Trans className="mark-checkbox" parent="span" i18nKey="termsAccept">Acepto las <a target="_blank" href="/terms">condiciones de servicio</a> de este sitio</Trans>
+            </Checkbox>
+
+            <Button type="submit" disabled={!this.state.termsAccept} bsStyle="success">{t('Registrarse')}</Button>
             <AccountPageFooter>
               <p>{t('¿Ya tienes un cuenta?')} <Link to={{ pathname: '/login', state: this.state }} >{t('Iniciar sesión')}</Link>.</p>
             </AccountPageFooter>

@@ -111,5 +111,6 @@
   "Subscription added",
   "Suscripción actualizada":
   "Subscription updated",
-  "Última actualización, {{when}}": "Last updated, {{when}}"
+  "Última actualización, {{when}}": "Last updated, {{when}}",
+  "Has iniciado sesión con {{service}} usando la dirección de correo {{email}}.": "You're logged in with {{service}} using the email address {{email}}."
 }

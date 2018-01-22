@@ -1,10 +1,12 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
+import i18n from 'i18next';
+import { getFileNameOfLang } from '/imports/api/Utility/server/files.js';
 import getPrivateFile from '../../../modules/server/get-private-file';
 import templateToHTML from '../../../modules/server/handlebars-email-to-html';
 import templateToText from '../../../modules/server/handlebars-email-to-text';
 
-const name = '¡Tod@s contra el Fuego!';
+const name = i18n.t('AppName');
 const email = '<noreply@comunes.org>';
 const from = `${name} ${email}`;
 const emailTemplates = Accounts.emailTemplates;
@@ -17,7 +19,7 @@ emailTemplates.verifyEmail = {
     return `[${name}] Verify Your Email Address`;
   },
   html(user, url) {
-    return templateToHTML(getPrivateFile('email-templates/verify-email.html'), {
+    return templateToHTML(getPrivateFile(getFileNameOfLang('email-templates', 'verify-email', 'html', user.lang)), {
       applicationName: name,
       firstName: user.profile.name.first,
       verifyUrl: url.replace('#/', '')
@@ -26,12 +28,12 @@ emailTemplates.verifyEmail = {
   text(user, url) {
     const urlWithoutHash = url.replace('#/', '');
     if (Meteor.isDevelopment) console.info(`Verify Email Link: ${urlWithoutHash}`); // eslint-disable-line
-    return templateToText(getPrivateFile('email-templates/verify-email.txt'), {
+    return templateToText(getPrivateFile(getFileNameOfLang('email-templates', 'verify-email', 'txt', user.lang)), {
       applicationName: name,
       firstName: user.profile.name.first,
-      verifyUrl: urlWithoutHash,
+      verifyUrl: urlWithoutHash
     });
-  },
+  }
 };
 
 emailTemplates.resetPassword = {
@@ -39,21 +41,21 @@ emailTemplates.resetPassword = {
     return `[${name}] Reset Your Password`;
   },
   html(user, url) {
-    return templateToHTML(getPrivateFile('email-templates/reset-password.html'), {
+    return templateToHTML(getPrivateFile(getFileNameOfLang('email-templates', 'reset-password', 'html', user.lang)), {
       firstName: user.profile.name.first,
       applicationName: name,
       emailAddress: user.emails[0].address,
-      resetUrl: url.replace('#/', ''),
+      resetUrl: url.replace('#/', '')
     });
   },
   text(user, url) {
     const urlWithoutHash = url.replace('#/', '');
     if (Meteor.isDevelopment) console.info(`Reset Password Link: ${urlWithoutHash}`); // eslint-disable-line
-    return templateToText(getPrivateFile('email-templates/reset-password.txt'), {
+    return templateToText(getPrivateFile(getFileNameOfLang('email-templates', 'reset-password', 'txt', user.lang)), {
       firstName: user.profile.name.first,
       applicationName: name,
       emailAddress: user.emails[0].address,
-      resetUrl: urlWithoutHash,
+      resetUrl: urlWithoutHash
     });
-  },
+  }
 };

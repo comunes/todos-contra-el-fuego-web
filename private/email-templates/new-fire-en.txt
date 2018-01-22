@@ -1,0 +1,10 @@
+Hey, {{firstName}}!
+
+{{message}}
+
+[More information about this fire]({{fireUrl}})
+
+Thanks!
+{{applicationName}} Team
+
+Manage your subscriptions to these fire alerts: {{subsUrl}}

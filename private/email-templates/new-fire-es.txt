@@ -1,0 +1,10 @@
+Hola, {{firstName}}!
+
+{{message}}
+
+[Más información sobre este fuego]({{fireUrl}})
+
+Gracias!
+El equipo de {{applicationName}}
+
+Gestiona tus suscripciones a estas alertas de fuegos: {{subsUrl}}

@@ -48,34 +48,34 @@ class Profile extends React.Component {
           required() {
             // Only required if newPassword field has a value.
             return component.newPassword.value.length > 0;
-          },
+          }
         },
         newPassword: {
           required() {
             // Only required if currentPassword field has a value.
             return component.currentPassword.value.length > 0;
-          },
-        },
+          }
+        }
       },
       messages: {
         firstName: {
-          required: this.t("¿Cuál es tu nombre?"),
+          required: this.t('¿Cuál es tu nombre?')
         },
         lastName: {
-          required: this.t("¿Cuál es tu apellido?"),
+          required: this.t('¿Cuál es tu apellido?')
         },
         emailAddress: {
-          required: this.t("Necesitamos una contraseña aquí."),
-          email: this.t("¿Es correcto este correo?"),
+          required: this.t('Necesitamos una contraseña aquí.'),
+          email: this.t('¿Es correcto este correo?')
         },
         currentPassword: {
-          required: this.t("Necesito tu contraseña si la quieres cambiar."),
+          required: this.t('Necesito tu contraseña si la quieres cambiar.')
         },
         newPassword: {
-          required: this.t("Necesito tu nueva contraseña si la quieres cambiar."),
-        },
+          required: this.t('Necesito tu nueva contraseña si la quieres cambiar.')
+        }
       },
-      submitHandler() { component.handleSubmit(); },
+      submitHandler() { component.handleSubmit(); }
     });
   }
 
@@ -104,16 +104,16 @@ class Profile extends React.Component {
       profile: {
         name: {
           first: this.firstName.value,
-          last: this.lastName.value,
-        },
-      },
+          last: this.lastName.value
+        }
+      }
     };
 
     Meteor.call('users.editProfile', profile, (error) => {
       if (error) {
         Bert.alert(T9n.get(`error.accounts.${error.reason}`), 'danger');
       } else {
-        Bert.alert(this.t("¡Perfíl actualizado!"), 'success');
+        Bert.alert(this.t('¡Perfíl actualizado!'), 'success');
       }
     });
 
@@ -134,29 +134,32 @@ class Profile extends React.Component {
       {Object.keys(user.services).map(service => (
         <div key={service} className={`LoggedInWith ${service}`}>
           <img src={`/${service}.svg`} alt={service} />
-          <p>{`You're logged in with ${_.capitalize(service)} using the email address ${user.services[service].email}.`}</p>
+          <p>{this.props.t('Has iniciado sesión con {{service}} usando la dirección de correo {{email}}.', { service: _.capitalize(service), email: user.services[service].email })}</p>
           <Button
             className={`btn btn-${service}`}
             href={{
               facebook: 'https://www.facebook.com/settings',
               google: 'https://myaccount.google.com/privacy#personalinfo',
-              github: 'https://github.com/settings/profile',
+              github: 'https://github.com/settings/profile'
             }[service]}
             target="_blank"
-          >{this.t("Editar perfíl en")} {_.capitalize(service)}</Button>
+          >{this.t('Editar perfíl en')} {_.capitalize(service)}
+          </Button>
         </div>
       ))}
     </div>) : <div />;
   }
 
   renderPasswordUser(loading, user) {
-    const {t, i18n} = this.props;
-    const langName = { 'en': 'English', 'es': 'Español', 'gl': 'Galego', 'ast': 'Asturianu', 'ca': 'Català' };
+    const { t, i18n } = this.props;
+    const langName = {
+      en: 'English', es: 'Español', gl: 'Galego', ast: 'Asturianu', ca: 'Català'
+    };
     return !loading ? (<div>
       <Row>
         <Col xs={6}>
           <FormGroup>
-            <ControlLabel>{this.t("Nombre")}</ControlLabel>
+            <ControlLabel>{this.t('Nombre')}</ControlLabel>
             <input
               type="text"
               name="firstName"
@@ -168,7 +171,7 @@ class Profile extends React.Component {
         </Col>
         <Col xs={6}>
           <FormGroup>
-            <ControlLabel>{this.t("Apellidos")}</ControlLabel>
+            <ControlLabel>{this.t('Apellidos')}</ControlLabel>
             <input
               type="text"
               name="lastName"
@@ -180,7 +183,7 @@ class Profile extends React.Component {
         </Col>
       </Row>
       <FormGroup>
-        <ControlLabel>{this.t("Correo electrónico")}</ControlLabel>
+        <ControlLabel>{this.t('Correo electrónico')}</ControlLabel>
         <input
           type="email"
           name="emailAddress"
@@ -190,27 +193,28 @@ class Profile extends React.Component {
         />
       </FormGroup>
       <FormGroup>
-      <ControlLabel>{this.t("Idioma")}</ControlLabel>
-      <div className="btn-group">
-        <button className="btn btn-secondary btn-sm dropdown-toggle lang-selector" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {langName[i18n.language]}
-        </button>
-        <div className="dropdown-menu">
-          {i18n.languages.map(lang => (
-             <button
-                 className="dropdown-item"
-                 onClick={() => this.onLangSelect(lang)}
-                 key={lang}
-                 type="button">
-               {langName[lang]}
-             </button>
+        <ControlLabel>{this.t('Idioma')}</ControlLabel>
+        <div className="btn-group">
+          <button className="btn btn-secondary btn-sm dropdown-toggle lang-selector" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {langName[i18n.language]}
+          </button>
+          <div className="dropdown-menu">
+            {i18n.languages.map(lang => (
+              <button
+                className="dropdown-item"
+                onClick={() => this.onLangSelect(lang)}
+                key={lang}
+                type="button"
+              >
+                {langName[lang]}
+              </button>
            ))
           }
+          </div>
         </div>
-      </div>
       </FormGroup>
       <FormGroup>
-        <ControlLabel>{this.t("Contraseña actual")}</ControlLabel>
+        <ControlLabel>{this.t('Contraseña actual')}</ControlLabel>
         <input
           type="password"
           name="currentPassword"
@@ -219,23 +223,23 @@ class Profile extends React.Component {
         />
       </FormGroup>
       <FormGroup>
-        <ControlLabel>{this.t("Nueva contraseña")}</ControlLabel>
+        <ControlLabel>{this.t('Nueva contraseña')}</ControlLabel>
         <input
           type="password"
           name="newPassword"
           ref={newPassword => (this.newPassword = newPassword)}
           className="form-control"
         />
-        <InputHint>{this.t("Usa al menos seis caracteres.")}</InputHint>
+        <InputHint>{this.t('Usa al menos seis caracteres.')}</InputHint>
       </FormGroup>
-      <Button type="submit" bsStyle="success">{this.t("Guardar perfíl")}</Button>
+      <Button type="submit" bsStyle="success">{this.t('Guardar perfíl')}</Button>
     </div>) : <div />;
   }
 
   renderProfileForm(loading, user) {
     return !loading ? ({
       password: this.renderPasswordUser,
-      oauth: this.renderOAuthUser,
+      oauth: this.renderOAuthUser
     }[this.getUserType(user)])(loading, user) : <div />;
   }
 
@@ -244,7 +248,7 @@ class Profile extends React.Component {
     return (<div className="Profile">
       <Row className="align-items-center justify-content-center">
         <Col xs={12} sm={6} md={4}>
-          <h4 className="page-header">{this.t("Editar perfíl")}</h4>
+          <h4 className="page-header">{this.t('Editar perfíl')}</h4>
           <form ref={form => (this.form = form)} onSubmit={event => event.preventDefault()}>
             {this.renderProfileForm(loading, user)}
           </form>

@@ -5,8 +5,9 @@ import { Meteor } from 'meteor/meteor';
 import moment from 'moment';
 import { dateLongFormat } from '/imports/api/Common/dates';
 import Notifications from '/imports/api/Notifications/Notifications';
-import sendMail from '/imports/startup/server/email';
-import { hr } from '/imports/startup/server/email';
+// import sendMail from '/imports/startup/server/email';
+import sendEmail from '/imports/modules/server/send-email';
+// import { hr } from '/imports/startup/server/email';
 import getOAuthProfile from '/imports/modules/get-oauth-profile';
 import image from 'google-maps-image-api-url';
 import { trim } from '/imports/ui/components/NotificationsObserver/util.js';
@@ -40,9 +41,10 @@ Meteor.startup(() => {
     });
   }
 
+  /*
   function imgEl(lat, lng) {
     return `<img src="${imgUrl(lat, lng)}" width="640" height="480"/>`;
-  }
+  } */
 
   function process(notif) {
     if (notif.type === 'web' && !notif.emailNotified) {
@@ -58,31 +60,41 @@ Meteor.startup(() => {
       const emailAddress = OAuthProfile ? OAuthProfile.email :
         user && user.emails[0] && user.emails[0].verified ? user.emails[0].address : null;
       if (emailAddress) {
-        const img = imgEl(notif.geo.coordinates[1], notif.geo.coordinates[0]);
+        const img = imgUrl(notif.geo.coordinates[1], notif.geo.coordinates[0]);
         //    const url = imgUrl(notif.geo.coordinates[1], notif.geo.coordinates[0]);
         const fireUrl = `${Meteor.absoluteUrl('fire/')}${notif.sealed}`;
-        const fireHtmlUrl = `<a href="${fireUrl}">${i18n.t('Más información sobre este fuego')}</a>`;
+        // const fireHtmlUrl = `<a href="${fireUrl}">${i18n.t('Más información sobre este fuego')}</a>`;
         // TODO get _id of fire
-        const fireTextUrl = `${i18n.t('Más información sobre este fuego')}:\n${fireUrl}`;
+        // const fireTextUrl = `${i18n.t('Más información sobre este fuego')}:\n${fireUrl}`;
         // FIXME use our map as url and static map as img
         moment.locale(user.lang);
         // moment user tz ?
         const message = `${trim(notif.content)} (${i18n.t('fireDetectedAt', { when: dateLongFormat(notif.when) })}).`;
 
-        // TODO unsubscribe link
-        // TODO Address
+        // TODO Comunes Address
 
         const emailOpts = {
           to: emailAddress,
-          userName: firstName,
-          sendAt: new Date(),
+          // userName: firstName,
+          // sendAt: new Date(),
           subject: truncate.apply(message, [50, true]),
-          text: `${message}\n\n${fireTextUrl}\n\n`,
-          template: '<body><h2>{{appName}}</h2>{{{html}}}</body>',
-          appName: i18n.t('AppName'),
-          html: `<p>${message}</p><p>${fireHtmlUrl}</p>${hr}<p>${img}</p>`
+          // text: `${message}\n\n${fireTextUrl}\n\n`,
+          // template: '<body><h2>{{appName}}</h2>{{{html}}}</body>',
+          lang: user.lang,
+          template: 'new-fire',
+          templateVars: {
+            applicationName: i18n.t('AppName'),
+            firstName,
+            message,
+            fireUrl,
+            img,
+            subsUrl: Meteor.absoluteUrl('subscriptions')
+          }
         };
-        sendMail(emailOpts, true);
+        sendEmail(emailOpts).catch((error) => {
+          throw new Meteor.Error('500', `${error}`);
+        });
+        // sendMail(emailOpts, true);
         Notifications.update(notif._id, { $set: { emailNotified: true, emailNotifiedAt: new Date() } });
       }
     }

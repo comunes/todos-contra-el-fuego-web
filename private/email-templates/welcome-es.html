@@ -3,7 +3,7 @@
 <head>
 <meta name="viewport" content="width=device-width" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>[{{applicationName}}] Verify Your Email Address</title>
+<title>Bienvenido! | {{applicationName}}</title>
 <style>
   /* -------------------------------------
     GLOBAL
@@ -271,10 +271,10 @@
 		<td></td>
 		<td class="container" width="600">
 			<div class="content">
-				<table class="main" width="100%" cellpadding="0" cellspacing="0" itemprop="action" itemscope itemtype="http://schema.org/ConfirmAction">
+				<table class="main" width="100%" cellpadding="0" cellspacing="0" itemprop="action" itemscope itemtype="http://schema.org/JoinAction">
 					<tr>
 						<td class="content-wrap">
-							<meta itemprop="name" content="Verify Email Address"/>
+							<meta itemprop="name" content="Welcome"/>
 							<table width="100%" cellpadding="0" cellspacing="0">
 								<tr>
 									<td class="content-block">
@@ -283,18 +283,23 @@
 								</tr>
 								<tr>
 									<td class="content-block">
-										Can you do us a favor and verify your email address?
+										Bienvenid@ a {{applicationName}}. Te agradecemos que colabores con nosotr@s.
 									</td>
 								</tr>
+                <tr>
+                  <td class="content-block">
+                    ¿Preparada para empezar?
+                  </td>
+                </tr>
 								<tr>
 									<td class="content-block" itemprop="handler" itemscope itemtype="http://schema.org/HttpActionHandler">
-										<a href="{{verifyUrl}}" class="btn-primary" itemprop="url">Verify Email Address</a>
+										<a href="{{welcomeUrl}}" class="btn-primary" itemprop="url">Ver tus suscripciones a fuegos</a>
 									</td>
 								</tr>
 								<tr>
 									<td class="content-block">
-                    Thanks! <br />
-										{{applicationName}} Team
+                    Gracias, <br />
+										El equipo de {{applicationName}}
 									</td>
 								</tr>
 							</table>
@@ -304,7 +309,7 @@
 				<div class="footer">
 					<table width="100%">
 						<tr>
-							<td class="aligncenter content-block">Follow <a href="http://twitter.com/application">@application</a> on Twitter.</td>
+							<td class="aligncenter content-block">Sigue a <a href="http://twitter.com/TsContraElFuego">@TsContraElFuego</a> en Twitter.</td>
 						</tr>
 					</table>
 				</div></div>
