@@ -14,7 +14,8 @@ const sendEmail = (options, { resolve, reject }) => {
       // basic: from, to/cc/bcc/replyTo, subject, html, text,
       // others: watchHtml, icalEvent, headers, attachments, mailComposer, inReplyTo, references, messageId
       const opts = options;
-      opts.template = '<body><h2>{{appName}}</h2>{{{html}}}</body>';
+      // opts.template = '<body><h2>{{appName}}</h2>{{{html}}}</body>';
+      opts.template = '<body>{{{html}}}</body>';
       opts.appName = i18n.t('AppName');
       // console.log(`Email options: ${JSON.stringify(opts)}`);
       sendMail(opts, true);
