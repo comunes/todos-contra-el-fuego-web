@@ -1,116 +1,75 @@
 {
-  "AppName": "All Against Fire",
-  "AppNameFull": "All Against Fire!",
-  "OrgName": "Comunes",
-  "OrgNameFull": "Comunes Association",
-  "Privacidad": "Privacy",
-  "Términos": "Terms",
-  "de Servicio": "of Service",
-  "Política": "Privacy",
-  "de Privacidad": "Policy",
-  "Inicio": "Home",
-  "Licencia": "License",
-  "Cerrar sesión": "Logout",
-  "Registrarse": "Sign Up",
-  "Regístrate": "Sign Up",
-  "Iniciar sesión": "Login",
-  "o regístrate con un correo": "or Sign Up with an Email Address",
-  "o con un correo":
-  "or with an Email Address",
-  "Nombre":
-  "First Name",
-  "Apellidos":
-  "Last Name",
-  "Correo electrónico":
-  "Email Address",
-  "Contraseña":
-  "Password",
-  "¿Ya tienes un cuenta?":
-  "Already have an account?",
-  "Usa al menos seis caracteres.":
-  "Use at least six characters.",
-  "Iniciar sesión con Google":
-  "Log In with Google",
-  "¿Olvidaste tu contraseña?":
-  "Forgot password?",
-  "¿No tienes una cuenta?":
-  "Don't have an account?",
-  "Introduce tu correo abajo para recibir un enlace para resetear tu contraseña.":
-  "Enter your email address below to receive a link to reset your password.",
-  "Recupera tu contraseña":
-  "Recover Password",
-  "¿Recuerdas tu contraseña?":
-  "Remember your password?",
-  "Necesitamos un correo aquí.":
-  "Need an email address here.",
-  "¿Es este correo correcto?":
-  "Is this email address correct?",
-  "Necesitamos una contraseña aquí.":
-  "Need a password here.",
-  "Bienvenid@ de nuevo":
-  "Welcome back!",
-  "Guardar perfíl":
-  "Save profile",
-  "Contraseña actual":
-  "Current Password",
-  "Nueva contraseña":
-  "New Password",
-  "Editar perfíl":
-  "Edit Profile",
-  "Editar perfíl en":
-  "Edit Profile on",
-  "¡Perfíl actualizado!":
-  "Profile updated!",
-  "¿Cuál es tu nombre?":
-  "What's your first name?",
-  "¿Cuál es tu apellido?":
-  "What's your lastName name?",
-  "Necesito tu contraseña si la quieres cambiar.":
-  "Need your current password if changing.",
-  "Necesito tu nueva contraseña si la quieres cambiar.":
-  "Need your new password if changing.",
-  "¿Es correcto este correo?":
-  "Is this email address correct?",
-  "verifyEmail":
-  "Hey friend! Can you verify your email address ({{email}}) for us?",
-  "Reenviar email de verificación":
-  "Re-send verification email",
-  "checkVerificationEmail":
-  "Check {{email}} for a verification link!",
-  "checkResetEmail":
-  "Check ${email} for a reset link!",
-  "¡Listo, gracias!":
-  "All set, thanks!",
-  "Por favor, inténtalo otra vez.":
-  "Please try again.",
-  "Verificando...":
-  "Verifying...",
-  "Introduce una nueva contraseña, por favor.":
-  "Enter a new password, please.",
-  "Repite tu nueva contraseña, por favor.":
-  "Repeat your new password, please.",
-  "Mmmm, tus contraseñas no coinciden. Inténtalo otra vez":
-  "Hmm, your passwords don't match. Try again",
-  "Para resetear tu contraseña, introduce una nueva debajo. Iniciarás la sesión con la nueva contraseña.":
-  "To reset your password, enter a new one below. You will be logged in with your new password.",
-  "Resetea tu contraseña":
-  "Reset Password",
-  "Nueva contraseña":
-  "New Password",
-  "Repite la nueva contraseña":
-  "Repeat New Password",
-  "Resetea la contraseña y entra":
-  "Reset Password &amp; Login",
-  "Imágenes capturadas por los satélites de la NASA muestran el humo de grandes incendios que se extienden sobre el Océano Pacífico. La actividad del fuego está delineada en rojo.":
-  "Images captured by NASA satellites show the smoke of large fires spreading over the Pacific Ocean. Fire activity is outlined in red.",
-  "Colaboración masiva contra los incendios":
-  "Corwdsourcing against wildfires",
-  "Todavía sin subscriptiones":
-  "No subscriptions yet",
-  "Suscripción añadida":
-  "Subscription added",
-  "Suscripción actualizada":
-  "Subscription updated",
-  "Última actualización, {{when}}": "Last updated, {{when}}",
-  "Has iniciado sesión con {{service}} usando la dirección de correo {{email}}.": "You're logged in with {{service}} using the email address {{email}}."
+    "AppName": "All Against Fire",
+    "AppNameFull": "All Against Fire!",
+    "OrgName": "Comunes",
+    "OrgNameFull": "Comunes Association",
+    "Privacidad": "Privacy",
+    "Términos": "Terms",
+    "de Servicio": "of Service",
+    "Política": "Privacy",
+    "de Privacidad": "Policy",
+    "Inicio": "Home",
+    "Licencia": "License",
+    "Cerrar sesión": "Logout",
+    "Registrarse": "Sign Up",
+    "Regístrate": "Sign Up",
+    "Iniciar sesión": "Login",
+    "o regístrate con un correo": "or Sign Up with an Email Address",
+    "o con un correo": "or with an Email Address",
+    "Nombre": "First Name",
+    "Apellidos": "Last Name",
+    "Correo electrónico": "Email Address",
+    "Contraseña": "Password",
+    "¿Ya tienes un cuenta?": "Already have an account?",
+    "Usa al menos seis caracteres.": "Use at least six characters.",
+    "Iniciar sesión con Google": "Log In with Google",
+    "¿Olvidaste tu contraseña?": "Forgot password?",
+    "¿No tienes una cuenta?": "Don't have an account?",
+    "Introduce tu correo abajo para recibir un enlace para resetear tu contraseña.": "Enter your email address below to receive a link to reset your password.",
+    "Recupera tu contraseña": "Recover Password",
+    "¿Recuerdas tu contraseña?": "Remember your password?",
+    "Necesitamos un correo aquí.": "Need an email address here.",
+    "¿Es este correo correcto?": "Is this email address correct?",
+    "Necesitamos una contraseña aquí.": "Need a password here.",
+    "Bienvenid@ de nuevo": "Welcome back!",
+    "Guardar perfíl": "Save profile",
+    "Contraseña actual": "Current Password",
+    "Nueva contraseña": "New Password",
+    "Editar perfíl": "Edit Profile",
+    "Editar perfíl en": "Edit Profile on",
+    "¡Perfíl actualizado!": "Profile updated!",
+    "¿Cuál es tu nombre?": "What's your first name?",
+    "¿Cuál es tu apellido?": "What's your lastName name?",
+    "Necesito tu contraseña si la quieres cambiar.": "Need your current password if changing.",
+    "Necesito tu nueva contraseña si la quieres cambiar.": "Need your new password if changing.",
+    "¿Es correcto este correo?": "Is this email address correct?",
+    "verifyEmail": "Hey friend! Can you verify your email address ({{email}}) for us?",
+    "Reenviar email de verificación": "Re-send verification email",
+    "checkVerificationEmail": "Check {{email}} for a verification link!",
+    "checkResetEmail": "Check ${email} for a reset link!",
+    "¡Listo, gracias!": "All set, thanks!",
+    "Por favor, inténtalo otra vez.": "Please try again.",
+    "Verificando...": "Verifying...",
+    "Introduce una nueva contraseña, por favor.": "Enter a new password, please.",
+    "Repite tu nueva contraseña, por favor.": "Repeat your new password, please.",
+    "Mmmm, tus contraseñas no coinciden. Inténtalo otra vez": "Hmm, your passwords don't match. Try again",
+    "Para resetear tu contraseña, introduce una nueva debajo. Iniciarás la sesión con la nueva contraseña.": "To reset your password, enter a new one below. You will be logged in with your new password.",
+    "Resetea tu contraseña": "Reset Password",
+    "Repite la nueva contraseña": "Repeat New Password",
+    "Resetea la contraseña y entra": "Reset Password &amp; Login",
+    "Imágenes capturadas por los satélites de la NASA muestran el humo de grandes incendios que se extienden sobre el Océano Pacífico. La actividad del fuego está delineada en rojo.": "Images captured by NASA satellites show the smoke of large fires spreading over the Pacific Ocean. Fire activity is outlined in red.",
+    "Colaboración masiva contra los incendios": "Corwdsourcing against wildfires",
+    "Todavía sin subscriptiones": "No subscriptions yet",
+    "Suscripción añadida": "Subscription added",
+    "Suscripción actualizada": "Subscription updated",
+    "Última actualización, {{when}}": "Last updated, {{when}}",
+    "Has iniciado sesión con {{service}} usando la dirección de correo {{email}}.": "You're logged in with {{service}} using the email address {{email}}.",
+    "Política de": "Privacy",
+    "Uso de Cookies": "Use of Cookies",
+    "Utilizamos cookies para asegurar un mejor uso de nuestra web. Si continúas navegando, consideramos que aceptas su uso": "We use cookies to ensure a better use of our website. If you continue browsing, we consider that you accept their use",
+    "Participa": "Get Involved",
+    "activeFires": "Active fires",
+    "Fuegos activos": "Active fires",
+    "noActiveFireInMapCount": "There are no active fires in this area of the map. There is a total of <1><0>{{countTotal}}</0></1> active fires detected worldwide.",
+    "activeFireInMapCount": "On the map marked in red <1><0>{{count,number}}</0></1> active fires. There is a total of <3><0>{{countTotal,number}} </0></3> active fires detected worldwide by NASA."
 }
