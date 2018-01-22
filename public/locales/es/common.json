@@ -209,6 +209,8 @@
   "Siguiente": "Siguiente",
   "Siempre alerta a los fuegos en nuestro vecindario": "Siempre alerta a los fuegos en nuestro vecindario",
   "Información adicional sobre fuego detectado en {{where}} el {{when}}": "Información adicional sobre fuego detectado en {{where}} el {{when}}",
+  "Información adicional sobre fuego detectado el {{when}}": "Información adicional sobre fuego detectado el {{when}}",
+
   "Coordenadas:": "Coordenadas:",
   "Fuego detectado por satélites de la NASA {{when}}": "Fuego detectado por satélites de la NASA {{when}}",
   "Puedes añadir un comentario si tienes información adicional sobre este fuego.": "Puedes añadir un comentario si tienes información adicional sobre este fuego.",
