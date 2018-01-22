@@ -8,3 +8,4 @@ npm-debug.log
 **/.sass-cache
 .deploy/
 public/locales/undefined/
+.deploy-staging
