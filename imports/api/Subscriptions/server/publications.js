@@ -35,7 +35,7 @@ Meteor.publishTransformed('userSubsToFires', function transform() {
     }
     // console.log(`with noise: [${doc.lat}, ${doc.lon}]`);
     delete doc.chatId;
-    // delete doc.geo;
+    delete doc.geo;
     return doc;
   });
 });
