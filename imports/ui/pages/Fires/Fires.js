@@ -1,3 +1,4 @@
+/* global Chronos */
 /* eslint-disable import/no-absolute-path */
 /* eslint-disable react/jsx-indent-props */
 /* eslint-disable react/jsx-indent */
@@ -101,7 +102,7 @@ class Fire extends React.Component {
          </Fragment>
         }
        </div>
-      ) : <div>{!loading && <NotFound />} </div>);
+      ) : <NotFound />);
   }
 }
 
