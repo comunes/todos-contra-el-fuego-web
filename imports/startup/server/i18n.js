@@ -6,8 +6,8 @@ import i18nOpts from '../common/i18n';
 // import { T9n } from 'meteor-accounts-t9n';
 
 // vi ostrio:meteor-root
-i18nOpts.backend.loadPath = `${Meteor.absolutePath}/public${i18nOpts.backend.loadPath}`;
-i18nOpts.backend.addPath = `${Meteor.absolutePath}/public${i18nOpts.backend.addPath}`;
+i18nOpts.backend.loadPath = `${Meteor.rootPath}/../web.browser/app/${i18nOpts.backend.loadPath}`;
+i18nOpts.backend.addPath = `${Meteor.rootPath}/../web.browser/app/${i18nOpts.backend.addPath}`;
 
 // console.log(i18nOpts.backend.loadPath);
 i18nOpts.debug = false;
