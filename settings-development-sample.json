@@ -13,6 +13,7 @@
   "private": {
     "testEmail": "someone@example.com",
     "testMailer": false,
+    "debugMailer": false,
     "MAIL_URL": "",
     "OAuth": {
       "facebook": {

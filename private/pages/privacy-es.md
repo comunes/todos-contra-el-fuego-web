@@ -6,7 +6,7 @@ Esta página se utiliza para informar a los visitantes del sitio web sobre nuest
 
 Si elige usar nuestro Servicio, acepta la recopilación y el uso de la información en relación con esta política. La información personal que recopilamos se usa para proporcionar y mejorar el servicio. No usaremos ni compartiremos su información con nadie, excepto según se describe en esta Política de privacidad.
 
-Los términos utilizados en esta Política de privacidad tienen los mismos significados que en nuestros [Términos y condiciones](/terms), a los que se puede acceder en "Tod@s contra incendio" a menos que se defina lo contrario en esta Política de privacidad.
+Los términos utilizados en esta Política de privacidad tienen los mismos significados que en nuestros [Términos y condiciones](/terms), a los que se puede acceder en "Tod@s contra el fuego" a menos que se defina lo contrario en esta Política de privacidad.
 
 **Recopilación y uso de información**
 

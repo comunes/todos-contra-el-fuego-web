@@ -38,7 +38,7 @@ const MailQueue = new MailTime({
     }
     return `${i18n.t('AppName')} <${transport.options.auth.user}>`;
   },
-  debug: true,
+  debug: Meteor.settings.private.debugMailer,
   concatEmails: true, // Concatenate emails to the same addressee
   concatSubject: `${i18n.t('Nuevas notificaciones de {{app}}', { app: i18n.t('AppName') })}`,
   /* eslint-disable */

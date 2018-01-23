@@ -10,6 +10,8 @@ import i18n from 'i18next';
 const sendEmail = (options, { resolve, reject }) => {
   try {
     Meteor.defer(() => {
+      // console.log(`Current user lang ${options.lang}`);
+      i18n.changeLanguage(options.lang);
       // Meteor email options:
       // basic: from, to/cc/bcc/replyTo, subject, html, text,
       // others: watchHtml, icalEvent, headers, attachments, mailComposer, inReplyTo, references, messageId
@@ -33,6 +35,7 @@ export default ({
   if (text || html || template) {
     return new Promise((resolve, reject) => {
       sendEmail({
+        lang,
         ...rest,
         text: template ? templateToText(getPrivateFile(getFileNameOfLang('email-templates', template, 'txt', lang)), (templateVars || {})) : text,
         html: template ? templateToHTML(getPrivateFile(getFileNameOfLang('email-templates', template, 'html', lang)), (templateVars || {})) : html

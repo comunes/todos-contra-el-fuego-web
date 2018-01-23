@@ -52,7 +52,7 @@
   "Repite tu nueva contraseña, por favor.": "Repeat your new password, please.",
   "Mmmm, tus contraseñas no coinciden. Inténtalo otra vez": "Hmm, your passwords don't match. Try again",
   "Para resetear tu contraseña, introduce una nueva debajo. Iniciarás la sesión con la nueva contraseña.": "To reset your password, enter a new one below. You will be logged in with your new password.",
-  "Resetea tu contraseña": "Reset Password",
+  "Resetea tu contraseña": "Reset your Password",
   "Repite la nueva contraseña": "Repeat New Password",
   "Resetea la contraseña y entra": "Reset Password &amp; Login",
   "Imágenes capturadas por los satélites de la NASA muestran el humo de grandes incendios que se extienden sobre el Océano Pacífico. La actividad del fuego está delineada en rojo.": "Images captured by NASA satellites show the smoke of large fires spreading over the Pacific Ocean. Fire activity is outlined in red.",
@@ -157,5 +157,6 @@
   "not-found": "Oops: This page doesn't exist",
   "Más información sobre este fuego": "More information about this fire",
   "termsAccept": "I accept the <1>conditions of service</1> of this site",
-  "Bienvenid@!": "Welcome!"
+  "Bienvenid@!": "Welcome!",
+  "Verifica tu dirección de correo": "Verify Your Email Address"
 }
