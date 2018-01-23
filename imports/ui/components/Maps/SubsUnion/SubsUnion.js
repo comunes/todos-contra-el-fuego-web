@@ -55,8 +55,15 @@ const subsUnion = (union, options) => {
         parts: 144
       };
       options.subs.forEach((sub) => {
-        const circle = LGeo.circle([sub.location.lat, sub.location.lon], sub.distance * 1000, copts);
-        circle.addTo(unionGroup);
+        if (sub.location && sub.location.lat && sub.location.lon && sub.distance) {
+          check(sub.location.lon, Number);
+          check(sub.location.lat, Number);
+          check(sub.distance, Number);
+          const circle = LGeo.circle([sub.location.lat, sub.location.lon], sub.distance * 1000, copts);
+          circle.addTo(unionGroup);
+        } else {
+          console.error(`Wrong subscription ${JSON.stringify(sub)}`);
+        }
       });
       const unionJson = unify(unionGroup.getLayers());
       union = L.geoJson(unionJson);
