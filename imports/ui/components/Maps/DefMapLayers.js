@@ -32,7 +32,7 @@ class DefMapLayers extends Component {
       <BaseLayer checked={this.props.gray} name={t('Mapa gris de OpenStreetMap')}>
         <TileLayer
             attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-            url="http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png"
+            url="https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png"
         />
       </BaseLayer>);
     const osmlayer = (
