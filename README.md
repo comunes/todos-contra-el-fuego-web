@@ -8,8 +8,7 @@ Install `meteor` and run `npm start`
 
 ### GeoIP
 
-Configure mirror and cron on geoip database. See http://dev.maxmind.com/geoip/geoip2/geolite2/
-
+Configure [mirror and cron](https://www.npmjs.com/package/maxmind-geolite2-mirror) of the [geoip database](http://dev.maxmind.com/geoip/geoip2/geolite2/).
 
 ## Telegram bot
 
