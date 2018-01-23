@@ -12,7 +12,7 @@ import Blaze from 'meteor/gadicc:blaze-react-component';
 import DefMapLayers from '/imports/ui/components/Maps/DefMapLayers';
 import NotFound from '/imports/ui/pages/NotFound/NotFound';
 import FiresCollection from '/imports/api/Fires/Fires';
-import { dateLongFormat, dateFromNow } from '/imports/api/Common/dates';
+import { dateLongFormat } from '/imports/api/Common/dates';
 import '/imports/startup/client/comments';
 import './Fires.scss';
 
@@ -20,15 +20,29 @@ class Fire extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      when: props.when
     };
-    // console.log(moment.tz.guess());
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.when !== nextProps.when) {
+      // console.log(`Next when ${nextProps.when}`);
+      this.setState({
+        when: nextProps.when
+      });
+    }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !(nextState.when === this.state.when);
   }
 
   render() {
     const { loading, fire, t } = this.props;
+    console.log(`Render ${this.state.when}`);
     if (fire && fire.when) {
       this.dateLongFormat = dateLongFormat(fire.when);
-      this.dateFromNow = dateFromNow(fire.when);
+      this.dateFromNow = this.state.when;
     }
     return (fire ?
       (<div className="ViewFire">
@@ -87,13 +101,14 @@ class Fire extends React.Component {
          </Fragment>
         }
        </div>
-      ) : <NotFound />);
+      ) : <div>{!loading && <NotFound />} </div>);
   }
 }
 
 Fire.propTypes = {
   t: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
+  when: PropTypes.string,
   fire: PropTypes.object // .isRequired
 };
 
@@ -105,10 +120,13 @@ Fire.defaultProps = {
 const FireContainer = withTracker(({ match }) => {
   const fireEncrypt = match.params.id;
   const subscription = Meteor.subscribe('fireFromHash', fireEncrypt);
+
+  // });
   // console.log(`Subs ready: ${subscription.ready()}, fire: ${JSON.stringify(FiresCollection.findOne())}`);
   return {
     loading: !subscription.ready(),
-    fire: FiresCollection.findOne()
+    fire: FiresCollection.findOne(),
+    when: subscription.ready() ? Chronos.moment(FiresCollection.findOne().when).fromNow() : null
   };
 })(Fire);
 
