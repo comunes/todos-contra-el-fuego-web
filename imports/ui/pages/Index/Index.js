@@ -234,7 +234,7 @@ class Index extends Component {
                         <div className="feature-item">
                           <i className="icon-lock-open text-primary" />
                           <h3><Trans>Software Libre</Trans></h3>
-                          <p className="text-muted"><Trans i18nKey="dev-with-us-home">Todo nuestro trabajo es sofware libre. <a href="https://github.com/comunes/todos-contra-el-fuego" rel="noopener noreferrer" target="_blank">Traductoræs y desarrolladoræs siempre bienvenid@s</a>.</Trans></p>
+                          <p className="text-muted"><Trans i18nKey="dev-with-us-home">Todo nuestro trabajo es sofware libre. <a href="https://github.com/comunes/todos-contra-el-fuego-web" rel="noopener noreferrer" target="_blank">Traductoræs y desarrolladoræs siempre bienvenid@s</a>.</Trans></p>
                         </div>
                       </div>
                     </div>
