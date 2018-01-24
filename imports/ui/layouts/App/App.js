@@ -12,7 +12,7 @@ import { Roles } from 'meteor/alanning:roles';
 // https://github.com/gadicc/meteor-blaze-react-component/
 import Blaze from 'meteor/gadicc:blaze-react-component';
 // i18n
-import i18n from '/imports/startup/client/i18n';
+import i18n, { i18nReady } from '/imports/startup/client/i18n';
 import '/imports/startup/client/ravenLogger';
 import '/imports/startup/client/geolocation';
 import '/imports/startup/client/piwik-start.js';
@@ -88,8 +88,9 @@ const App = props => (
           </Grid>
           <Footer />
           <Reconnect />
+          {props.i18nReady.get() &&
           <Blaze template="cookieConsent" />
-          {/* <Blaze template="cookieConsentImply" /> */}
+          }
         </div> : ''}
     </Router>
   </I18nextProvider>
@@ -102,6 +103,7 @@ App.defaultProps = {
 
 App.propTypes = {
   loading: PropTypes.bool.isRequired,
+  i18nReady: PropTypes.object.isRequired,
   userId: PropTypes.string,
   emailAddress: PropTypes.string,
   emailVerified: PropTypes.bool.isRequired
@@ -119,10 +121,11 @@ export default withTracker(() => {
   const loading = !Roles.subscription.ready();
   const name = user && user.profile && user.profile.name && getUserName(user.profile.name);
   const emailAddress = user && user.emails && user.emails[0].address;
-
+  console.log(`i18n ready?: ${i18nReady.get()}`);
   return {
     loading,
     loggingIn,
+    i18nReady,
     authenticated: !loggingIn && !!userId,
     name: name || emailAddress,
     roles: !loading && Roles.getRolesForUser(userId),

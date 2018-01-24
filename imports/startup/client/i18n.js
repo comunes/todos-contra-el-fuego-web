@@ -2,6 +2,7 @@
 import i18n from 'i18next';
 import { Meteor } from 'meteor/meteor';
 import { Tracker } from 'meteor/tracker';
+import { ReactiveVar } from 'meteor/reactive-var';
 import backend from 'i18next-xhr-backend';
 import LngDetector from 'i18next-browser-languagedetector';
 import Cache from 'i18next-localstorage-cache';
@@ -27,6 +28,8 @@ const detectorOptions = {
   caches: ['localStorage', 'cookie'],
   excludeCacheFor: ['cimode'] // languages to not persist (cookie, localStorage)
 };
+
+export const i18nReady = new ReactiveVar(false);
 
 const cacheOptions = {
   // turn on or off
@@ -68,6 +71,7 @@ i18n.use(backend)
       console.error(err);
       return;
     }
+    i18nReady.set(true);
     document.title = t('AppName');
     // Accounts translation
     // https://github.com/softwarerero/meteor-accounts-t9n
@@ -86,7 +90,7 @@ i18n.use(backend)
       showLink: false,
       position: 'bottom',
       linkText: 'Lee más',
-      linkRouteName: '/',
+      linkRouteName: '/privacy',
       acceptButtonText: 'Aceptar',
       html: false,
       expirationInDays: 70,
