@@ -19,7 +19,7 @@ import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.css';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.js';
 import 'leaflet-sleep/Leaflet.Sleep.js';
 import Control from 'react-leaflet-control';
-import { Button, ButtonGroup } from 'react-bootstrap';
+import { Row, Col, Button, ButtonGroup } from 'react-bootstrap';
 import subsUnion from '/imports/ui/components/Maps/SubsUnion/SubsUnion';
 import UserSubsToFiresCollection from '/imports/api/Subscriptions/Subscriptions';
 import './SelectionMap.scss';
@@ -161,97 +161,100 @@ class SelectionMap extends Component {
     const { t, onRemove } = this.props;
     return (
       this.isValidState() ?
-          <div>
-            <Map
-                className="selectionmap-leaflet-container"
-                center={this.state.center}
-                zoom={this.state.zoom}
-                ref={(map) => {
-                    this.selectionMap = map;
-                    this.handleLeafletLoad(map);
-                  }}
-                sleep={window.location.pathname === '/'}
-                sleepTime={10750}
-                wakeTime={750}
-                onViewportChanged={this.onViewportChanged}
-                sleepNote
-                hoverToWake={false}
-                wakeMessage={t('Pulsa para activar')}
-                wakeMessageTouch={t('Pulsa para activar')}
-                sleepOpacity={0.6}
-            >
-              <DefMapLayers gray={false} />
-              {this.props.action === action.edit &&
-               this.props.currentSubs.map((subs, index) => (
-                   <Marker
-                       key={subs._id}
-                       draggable={false}
-                       position={[subs.location.lat, subs.location.lon]}
-                       icon={removeIcon}
-                       title={t('Pulsa para borrar')}
-                       onClick={() => { onRemove(subs._id); }}
-                   >
-                     {index === 0 &&
-                      <Tooltip
-                       permanent
-                       direction="right"
-                       /* Use .openTooltip(); in the future */
-                       offset={[10, -10]}
+      <Row>
+        <Col xs={12} sm={12} md={12} lg={12}>
+          <Map
+              className="selectionmap-leaflet-container"
+              center={this.state.center}
+              zoom={this.state.zoom}
+              ref={(map) => {
+                  this.selectionMap = map;
+                  this.handleLeafletLoad(map);
+                }}
+              sleep={window.location.pathname === '/'}
+              sleepTime={10750}
+              wakeTime={750}
+              onViewportChanged={this.onViewportChanged}
+              sleepNote
+              hoverToWake={false}
+              wakeMessage={t('Pulsa para activar')}
+              wakeMessageTouch={t('Pulsa para activar')}
+              sleepOpacity={0.6}
+          >
+            <DefMapLayers gray={false} />
+            {this.props.action === action.edit &&
+             this.props.currentSubs.map((subs, index) => (
+               <Marker
+                   key={subs._id}
+                   draggable={false}
+                   position={[subs.location.lat, subs.location.lon]}
+                   icon={removeIcon}
+                   title={t('Pulsa para borrar')}
+                   onClick={() => { onRemove(subs._id); }}
+               >
+                 {index === 0 &&
+                  <Tooltip
+                      permanent
+                      direction="right"
+                      /* Use .openTooltip(); in the future */
+                      offset={[10, -10]}
+                  >
+                    <span>{t('Pulsa aquí para borrar la zona')}</span>
+                  </Tooltip>
+                 }
+               </Marker>
+             ))
+            }
+               {this.props.action === action.add &&
+                <Fragment>
+                  <Marker
+                      draggable={this.state.draggable}
+                      onDragend={this.updatePosition}
+                      position={this.state.marker}
+                      icon={positionIcon}
+                      title={t('Arrastrar para seleccionar otro punto')}
+                      ref={(ref) => { this.marker = ref; }}
+                  />
+                  <CircleMarker
+                      center={this.state.marker}
+                      color="red"
+                      stroke={false}
+                      fillOpacity="1"
+                      fill
+                      radius={3}
+                  />
+                  <Circle
+                      center={this.state.marker}
+                      ref={(ref) => { this.distanceCircle = ref; }}
+                      color="#145A32"
+                      fillColor="green"
+                      fillOpacity={0.1}
+                      radius={this.state.distance * 1000}
+                  />
+                </Fragment>
+               }
+                <Control position="topright" >
+                  <ButtonGroup>
+                    { this.props.sndBtn && this.props.onSndBtn &&
+                      <Button
+                          bsStyle="warning"
+                          onClick={event => this.onSndBtn(event)}
                       >
-                       <span>{t('Pulsa aquí para borrar la zona')}</span>
-                      </Tooltip>
-                     }
-                   </Marker>
-               ))
-              }
-              {this.props.action === action.add &&
-               <Fragment>
-                 <Marker
-                     draggable={this.state.draggable}
-                     onDragend={this.updatePosition}
-                     position={this.state.marker}
-                     icon={positionIcon}
-                     title={t('Arrastrar para seleccionar otro punto')}
-                     ref={(ref) => { this.marker = ref; }}
-                 />
-                 <CircleMarker
-                     center={this.state.marker}
-                     color="red"
-                     stroke={false}
-                     fillOpacity="1"
-                     fill
-                     radius={3}
-                 />
-                 <Circle
-                     center={this.state.marker}
-                     ref={(ref) => { this.distanceCircle = ref; }}
-                     color="#145A32"
-                     fillColor="green"
-                     fillOpacity={0.1}
-                     radius={this.state.distance * 1000}
-                 />
-               </Fragment>
-              }
-               <Control position="topright" >
-                 <ButtonGroup>
-                   { this.props.sndBtn && this.props.onSndBtn &&
-                     <Button
-                         bsStyle="warning"
-                         onClick={event => this.onSndBtn(event)}
-                     >
-                       {this.props.sndBtn}
-                     </Button>
-                   }
-                     <Button
-                         bsStyle="success"
-                         onClick={event => this.onFstBtn(event)}
-                     >
-                       {this.props.fstBtn}
-                     </Button>
-                 </ButtonGroup>
-               </Control>
-            </Map>
-          </div> :
+                        {this.props.sndBtn}
+                      </Button>
+                    }
+                      <Button
+                          bsStyle="success"
+                          onClick={event => this.onFstBtn(event)}
+                      >
+                        {this.props.fstBtn}
+                      </Button>
+                  </ButtonGroup>
+                </Control>
+          </Map>
+        </Col>
+      </Row>
+        :
       <div />);
   }
 }
