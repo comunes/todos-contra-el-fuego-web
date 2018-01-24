@@ -113,7 +113,6 @@ class SubscriptionsMap extends React.Component {
              </ButtonGroup>
            </Control>
          </Map>
-
          <Row>
            <Col xs={12} sm={12} md={12} lg={12}>
              <p className="subscriptionsmap-footnote"><span style={{ paddingRight: '5px' }}>(*)</span><Trans i18nKey="mapPrivacy" parent="span"><em>Para preservar la privacidad de nuestros usuarios/as, los datos reflejados están aleatoriamente alterados y son solo orientativos.</em></Trans></p>
