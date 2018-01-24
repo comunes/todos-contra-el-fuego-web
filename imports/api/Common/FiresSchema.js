@@ -23,7 +23,7 @@ const firesCommonSchema = {
   acq_date: { type: String, optional: true },
   acq_time: { type: String, optional: true },
   satellite: { type: String, optional: true },
-  confidence: { type: String, optional: true },
+  confidence: { type: Number, optional: true },
   version: { type: String, optional: true },
   frp: { type: Number, optional: true },
   daynight: { type: String, optional: true },
