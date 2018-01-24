@@ -70,7 +70,7 @@
   "noActiveFireInMapCount": "There are no active fires in this area of the map. There is a total of <1><0>{{countTotal}}</0></1> active fires detected worldwide.",
   "activeFireInMapCount": "On the map marked in red <1><0>{{count,number}}</0></1> active fires. There is a total of <3><0>{{countTotal,number}} </0></3> active fires detected worldwide by NASA.",
   "activeNeigFireInMapCount": "In Orange, the fires recently reported by our users.",
-  "Centrar el mapa en tu ubicación": "Center the map on your location",
+  "Centrar en tu ubicación": "Center on your location",
   "Resaltar en verde el área vigilada por nuestros usuarios/as": "The area monitored by our users is highlighted in green",
   "Resaltar los fuegos con un marcador": "Highlight the fires with a marker",
   "mapPrivacy": "<0>In order to preserve the privacy of our users, the reflected data are randomly altered and are only indicative.</0>",
@@ -158,5 +158,7 @@
   "Más información sobre este fuego": "More information about this fire",
   "termsAccept": "I accept the <1>conditions of service</1> of this site",
   "Bienvenid@!": "Welcome!",
-  "Verifica tu dirección de correo": "Verify Your Email Address"
+  "Verifica tu dirección de correo": "Verify Your Email Address",
+  "Zonas vigiladas": "Monitored areas",
+  "En verde, las zonas vigiladas por nuestros usuari@s actualmente. ¡Participa!": "In green, the areas monitored by our users currently. Participate!"
 }

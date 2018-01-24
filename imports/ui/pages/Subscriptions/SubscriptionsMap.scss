@@ -1,0 +1,63 @@
+@import '../../stylesheets/mixins';
+@import '../../stylesheets/colors';
+
+.subscriptionsmap-leaflet-container {
+  height: 100%;
+  min-height: 60vh;
+  width: 100%;
+  /* min-width: 75vw; */
+  display: flex;
+  margin: 20px auto;
+}
+
+div.selectionmap-leaflet-container {
+  position: relative;
+  margin: 0;
+}
+
+@include breakpoint(mobile) {
+  .subscriptionsmap-leaflet-container {
+    height: 80%;
+    min-width: 90vw;
+  }
+}
+
+.Loading {
+  position: absolute;
+  top: calc(50% - 150px);
+  left: calc(50% - 150px);
+  z-index: 1000;
+}
+
+.Loading > svg {
+  width: 300px;
+  height: 300px;
+  stroke: grey;
+}
+
+.mark-checkbox {
+  margin-left: 5px;
+}
+
+.leaflet-control-layers-toggle {
+  background-image: url(/images/layers.png);
+}
+
+.leaflet-retina .leaflet-control-layers-toggle {
+  background-image: url(/images/layers.png);
+  background-size: 26px 26px;
+}
+
+.glyphicon .glyphicon-thumbs-up {
+
+}
+
+.subscriptionsmap-legend {
+  font-size: 16px;
+}
+
+.subscriptionsmap-note,
+.subscriptionsmap-footnote {
+  font-size: 14px;
+  color: $light;
+}

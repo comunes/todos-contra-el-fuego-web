@@ -16,8 +16,8 @@ div.selectionmap-leaflet-container {
 
 @include breakpoint(mobile) {
   .selectionmap-leaflet-container {
-     height: 80%;
-     min-width: 90vw;
+    height: 80%;
+    min-width: 90vw;
   }
 }
 

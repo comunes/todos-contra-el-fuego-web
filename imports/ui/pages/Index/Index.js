@@ -14,6 +14,7 @@ import { ScrollToTopOnMount, SectionsContainer, Section } from 'react-fullpage';
 import 'html5-device-mockups/dist/device-mockups.min.css';
 import { isAnyMobile } from '/imports/ui/components/Utils/isMobile';
 import SubscriptionEditor from '/imports/ui/components/SubscriptionEditor/SubscriptionEditor';
+import SubscriptionsMap from '/imports/ui/pages/Subscriptions/SubscriptionsMap';
 import FiresMap from '../FiresMap/FiresMap';
 
 import './Index.scss';
@@ -43,7 +44,7 @@ class Index extends Component {
   getMap(isMobile) {
     if (!isMobile) {
       return (
-        <Section className="">
+        <Section className="sect5">
           <div className="container">
             <FiresMap />
           </div>
@@ -70,7 +71,7 @@ class Index extends Component {
   render() {
     // https://github.com/subtirelumihail/react-fullpage
     const fullPageOptions = {
-      anchors:              isAnyMobile ? ['home', 'crowdsourcing', 'participe', 'platforms'] : ['home', 'crowdsourcing', 'participe', 'fires', 'platforms'], // the anchors for each sections
+      anchors:              isAnyMobile ? ['home', 'crowdsourcing', 'users', 'participe', 'platforms'] : ['home', 'crowdsourcing', 'users', 'participe', 'fires', 'platforms'], // the anchors for each sections
       activeClass:          'active', // the class that is appended to the sections links
       arrowNavigation:      true, // use arrow keys (true after development)
       className:            'section-container', // the class name for the section container
@@ -89,7 +90,7 @@ class Index extends Component {
 
         <ScrollToTopOnMount />
         <SectionsContainer className="container" {...fullPageOptions}>
-          <Section>
+          <Section className="sect1">
             <header>
               <ReactResizeDetector handleWidth handleHeight onResize={this.onResize} />
               <div
@@ -159,7 +160,7 @@ class Index extends Component {
             </section>
           </Section>
 
-          <Section className="crowd text-center bg-image-full">
+          <Section className="crowd text-center bg-image-full sect2">
             <div className="container">
               <div className="row">
                 <div className="col-md-8 mx-auto">
@@ -170,7 +171,13 @@ class Index extends Component {
             </div>
           </Section>
 
-          <Section className="">
+          <Section className="sect3">
+            <div className="container">
+              <SubscriptionsMap />
+            </div>
+          </Section>
+
+          <Section className="sect4">
             <div className="container">
               <h4 className="page-header"><Trans parent="span">Suscríbete a alertas de fuegos</Trans></h4>
               <SubscriptionEditor
@@ -178,12 +185,11 @@ class Index extends Component {
                   history={this.props.history}
               />
             </div>
-            <div className="overlay" />
           </Section>
 
           {this.getMap(isAnyMobile)}
 
-          <Section className="platf">
+          <Section className="platf sect6">
             <div className="container">
               <div className="section-heading text-center">
                 <h2><Trans>Somos muchos ojos</Trans></h2>

@@ -116,8 +116,8 @@
   "En rojo, <1><0>{{count,number}}</0></1> fuegos activos en el mapa. Hay un total de <3><0>{{countTotal,number}}</0></3> fuegos activos detectados en todo el mundo por la NASA.",
   "activeNeigFireInMapCount":
   "En naranja, los fuegos notificados por nuestros usuarios/as recientemente.",
-  "Centrar el mapa en tu ubicación":
-  "Centrar el mapa en tu ubicación",
+  "Centrar en tu ubicación":
+  "Centrar en tu ubicación",
   "Resaltar en verde el área vigilada por nuestros usuarios/as":
   "Resaltar en verde el área vigilada por nuestros usuarios/as",
   "Resaltar los fuegos con un marcador":
@@ -229,5 +229,7 @@
   "Bienvenid@!": "Bienvenid@!",
   "Has iniciado sesión con {{service}} usando la dirección de correo {{email}}.": "Has iniciado sesión con {{service}} usando la dirección de correo {{email}}.",
   "Verifica tu dirección de correo":
-  "Verifica tu dirección de correo"
+  "Verifica tu dirección de correo",
+  "Zonas vigiladas": "Zonas vigiladas",
+  "En verde, las zonas vigiladas por nuestros usuari@s actualmente. ¡Participa!": "En verde, las zonas vigiladas por nuestros usuari@s actualmente. ¡Participa!"
 }

@@ -37,7 +37,7 @@ class CenterInMyPosition extends React.Component {
   render() {
     return (
       <Button bsStyle="default" onClick={() => this.onClick()}>
-        <i className="icons icon-target" />{this.props.t('Centrar el mapa en tu ubicación')}
+        <i className="icons icon-target" />{this.props.t('Centrar en tu ubicación')}
       </Button>);
   }
 }

@@ -26,16 +26,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.34787809"
-     inkscape:cx="482.26239"
-     inkscape:cy="500.72871"
+     inkscape:zoom="0.17393905"
+     inkscape:cx="-1241.6741"
+     inkscape:cy="980.29345"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1920"
-     inkscape:window-height="1016"
+     inkscape:window-height="983"
      inkscape:window-x="0"
-     inkscape:window-y="867"
+     inkscape:window-y="438"
      inkscape:window-maximized="1"
      inkscape:showpageshadow="false" />
   <metadata
@@ -270,5 +270,47 @@
          y="236.31812"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.69999981px;line-height:1.29999995;font-family:Roboto;-inkscape-font-specification:'Roboto, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#501616;stroke-width:0.26458332"
          id="tspan4828">FUEGOS ACTIVOS</tspan></text>
+    <rect
+       style="opacity:1;vector-effect:none;fill:#dcd4ce;fill-opacity:1;stroke:none;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect13358"
+       width="340.73239"
+       height="164.28169"
+       x="-412.22534"
+       y="-153.25351" />
+    <rect
+       y="-153.25351"
+       x="-412.22534"
+       height="164.28169"
+       width="340.73239"
+       id="rect13360"
+       style="opacity:0.25;vector-effect:none;fill:#0d2e0e;fill-opacity:1;stroke:none;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <rect
+       style="opacity:0.5;vector-effect:none;fill:#0d2e0e;fill-opacity:1;stroke:none;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect13362"
+       width="340.73239"
+       height="164.28169"
+       x="-412.22534"
+       y="10.788144" />
+    <rect
+       y="-200.16852"
+       x="-412.22534"
+       height="47.154934"
+       width="340.73239"
+       id="rect13364"
+       style="opacity:1;vector-effect:none;fill:#0d2e0e;fill-opacity:1;stroke:none;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#dcd4ce;fill-opacity:1;stroke:none;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect13366"
+       width="340.73239"
+       height="164.28169"
+       x="-412.22534"
+       y="174.8299" />
+    <rect
+       y="338.87128"
+       x="-412.22534"
+       height="164.28169"
+       width="340.73239"
+       id="rect13398"
+       style="opacity:0.3;vector-effect:none;fill:#0d2e0e;fill-opacity:1;stroke:none;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
   </g>
 </svg>
