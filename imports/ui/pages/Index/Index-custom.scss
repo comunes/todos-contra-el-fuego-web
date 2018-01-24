@@ -26,7 +26,7 @@
   > i {
     display: none;
   }
-  font-size: 2.2rem;
+  font-size: 2.5rem;
   text-shadow: 2px 2px 1px #280B0B;
 }
 
@@ -76,7 +76,7 @@
   width: 30%;
   left: 35%;
   border: 14px solid #FFF;
-  opacity: .5;
+  opacity: .8;
   &:after {
     content: "";
     display: block;
@@ -94,9 +94,9 @@
   position: absolute;
   font-size: 140px;
   color: white;
-  opacity: .7;
+  opacity: .8;
   right: 35%;
-  text-shadow: 1px 1px #280B0B;
+  text-shadow: 2px 2px #280B0B;
 }
 
 @include breakpoint(mobile) {
@@ -118,7 +118,13 @@
 }
 
 .slide-2-icon {
-  top: 20%;
+  top: 5%;
+}
+
+@include breakpoint(mobile) {
+  .slide-2-icon {
+    top: 20%;
+  }
 }
 
 .slide-2-iconDISABLED:before {
