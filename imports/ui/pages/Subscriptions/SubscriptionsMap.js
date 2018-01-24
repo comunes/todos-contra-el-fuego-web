@@ -87,31 +87,33 @@ class SubscriptionsMap extends React.Component {
            <Row>
              <Trans>En verde, las zonas vigiladas por nuestros usuari@s actualmente. ¡Participa!</Trans>&nbsp;(*)
            </Row>
-           <Map
-               ref={(map) => {
-                   this.subscriptionsMap = map;
-                   this.handleLeafletLoad(map);
-                 }}
-               zoom={this.state.viewport.zoom}
-               center={this.state.viewport.center}
-               className="subscriptionsmap-leaflet-container"
-               animate
-               sleep={window.location.pathname === '/'}
-               sleepTime={10750}
-               wakeTime={750}
-               sleepNote
-               hoverToWake
-               wakeMessage={this.props.t('Pulsa para activar')}
-               sleepOpacity={0.6}
-           >
-             <DefMapLayers />
-             <Control position="topright" >
-               <ButtonGroup>
-                 <CenterInMyPosition onClick={viewport => this.centerOnUserLocation(viewport)} {... this.props} />
-               </ButtonGroup>
-             </Control>
-           </Map>
          </Col>
+         <Map
+             ref={(map) => {
+                 this.subscriptionsMap = map;
+                 this.handleLeafletLoad(map);
+               }}
+             zoom={this.state.viewport.zoom}
+             center={this.state.viewport.center}
+             className="subscriptionsmap-leaflet-container"
+             animate
+             sleep={window.location.pathname === '/'}
+             sleepTime={10750}
+             wakeTime={750}
+             sleepNote
+             hoverToWake={false}
+             wakeMessage={this.props.t('Pulsa para activar')}
+             wakeMessageTouch={this.props.t('Pulsa para activar')}
+             sleepOpacity={0.6}
+         >
+           <DefMapLayers />
+           <Control position="topright" >
+             <ButtonGroup>
+               <CenterInMyPosition onClick={viewport => this.centerOnUserLocation(viewport)} {... this.props} />
+             </ButtonGroup>
+           </Control>
+         </Map>
+
          <Row>
            <Col xs={12} sm={12} md={12} lg={12}>
              <p className="subscriptionsmap-footnote"><span style={{ paddingRight: '5px' }}>(*)</span><Trans i18nKey="mapPrivacy" parent="span"><em>Para preservar la privacidad de nuestros usuarios/as, los datos reflejados están aleatoriamente alterados y son solo orientativos.</em></Trans></p>

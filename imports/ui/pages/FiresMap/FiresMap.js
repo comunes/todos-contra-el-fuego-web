@@ -184,8 +184,9 @@ class FiresMap extends React.Component {
              sleepTime={10750}
              wakeTime={750}
              sleepNote
-             hoverToWake
+             hoverToWake={false}
              wakeMessage={this.props.t('Pulsa para activar')}
+             wakeMessageTouch={this.props.t('Pulsa para activar')}
              sleepOpacity={0.6}
          >
            {/* http://wiki.openstreetmap.org/wiki/Tile_servers */}

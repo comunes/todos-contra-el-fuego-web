@@ -246,3 +246,7 @@
 .sect6 {
   background-color: $todos-back5;
 }
+
+.sect3, sect4, sect5, sect6 {
+  overflow: visible !important;
+}

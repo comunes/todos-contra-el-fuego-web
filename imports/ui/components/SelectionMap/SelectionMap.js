@@ -161,7 +161,7 @@ class SelectionMap extends Component {
     const { t, onRemove } = this.props;
     return (
       this.isValidState() ?
-          <Fragment>
+          <div>
             <Map
                 className="selectionmap-leaflet-container"
                 center={this.state.center}
@@ -175,8 +175,9 @@ class SelectionMap extends Component {
                 wakeTime={750}
                 onViewportChanged={this.onViewportChanged}
                 sleepNote
-                hoverToWake
+                hoverToWake={false}
                 wakeMessage={t('Pulsa para activar')}
+                wakeMessageTouch={t('Pulsa para activar')}
                 sleepOpacity={0.6}
             >
               <DefMapLayers gray={false} />
@@ -250,7 +251,7 @@ class SelectionMap extends Component {
                  </ButtonGroup>
                </Control>
             </Map>
-          </Fragment> :
+          </div> :
       <div />);
   }
 }
