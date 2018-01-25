@@ -16,6 +16,13 @@ See our [bot](https://github.com/comunes/todos-contra-el-fuego/tree/master/teleg
 
 More platforms and services in the future...
 
+### Tests
+
+We do tests via:
+```
+TEST_WATCH=1 MONGO_URL=mongodb://localhost:27017/fuegos  meteor --settings settings-development.json test --driver-package meteortesting:mocha --port 3010
+```
+
 ## Data source acknowledgements
 
 *We acknowledge the use of data and imagery from LANCE FIRMS operated by the NASA/GSFC/Earth Science Data and Information System (ESDIS) with funding provided by NASA/HQ*.
