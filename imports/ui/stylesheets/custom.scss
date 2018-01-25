@@ -20,9 +20,19 @@ h4.page-header {
 }
 
 .App > .container { // Because of fixed header, previously page-header {
-  margin-top: 30px;
+  /* margin-top: 30px; */
 }
 
 h4.page-header {
   font-size: 2em;
+}
+
+.page-header {
+  margin-top: 0;
+}
+
+@include breakpoint(tablet) {
+  .page-header {
+    margin-top: 10px;
+  }
 }

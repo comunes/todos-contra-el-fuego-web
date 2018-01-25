@@ -35,15 +35,22 @@ class CenterInMyPosition extends React.Component {
   }
 
   render() {
+    const { onlyIcon, t } = this.props;
+    const msg = t('Centrar en tu ubicación');
     return (
       <Button bsStyle="default" onClick={() => this.onClick()}>
-        <i className="icons icon-target" />{this.props.t('Centrar en tu ubicación')}
+        <i className="icons icon-target" title={!onlyIcon ? msg : ''} />{!onlyIcon ? msg : ''}
       </Button>);
   }
 }
 
+CenterInMyPosition.defaultProps = {
+  onlyIcon: false
+};
+
 CenterInMyPosition.propTypes = {
-  t: PropTypes.func.isRequired
+  t: PropTypes.func.isRequired,
+  onlyIcon: PropTypes.bool
 };
 
 export default translate([], { wait: true })(CenterInMyPosition);

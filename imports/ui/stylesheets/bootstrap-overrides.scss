@@ -1,19 +1,9 @@
 @import './mixins';
 
-.page-header {
-  margin-top: 0;
-}
-
-@include breakpoint(tablet) {
-  .page-header {
-    margin-top: 20px;
-  }
-}
-
 body {
   background-color: lighten($todos-palette5, 70%);
   /* for fixed header */
-  padding-top: 50px;
+  /* padding-top: 50px; */
 }
 
 .navbar-nav .nav-link {

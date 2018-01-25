@@ -164,17 +164,18 @@ class SelectionMap extends Component {
       <Row>
         <Col xs={12} sm={12} md={12} lg={12}>
           <Map
-              className="selectionmap-leaflet-container"
-              center={this.state.center}
-              zoom={this.state.zoom}
               ref={(map) => {
                   this.selectionMap = map;
                   this.handleLeafletLoad(map);
                 }}
+              zoom={this.state.zoom}
+              center={this.state.center}
+              className="selectionmap-leaflet-container"
+              onViewportChanged={this.onViewportChanged}
+              animate
               sleep={window.location.pathname === '/'}
               sleepTime={10750}
               wakeTime={750}
-              onViewportChanged={this.onViewportChanged}
               sleepNote
               hoverToWake={false}
               wakeMessage={t('Pulsa para activar')}

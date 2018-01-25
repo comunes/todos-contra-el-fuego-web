@@ -4,12 +4,13 @@
 /* eslint-disable react/jsx-indent */
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col, Checkbox } from 'react-bootstrap';
+import { ButtonGroup, Row, Col, Checkbox } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Trans, translate } from 'react-i18next';
 import { Map } from 'react-leaflet';
+import Control from 'react-leaflet-control';
 import _ from 'lodash';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.css';
@@ -156,7 +157,6 @@ class FiresMap extends React.Component {
               <Checkbox inline={false} onClick={e => this.useMarkers(e.target.checked)}>
                 <Trans className="mark-checkbox" parent="span">Resaltar los fuegos con un marcador</Trans>
               </Checkbox>}
-              <CenterInMyPosition onClick={viewport => this.centerOnUserLocation(viewport)} />
              </Fragment>}
               <p className="firesmap-note">
                 <em>{ this.state.viewport.zoom >= MAXZOOMREACTIVE ?
@@ -206,6 +206,11 @@ class FiresMap extends React.Component {
              />
            </Fragment> }
            <DefMapLayers />
+           <Control position="topright" >
+             <ButtonGroup>
+               <CenterInMyPosition onClick={viewport => this.centerOnUserLocation(viewport)} onlyIcon {... this.props} />
+             </ButtonGroup>
+           </Control>
          </Map>
          <Row>
            <Col xs={12} sm={12} md={12} lg={12}>

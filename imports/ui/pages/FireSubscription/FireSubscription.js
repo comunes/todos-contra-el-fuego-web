@@ -91,8 +91,7 @@ class FireSubscription extends React.Component {
             }
           </Col>
         </Row>
-        <Row className="align-items-center justify-content-center">
-          <SelectionMap
+        <SelectionMap
               center={this.state.center}
               zoom={this.state.zoom}
               distance={this.state.distance}
@@ -100,8 +99,7 @@ class FireSubscription extends React.Component {
               onFstBtn={state => this.onSubs(state)}
               onSelection={state => this.onSelection(state)}
               action={action.add}
-          />
-        </Row>
+        />
       </div>
     );
   }

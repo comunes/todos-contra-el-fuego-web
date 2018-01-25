@@ -84,10 +84,7 @@ class Subscriptions extends Component {
     const firstBtnTitle = ['Añadir zona', '', 'Terminar']; // view, add, edit
     return (!loading ? (
       <div className="Subscriptions">
-        <div className="page-header clearfix">
-          <h4 className="pull-left"><Trans>Suscripciones a alertas de fuegos en zonas de mi interés</Trans></h4>
-        </div>
-        <br />
+        <h4 className="page-header"><Trans>Suscripciones a alertas de fuegos en zonas de mi interés</Trans></h4>
       { subscriptions.length === 0 ?
         <Alert bsStyle="warning"><Trans>No estás suscrito a fuegos en ninguna zona</Trans></Alert> :
         <Alert bsStyle="success"><Trans>En verde, áreas de las que recibirás alertas de fuegos</Trans></Alert>

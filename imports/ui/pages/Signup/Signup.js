@@ -118,7 +118,7 @@ class Signup extends React.Component {
                 services={['telegram', 'google']}
                 emailMessage={{
                   offset: 97,
-                  text: t('o regístrate con un correo')
+                  text: t('o con un correo')
                 }}
               />
             </Col>

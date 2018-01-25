@@ -109,7 +109,7 @@ class SubscriptionsMap extends React.Component {
            <DefMapLayers />
            <Control position="topright" >
              <ButtonGroup>
-               <CenterInMyPosition onClick={viewport => this.centerOnUserLocation(viewport)} {... this.props} />
+               <CenterInMyPosition onClick={viewport => this.centerOnUserLocation(viewport)} onlyIcon {... this.props} />
              </ButtonGroup>
            </Control>
          </Map>

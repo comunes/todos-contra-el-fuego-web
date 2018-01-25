@@ -10,7 +10,6 @@ import PropTypes from 'prop-types';
 // https://www.npmjs.com/package/react-resize-detector
 import ReactResizeDetector from 'react-resize-detector';
 import _ from 'lodash';
-import { ScrollToTopOnMount, SectionsContainer, Section } from 'react-fullpage';
 import 'html5-device-mockups/dist/device-mockups.min.css';
 import { isAnyMobile } from '/imports/ui/components/Utils/isMobile';
 import SubscriptionEditor from '/imports/ui/components/SubscriptionEditor/SubscriptionEditor';
@@ -44,11 +43,11 @@ class Index extends Component {
   getMap(isMobile) {
     if (!isMobile) {
       return (
-        <Section className="sect5">
+        <section className="sect5">
           <div className="container">
             <FiresMap />
           </div>
-        </Section>);
+        </section>);
     }
     return (<Fragment />);
   }
@@ -70,27 +69,25 @@ class Index extends Component {
 
   render() {
     // https://github.com/subtirelumihail/react-fullpage
-    const fullPageOptions = {
-      anchors:              isAnyMobile ? ['home', 'crowdsourcing', 'users', 'participe', 'platforms'] : ['home', 'crowdsourcing', 'users', 'participe', 'fires', 'platforms'], // the anchors for each sections
-      activeClass:          'active', // the class that is appended to the sections links
-      arrowNavigation:      true, // use arrow keys (true after development)
-      className:            'section-container', // the class name for the section container
-      delay:                1000, // the scroll animation speed
-      navigation:           true, // !isMobile, // use dots navigation
-      scrollBar:            isAnyMobile, // use the browser default scrollbar
-      sectionClassName:     'section', // the section class name
-      sectionPaddingTop:    '0', // the section top padding
-      sectionPaddingBottom: '0', // the section bottom padding
-      verticalAlign:        false // align the content of each section vertical
-    };
+    /* const fullPageOptions = {
+     *   anchors:              isAnyMobile ? ['home', 'crowdsourcing', 'users', 'participe', 'platforms'] : ['home', 'crowdsourcing', 'users', 'participe', 'fires', 'platforms'], // the anchors for each sections
+     *   activeClass:          'active', // the class that is appended to the sections links
+     *   arrowNavigation:      true, // use arrow keys (true after development)
+     *   className:            'section-container', // the class name for the section container
+     *   delay:                1000, // the scroll animation speed
+     *   navigation:           true, // !isMobile, // use dots navigation
+     *   scrollBar:            isAnyMobile, // use the browser default scrollbar
+     *   sectionClassName:     'section', // the section class name
+     *   sectionPaddingTop:    '20', // the section top padding
+     *   sectionPaddingBottom: '0', // the section bottom padding
+     *   verticalAlign:        false // align the content of each section vertical
+     * }; */
 
     return (
       <div className="IndexDisabled full-width">
         {/* https://v4-alpha.getbootstrap.com/components/carousel/  */}
-
-        <ScrollToTopOnMount />
-        <SectionsContainer className="container" {...fullPageOptions}>
-          <Section className="sect1">
+        <Fragment>
+          <section className="sect1">
             <header>
               <ReactResizeDetector handleWidth handleHeight onResize={this.onResize} />
               <div
@@ -158,26 +155,29 @@ class Index extends Component {
                 {/* <Link className="participe-btn btn btn-lg btn-warning" role="button" to="/#platforms">{this.props.t('Participa')}</Link> */}
               </div>
             </section>
-          </Section>
+          </section>
 
-          <Section className="crowd text-center bg-image-full sect2">
+          <section className="crowd text-center bg-image-full sect2">
             <div className="container">
               <div className="row">
                 <div className="col-md-8 mx-auto">
                   <h2 className="section-heading"><Trans>Colaboración masiva contra los incendios</Trans></h2>
-                  <p><Trans>Imágenes capturadas por los satélites de la NASA muestran el humo de grandes incendios que se extienden sobre el Océano Pacífico. La actividad del fuego está delineada en rojo.</Trans></p>
+                  <p><Trans>Usamos diferentes fuentes de datos para notificarte de fuegos activos en tus zonas de interés</Trans></p>
                 </div>
               </div>
+              <div className="row crowd-footer">
+                <p className="text-muted"><Trans>Imágenes capturadas por los satélites de la NASA muestran el humo de grandes incendios que se extienden sobre el Océano Pacífico. La actividad del fuego está delineada en rojo.</Trans></p>
+              </div>
             </div>
-          </Section>
+          </section>
 
-          <Section className="sect3">
+          <section className="sect3">
             <div className="container">
               <SubscriptionsMap />
             </div>
-          </Section>
+          </section>
 
-          <Section className="sect4">
+          <section className="sect4">
             <div className="container">
               <h4 className="page-header"><Trans parent="span">Suscríbete a alertas de fuegos</Trans></h4>
               <SubscriptionEditor
@@ -185,16 +185,14 @@ class Index extends Component {
                   history={this.props.history}
               />
             </div>
-          </Section>
+          </section>
 
           {this.getMap(isAnyMobile)}
 
-          <Section className="platf sect6">
+          <section className="platf sect6">
             <div className="container">
               <div className="section-heading text-center">
                 <h2><Trans>Somos muchos ojos</Trans></h2>
-                <p className="text-muted"><Trans>Usamos diferentes fuentes de datos para notificarte de fuegos activos en tus zonas de interés</Trans></p>
-                <hr />
               </div>
               <div className="row">
                 <div className="col-lg-4 my-auto">
@@ -248,9 +246,8 @@ class Index extends Component {
                 </div>
               </div>
             </div>
-          </Section>
-
-        </SectionsContainer>
+          </section>
+        </Fragment>
       </div>
     );
   }

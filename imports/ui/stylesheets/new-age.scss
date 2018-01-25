@@ -48,50 +48,50 @@ p {
   line-height: 1.5;
   margin-bottom: 20px; }
 
-div.section.platf > div.container {
+section.platf > div.container {
   padding: 30px 0; }
-div.section h2 {
+section h2 {
   font-size: 50px; }
 
 @include breakpoint(mobile) {
-  div.section h2 {
+  section h2 {
     font-size: 40px; }
 }
 
-div.section.crowd > div.container {
+section.crowd > div.container {
   position: relative;
-  padding: 120px 0; }
-div.section.crowd h2 {
+  padding: 150px 0; }
+section.crowd h2 {
   font-size: 50px;
   margin-top: 20px; }
 @media (min-width: 768px) {
-  div.section.crowd h2 {
+  section.crowd h2 {
     font-size: 70px; } }
 
 @include breakpoint(mobile) {
-  div.section.crowd p {
+  section.crowd p {
     padding-left: 10px;
     padding-right: 10px;
   }
 
-  div.section.crowd h2 {
+  section.crowd h2 {
     font-size: 35px; } }
 
-div.section.platf .div.section-heading {
-  margin-bottom: 100px; }
-div.section.platf .div.section-heading h2 {
+section.platf .section-heading {
+  margin-bottom: 30px; }
+section.platf .section-heading h2 {
   margin-top: 0; }
-div.section.platf .div.section-heading p {
+section.platf .section-heading p {
   margin-bottom: 0; }
 
-div.section.platf .device-container,
-div.section.platf .feature-item {
+section.platf .device-container,
+section.platf .feature-item {
   max-width: 325px;
   margin: 0 auto; }
 
 @include breakpoint(mobile) {
-  div.section.platf .device-container,
-  div.section.platf .feature-item {
+  section.platf .device-container,
+  section.platf .feature-item {
     margin: 10px auto;
   }
 
@@ -100,26 +100,26 @@ div.section.platf .feature-item {
   }
 }
 
-div.section.platf .device-container {
+section.platf .device-container {
   margin-bottom: 100px; }
 @media (min-width: 992px) {
-  div.section.platf .device-container {
+  section.platf .device-container {
     margin-bottom: 0; } }
 
-div.section.platf .feature-item {
+section.platf .feature-item {
   padding-top: 50px;
   padding-bottom: 50px;
   text-align: center; }
 
 @include breakpoint(mobile) {
-  div.section.platf .feature-item {
+  section.platf .feature-item {
     padding-top: 15px;
     padding-bottom: 15px; }
 }
 
-div.section.platf .feature-item h3 {
+section.platf .feature-item h3 {
   font-size: 30px; }
-div.section.platf .feature-item i {
+section.platf .feature-item i {
   font-size: 82px;
   display: block;
   margin-bottom: 15px;
@@ -128,7 +128,7 @@ div.section.platf .feature-item i {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent; }
 
-div.section.cta {
+section.cta {
   position: relative;
   padding: 250px 0;
   background-image: url("../img/bg-cta.jpg");
@@ -137,19 +137,19 @@ div.section.cta {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover; }
-div.section.cta .cta-content {
+section.cta .cta-content {
   position: relative;
   z-index: 1; }
-div.section.cta .cta-content h2 {
+section.cta .cta-content h2 {
   font-size: 50px;
   max-width: 450px;
   margin-top: 0;
   margin-bottom: 25px;
   color: white; }
 @media (min-width: 768px) {
-  div.section.cta .cta-content h2 {
+  section.cta .cta-content h2 {
     font-size: 80px; } }
-div.section.cta .overlay {
+section.cta .overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -157,16 +157,16 @@ div.section.cta .overlay {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5); }
 
-div.section.contact {
+section.contact {
   text-align: center; }
-div.section.contact h2 {
+section.contact h2 {
   margin-top: 0;
   margin-bottom: 25px; }
-div.section.contact h2 i {
+section.contact h2 i {
   color: #dd4b39; }
-div.section.contact ul.list-social {
+section.contact ul.list-social {
   margin-bottom: 0; }
-div.section.contact ul.list-social li a {
+section.contact ul.list-social li a {
   font-size: 40px;
   line-height: 80px;
   display: block;
@@ -174,17 +174,17 @@ div.section.contact ul.list-social li a {
   height: 80px;
   color: white;
   border-radius: 100%; }
-div.section.contact ul.list-social li.social-twitter a {
+section.contact ul.list-social li.social-twitter a {
   background-color: #1da1f2; }
-div.section.contact ul.list-social li.social-twitter a:hover {
+section.contact ul.list-social li.social-twitter a:hover {
   background-color: #0d95e8; }
-div.section.contact ul.list-social li.social-facebook a {
+section.contact ul.list-social li.social-facebook a {
   background-color: #3b5998; }
-div.section.contact ul.list-social li.social-facebook a:hover {
+section.contact ul.list-social li.social-facebook a:hover {
   background-color: #344e86; }
-div.section.contact ul.list-social li.social-google-plus a {
+section.contact ul.list-social li.social-google-plus a {
   background-color: #dd4b39; }
-div.section.contact ul.list-social li.social-google-plus a:hover {
+section.contact ul.list-social li.social-google-plus a:hover {
   background-color: #d73925; }
 
 .bg-primary {

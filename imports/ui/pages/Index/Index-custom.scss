@@ -172,8 +172,7 @@
   position: relative;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
-  margin-top: -21px;
-  position: relative;
+  /* margin-top: -21px; full pagen */
   /*
     width: 100vw;
     position: relative;
@@ -222,7 +221,7 @@
 }
 
 .full-width .page-header { // section titles
-  margin-top: 20px;
+  padding-top: 30px;
 }
 
 .sect1 {
@@ -249,4 +248,18 @@
 
 .sect3, sect4, sect5, sect6 {
   overflow: visible !important;
+}
+
+
+.crowd-footer {
+  position: relative;
+  bottom: -150px;
+  left: 0px;
+  text-align: left;
+}
+
+.crowd-footer > p {
+  font-size: 13px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
