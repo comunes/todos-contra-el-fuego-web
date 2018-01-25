@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 import ReactResizeDetector from 'react-resize-detector';
 import _ from 'lodash';
 import 'html5-device-mockups/dist/device-mockups.min.css';
+import 'bootstrap-carousel-swipe-haven/carousel-swipe';
 import { isAnyMobile } from '/imports/ui/components/Utils/isMobile';
 import SubscriptionEditor from '/imports/ui/components/SubscriptionEditor/SubscriptionEditor';
 import SubscriptionsMap from '/imports/ui/pages/Subscriptions/SubscriptionsMap';
@@ -68,21 +69,6 @@ class Index extends Component {
   }
 
   render() {
-    // https://github.com/subtirelumihail/react-fullpage
-    /* const fullPageOptions = {
-     *   anchors:              isAnyMobile ? ['home', 'crowdsourcing', 'users', 'participe', 'platforms'] : ['home', 'crowdsourcing', 'users', 'participe', 'fires', 'platforms'], // the anchors for each sections
-     *   activeClass:          'active', // the class that is appended to the sections links
-     *   arrowNavigation:      true, // use arrow keys (true after development)
-     *   className:            'section-container', // the class name for the section container
-     *   delay:                1000, // the scroll animation speed
-     *   navigation:           true, // !isMobile, // use dots navigation
-     *   scrollBar:            isAnyMobile, // use the browser default scrollbar
-     *   sectionClassName:     'section', // the section class name
-     *   sectionPaddingTop:    '20', // the section top padding
-     *   sectionPaddingBottom: '0', // the section bottom padding
-     *   verticalAlign:        false // align the content of each section vertical
-     * }; */
-
     return (
       <div className="IndexDisabled full-width">
         {/* https://v4-alpha.getbootstrap.com/components/carousel/  */}
