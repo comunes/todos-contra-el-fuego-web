@@ -4,7 +4,7 @@
 /* eslint-disable react/jsx-indent */
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { ButtonGroup, Row, Col } from 'react-bootstrap';
+import { Button, ButtonGroup, Row, Col } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Trans, translate } from 'react-i18next';
@@ -74,6 +74,13 @@ class SubscriptionsMap extends React.Component {
     this.setState({ init: false, viewport });
   }
 
+  gotoParticipe() {
+    const element = document.querySelector('#participe');
+    if (element) {
+      element.scrollIntoView();
+    }
+  }
+
   render() {
     console.log(`Rendering Subs users ready ${this.props.subsready} subs: ${this.props.userSubs.length} viewport: ${JSON.stringify(this.state.viewport)}`);
     return (
@@ -111,6 +118,12 @@ class SubscriptionsMap extends React.Component {
            <Control position="topright" >
              <ButtonGroup>
                <CenterInMyPosition onClick={viewport => this.centerOnUserLocation(viewport)} onlyIcon {... this.props} />
+               <Button
+                   bsStyle="success"
+                   onClick={() => { this.gotoParticipe(); }}
+               >
+                 {this.props.t('Participa')}
+               </Button>
              </ButtonGroup>
            </Control>
          </Map>

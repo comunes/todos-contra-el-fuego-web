@@ -68,6 +68,13 @@ class Index extends Component {
     window.open('https://t.me/TodosContraElFuego_bot', '_blank');
   }
 
+  gotoParticipe() {
+    const element = document.querySelector('#participe');
+    if (element) {
+      element.scrollIntoView();
+    }
+  }
+
   render() {
     return (
       <div className="IndexDisabled full-width">
@@ -79,10 +86,10 @@ class Index extends Component {
               <div
                   id="carouselExampleIndicators"
                   className="carousel slide"
-                  data-interval={false}
+
                   ref={(ref) => { this.slides = ref; }}
               >
-                {/* for dev: data-interval=false */}
+                {/* for dev ^^^: data-interval=false */}
                 <ol className="carousel-indicators">
                   <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active" />
                   <li data-target="#carouselExampleIndicators" data-slide-to="1" />
@@ -92,7 +99,13 @@ class Index extends Component {
                 <div className="carousel-inner" role="listbox">
 
                   <div className="carousel-item carousel-item-1 active">
-                    <div className="slide-1-icon" />
+                    <div
+                        tabIndex={0}
+                        role="button"
+                        className="slide-1-icon"
+                        onKeyDown={() => { this.gotoParticipe(); }}
+                        onClick={() => { this.gotoParticipe(); }}
+                    />
                     <div className="carousel-caption">
                       <h3><Trans>Elige un lugar</Trans></h3>
                       <p />
@@ -164,6 +177,7 @@ class Index extends Component {
             </div>
           </section>
 
+          <a id="participe" name="participe" />
           <section className="sect4">
             <div className="container">
               <h4 className="page-header"><Trans parent="span">Suscríbete a alertas de fuegos</Trans></h4>
