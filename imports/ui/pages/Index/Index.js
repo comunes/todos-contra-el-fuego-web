@@ -79,6 +79,7 @@ class Index extends Component {
               <div
                   id="carouselExampleIndicators"
                   className="carousel slide"
+                  data-interval={false}
                   ref={(ref) => { this.slides = ref; }}
               >
                 {/* for dev: data-interval=false */}
@@ -93,7 +94,7 @@ class Index extends Component {
                   <div className="carousel-item carousel-item-1 active">
                     <div className="slide-1-icon" />
                     <div className="carousel-caption">
-                      <h3><i className="fa fa-map-pointer" aria-hidden="true" /><Trans>Elige un lugar</Trans></h3>
+                      <h3><Trans>Elige un lugar</Trans></h3>
                       <p />
                     </div>
                   </div>
@@ -101,7 +102,7 @@ class Index extends Component {
                   <div className="carousel-item carousel-item-2">
                     <div className="slide-2-icon" />
                     <div className="carousel-caption">
-                      <h3><i className="fa fa-dot-circle-o" aria-hidden="true" /><Trans>Elige un radio de vigilancia</Trans></h3>
+                      <h3><Trans>Elige un radio de vigilancia</Trans></h3>
                       <p />
                     </div>
                   </div>
@@ -109,7 +110,7 @@ class Index extends Component {
                   <div className="carousel-item carousel-item-3">
                     <div className="slide-3-icon" />
                     <div className="carousel-caption">
-                      <h3><i className="fa fa-podcast" aria-hidden="true" /><Trans>Recibe alertas de fuegos en esa zona</Trans></h3>
+                      <h3><Trans>Recibe alertas de fuegos en esa zona</Trans></h3>
                       <p />
                     </div>
                   </div>
@@ -117,7 +118,7 @@ class Index extends Component {
                   <div className="carousel-item carousel-item-4">
                     <div className="slide-4-icon" />
                     <div className="carousel-caption">
-                      <h3><i className="fa fa-bell-o" aria-hidden="true" /><Trans>Alerta cuando hay un fuego</Trans></h3>
+                      <h3><Trans>Alerta cuando hay un fuego</Trans></h3>
                       <p />
                     </div>
                   </div>
