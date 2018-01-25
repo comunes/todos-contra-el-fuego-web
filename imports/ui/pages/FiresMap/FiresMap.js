@@ -25,7 +25,7 @@ import Loading from '/imports/ui/components/Loading/Loading';
 import ActiveFiresCollection from '/imports/api/ActiveFires/ActiveFires';
 import FireAlertsCollection from '/imports/api/FireAlerts/FireAlerts';
 import UserSubsToFiresCollection from '/imports/api/Subscriptions/Subscriptions';
-import { isNotHomeAndMobile } from '/imports/ui/components/Utils/isMobile';
+import { isNotHomeAndMobile, isChrome } from '/imports/ui/components/Utils/isMobile';
 
 import './FiresMap.scss';
 
@@ -180,7 +180,7 @@ class FiresMap extends React.Component {
              onClick={this.onClickReset}
              viewport={this.state.viewport}
              onViewportChanged={this.onViewportChanged}
-             sleep={window.location.pathname === '/'}
+             sleep={window.location.pathname === '/' && !isChrome}
              sleepTime={10750}
              wakeTime={750}
              sleepNote

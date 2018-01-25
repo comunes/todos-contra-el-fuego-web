@@ -19,6 +19,7 @@ import subsUnion from '/imports/ui/components/Maps/SubsUnion/SubsUnion';
 import DefMapLayers from '/imports/ui/components/Maps/DefMapLayers';
 import Loading from '/imports/ui/components/Loading/Loading';
 import UserSubsToFiresCollection from '/imports/api/Subscriptions/Subscriptions';
+import { isChrome } from '/imports/ui/components/Utils/isMobile';
 
 import './SubscriptionsMap.scss';
 
@@ -97,7 +98,7 @@ class SubscriptionsMap extends React.Component {
              center={this.state.viewport.center}
              className="subscriptionsmap-leaflet-container"
              animate
-             sleep={window.location.pathname === '/'}
+             sleep={window.location.pathname === '/' && !isChrome}
              sleepTime={10750}
              wakeTime={750}
              sleepNote

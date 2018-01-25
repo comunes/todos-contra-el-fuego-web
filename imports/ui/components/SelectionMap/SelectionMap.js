@@ -22,6 +22,7 @@ import Control from 'react-leaflet-control';
 import { Row, Col, Button, ButtonGroup } from 'react-bootstrap';
 import subsUnion from '/imports/ui/components/Maps/SubsUnion/SubsUnion';
 import UserSubsToFiresCollection from '/imports/api/Subscriptions/Subscriptions';
+import { isChrome } from '/imports/ui/components/Utils/isMobile';
 import './SelectionMap.scss';
 
 export const action = {
@@ -173,7 +174,7 @@ class SelectionMap extends Component {
               className="selectionmap-leaflet-container"
               onViewportChanged={this.onViewportChanged}
               animate
-              sleep={window.location.pathname === '/'}
+              sleep={window.location.pathname === '/' && !isChrome}
               sleepTime={10750}
               wakeTime={750}
               sleepNote
