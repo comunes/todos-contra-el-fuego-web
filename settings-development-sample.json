@@ -8,7 +8,8 @@
   },
   "sentryPrivateDSN": "",
   "public": {
-    "sentryPublicDSN": ""
+    "sentryPublicDSN": "",
+    "telegramAuth": 1
   },
   "private": {
     "testEmail": "someone@example.com",
@@ -32,6 +33,7 @@
         "loginStyle": "popup"
       }
     },
-    "proxies_count": 0
+    "proxies_count": 0,
+    "ironPassword": "SomePasswordAlLeast32LongYouKnowHowToCount"
   }
 }
