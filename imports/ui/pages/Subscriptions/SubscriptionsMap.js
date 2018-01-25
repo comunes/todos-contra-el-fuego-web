@@ -86,7 +86,7 @@ class SubscriptionsMap extends React.Component {
          <h4 className="page-header"><Trans parent="span">Zonas vigiladas</Trans></h4>
          <Col xs={12} sm={12} md={12} lg={12}>
            <Row>
-             <Trans>En verde, las zonas vigiladas por nuestros usuari@s actualmente. ¡Participa!</Trans>&nbsp;(*)
+             <Trans>En verde, las zonas vigiladas por nuestros usuari@s actualmente</Trans>&nbsp;(*)
            </Row>
          </Col>
          <Map
