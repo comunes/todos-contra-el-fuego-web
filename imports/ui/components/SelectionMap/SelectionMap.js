@@ -292,6 +292,6 @@ export default translate([], { wait: true })(withTracker((props) => {
     center: props.center[0] !== null ? props.center : geolocation.get(),
     distance: props.distance,
     loadingSubs: !subscription.ready(),
-    currentSubs: UserSubsToFiresCollection.find({ owner: Meteor.userId(), type: 'web' }).fetch()
+    currentSubs: UserSubsToFiresCollection.find({ owner: Meteor.userId() }).fetch() // type: 'web'
   };
 })(SelectionMap));

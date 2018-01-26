@@ -41,7 +41,7 @@ Meteor.publishTransformed('userSubsToFires', function transform() {
 });
 
 Meteor.publish('mysubscriptions', function subscriptions() {
-  return Subscriptions.find({ owner: this.userId, type: 'web' });
+  return Subscriptions.find({ owner: this.userId }); // type: 'web'
 });
 
 // Note: subscriptions.view is also used when editing an existing subscription.

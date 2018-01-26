@@ -27,6 +27,7 @@ import NewSubscription from '../../pages/NewSubscription/NewSubscription';
 import ViewSubscription from '../../pages/ViewSubscription/ViewSubscription';
 import EditSubscription from '../../pages/EditSubscription/EditSubscription';
 import Signup from '../../pages/Signup/Signup';
+import Auth from '../../pages/Auth/Auth';
 import Login from '../../pages/Login/Login';
 import Logout from '../../pages/Logout/Logout';
 import VerifyEmail from '../../pages/VerifyEmail/VerifyEmail';
@@ -70,6 +71,7 @@ const App = props => (
               <Authenticated exact path="/profile" component={Profile} {...props} />
               <Route path="/fires" component={FiresMap} {...props} />
               <Route path="/fire/:id" component={Fires} {...props} />
+              <Public path="/auth/:token" component={Auth} {...props} />
               <Public path="/signup" component={Signup} {...props} />
               <Public path="/login" component={Login} {...props} />
               <Route path="/logout" component={Logout} {...props} />
@@ -121,7 +123,7 @@ export default withTracker(() => {
   const loading = !Roles.subscription.ready();
   const name = user && user.profile && user.profile.name && getUserName(user.profile.name);
   const emailAddress = user && user.emails && user.emails[0].address;
-  console.log(`i18n ready?: ${i18nReady.get()}`);
+  // console.log(`i18n ready?: ${i18nReady.get()}`);
   return {
     loading,
     loggingIn,

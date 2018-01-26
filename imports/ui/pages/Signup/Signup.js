@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Bert } from 'meteor/themeteorchef:bert';
-import randomHex from 'crypto-random-hex';
 import Icon from '../../components/Icon/Icon';
 import OAuthLoginButtons from '../../components/OAuthLoginButtons/OAuthLoginButtons';
 import InputHint from '../../components/InputHint/InputHint';
@@ -96,6 +95,26 @@ class Signup extends React.Component {
     this.setState({ termsAccept });
   }
 
+  onTelegramAuth() {
+    /* dynamic import sample
+    // https://github.com/meteor/meteor/issues/9038
+    import('crypto-random-hex').then(({ default: randomHex }) => {
+      // console.log(randomHex);
+      const hex = randomHex(20);
+      window.open(`https://t.me/TodosContraElFuego_bot?start=${hex}`);
+    }); */
+    Meteor.call('auth.getHash', (error, response) => {
+      if (error) {
+        console.warn(error);
+      } else {
+        const bot = Meteor.isDevelopment ? 'rednodetest_bot' : 'TodosContraElFuego_bot';
+        const url = `https://t.me/${bot}?start=${response}`;
+        // console.log(url);
+        window.open(url);
+      }
+    });
+  }
+
   render() {
     const { t, history } = this.props;
     return (<div className="Signup">
@@ -103,12 +122,12 @@ class Signup extends React.Component {
         <Col xs={12} sm={6} md={5} lg={4}>
           <h4 className="page-header">{t('Registrarse')}</h4>
           <Row>
-            { false && // disabled
+            { Meteor.settings.public.telegramAuth &&
             <Col xs={12}>
               <button
                   className="btn btn-block btn-raised btn-primary OAuthLoginButtonDis OAuthLoginButton-telegram"
                   type="button"
-                  onClick={() => { const hex = randomHex(20); console.log(hex); window.open(`https://t.me/TodosContraElFuego_bot?start=${hex}`); }}
+                  onClick={this.onTelegramAuth}
               >
                 <span><Icon icon="telegram" /> {t('Iniciar sesión con Telegram')}</span>
               </button>

@@ -1,6 +1,8 @@
+/* eslint-disable import/no-absolute-path */
 import { Meteor } from 'meteor/meteor';
 import { check, Match } from 'meteor/check';
 import { Accounts } from 'meteor/accounts-base';
+import urlEnc from '/imports/modules/url-encode';
 import editProfile from './edit-profile';
 import rateLimit from '../../../modules/rate-limit';
 
@@ -34,6 +36,13 @@ Meteor.methods({
   'users.setLang': function userLang(lang) {
     check(lang, validLangCode);
     Meteor.users.update({ _id: this.userId }, { $set: { lang } });
+  },
+  'auth.getHash': async function getHash() {
+    const token = Accounts._generateStampedLoginToken();
+    const obj = Accounts._hashStampedToken(token);
+    // console.log(obj);
+    const sealed = await urlEnc.encrypt(obj);
+    return sealed;
   }
 });
 
