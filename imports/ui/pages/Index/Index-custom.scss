@@ -120,7 +120,8 @@
 
     .slide-3-icon:before,
     .slide-4-icon:before {
-        top: -50px;
+      top: 10px;
+      /* top: -50px; */
     }
 }
 
@@ -259,6 +260,6 @@
 
 .crowd-footer > p {
   font-size: 13px;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
