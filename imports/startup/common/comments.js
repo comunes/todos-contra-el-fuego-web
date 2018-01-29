@@ -9,7 +9,7 @@ Comments.config({
     profile: 1
   },
   generateUsername: function genUser(user) {
-    console.log(JSON.stringify(user));
+    // console.log(JSON.stringify(user));
     // FIXME
     return user.profile && user.profile.name && user.profile.name.first ? user.profile.name.first : '';
   }

@@ -24,3 +24,5 @@ import '../../api/Fires/server/publications';
 
 import '../../api/SiteSettings/methods';
 import '../../api/SiteSettings/server/publications';
+
+import '../../api/FalsePositives/methods';

@@ -30,13 +30,11 @@ Meteor.publish('fireFromHash', function fireFromHash(fireEnc) {
     // console.log(fireEnc);
     const unsealed = Promise.await(urlEnc.decrypt(fireEnc));
     const w = unsealed.when;
-    // console.log(w);
     unsealed.when = new Date(w);
-    // console.log(unsealed.when);
     const c = unsealed.createdAt;
-    unsealed.createdAt = new Date(c);
+    unsealed.createdAt = !c ? new Date() : new Date(c);
     const u = unsealed.updatedAt;
-    unsealed.updatedAt = new Date(u);
+    unsealed.updatedAt = !u ? new Date() : new Date(u);
     // console.log(unsealed);
     FiresCollection.schema.validate(unsealed);
     const fire = findFire(unsealed);

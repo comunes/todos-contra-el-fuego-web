@@ -6,6 +6,7 @@ import randomHex from 'crypto-random-hex';
 import UserSubsToFiresCollection from '/imports/api/Subscriptions/Subscriptions';
 import FireAlertsCollection from '/imports/api/FireAlerts/FireAlerts';
 import SiteSettings from '/imports/api/SiteSettings/SiteSettings';
+import FalsePositives from '/imports/api/FalsePositives/FalsePositives';
 
 Meteor.startup(() => {
   // https://github.com/percolatestudio/meteor-migrations
@@ -89,6 +90,17 @@ Meteor.startup(() => {
     up: function siteSettingsIndex() {
       // other way:
       SiteSettings._ensureIndex({ name: 1 }, { unique: 1 });
+    }
+  });
+
+  Migrations.add({
+    version: 6,
+    up: function falsePositiveIndexes() {
+      FalsePositives._ensureIndex({ chatId: 1 });
+      FalsePositives._ensureIndex({ owner: 1 });
+      FalsePositives._ensureIndex({ fireId: 1 });
+      FalsePositives._ensureIndex({ type: 1 });
+      FalsePositives._ensureIndex({ geo: '2dsphere' });
     }
   });
 
