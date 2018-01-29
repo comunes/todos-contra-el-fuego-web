@@ -5,6 +5,7 @@ import { Accounts } from 'meteor/accounts-base';
 import randomHex from 'crypto-random-hex';
 import UserSubsToFiresCollection from '/imports/api/Subscriptions/Subscriptions';
 import FireAlertsCollection from '/imports/api/FireAlerts/FireAlerts';
+import SiteSettings from '/imports/api/SiteSettings/SiteSettings';
 
 Meteor.startup(() => {
   // https://github.com/percolatestudio/meteor-migrations
@@ -83,8 +84,16 @@ Meteor.startup(() => {
     }
   });
 
+  Migrations.add({
+    version: 5,
+    up: function siteSettingsIndex() {
+      // other way:
+      SiteSettings._ensureIndex({ name: 1 }, { unique: 1 });
+    }
+  });
+
   // Set createdAt in users & subs
   Migrations.migrateTo('latest');
 
-  // Migrations.migrateTo('2,rerun');
+  // Migrations.migrateTo('5,rerun');
 });

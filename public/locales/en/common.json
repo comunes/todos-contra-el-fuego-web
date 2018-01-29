@@ -142,7 +142,7 @@
   "Información adicional sobre fuego detectado en {{where}} el {{when}}": "Additional information about fire detected in {{where}} on {{when}}",
   "Información adicional sobre fuego detectado el {{when}}": "Additional information about fire detected on {{when}}",
   "Coordenadas:": "Coordinates:",
-  "Fuego detectado por satélites de la NASA {{when}}": "Fire detected by NASA satellites {{when}}",
+  "Fuego detectado por satélites de la NASA <1></1>": "Fire detected by NASA satellites <1></1>",
   "Puedes añadir un comentario si tienes información adicional sobre este fuego.": "You can add a comment if you have additional information about this fire.",
   "Por ejemplo:": "For example:",
   "si conoces esta zona y cómo acceder al fuego (esto puede de ser de ayuda para apagarlo si sigue activo o para investigarlo en un futuro)": "If you know the area and how to access the fire (this can be helpful to turn off if still active or to investigate in the future)",
@@ -152,7 +152,7 @@
   "Haga zoom en una zona de su interés si quiere que los fuegos se actualicen en tiempo real.": "Zoom into an area of your interest if you want that fires to be updated in real time.",
   "Notificaciones": "Notifications",
   "Recibe nuestras notificaciones de fuegos por correo o en tu navegador": "Receive our fire notifications by mail or in your browser",
-  "Fuego notificado por uno de nuestros usuarios/as {{when}}": "Fire reported by one of our users {{when}}",
+  "Fuego notificado por uno de nuestros usuarios/as <1></1>": "Fire reported by one of our users <1></1>",
   "No recibirás notificaciones de fuegos en este equipo, solo por correo": "You will not receive notifications of fires in this device, only by email",
   "not-found": "Oops: This page doesn't exist",
   "Más información sobre este fuego": "More information about this fire",
@@ -160,5 +160,6 @@
   "Bienvenid@!": "Welcome!",
   "Verifica tu dirección de correo": "Verify Your Email Address",
   "Zonas vigiladas": "Monitored areas",
-  "En verde, las zonas vigiladas por nuestros usuari@s actualmente": "In green, the areas monitored by our users currently"
+  "En verde, las zonas vigiladas por nuestros usuari@s actualmente": "In green, the areas monitored by our users currently",
+  "Datos actualizados <1></1>": "Data updated <1></1>"
 }

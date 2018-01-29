@@ -21,3 +21,6 @@ import '../../api/Notifications/server/publications';
 
 import '../../api/Fires/methods';
 import '../../api/Fires/server/publications';
+
+import '../../api/SiteSettings/methods';
+import '../../api/SiteSettings/server/publications';

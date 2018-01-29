@@ -210,7 +210,7 @@
   "Información adicional sobre fuego detectado el {{when}}": "Información adicional sobre fuego detectado el {{when}}",
 
   "Coordenadas:": "Coordenadas:",
-  "Fuego detectado por satélites de la NASA {{when}}": "Fuego detectado por satélites de la NASA {{when}}",
+  "Fuego detectado por satélites de la NASA <1></1>": "Fuego detectado por satélites de la NASA <1></1>",
   "Puedes añadir un comentario si tienes información adicional sobre este fuego.": "Puedes añadir un comentario si tienes información adicional sobre este fuego.",
   "Por ejemplo:": "Por ejemplo:",
   "si conoces esta zona y cómo acceder al fuego (esto puede de ser de ayuda para apagarlo si sigue activo o para investigarlo en un futuro)": "si conoces esta zona y cómo acceder al fuego (esto puede de ser de ayuda para apagarlo si sigue activo o para investigarlo en un futuro)",
@@ -220,7 +220,7 @@
   "Haga zoom en una zona de su interés si quiere que los fuegos se actualicen en tiempo real.": "Haga zoom en una zona de su interés si quiere que los fuegos se actualicen en tiempo real.",
   "Notificaciones": "Notificaciones",
   "Recibe nuestras notificaciones de fuegos por correo o en tu navegador": "Recibe nuestras notificaciones de fuegos por correo o en tu navegador",
-  "Fuego notificado por uno de nuestros usuarios/as {{when}}": "Fuego notificado por uno de nuestros usuarios/as {{when}}",
+  "Fuego notificado por uno de nuestros usuarios/as <1></1>": "Fuego notificado por uno de nuestros usuarios/as <1></1>",
   "No recibirás notificaciones de fuegos en este equipo, solo por correo": "No recibirás notificaciones de fuegos en este equipo, solo por correo",
   "not-found": "Upppps: Esta página no existe",
   "Más información sobre este fuego": "Más información sobre este fuego",
@@ -231,5 +231,6 @@
   "Verifica tu dirección de correo":
   "Verifica tu dirección de correo",
   "Zonas vigiladas": "Zonas vigiladas",
-  "En verde, las zonas vigiladas por nuestros usuari@s actualmente": "En verde, las zonas vigiladas por nuestros usuari@s actualmente"
+  "En verde, las zonas vigiladas por nuestros usuari@s actualmente": "En verde, las zonas vigiladas por nuestros usuari@s actualmente",
+  "Datos actualizados <1></1>": "Datos actualizados <1></1>"
 }

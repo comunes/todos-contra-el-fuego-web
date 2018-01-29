@@ -21,9 +21,11 @@ import CenterInMyPosition from '/imports/ui/components/CenterInMyPosition/Center
 import FireList from '/imports/ui/components/Maps/FireList';
 import subsUnion from '/imports/ui/components/Maps/SubsUnion/SubsUnion';
 import DefMapLayers from '/imports/ui/components/Maps/DefMapLayers';
+import FromNow from '/imports/ui/components/FromNow/FromNow';
 import Loading from '/imports/ui/components/Loading/Loading';
 import ActiveFiresCollection from '/imports/api/ActiveFires/ActiveFires';
 import FireAlertsCollection from '/imports/api/FireAlerts/FireAlerts';
+import SiteSettings from '/imports/api/SiteSettings/SiteSettings';
 import UserSubsToFiresCollection from '/imports/api/Subscriptions/Subscriptions';
 import { isNotHomeAndMobile, isChrome } from '/imports/ui/components/Utils/isMobile';
 
@@ -140,8 +142,8 @@ class FiresMap extends React.Component {
            <Col xs={12} sm={6} md={6} lg={6} >
              <p className="firesmap-legend">
                { this.props.activefires.length === 0 ?
-                 <Trans parent="span" i18nKey="noActiveFireInMapCount">No hay fuegos activos en esta zona del mapa. Hay un total de <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos detectados en todo el mundo.</Trans> :
-                 <Trans parent="span" i18nKey="activeFireInMapCount">En rojo, <strong>{{ count: this.props.activefires.length }}</strong> fuegos activos en el mapa. Hay un total de <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos detectados en todo el mundo por la NASA.</Trans>
+                 <Fragment><Trans parent="span" i18nKey="noActiveFireInMapCount">No hay fuegos activos en esta zona del mapa. Hay un total de <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos detectados en todo el mundo.</Trans> <Trans>Datos actualizados <FromNow when={this.props.lastCheck} /></Trans></Fragment> :
+                 <Fragment><Trans parent="span" i18nKey="activeFireInMapCount">En rojo, <strong>{{ count: this.props.activefires.length }}</strong> fuegos activos en el mapa. Hay un total de <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos detectados en todo el mundo por la NASA.</Trans> <Trans>Datos actualizados <FromNow when={this.props.lastCheck} /></Trans></Fragment>
                }
              </p>
              {isNotHomeAndMobile &&
@@ -228,6 +230,7 @@ FiresMap.propTypes = {
   userSubs: PropTypes.arrayOf(PropTypes.object).isRequired,
   activefires: PropTypes.arrayOf(PropTypes.object).isRequired,
   firealerts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  lastCheck: PropTypes.instanceOf(Date),
   activefirestotal: PropTypes.number.isRequired,
   center: PropTypes.arrayOf(PropTypes.number),
   zoom: PropTypes.number,
@@ -258,12 +261,14 @@ export default translate([], { wait: true })(withTracker(() => {
   Meteor.subscribe('activefirestotal');
   // Right now to all neighborhood alerts
   Meteor.subscribe('fireAlerts');
+  Meteor.subscribe('settings');
   const userSubs = Meteor.subscribe('userSubsToFires');
   // const subscription = Meteor.subscribe('activefiresmyloc', zoom.get());
   // Warning with the performance of this log:
   // console.log(`Active fires ${ActiveFiresCollection.find().count()} of ${Counter.get('countActiveFires')}`);
   // console.log(`Active neighborhood fires ${FireAlertsCollection.find().fetch().length} and users subscribed ${UserSubsToFiresCollection.find().fetch().length}`);
   // console.log(UserSubsToFiresCollection.find().fetch());
+  const lastCheck = SiteSettings.findOne({ name: 'last-fire-check' });
   return {
     loading: !subscription.ready(),
     userSubs: UserSubsToFiresCollection.find().fetch(),
@@ -273,6 +278,7 @@ export default translate([], { wait: true })(withTracker(() => {
     // activefires: ActiveFiresCollection.find({}).fetch(),
     activefirestotal: Counter.get('countActiveFires'),
     firealerts: FireAlertsCollection.find().fetch(),
+    lastCheck: lastCheck ? lastCheck.value : null,
     center: geolocation.get(),
     zoom: zoom.get()
   };
