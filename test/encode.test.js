@@ -7,6 +7,20 @@ import ActiveFiresCollection from '/imports/api/ActiveFires/ActiveFires';
 import urlEnc from '/imports/modules/url-encode';
 import { Accounts } from 'meteor/accounts-base';
 
+
+async function encAndDec(obj) {
+  delete obj._id;
+  const sealed = await urlEnc.encrypt(obj);
+  const unsealed = await urlEnc.decrypt(sealed);
+  const w = unsealed.when;
+  unsealed.when = new Date(w);
+  const c = unsealed.createdAt;
+  unsealed.createdAt = new Date(c);
+  const u = unsealed.updatedAt;
+  unsealed.updatedAt = new Date(u);
+  chai.expect(unsealed).to.deep.equal(obj);
+}
+
 describe('url encoding', () => {
   it('should encrypt and dcrypt basic objects', async () => {
     const obj = { lat: 2 };
@@ -59,16 +73,7 @@ describe('url encoding', () => {
   // This fails because Date is return as String (not as Date) and because _id
   it('should encrypt and dcrypt collection objects', async () => {
     const obj = ActiveFiresCollection.findOne();
-    delete obj._id;
-    const sealed = await urlEnc.encrypt(obj);
-    const unsealed = await urlEnc.decrypt(sealed);
-    const w = unsealed.when;
-    unsealed.when = new Date(w);
-    const c = unsealed.createdAt;
-    unsealed.createdAt = new Date(c);
-    const u = unsealed.updatedAt;
-    unsealed.updatedAt = new Date(u);
-    chai.expect(unsealed).to.deep.equal(obj);
+    encAndDec(obj);
   });
 
   it('should decrypt node-red enc objects', async () => {
@@ -87,4 +92,11 @@ describe('url encoding', () => {
     unsealed.when = new Date(w);
     chai.expect(unsealed).to.deep.equal(obj);
   });
+
+  // limit 0 for no limit and test everything (and increase timeout)
+  it('should encrypt and dcrypt all collection objects', async () => {
+    ActiveFiresCollection.find({}, { limit: 1000 }).fetch().forEach((obj) => {
+      encAndDec(obj);
+    });
+  }).timeout(5000);
 });
