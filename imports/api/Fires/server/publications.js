@@ -36,6 +36,14 @@ Meteor.publish('fireFromHash', function fireFromHash(fireEnc) {
     const u = unsealed.updatedAt;
     unsealed.updatedAt = !u ? new Date() : new Date(u);
     // console.log(unsealed);
+
+    // FIXME:
+    if (typeof unsealed.confidence === 'string') {
+      unsealed.confidence = Number.parseInt(unsealed.confidence, 10);
+    }
+    if (typeof unsealed.confidence === 'undefined' || isNaN(unsealed.confidence)) {
+      delete unsealed.confidence;
+    }
     FiresCollection.schema.validate(unsealed);
     const fire = findFire(unsealed);
     // console.log(`Found: ${fire.count()}`);
