@@ -232,7 +232,7 @@
   "Verifica tu dirección de correo",
   "Zonas vigiladas": "Zonas vigiladas",
   "En verde, las zonas vigiladas por nuestros usuari@s actualmente": "En verde, las zonas vigiladas por nuestros usuari@s actualmente",
-  "Datos actualizados <1></1>": "Datos actualizados <1></1>",
+  "Datos actualizados <1></1>.": "Datos actualizados <1></1>.",
   "Tomamos nota, ¡gracias por colaborar! Tomamos nota, ¡gracias por colaborar!":
   "Tomamos nota, ¡gracias por colaborar! Tomamos nota, ¡gracias por colaborar!",
   "Indícanos de que tipo de fuego se trata y ayúdanos así a mejorar nuestras notificaciones:": "Indícanos de que tipo de fuego se trata y ayúdanos así a mejorar nuestras notificaciones:",
@@ -240,5 +240,11 @@
   "Regístrate o inicia sesión para aportar información sobre este fuego":
   "Regístrate o inicia sesión para aportar información sobre este fuego",
   "Fuego no encontrado":
-  "Fuego no encontrado"
+  "Fuego no encontrado",
+  "Es una industria":
+  "Es una industria",
+  "Es una quema controlada":
+  "Es una quema controlada",
+  "Parece una falsa alarma":
+  "Parece una falsa alarma"
 }

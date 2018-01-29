@@ -116,7 +116,7 @@ class Fire extends React.Component {
                              key={key}
                              type="button"
                          >
-                           {FalsePositiveTypes[key]}
+                           <Trans>{FalsePositiveTypes[key]}</Trans>
                          </button>
                        ))
                       }

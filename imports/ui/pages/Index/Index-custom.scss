@@ -45,9 +45,9 @@
 }
 
 @include breakpoint(mobile) {
-    .carousel-caption > h3 {
-        font-size: 2.0rem;
-    }
+  .carousel-caption > h3 {
+    font-size: 2.0rem;
+  }
 }
 
 .py-5 > .container > {
@@ -64,20 +64,20 @@
 }
 
 @include breakpoint(mobile) {
-    .py-5 > .container > {
-        p {
-            font-size: 1.2em;
-        }
+  .py-5 > .container > {
+    p {
+      font-size: 1.2em;
     }
+  }
 
-    .pt-5, .py-5 {
-        padding-top: 1rem !important;
-    }
+  .pt-5, .py-5 {
+    padding-top: 1rem !important;
+  }
 
-    .moto {
-        margin-top: 5px;
-        margin-left: 5px;
-    }
+  .moto {
+    margin-top: 5px;
+    margin-left: 5px;
+  }
 }
 
 .slide-2-icon {
@@ -100,7 +100,10 @@
   text-align: center;
 }
 
-.slide-1-icon:before, .slide-2-icon:before, .slide-3-icon:before, .slide-4-icon:before {
+.slide-1-icon:before,
+.slide-2-icon:before,
+.slide-3-icon:before,
+.slide-4-icon:before {
   font-family: FontAwesome;
   /* position: absolute; */
   font-size: 140px;
@@ -111,18 +114,20 @@
 }
 
 @include breakpoint(mobile) {
-    .slide-1-icon:before,
-    .slide-2-icon:before,
-    .slide-3-icon:before,
-    .slide-4-icon:before {
-        font-size: 100px;
-    }
+  .slide-1-icon:before,
+  .slide-2-icon,
+  .slide-2-icon:before,
+  .slide-3-icon:before,
+  .slide-4-icon:before {
+    font-size: 100px;
+    opacity: .6;
+  }
 
-    .slide-3-icon:before,
-    .slide-4-icon:before {
-      top: 10px;
-      /* top: -50px; */
-    }
+  .slide-3-icon:before,
+  .slide-4-icon:before {
+    top: 10px;
+    /* top: -50px; */
+  }
 }
 
 .slide-1-icon:before {
