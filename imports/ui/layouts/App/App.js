@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { Router, Switch, Route } from 'react-router-dom';
 import { Grid } from 'react-bootstrap';
 import { I18nextProvider } from 'react-i18next';
+import { Helmet } from 'react-helmet';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Roles } from 'meteor/alanning:roles';
@@ -54,6 +55,11 @@ const App = props => (
     <Router history={history}>
       { !props.loading ?
         <div className="App">
+          <Helmet>
+            <meta charSet="utf-8" />
+            <title>{i18n.t('AppName')}</title>
+            <meta name="description" content={`${i18n.t('AppDescrip')}: ${i18n.t('AppDescripLong')}`} />
+          </Helmet>
           <Navigation {...props} />
           <ReSendEmail {...props} />
           <Grid>
@@ -120,7 +126,7 @@ export default withTracker(() => {
   const loggingIn = Meteor.loggingIn();
   const user = Meteor.user();
   const userId = Meteor.userId();
-  const loading = !Roles.subscription.ready();
+  const loading = !Roles.subscription.ready() || !i18nReady.get();
   const name = user && user.profile && user.profile.name && getUserName(user.profile.name);
   const emailAddress = user && user.emails && user.emails[0].address;
   // console.log(`i18n ready?: ${i18nReady.get()}`);

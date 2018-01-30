@@ -72,7 +72,7 @@ i18n.use(backend)
       return;
     }
     i18nReady.set(true);
-    document.title = t('AppName');
+    // document.title = t('AppName');
     // Accounts translation
     // https://github.com/softwarerero/meteor-accounts-t9n
     // console.log("Language: " + i18n.language);

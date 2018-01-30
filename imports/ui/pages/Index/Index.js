@@ -161,8 +161,8 @@ class Index extends Component {
             <div className="container">
               <div className="row">
                 <div className="col-md-8 mx-auto">
-                  <h2 className="section-heading"><Trans>Colaboración masiva contra los incendios</Trans></h2>
-                  <p><Trans>Usamos diferentes fuentes de datos para notificarte de fuegos activos en tus zonas de interés</Trans></p>
+                  <h2 className="section-heading">{this.props.t('AppDescrip')}</h2>
+                  <p>{this.props.t('AppDescripLong')}</p>
                 </div>
               </div>
               <div className="row crowd-footer">

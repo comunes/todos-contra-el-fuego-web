@@ -1,6 +1,8 @@
 {
   "AppName": "Tod@s contra el Fuego",
   "AppNameFull": "¡Tod@s contra el Fuego!",
+  "AppDescrip": "Colaboración masiva contra los incendios",
+  "AppDescripLong": "Usamos diferentes fuentes de datos para notificarte de fuegos activos en tus zonas de interés",
   "OrgName": "Comunes",
   "OrgNameFull": "Asociación Comunes",
   "Privacidad": "Privacidad",
@@ -128,8 +130,6 @@
   "Nuevas notificaciones de {{app}}",
   "Imágenes capturadas por los satélites de la NASA muestran el humo de grandes incendios que se extienden sobre el Océano Pacífico. La actividad del fuego está delineada en rojo.":
   "Imágenes capturadas por los satélites de la NASA muestran el humo de grandes incendios que se extienden sobre el Océano Pacífico. La actividad del fuego está delineada en rojo.",
-  "Colaboración masiva contra los incendios":
-  "Colaboración masiva contra los incendios",
   "Todavía sin subscriptiones":
   "Todavía sin subscriptiones",
   "Suscripción añadida":
@@ -161,7 +161,6 @@
   "Pulsa aquí para borrar la zona": "Pulsa aquí para borrar la zona",
   "Los fuegos activos se actualizan en tiempo real.": "Los fuegos activos se actualizan en tiempo real.",
   "Somos muchos ojos": "Somos muchos ojos",
-  "Usamos diferentes fuentes de datos para notificarte de fuegos activos en tus zonas de interés": "Usamos diferentes fuentes de datos para notificarte de fuegos activos en tus zonas de interés",
   "Usa nuestro bot de Telegram para estar al tanto de los fuegos en tus área": "Usa nuestro bot de Telegram para estar al tanto de los fuegos en tus área",
   "Otros dispositivos": "Otros dispositivos",
   "support-us-home": "Estamos desarrollando nuestras herramientas para otros dispositivos. Puedes <1>contribuir a hacerlo posible.</1>",
