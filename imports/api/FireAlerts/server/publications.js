@@ -4,7 +4,6 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { NumberBetween } from '/imports/modules/server/other-checks';
-import moment from 'moment';
 import FireAlerts from '../FireAlerts';
 
 Meteor.publish('fireAlerts', function fireAlerts(northEastLng, northEastLat, southWestLng, southWestLat) {
