@@ -15,10 +15,10 @@ export const getFileNameOfLang = (dir, fileName, ext, lang) => {
   const fallback = getFallbackLang(lang);
   let file = `${base}-${lang}.${ext}`;
   if (!fs.existsSync(as(file))) {
-    console.log(`Page '${fileName}' not found for '${lang}' lang`);
+    // console.log(`Page '${fileName}' not found for '${lang}' lang`);
     file = `${base}-${fallback}.${ext}`;
     if (!fs.existsSync(as(file))) {
-      console.log(`Page '${fileName}' not found for '${fallback}' lang`);
+      // console.log(`Page '${fileName}' not found for '${fallback}' lang`);
       file = `${base}.${ext}`;
     }
   }
