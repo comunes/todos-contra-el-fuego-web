@@ -27,6 +27,10 @@ TEST_WATCH=1 MONGO_URL=mongodb://localhost:27017/fuegos  meteor --settings setti
 
 *We acknowledge the use of data and imagery from LANCE FIRMS operated by the NASA/GSFC/Earth Science Data and Information System (ESDIS) with funding provided by NASA/HQ*.
 
+## License
+
+GNU APLv3. See our [LICENSE](https://github.com/comunes/todos-contra-el-fuego-web/blob/tcef-master/LICENSE.md), for a complete text.
+
 ## Thanks & other acknowlegments
 
 (...)
