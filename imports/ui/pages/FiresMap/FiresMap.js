@@ -34,8 +34,8 @@ import './FiresMap.scss';
 const MAXZOOM = 6;
 const MAXZOOMREACTIVE = 6;
 const zoom = new ReactiveVar(8);
-const center = new ReactiveVar([null, null]);
-const mapSize = new ReactiveVar([400, 400]);
+const center = new ReactiveVar([0, 0]);
+const mapSize = new ReactiveVar();
 
 // Remove map in subscription
 class FiresMap extends React.Component {
@@ -59,17 +59,17 @@ class FiresMap extends React.Component {
   }
 
   componentDidMount() {
-    mapSize.set([this.divElement.clientHeight, this.divElement.clientWidth]);
     if (this.fireMap) {
-      this.addScale();
+      if (this.getMap().getCenter()) {
+        const bounds = this.getMap().getBounds();
+        mapSize.set([bounds.getNorthEast(), bounds.getSouthWest()]);
+        this.addScale();
+      }
     }
   }
 
   onViewportChanged(viewport) {
     this.debounceView(viewport);
-  }
-
-  onClickReset() {
   }
 
   getMap() {
@@ -82,6 +82,10 @@ class FiresMap extends React.Component {
 
   handleViewportChange(viewport) {
     console.log(`Viewport changed: ${JSON.stringify(viewport)}`);
+    const bounds = this.getMap().getBounds();
+    // console.log(bounds);
+    mapSize.set([bounds.getNorthEast(), bounds.getSouthWest()]);
+    /*
     if (viewport.center === this.state.viewport.center &&
         viewport.zoom === this.state.viewport.zoom) {
       // Do nothing, in same point
@@ -89,7 +93,7 @@ class FiresMap extends React.Component {
     }
     zoom.set(viewport.zoom);
     center.set(viewport.center);
-    this.setState({ viewport });
+    this.setState({ viewport }); */
   }
 
   centerOnUserLocation(viewport) {
@@ -124,7 +128,7 @@ class FiresMap extends React.Component {
   }
 
   render() {
-    console.log(`Rendering ${this.props.loading ? 'loading' : 'LOADED'} map ${this.props.activefires.length} of ${this.props.activefirestotal} total. Subs users ready ${this.props.subsready}, reactive ${this.state.viewport.zoom >= MAXZOOMREACTIVE}`);
+    console.log(`Rendering ${this.props.loading ? 'loading' : 'LOADED'} map ${this.props.activefires.length + this.props.firealerts.length} of ${this.props.activefirestotal} total. Subs users ready ${this.props.subsready}, reactive ${this.state.viewport.zoom >= MAXZOOMREACTIVE}`);
 
     return (
       /* Large number of markers:
@@ -141,9 +145,9 @@ class FiresMap extends React.Component {
          <Row>
            <Col xs={12} sm={6} md={6} lg={6} >
              <p className="firesmap-legend">
-               { this.props.activefires.length === 0 ?
+               { (this.props.activefires.length + this.props.firealerts.length) === 0 ?
                  <Fragment><Trans parent="span" i18nKey="noActiveFireInMapCount">No hay fuegos activos en esta zona del mapa. Hay un total de <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos detectados en todo el mundo.</Trans> <Trans>Datos actualizados <FromNow when={this.props.lastCheck} />.</Trans></Fragment> :
-                 <Fragment><Trans parent="span" i18nKey="activeFireInMapCount">En rojo, <strong>{{ count: this.props.activefires.length }}</strong> fuegos activos en el mapa. Hay un total de <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos detectados en todo el mundo por la NASA.</Trans> <Trans>Datos actualizados <FromNow when={this.props.lastCheck} />.</Trans></Fragment>
+                 <Fragment><Trans parent="span" i18nKey="activeFireInMapCount">En rojo, <strong>{{ count: this.props.activefires.length + this.props.firealerts.length }}</strong> fuegos activos en el mapa. Hay un total de <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos detectados en todo el mundo por la NASA.</Trans> <Trans>Datos actualizados <FromNow when={this.props.lastCheck} />.</Trans></Fragment>
                }
              </p>
              {isNotHomeAndMobile &&
@@ -178,6 +182,8 @@ class FiresMap extends React.Component {
              className="firesmap-leaflet-container"
              animate
              minZoom={5}
+             center={this.props.center}
+             zoom={this.props.zoom}
              preferCanvas
              onClick={this.onClickReset}
              viewport={this.state.viewport}
@@ -237,47 +243,47 @@ FiresMap.propTypes = {
   t: PropTypes.func.isRequired
 };
 
+let init = true;
+
 export default translate([], { wait: true })(withTracker(() => {
   let subscription;
-  let init = true;
   Meteor.autorun(() => {
     if (geolocation.get() && init) {
       center.set(geolocation.get());
-      // console.log(`Geolocation ${geolocation.get()}`);
+      console.log(`Geolocation ${geolocation.get()}`);
       init = false;
     }
-    if (mapSize.get()) {
+    if (mapSize.get() && mapSize.get()[0].lng && mapSize.get()[1].lat) {
       subscription = Meteor.subscribe(
         'activefiresmyloc',
-        zoom.get(),
-        center.get()[0],
-        center.get()[1],
-        mapSize.get()[0],
-        mapSize.get()[1]
+        mapSize.get()[0].lng,
+        mapSize.get()[0].lat,
+        mapSize.get()[1].lng,
+        mapSize.get()[1].lat
+      );
+      Meteor.subscribe(
+        'fireAlerts',
+        mapSize.get()[0].lng,
+        mapSize.get()[0].lat,
+        mapSize.get()[1].lng,
+        mapSize.get()[1].lat
       );
     }
   });
 
   Meteor.subscribe('activefirestotal');
-  // Right now to all neighborhood alerts
-  Meteor.subscribe('fireAlerts');
   Meteor.subscribe('settings');
   const userSubs = Meteor.subscribe('userSubsToFires');
-  // const subscription = Meteor.subscribe('activefiresmyloc', zoom.get());
-  // Warning with the performance of this log:
-  // console.log(`Active fires ${ActiveFiresCollection.find().count()} of ${Counter.get('countActiveFires')}`);
-  // console.log(`Active neighborhood fires ${FireAlertsCollection.find().fetch().length} and users subscribed ${UserSubsToFiresCollection.find().fetch().length}`);
-  // console.log(UserSubsToFiresCollection.find().fetch());
   const lastCheck = SiteSettings.findOne({ name: 'last-fire-check' });
+  const fireAlerts = FireAlertsCollection.find().fetch();
   return {
-    loading: !subscription.ready(),
+    loading: !subscription ? true : !subscription.ready(),
     userSubs: UserSubsToFiresCollection.find().fetch(),
     subsready: userSubs.ready(),
     // Not reactive query depending on zoom level
     activefires: ActiveFiresCollection.find({}, { reactive: zoom.get() >= MAXZOOMREACTIVE }).fetch(),
-    // activefires: ActiveFiresCollection.find({}).fetch(),
-    activefirestotal: Counter.get('countActiveFires'),
-    firealerts: FireAlertsCollection.find().fetch(),
+    activefirestotal: Counter.get('countActiveFires') + fireAlerts.length,
+    firealerts: fireAlerts,
     lastCheck: lastCheck ? lastCheck.value : null,
     center: geolocation.get(),
     zoom: zoom.get()
