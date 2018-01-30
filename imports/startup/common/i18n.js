@@ -36,7 +36,7 @@ const i18nOpts = {
   },
   whitelist: false,
   // whitelist: ['es', 'en'], // allowed languages
-  load: 'all', // es-ES -> es, en-US -> en
+  load: 'languageOnly', // 'es' o 'en', previously: 'all', // es-ES -> es, en-US -> en
   debug: shouldDebug,
   ns: 'common',
   defaultNS: 'common',
