@@ -6,4 +6,5 @@ import './email';
 import './IPGeocoder';
 import './migrations';
 import './notificationsObserver';
+import './facts';
 import '../common/comments';

@@ -31,6 +31,7 @@ import Signup from '../../pages/Signup/Signup';
 import Auth from '../../pages/Auth/Auth';
 import Login from '../../pages/Login/Login';
 import Logout from '../../pages/Logout/Logout';
+import Status from '../../pages/Status/Status';
 import VerifyEmail from '../../pages/VerifyEmail/VerifyEmail';
 import RecoverPassword from '../../pages/RecoverPassword/RecoverPassword';
 import ResetPassword from '../../pages/ResetPassword/ResetPassword';
@@ -75,6 +76,7 @@ const App = props => (
               <Authenticated exact path="/subscriptions/:_id" component={ViewSubscription} {...props} />
               <Authenticated exact path="/subscriptions/:_id/edit" component={EditSubscription} {...props} />
               <Authenticated exact path="/profile" component={Profile} {...props} />
+              <Authenticated exact path="/status" component={Status} {...props} />
               <Route path="/fires" component={FiresMap} {...props} />
               <Route path="/fire/:id" component={Fires} {...props} />
               <Public path="/auth/:token" component={Auth} {...props} />
