@@ -45,7 +45,7 @@
     "moment": "^2.19.1",
     "moment-timezone": "^0.5.14",
     "node-geocoder": "^3.21.1",
-    "nodemailer": "^4.4.1",
+    "nodemailer": "^4.4.2",
     "popper.js": "^1.12.7",
     "prop-types": "^15.6.0",
     "push.js": "^1.0.5",

@@ -1,9 +1,8 @@
 import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
 import nodemailer from 'nodemailer';
 import { MailTime } from 'meteor/ostrio:mailer';
 import i18n from 'i18next';
-
-// console.log(i18n.t('Inicio del mailer'));
 
 const transports = [];
 
@@ -13,9 +12,6 @@ transports.push(fstTransport);
 // console.log(fstTransport.options.auth.user);
 
 const db = Meteor.users.rawDatabase(); // new Mongo.Collection('__mailTimeQueue__').rawDatabase();
-
-// Use __mailTimeQueue collection in any db
-// db.getCollection("__mailTimeQueue__").count()
 
 // https://litmus.com/community/discussions/4633-is-there-a-reliable-1px-horizontal-rule-method
 export const hr = `<table cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100% !important;">
@@ -81,3 +77,28 @@ if (Meteor.settings.private.testMailer) {
   sendMail(emailOpts, true);
   sendMail(emailOpts, true);
 }
+
+
+// Set interval to greater than 256
+// https://github.com/VeliovGroup/Mail-Time/issues/5
+const MailJobs = new Mongo.Collection('__JobTasks__mailTimeQueue', { idGeneration: 'MONGO' });
+
+const updateJob = (mailJob) => {
+  MailJobs.update(mailJob._id, { $set: { delay: 30000 } });
+  // console.log(MailJobs.findOne());
+};
+
+const mailJob = MailJobs.findOne();
+
+if (mailJob) {
+  updateJob(mailJob);
+}
+
+MailJobs.find().observe({
+  added: function notifAdded(item) {
+    updateJob(item);
+  },
+  changed: function notifChanged(item) {
+    updateJob(item);
+  }
+});
