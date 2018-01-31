@@ -1,0 +1,10 @@
+.error-boundary {
+  background-image: url('/error-background.png');
+  height: 100%;
+  min-height: 55vh;
+  margin-top: 40px;
+}
+
+.error-boundary > div > div > h4 {
+  line-height: 1.5em;
+}

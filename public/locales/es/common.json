@@ -222,6 +222,8 @@
   "Fuego notificado por uno de nuestros usuarios/as <1></1>": "Fuego notificado por uno de nuestros usuarios/as <1></1>",
   "No recibirás notificaciones de fuegos en este equipo, solo por correo": "No recibirás notificaciones de fuegos en este equipo, solo por correo",
   "not-found": "Upppps: Esta página no existe",
+  "general-error-title": "Upppps: Algo ha ido mal",
+  "general-error-description": "Estamos investigando el problema, vuelve a intentarlo en un rato",
   "Más información sobre este fuego": "Más información sobre este fuego",
   "Última actualización, {{when}}": "Última actualización, {{when}}",
   "termsAccept": "Acepto las <1>condiciones de servicio</1> de este sitio",

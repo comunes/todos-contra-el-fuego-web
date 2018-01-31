@@ -43,6 +43,7 @@ import Privacy from '../../pages/Privacy/Privacy';
 import License from '../../pages/License/License';
 import Credits from '../../pages/Credits/Credits';
 import ReSendEmail from '../../components/ReSendEmail/ReSendEmail';
+import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
 import history from '../../components/History/History';
 import '../../components/NotificationsObserver/NotificationsObserver';
 import FiresMap from '../../pages/FiresMap/FiresMap';
@@ -53,56 +54,60 @@ import './App.scss';
 const App = props => (
   /* https://react.i18next.com/components/i18nextprovider.html */
   <I18nextProvider i18n={i18n}>
-    <Router history={history}>
-      { !props.loading ?
-        <div className="App">
-          <Helmet>
-            <meta charSet="utf-8" />
-            <title>{i18n.t('AppName')}</title>
-            <meta name="description" content={`${i18n.t('AppDescrip')}: ${i18n.t('AppDescripLong')}`} />
-          </Helmet>
-          <Navigation {...props} />
-          <ReSendEmail {...props} />
-          <Grid>
-            <Switch>
-              <Route exact name="index" path="/" component={Index} />
-              {/* <Authenticated exact path="/documents" component={Documents} {...props} />
-              <Authenticated exact path="/documents/new" component={NewDocument} {...props} />
-              <Authenticated exact path="/documents/:_id" component={ViewDocument} {...props} />
-              <Authenticated exact path="/documents/:_id/edit" component={EditDocument} {...props} />
-              */}
-              <Authenticated exact path="/subscriptions" component={Subscriptions} {...props} />
-              <Authenticated exact path="/subscriptions/new" component={NewSubscription} {...props} />
-              <Authenticated exact path="/subscriptions/:_id" component={ViewSubscription} {...props} />
-              <Authenticated exact path="/subscriptions/:_id/edit" component={EditSubscription} {...props} />
-              <Authenticated exact path="/profile" component={Profile} {...props} />
-              <Authenticated exact path="/status" component={Status} {...props} />
-              <Route path="/fires" component={FiresMap} {...props} />
-              <Route path="/fire/:id" component={Fires} {...props} />
-              <Public path="/auth/:token" component={Auth} {...props} />
-              <Public path="/signup" component={Signup} {...props} />
-              <Public path="/login" component={Login} {...props} />
-              <Route path="/logout" component={Logout} {...props} />
-              <Route path="/sandbox" component={Sandbox} {...props} />
-              {/* <Route path="/subscriptions" render={props => <FireSubscription focusInput {...props} />} /> */}
+    <ErrorBoundary>
+      <Router history={history}>
+        { !props.loading ?
+          <div className="App">
+            <Helmet>
+              <meta charSet="utf-8" />
+              <title>{i18n.t('AppName')}</title>
+              <meta name="description" content={`${i18n.t('AppDescrip')}: ${i18n.t('AppDescripLong')}`} />
+            </Helmet>
+            <Navigation {...props} />
+            <ReSendEmail {...props} />
 
-              <Route name="verify-email" path="/verify-email/:token" component={VerifyEmail} />
-              <Route name="recover-password" path="/recover-password" component={RecoverPassword} />
-              <Route name="reset-password" path="/reset-password/:token" component={ResetPassword} />
-              <Route name="terms" path="/terms" component={Terms} />
-              <Route name="privacy" path="/privacy" component={Privacy} />
-              <Route name="license" path="/license" component={License} />
-              <Route name="credits" path="/credits" component={Credits} />
-              <Route component={NotFound} />
-            </Switch>
-          </Grid>
-          <Footer />
-          <Reconnect />
-          {props.i18nReady.get() &&
-          <Blaze template="cookieConsent" />
-          }
-        </div> : ''}
-    </Router>
+            <Grid>
+              <Switch>
+                <Route exact name="index" path="/" component={Index} />
+                {/* <Authenticated exact path="/documents" component={Documents} {...props} />
+                <Authenticated exact path="/documents/new" component={NewDocument} {...props} />
+                <Authenticated exact path="/documents/:_id" component={ViewDocument} {...props} />
+                <Authenticated exact path="/documents/:_id/edit" component={EditDocument} {...props} />
+                */}
+                <Authenticated exact path="/subscriptions" component={Subscriptions} {...props} />
+                <Authenticated exact path="/subscriptions/new" component={NewSubscription} {...props} />
+                <Authenticated exact path="/subscriptions/:_id" component={ViewSubscription} {...props} />
+                <Authenticated exact path="/subscriptions/:_id/edit" component={EditSubscription} {...props} />
+                <Authenticated exact path="/profile" component={Profile} {...props} />
+                <Authenticated exact path="/status" component={Status} {...props} />
+                <Route path="/fires" component={FiresMap} {...props} />
+                <Route path="/fire/:id" component={Fires} {...props} />
+                <Public path="/auth/:token" component={Auth} {...props} />
+                <Public path="/signup" component={Signup} {...props} />
+                <Public path="/login" component={Login} {...props} />
+                <Route path="/logout" component={Logout} {...props} />
+                <Route path="/sandbox" component={Sandbox} {...props} />
+                {/* <Route path="/subscriptions" render={props => <FireSubscription focusInput {...props} />} /> */}
+
+                <Route name="verify-email" path="/verify-email/:token" component={VerifyEmail} />
+                <Route name="recover-password" path="/recover-password" component={RecoverPassword} />
+                <Route name="reset-password" path="/reset-password/:token" component={ResetPassword} />
+                <Route name="terms" path="/terms" component={Terms} />
+                <Route name="privacy" path="/privacy" component={Privacy} />
+                <Route name="license" path="/license" component={License} />
+                <Route name="credits" path="/credits" component={Credits} />
+
+                <Route component={NotFound} />
+              </Switch>
+            </Grid>
+            <Footer />
+            <Reconnect />
+            {props.i18nReady.get() &&
+            <Blaze template="cookieConsent" />
+            }
+          </div> : ''}
+      </Router>
+    </ErrorBoundary>
   </I18nextProvider>
 );
 
