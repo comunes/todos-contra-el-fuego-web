@@ -60,11 +60,7 @@ class FiresMap extends React.Component {
 
   componentDidMount() {
     if (this.fireMap) {
-      if (this.getMap().getCenter()) {
-        const bounds = this.getMap().getBounds();
-        mapSize.set([bounds.getNorthEast(), bounds.getSouthWest()]);
-        this.addScale();
-      }
+      this.addScale();
     }
   }
 
@@ -118,6 +114,8 @@ class FiresMap extends React.Component {
     // console.log('Map loading');
     // console.log(map);
     if (map) {
+      const bounds = this.getMap().getBounds();
+      mapSize.set([bounds.getNorthEast(), bounds.getSouthWest()]);
       this.state.union = subsUnion(this.state.union, {
         map,
         subs: this.props.userSubs,
