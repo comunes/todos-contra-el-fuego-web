@@ -112,11 +112,15 @@ class FiresMap extends React.Component {
     // console.log(map);
     if (map) {
       console.log('Firesmap loading');
-      const bounds = this.getMap().getBounds();
-      mapSize.set([bounds.getNorthEast(), bounds.getSouthWest()]);
-      if (!this.state.scaleAdded) {
-        this.addScale();
-        this.state.scaleAdded = true;
+      try {
+        const bounds = this.getMap().getBounds();
+        mapSize.set([bounds.getNorthEast(), bounds.getSouthWest()]);
+        if (!this.state.scaleAdded) {
+          this.addScale();
+          this.state.scaleAdded = true;
+        }
+      } catch (e) {
+        console.log('Failed to set map bounds and scale');
       }
       this.state.union = subsUnion(this.state.union, {
         map,
