@@ -27,6 +27,7 @@ import Subscriptions from '../../pages/Subscriptions/Subscriptions';
 import NewSubscription from '../../pages/NewSubscription/NewSubscription';
 import ViewSubscription from '../../pages/ViewSubscription/ViewSubscription';
 import EditSubscription from '../../pages/EditSubscription/EditSubscription';
+import TestError from '../../pages/TestError/TestError';
 import Signup from '../../pages/Signup/Signup';
 import Auth from '../../pages/Auth/Auth';
 import Login from '../../pages/Login/Login';
@@ -87,6 +88,7 @@ const App = props => (
                 <Public path="/login" component={Login} {...props} />
                 <Route path="/logout" component={Logout} {...props} />
                 <Route path="/sandbox" component={Sandbox} {...props} />
+                <Route path="/error" component={TestError} {...props} />
                 {/* <Route path="/subscriptions" render={props => <FireSubscription focusInput {...props} />} /> */}
 
                 <Route name="verify-email" path="/verify-email/:token" component={VerifyEmail} />
