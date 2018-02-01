@@ -111,7 +111,7 @@ class FiresMap extends React.Component {
   handleLeafletLoad(map) {
     // console.log(map);
     if (map) {
-      console.log('Firesmap loading');
+      // console.log('Firesmap loading');
       try {
         const bounds = this.getMap().getBounds();
         mapSize.set([bounds.getNorthEast(), bounds.getSouthWest()]);
@@ -254,7 +254,7 @@ export default translate([], { wait: true })(withTracker(() => {
   Meteor.autorun(() => {
     if (geolocation.get() && init) {
       center.set(geolocation.get());
-      console.log(`Geolocation ${geolocation.get()}`);
+      // console.log(`Geolocation ${geolocation.get()}`);
       init = false;
     }
     if (mapSize.get() && mapSize.get()[0].lng && mapSize.get()[1].lat) {
