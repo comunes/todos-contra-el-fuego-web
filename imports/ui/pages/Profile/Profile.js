@@ -1,13 +1,15 @@
 /* eslint-disable no-underscore-dangle */
+/* eslint-disable import/no-absolute-path */
 
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Row, FormGroup, ControlLabel, Button } from 'react-bootstrap';
-import Col from '../../components/Col/Col';
 import _ from 'lodash';
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Bert } from 'meteor/themeteorchef:bert';
+import { testId } from '/imports/ui/components/Utils/TestUtils';
+import Col from '../../components/Col/Col';
 import { createContainer } from 'meteor/react-meteor-data';
 import InputHint from '../../components/InputHint/InputHint';
 import validate from '../../../modules/validate';
@@ -232,7 +234,7 @@ class Profile extends React.Component {
         />
         <InputHint>{this.t('Usa al menos seis caracteres.')}</InputHint>
       </FormGroup>
-      <Button type="submit" bsStyle="success">{this.t('Guardar perfíl')}</Button>
+      <Button id={testId('profileSubmit')} type="submit" bsStyle="success">{this.t('Guardar perfíl')}</Button>
     </div>) : <div />;
   }
 

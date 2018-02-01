@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Bert } from 'meteor/themeteorchef:bert';
+import { testId } from '/imports/ui/components/Utils/TestUtils';
 import Icon from '../../components/Icon/Icon';
 import OAuthLoginButtons from '../../components/OAuthLoginButtons/OAuthLoginButtons';
 import InputHint from '../../components/InputHint/InputHint';
@@ -186,11 +187,11 @@ class Signup extends React.Component {
               />
               <InputHint>{t('Usa al menos seis caracteres.')}</InputHint>
             </FormGroup>
-            <Checkbox inline={false} defaultChecked={this.state.termsAccept} onClick={e => this.setTermsAccept(e.target.checked)}>
+            <Checkbox inline={false} name="tos" defaultChecked={this.state.termsAccept} onClick={e => this.setTermsAccept(e.target.checked)}>
               <Trans className="mark-checkbox" parent="span" i18nKey="termsAccept">Acepto las <a target="_blank" href="/terms">condiciones de servicio</a> de este sitio</Trans>
             </Checkbox>
 
-            <Button type="submit" disabled={!this.state.termsAccept} bsStyle="success">{t('Registrarse')}</Button>
+            <Button id={testId('signUpSubmit')} type="submit" disabled={!this.state.termsAccept} bsStyle="success">{t('Registrarse')}</Button>
             <AccountPageFooter>
               <p>{t('¿Ya tienes un cuenta?')} <Link to={{ pathname: '/login', state: this.state }} >{t('Iniciar sesión')}</Link>.</p>
             </AccountPageFooter>

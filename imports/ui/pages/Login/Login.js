@@ -1,3 +1,5 @@
+/* eslint-disable import/no-absolute-path */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Row, FormGroup, ControlLabel, Button } from 'react-bootstrap';
@@ -6,6 +8,7 @@ import { Meteor } from 'meteor/meteor';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { translate } from 'react-i18next';
 import { T9n } from 'meteor-accounts-t9n';
+import { testId } from '/imports/ui/components/Utils/TestUtils';
 import Col from '../../components/Col/Col';
 import OAuthLoginButtons from '../../components/OAuthLoginButtons/OAuthLoginButtons';
 import AccountPageFooter from '../../components/AccountPageFooter/AccountPageFooter';
@@ -101,7 +104,7 @@ class Login extends React.Component {
                   className="form-control"
                 />
               </FormGroup>
-              <Button type="submit" bsStyle="success">{this.t('Iniciar sesión')}</Button>
+              <Button id={testId('loginSubmit')} type="submit" bsStyle="success">{this.t('Iniciar sesión')}</Button>
               <AccountPageFooter>
                 <p>{this.t('¿No tienes una cuenta?')} <Link to="/signup">{this.t('Regístrate')}</Link>.</p>
               </AccountPageFooter>

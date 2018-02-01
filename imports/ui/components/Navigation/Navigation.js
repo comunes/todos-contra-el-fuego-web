@@ -1,9 +1,12 @@
+/* eslint-disable import/no-absolute-path */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Trans, translate } from 'react-i18next';
+import { testId } from '/imports/ui/components/Utils/TestUtils';
 import BetaRibbon from '../../components/BetaRibbon/BetaRibbon';
 import PublicNavigation from '../PublicNavigation/PublicNavigation';
 import AuthenticatedNavigation from '../AuthenticatedNavigation/AuthenticatedNavigation';
@@ -38,12 +41,12 @@ const Navigation = props => (
           {/* <LinkContainer className="nav-item" anchorClassName="nav-link" to="/sandbox">
           <NavItem eventKey={1.1} href="/sandbox">Sandbox</NavItem>
           </LinkContainer> */}
-          <LinkContainer className="nav-item" anchorClassName="nav-link" to="/subscriptions">
+          <LinkContainer id={testId('subscriptions')} className="nav-item" anchorClassName="nav-link" to="/subscriptions">
             <NavItem eventKey={1.2} href="/subscriptions">
               {props.authenticated ? <Trans>Mis zonas</Trans> : <Trans>Participar</Trans>}
             </NavItem>
           </LinkContainer>
-          <LinkContainer className="nav-item" anchorClassName="nav-link" to="/fires">
+          <LinkContainer id={testId('activeFires')} className="nav-item" anchorClassName="nav-link" to="/fires">
             <NavItem eventKey={2} href="/fires">{props.t('activeFires')}</NavItem>
           </LinkContainer>
         </ul>
