@@ -5,13 +5,14 @@
     this.Before(() => {
       //  global.expect = require('@xolvio/jasmine-expect').expect;
 
+      /* Not used
       if (!this.initMyCmds) {
         client.addCommand('waitForClickable', function elementClickable(selector, timeout) {
           this.waitForVisible(selector, timeout);
           this.waitForEnabled(selector, timeout);
         });
         this.initMyCmds = true;
-      }
+      } */
 
       // server.call('fixtures/reset');
       // server.call('emailStub/reset');

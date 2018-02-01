@@ -1,8 +1,11 @@
+/* eslint-disable import/no-absolute-path */
+
 import React from 'react';
 import { year } from '@cleverbeagle/dates';
 import { Link } from 'react-router-dom';
 import { Grid } from 'react-bootstrap';
 import { translate } from 'react-i18next';
+import { testId } from '/imports/ui/components/Utils/TestUtils';
 
 import './Footer.scss';
 
@@ -21,19 +24,19 @@ const Footer = (props) => {
 
         <ul className="pull-right">
           <li>
-            <Link to="/terms">
+            <Link id={testId('tos')} to="/terms">
               <span className="d-none d-md-inline">{t('Términos de Servicio')}</span>
               <span className="d-md-none">{t('Términos')}</span>
             </Link>
           </li>
           <li>
-            <Link to="/privacy">
+            <Link id={testId('privacy')} to="/privacy">
               <span className="d-none d-md-inline">{t('Política de Privacidad')}</span>
               <span className="d-md-none">{t('Privacidad')}</span>
             </Link>
           </li>
-          <li><span className="d-none d-md-inline"><Link to="/license">{t('Licencia')}</Link></span></li>
-          <li><span className="d-none d-md-inline"><Link to="/credits">{t('Créditos')}</Link></span></li>
+          <li><span className="d-none d-md-inline"><Link id={testId('license')} to="/license">{t('Licencia')}</Link></span></li>
+          <li><span className="d-none d-md-inline"><Link id={testId('credits')} to="/credits">{t('Créditos')}</Link></span></li>
         </ul>
       </Grid>
     </div>
