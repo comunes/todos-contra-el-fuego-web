@@ -100,22 +100,26 @@ i18n.use(backend)
     CookieConsent.init(cookiesOpt);
   });
 
+Meteor.subscribe('userData'); // lang is there
+
 i18n.on('languageChanged', (lng) => {
   moment.locale(lng);
   T9n.setLanguage(lng);
-  Tracker.autorun(() => {
+  Tracker.autorun((computation) => {
     if (Meteor.userId()) {
       // logged
       if (Meteor.user() && (typeof Meteor.user().lang === 'undefined' ||
                             Meteor.user().lang !== lng)
       ) {
         // Set the autodetected/changed lang
-        console.log(`Setting the autodetected lang ${lng}`);
+        console.log(`Setting the autodetected lang ${lng}, from previous ${Meteor.user().lang}`);
+        // console.log(Meteor.user());
         Meteor.call('users.setLang', lng, (error) => {
           if (error) {
             console.error(error);
           }
         });
+        computation.stop(); // not need it again til new lang change
       }
     }
   });
