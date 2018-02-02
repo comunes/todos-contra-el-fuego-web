@@ -1,6 +1,6 @@
-La Asociación Comunes (en adelante Comunes) con domicilio en Calle Duque de Alba, 13, 28012 Madrid, España con CIF G85860708 pone a disposición en su sitio web fuegos.comunes.org determinados contenidos de carácter informativo sobre sus actividades.
+La Asociación Comunes (en adelante Comunes) con domicilio en Calle Duque de Alba, 13, 28012 Madrid, España con CIF G85860708 pone a disposición en su sitio web [fuegos.comunes.org](https://fuegos.comunes.org) determinados contenidos de carácter informativo sobre sus actividades.
 
-Las presentes condiciones generales rigen única y exclusivamente el uso del sitio web de Comunes por parte de los USUARIOS que accedan al mismo. Las presentes condiciones generales se le exponen al USUARIO en el sitio web fuegos.comunes.org en todas y cada una de las páginas y cada vez que un USUARIO introduce sus datos en los formularios existentes, para que las lea, las imprima, archive y acepte a través de internet, no pudiendo el USUARIO introducir sus datos efectivamente sin que se haya producido esta aceptación.
+Las presentes condiciones generales rigen única y exclusivamente el uso del sitio web de Comunes por parte de los USUARIOS que accedan al mismo. Las presentes condiciones generales se le exponen al USUARIO en el sitio web [fuegos.comunes.org](https://fuegos.comunes.org) en todas y cada una de las páginas y cada vez que un USUARIO introduce sus datos en los formularios existentes, para que las lea, las imprima, archive y acepte a través de internet, no pudiendo el USUARIO introducir sus datos efectivamente sin que se haya producido esta aceptación.
 
 Comunes está inscrita en el Registro Nacional de Asocisaciones: Grupo 1 / Sección 1 / Número Nacional: 594506.
 
@@ -8,7 +8,7 @@ El acceso a este sitio web de Comunes, 'Todos contra el Fuego', implica sin rese
 
 **PRIMERA.- CONDICIONES DE ACCESO Y USO**
 
-1.1.- La utilización del sitio web de Comunes, 'Todos contra el Fuego', no conlleva la obligatoriedad de inscripción del USUARIO, salvo si este USUARIO desee utilizar los servicios de notificación de fuegos.comunes.org donde será preciso que se registre cubriendo un formulario básico, ésta suscripción se regirá por las condiciones generales específicas. Las condiciones de acceso y uso del presente sitio web se rigen estrictamente por la legalidad vigente y por el principio de buena fe comprometiéndose el USUARIO a realizar un buen uso de la web. Quedan prohibidos todos los actos que vulneren la legalidad, derechos o intereses de terceros: derecho a la intimidad, protección de datos, propiedad intelectual etc. Expresamente Comunes prohíbe los siguientes:
+1.1.- La utilización del sitio web de Comunes, 'Todos contra el Fuego', no conlleva la obligatoriedad de inscripción del USUARIO, salvo si este USUARIO desee utilizar los servicios de notificación de [fuegos.comunes.org](https://fuegos.comunes.org) donde será preciso que se registre cubriendo un formulario básico, ésta suscripción se regirá por las condiciones generales específicas. Las condiciones de acceso y uso del presente sitio web se rigen estrictamente por la legalidad vigente y por el principio de buena fe comprometiéndose el USUARIO a realizar un buen uso de la web. Quedan prohibidos todos los actos que vulneren la legalidad, derechos o intereses de terceros: derecho a la intimidad, protección de datos, propiedad intelectual etc. Expresamente Comunes prohíbe los siguientes:
 
 1.1.1.- Realizar acciones que puedan producir en el sitio web o a través del mismo por cualquier medio cualquier tipo de daño a los sistemas de Comunes o a terceros.
 
@@ -32,7 +32,7 @@ El USUARIO que desee establecer un hiperenlace en su sitio web al sitio web de C
 
 **TERCERA.- DERECHOS DE AUTOR Y MARCA**
 
-Comunes informa que el sitio web fuegos.comunes.org los contenidos propios, la programación y el diseño del sitio web se encuentra plenamente protegido por los derechos de autor mediante la licencia que en cada caso aplique y se indique. Comunes utiliza fuentes externas (como la NASA) para la elaboración de sus contenidos en determinadas ocasiones y también establece links o hiperenlaces a artículos o informaciones de terceros citando siempre la fuente. El legítimo titular de los derechos de autor de estas informaciones así incluidas podrá solicitar en cualquier momento la eliminación de las referidas referencias.
+Comunes informa que el sitio web [fuegos.comunes.org](https://fuegos.comunes.org) los contenidos propios, la programación y el diseño del sitio web se encuentra plenamente protegido por los derechos de autor mediante la licencia que en cada caso aplique y se indique. Comunes utiliza fuentes externas (como la NASA) para la elaboración de sus contenidos en determinadas ocasiones y también establece links o hiperenlaces a artículos o informaciones de terceros citando siempre la fuente. El legítimo titular de los derechos de autor de estas informaciones así incluidas podrá solicitar en cualquier momento la eliminación de las referidas referencias.
 
 Sobre los datos de la NASA: Reconocemos el uso de datos e imágenes de LANCE FIRMS operadas por NASA/GSFC/Earth Science Data and Information System (ESDIS) con fondos proporcionados por NASA/HQ.
 

@@ -1,6 +1,6 @@
-The Association Comunes (hereinafter Comunes) with address at Calle Duque de Alba, 13, 28012 Madrid, Spain with CIF G85860708 makes available on its website fuegos.comunes.org certain content of an informative nature on its activities.
+The Association Comunes (hereinafter Comunes) with address at Calle Duque de Alba, 13, 28012 Madrid, Spain with CIF G85860708 makes available on its website [fires.comunes.org](https://fires.comunes.org) certain content of an informative nature on its activities.
 
-These general conditions govern solely and exclusively the use of the Comunes website by the USERS that access it. These general conditions are exposed to the USER on the website fuegos.comunes.org in each and every one of the pages and each time a USER enters their data in the existing forms, to read, print, file and accept through internet, the USER can not enter their data effectively without this acceptance has occurred.
+These general conditions govern solely and exclusively the use of the Comunes website by the USERS that access it. These general conditions are exposed to the USER on the website [fires.comunes.org](https://fires.comunes.org) in each and every one of the pages and each time a USER enters their data in the existing forms, to read, print, file and accept through internet, the USER can not enter their data effectively without this acceptance has occurred.
 
 Comunes is registered in the Spanish National Registry of Associations: Group 1 / Section 1 / National Number: 594506.
 
@@ -8,7 +8,7 @@ The access to this website of Comunes, 'All against the Fire', implies without r
 
 **FIRST.- CONDITIONS OF ACCESS AND USE**
 
-1.1.- The use of the website of Comunes, 'All against the Fire', does not entail the obligation of registration of the USER, unless this USER wishes to use the notification services of fuegos.comunes.org where it will be necessary to register covering a basic form, this subscription will be governed by the specific general conditions. The conditions of access and use of this website are strictly governed by current legislation and by the principle of good faith, the USER committing to make good use of the website. All acts that violate the legality, rights or interests of third parties are forbidden: right to privacy, data protection, intellectual property, etc. Expressly Comunes prohibits the following:
+1.1.- The use of the website of Comunes, 'All against the Fire', does not entail the obligation of registration of the USER, unless this USER wishes to use the notification services of [fires.comunes.org](https://fires.comunes.org) where it will be necessary to register covering a basic form, this subscription will be governed by the specific general conditions. The conditions of access and use of this website are strictly governed by current legislation and by the principle of good faith, the USER committing to make good use of the website. All acts that violate the legality, rights or interests of third parties are forbidden: right to privacy, data protection, intellectual property, etc. Expressly Comunes prohibits the following:
 
 1.1.1.- Perform actions that may produce on the website or through it by any means any type of damage to the systems of Comunes or third parties.
 
@@ -32,7 +32,7 @@ The USER who wishes to establish a hyperlink on their website to the Comunes web
 
 **THIRD.- COPYRIGHT AND TRADEMARK**
 
-Comunes informs that the website fuegos.comunes.org the own contents, the programming and the design of the website is fully protected by the author's rights through the license that in each case applies and is indicated. Comunes uses external sources (such as NASA) to prepare its content on certain occasions and also establishes links or hyperlinks to articles or information from third parties, always citing the source. The legitimate owner of the copyright of this information so included may at any time request the elimination of the aforementioned references.
+Comunes informs that the website [fires.comunes.org](https://fires.comunes.org) the own contents, the programming and the design of the website is fully protected by the author's rights through the license that in each case applies and is indicated. Comunes uses external sources (such as NASA) to prepare its content on certain occasions and also establishes links or hyperlinks to articles or information from third parties, always citing the source. The legitimate owner of the copyright of this information so included may at any time request the elimination of the aforementioned references.
 
 About NASA data: *We acknowledge the use of data and imagery from LANCE FIRMS operated by the NASA/GSFC/Earth Science Data and Information System (ESDIS) with funding provided by NASA/HQ*.
 
