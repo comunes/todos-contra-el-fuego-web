@@ -16,7 +16,7 @@ import './Navigation.scss';
 
 // removed class: fixed-top
 const Navigation = props => (
-  <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav className="navbar navbar-expand-md navbar-dark bg-dark">
     <div style={{ overflow: 'hidden' } /* for ribbon */} className="container">
       <BetaRibbon />
       {/* <Navbar bsClass="navbar navbar-dark bg-dark"> */}

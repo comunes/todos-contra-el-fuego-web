@@ -25,14 +25,14 @@ const Footer = (props) => {
         <ul className="pull-right">
           <li>
             <Link id={testId('tos')} to="/terms">
-              <span className="d-none d-md-inline">{t('Términos de Servicio')}</span>
-              <span className="d-md-none">{t('Términos')}</span>
+              <span className="d-none d-lg-inline">{t('Términos de Servicio')}</span>
+              <span className="d-lg-none">{t('Términos')}</span>
             </Link>
           </li>
           <li>
             <Link id={testId('privacy')} to="/privacy">
-              <span className="d-none d-md-inline">{t('Política de Privacidad')}</span>
-              <span className="d-md-none">{t('Privacidad')}</span>
+              <span className="d-none d-lg-inline">{t('Política de Privacidad')}</span>
+              <span className="d-lg-none">{t('Privacidad')}</span>
             </Link>
           </li>
           <li><span className="d-none d-md-inline"><Link id={testId('license')} to="/license">{t('Licencia')}</Link></span></li>
