@@ -193,14 +193,14 @@ class Index extends Component {
             </ol>
             <div className="carousel-inner" role="listbox">
 
-              <div className="carousel-item carousel-snd-item-1 active">
-                <div className="carousel-caption">
+              <div className="carousel-item carousel-snd-item carousel-snd-item-1 active">
+                <div className="carousel-caption carousel-snd-caption">
                   <h3><Trans i18nKey="CO2emisions">¿Sabías que los fuegos <a href="https://www.livescience.com/1981-wildfires-release-cars.html" target="_blank">producen tanto CO² como los coches</a> y <a href="https://www.motherjones.com/politics/2014/08/wild-fires-are-so-so-bad-climate/" target="_blank">aproximadamente ⅕ de todas nuestras emisiones</a>?</Trans></h3>
                   <p />
                 </div>
               </div>
-              <div className="carousel-item carousel-snd-item-2">
-                <div className="carousel-caption">
+              <div className="carousel-item carousel-snd-item carousel-snd-item-2">
+                <div className="carousel-caption carousel-snd-caption">
                   <h3><Trans>Ayúdanos a combatir el cambio climático y a proteger el medioambiente</Trans></h3>
                   <p />
                 </div>

@@ -25,6 +25,16 @@
   background-size: cover;
 }
 
+.carousel-snd-item {
+  height: 85vh;
+  min-height: 400px;
+  background: no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 .carousel-control-next-icon, .carousel-control-prev-icon {
   width: 40px;
   height: 40px;
@@ -36,6 +46,7 @@
   cursor: pointer;
 }
 
+.carousel-snd-caption > h3,
 .carousel-caption > h3 {
   > i {
     display: none;
@@ -47,6 +58,12 @@
 @include breakpoint(mobile) {
   .carousel-caption > h3 {
     font-size: 2.0rem;
+  }
+}
+
+@include breakpoint(mobile) {
+  .carousel-snd-caption > h3 {
+    font-size: 1.3rem;
   }
 }
 
