@@ -57,7 +57,7 @@
 
 @include breakpoint(mobile) {
   .carousel-caption > h3 {
-    font-size: 2.0rem;
+    font-size: 1.8rem;
   }
 }
 
@@ -72,7 +72,7 @@
     color: #280B0B;
     font-weight: bold;
     text-transform: uppercase;
-    font-size: 10px;
+    font-size: 20px;
   }
   p {
     padding-top: 10px;
@@ -103,7 +103,7 @@
   width: 30%;
   left: 35%;
   border: 14px solid #FFF;
-  opacity: .8;
+  opacity: .6;
   &:after {
     content: "";
     display: block;
@@ -125,7 +125,7 @@
   /* position: absolute; */
   font-size: 140px;
   color: white;
-  opacity: .8;
+  opacity: .6;
   /* right: 35%; */
   text-shadow: 2px 2px #280B0B;
 }
@@ -287,10 +287,24 @@
   text-align: left;
 }
 
+.slides-footer {
+  position: relative;
+  bottom: 0px;
+  left: 0px;
+  text-align: left;
+}
+
+.slides-footer > p,
 .crowd-footer > p {
   font-size: 13px;
   margin-left: 20px;
   margin-right: 20px;
+}
+
+.slides-footer > p > a,
+.slides-footer > p > a:hover {
+  color: #868e96 !important;
+  text-shadow: 2px 2px 1px #280B0B;
 }
 
 #carouselSndIndicators > div > div.carousel-item.carousel-snd-item-1 > div > h3 > span > a {

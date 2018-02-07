@@ -197,12 +197,18 @@ class Index extends Component {
                 <div className="carousel-caption carousel-snd-caption">
                   <h3><Trans i18nKey="CO2emisions">¿Sabías que los fuegos <a href="https://www.livescience.com/1981-wildfires-release-cars.html" target="_blank">producen tanto CO² como los coches</a> y <a href="https://www.motherjones.com/politics/2014/08/wild-fires-are-so-so-bad-climate/" target="_blank">aproximadamente ⅕ de todas nuestras emisiones</a>?</Trans></h3>
                   <p />
+                  <div className="row slides-footer">
+                    <p className="text-muted"><a href="https://commons.wikimedia.org/wiki/File:La_Tuna_fire_and_cityscape_1.jpg" target="_blank"><Trans>Fuego en La Tuna, Los Ángeles, Estados Unidos, septiembre de 2017</Trans></a></p>
+                  </div>
                 </div>
               </div>
               <div className="carousel-item carousel-snd-item carousel-snd-item-2">
                 <div className="carousel-caption carousel-snd-caption">
                   <h3><Trans>Ayúdanos a combatir el cambio climático y a proteger el medioambiente</Trans></h3>
                   <p />
+                  <div className="row slides-footer">
+                    <p className="text-muted"><a href="https://commons.wikimedia.org/wiki/File:Smog_over_Almaty.jpg" target="_blank"><Trans>Polución en la ciudad de Almaty, Kazakhstan, enero de 2014</Trans></a></p>
+                  </div>
                 </div>
               </div>
             </div>
