@@ -9,6 +9,7 @@ import { translate, Trans } from 'react-i18next';
 import { FormGroup } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import { Bert } from 'meteor/themeteorchef:bert';
+import { Helmet } from 'react-helmet';
 import { Map, Circle } from 'react-leaflet';
 import Blaze from 'meteor/gadicc:blaze-react-component';
 import DefMapLayers from '/imports/ui/components/Maps/DefMapLayers';
@@ -58,16 +59,19 @@ class Fire extends React.Component {
     if (fire && fire.when) {
       this.dateLongFormat = dateLongFormat(fire.when);
     }
+    const title = fire.address ?
+      t('Información adicional sobre fuego detectado en {{where}} el {{when}}', { where: fire.address, when: this.dateLongFormat }) :
+      t('Información adicional sobre fuego detectado el {{when}}', { when: this.dateLongFormat });
     return (fire ? (
       <div className="ViewFire">
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>{t('AppName')}: {t('Información adicional sobre fuego')}</title>
+          <meta name="description" content={title} />
+        </Helmet>
         {!loading &&
          <Fragment>
-           <h4 className="page-header">
-             {fire.address ?
-              t('Información adicional sobre fuego detectado en {{where}} el {{when}}', { where: fire.address, when: this.dateLongFormat }) :
-              t('Información adicional sobre fuego detectado el {{when}}', { when: this.dateLongFormat })}
-           </h4>
-
+           <h4 className="page-header">{title}</h4>
            <Map
                ref={(map) => {
                    this.fireMap = map;

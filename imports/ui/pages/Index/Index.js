@@ -4,6 +4,7 @@
 /* eslint-env jquery */
 import React, { Component, Fragment } from 'react';
 import { translate, Trans } from 'react-i18next';
+import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 // import { HashLink as Link } from 'react-router-hash-link';
 // import { Link } from 'react-router-dom';
@@ -76,8 +77,12 @@ class Index extends Component {
   }
 
   render() {
+    const { t } = this.props;
     return (
       <div className="IndexDisabled full-width">
+        <Helmet>
+          <title>{t('AppName')}: {t('Inicio')}</title>
+        </Helmet>
         {/* https://v4-alpha.getbootstrap.com/components/carousel/  */}
         <Fragment>
           <section className="sect1">

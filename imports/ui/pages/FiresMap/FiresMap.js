@@ -8,6 +8,7 @@ import { ButtonGroup, Row, Col, Checkbox } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { withTracker } from 'meteor/react-meteor-data';
+import { Helmet } from 'react-helmet';
 import { Trans, translate } from 'react-i18next';
 import { Map } from 'react-leaflet';
 import Control from 'react-leaflet-control';
@@ -132,6 +133,7 @@ class FiresMap extends React.Component {
   }
 
   render() {
+    const { t } = this.props;
     console.log(`Rendering ${this.props.loading ? 'loading' : 'LOADED'} map ${this.props.activefires.length + this.props.firealerts.length} of ${this.props.activefirestotal} total. Subs users ready ${this.props.subsready}, reactive ${this.state.viewport.zoom >= MAXZOOMREACTIVE}`);
 
     return (
@@ -140,6 +142,11 @@ class FiresMap extends React.Component {
       <div
           ref={(divElement) => { this.divElement = divElement; }}
       >
+      { window.location.pathname !== '/' &&
+        <Helmet>
+          <title>{t('AppName')}: {t('Fuegos activos')}</title>
+          <meta name="description" content={t('Fuegos activos en el mundo actualizados en tiempo real')} />
+        </Helmet> }
         {this.props.loading || !this.props.subsready ?
          <Row className="align-items-center justify-content-center">
            <Loading />
