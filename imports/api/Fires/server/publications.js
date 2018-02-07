@@ -24,11 +24,29 @@ const options = {
 
 const geocoder = NodeGeocoder(options);
 
+const unseal = async (obj) => {
+  try {
+    const unsealed = await urlEnc.decrypt(obj);
+    return unsealed;
+  } catch (error) {
+    // console.warn(error);
+    return undefined;
+  }
+};
+
+const unsealW = obj => unseal(obj);
+
 Meteor.publish('fireFromHash', function fireFromHash(fireEnc) {
   check(fireEnc, String);
   try {
     // console.log(fireEnc);
-    const unsealed = Promise.await(urlEnc.decrypt(fireEnc));
+    // const unsealed = Promise.await(urlEnc.decrypt(fireEnc));
+    const unsealed = Promise.await(unsealW(fireEnc));
+    if (unsealed === undefined) {
+      console.info(`Wrong fire: ${fireEnc}`);
+      // https://guide.meteor.com/data-loading.html
+      return this.ready();
+    }
     const w = unsealed.when;
     unsealed.when = new Date(w);
     const c = unsealed.createdAt;
@@ -36,7 +54,6 @@ Meteor.publish('fireFromHash', function fireFromHash(fireEnc) {
     const u = unsealed.updatedAt;
     unsealed.updatedAt = !u ? new Date() : new Date(u);
     // console.log(unsealed);
-
     // FIXME:
     if (typeof unsealed.confidence === 'string') {
       unsealed.confidence = Number.parseInt(unsealed.confidence, 10);
@@ -55,7 +72,7 @@ Meteor.publish('fireFromHash', function fireFromHash(fireEnc) {
         }
         // console.log(unsealed.address);
       } catch (reve) {
-        console.error(reve);
+        console.warn(reve);
       }
     }
     if (fire.count() === 0) {
@@ -65,9 +82,9 @@ Meteor.publish('fireFromHash', function fireFromHash(fireEnc) {
     }
     return findFire(unsealed);
     /* console.log(`fires: ${fire.count()}`);
-     * return fire; */
+       * return fire; */
   } catch (e) {
-    console.error(e);
-    throw new Meteor.Error('500', e);
+    console.warn(e);
+    return this.ready();
   }
 });

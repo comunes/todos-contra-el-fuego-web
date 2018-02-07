@@ -29,6 +29,7 @@ import FireAlertsCollection from '/imports/api/FireAlerts/FireAlerts';
 import SiteSettings from '/imports/api/SiteSettings/SiteSettings';
 import UserSubsToFiresCollection from '/imports/api/Subscriptions/Subscriptions';
 import { isNotHomeAndMobile, isChrome } from '/imports/ui/components/Utils/isMobile';
+import { isHome } from '/imports/ui/components/Utils/location';
 
 import './FiresMap.scss';
 
@@ -110,18 +111,17 @@ class FiresMap extends React.Component {
   }
 
   handleLeafletLoad(map) {
-    // console.log(map);
-    if (map) {
-      // console.log('Firesmap loading');
+    if (map && map.leafletElement) {
+      const lmap = map.leafletElement;
       try {
-        const bounds = this.getMap().getBounds();
+        const bounds = lmap.getBounds();
         mapSize.set([bounds.getNorthEast(), bounds.getSouthWest()]);
         if (!this.state.scaleAdded) {
           this.addScale();
           this.state.scaleAdded = true;
         }
       } catch (e) {
-        console.log('Failed to set map bounds and scale');
+        console.warn('Failed to set map bounds and scale');
       }
       this.state.union = subsUnion(this.state.union, {
         map,
@@ -134,15 +134,14 @@ class FiresMap extends React.Component {
 
   render() {
     const { t } = this.props;
-    console.log(`Rendering ${this.props.loading ? 'loading' : 'LOADED'} map ${this.props.activefires.length + this.props.firealerts.length} of ${this.props.activefirestotal} total. Subs users ready ${this.props.subsready}, reactive ${this.state.viewport.zoom >= MAXZOOMREACTIVE}`);
-
+    console.log(`Rendering ${this.props.loading ? 'loading' : 'LOADED'} map ${this.props.activefires.length + this.props.firealerts.length} of ${this.props.activefirestotal} total. Subs users ready ${this.props.subsready} (${this.props.userSubs.length}), reactive ${this.state.viewport.zoom >= MAXZOOMREACTIVE}`);
     return (
       /* Large number of markers:
          https://stackoverflow.com/questions/43015854/large-dataset-of-markers-or-dots-in-leaflet/43019740#43019740 */
       <div
           ref={(divElement) => { this.divElement = divElement; }}
       >
-      { window.location.pathname !== '/' &&
+        { !isHome() &&
         <Helmet>
           <title>{t('AppName')}: {t('Fuegos activos')}</title>
           <meta name="description" content={t('Fuegos activos en el mundo actualizados en tiempo real')} />
@@ -199,7 +198,7 @@ class FiresMap extends React.Component {
              onClick={this.onClickReset}
              viewport={this.state.viewport}
              onViewportChanged={this.onViewportChanged}
-             sleep={window.location.pathname === '/' && !isChrome}
+             sleep={isHome() && !isChrome}
              sleepTime={10750}
              wakeTime={750}
              sleepNote

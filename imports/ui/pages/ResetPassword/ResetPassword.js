@@ -4,6 +4,7 @@ import { Row, Alert, FormGroup, ControlLabel, Button } from 'react-bootstrap';
 import Col from '../../components/Col/Col';
 import { Accounts } from 'meteor/accounts-base';
 import { Bert } from 'meteor/themeteorchef:bert';
+import { Helmet } from 'react-helmet';
 import validate from '../../../modules/validate';
 import { translate } from 'react-i18next';
 import { T9n } from 'meteor-accounts-t9n';
@@ -61,6 +62,9 @@ class ResetPassword extends React.Component {
   render() {
     return (<div className="ResetPassword">
       <Row className="align-items-center justify-content-center">
+        <Helmet>
+          <title>{this.t('AppName')}: {this.t('Resetea tu contraseña')}</title>
+        </Helmet>
         <Col xs={12} sm={6} md={4}>
           <h4 className="page-header">{this.t("Resetea tu contraseña")}</h4>
           <Alert bsStyle="info">

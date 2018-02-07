@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Alert } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
+import { Helmet } from 'react-helmet';
 import { Accounts } from 'meteor/accounts-base';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { translate } from 'react-i18next';
@@ -32,6 +33,9 @@ class VerifyEmail extends React.Component {
 
   render() {
     return (<div className="VerifyEmail">
+      <Helmet>
+        <title>{this.t('AppName')}: {this.t('Verifica tu dirección de correo')}</title>
+      </Helmet>
       <Alert bsStyle={!this.state.error ? 'info' : 'danger'}>
         {!this.state.error ? this.t('Verificando...') : this.state.error}
       </Alert>

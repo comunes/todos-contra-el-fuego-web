@@ -15,7 +15,7 @@ const backOpts = {
   jsonIndent: 2
 };
 
-const forceDebug = true;
+const forceDebug = false;
 const shouldDebug = (forceDebug && !Meteor.isProduction);
 
 const i18nOpts = {

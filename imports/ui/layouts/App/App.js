@@ -14,6 +14,7 @@ import { Roles } from 'meteor/alanning:roles';
 import Blaze from 'meteor/gadicc:blaze-react-component';
 // i18n
 import i18n, { i18nReady } from '/imports/startup/client/i18n';
+import '/imports/startup/client/meta';
 import '/imports/startup/client/ravenLogger';
 import '/imports/startup/client/geolocation';
 import '/imports/startup/client/piwik-start.js';

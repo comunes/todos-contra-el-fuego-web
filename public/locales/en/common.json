@@ -66,8 +66,8 @@
   "Uso de Cookies": "Use of Cookies",
   "Utilizamos cookies para asegurar un mejor uso de nuestra web. Si continúas navegando, consideramos que aceptas su uso": "We use cookies to ensure a better use of our website. If you continue browsing, we consider that you accept their use",
   "Participa": "Get Involved",
-  "activeFires": "Active fires",
-  "Fuegos activos": "Active fires",
+  "activeFires": "Active Fires",
+  "Fuegos activos": "Active Fires",
   "noActiveFireInMapCount": "There are no active fires in this area of the map. There is a total of <1><0>{{countTotal}}</0></1> active fires detected worldwide.",
   "activeFireInMapCount": "On the map marked in red <1><0>{{count,number}}</0></1> active fires. There is a total of <3><0>{{countTotal,number}} </0></3> active fires detected worldwide by NASA.",
   "activeNeigFireInMapCount": "In Orange, the fires recently reported by our users.",
@@ -161,5 +161,6 @@
   "Verifica tu dirección de correo": "Verify Your Email Address",
   "Zonas vigiladas": "Monitored areas",
   "En verde, las zonas vigiladas por nuestros usuari@s actualmente": "In green, the areas monitored by our users currently",
-  "Datos actualizados <1></1>.": "Data updated <1></1>."
+  "Datos actualizados <1></1>.": "Data updated <1></1>.",
+  "Información adicional sobre fuego": "Additional information about fire"
 }

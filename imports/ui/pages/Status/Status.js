@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import { translate } from 'react-i18next';
 import { withTracker } from 'meteor/react-meteor-data';
 import Blaze from 'meteor/gadicc:blaze-react-component';
+import { Helmet } from 'react-helmet';
 
 /*
    https://github.com/meteor/docs/blob/version-NEXT/long-form/oplog-observe-driver.md
@@ -26,6 +27,9 @@ class Status extends Component {
   render() {
     return (
       <Fragment>
+        <Helmet>
+          <title>{this.t('AppName')}: Status</title>
+        </Helmet>
         <h4 className="page-header">Status</h4>
         <Blaze template="serverFacts" />
       </Fragment>

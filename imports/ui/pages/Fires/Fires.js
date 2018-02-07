@@ -25,21 +25,25 @@ class Fire extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: props.loading,
+      notfound: props.notfound,
       when: props.when
     };
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.when !== nextProps.when) {
+    if (this.props.when !== nextProps.when || this.props.loading !== nextProps.loading || this.props.notfound !== nextProps.notfound) {
       // console.log(`Next when ${nextProps.when}`);
       this.setState({
+        loading: nextProps.loading,
+        notfound: nextProps.notfound,
         when: nextProps.when
       });
     }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return !(nextState.when === this.state.when);
+    return !(nextState.when === this.state.when && nextState.loading === this.state.loading && this.state.notfound === nextState.notfound);
   }
 
   onTypeSelect(key) {
@@ -55,23 +59,27 @@ class Fire extends React.Component {
   }
 
   render() {
-    const { loading, fire, t } = this.props;
+    const {
+      notfound, loading, fire, t
+    } = this.props;
+    /* console.log(`loading fire: ${loading}`);
+     * console.log(`Not found fire: ${notfound}`); */
     if (fire && fire.when) {
       this.dateLongFormat = dateLongFormat(fire.when);
+      this.title = fire.address ?
+        t('Información adicional sobre fuego detectado en {{where}} el {{when}}', { where: fire.address, when: this.dateLongFormat }) :
+        t('Información adicional sobre fuego detectado el {{when}}', { when: this.dateLongFormat });
     }
-    const title = fire.address ?
-      t('Información adicional sobre fuego detectado en {{where}} el {{when}}', { where: fire.address, when: this.dateLongFormat }) :
-      t('Información adicional sobre fuego detectado el {{when}}', { when: this.dateLongFormat });
-    return (fire ? (
+
+    return (fire && !loading ? (
       <div className="ViewFire">
         <Helmet>
-          <meta charSet="utf-8" />
           <title>{t('AppName')}: {t('Información adicional sobre fuego')}</title>
-          <meta name="description" content={title} />
+          <meta name="description" content={this.title} />
         </Helmet>
         {!loading &&
          <Fragment>
-           <h4 className="page-header">{title}</h4>
+           <h4 className="page-header">{this.title}</h4>
            <Map
                ref={(map) => {
                    this.fireMap = map;
@@ -147,13 +155,14 @@ class Fire extends React.Component {
          </Fragment>
         }
       </div>
-    ) : <NotFound />);
+    ) : <Fragment>{ notfound && <NotFound /> }</Fragment>);
   }
 }
 
 Fire.propTypes = {
   t: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
+  notfound: PropTypes.bool.isRequired,
   when: PropTypes.instanceOf(Date),
   fire: PropTypes.object
 };
@@ -167,10 +176,15 @@ const FireContainer = withTracker(({ match }) => {
   const fireEncrypt = match.params.id;
   const subscription = Meteor.subscribe('fireFromHash', fireEncrypt);
   // console.log(`Subs ready: ${subscription.ready()}, fire: ${JSON.stringify(FiresCollection.findOne())}`);
+  const loading = !subscription.ready();
+  const notfound = !loading && FiresCollection.find().count() === 0;
+  /* console.log(`loading fire: ${loading}`);
+   * console.log(`Not found fire: ${notfound}`); */
   return {
-    loading: !subscription.ready(),
+    loading,
     fire: FiresCollection.findOne(),
-    when: subscription.ready() ? FiresCollection.findOne().when : null
+    notfound,
+    when: subscription.ready() && FiresCollection.findOne() ? FiresCollection.findOne().when : null
   };
 })(Fire);
 

@@ -1,22 +1,24 @@
 /* eslint-disable react/jsx-indent-props */
+/* eslint-disable import/no-absolute-path */
 
 import React from 'react';
 import { Row, FormGroup, ControlLabel, Button, Checkbox } from 'react-bootstrap';
-import Col from '../../components/Col/Col';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Bert } from 'meteor/themeteorchef:bert';
+import { translate, Trans } from 'react-i18next';
+import { T9n } from 'meteor-accounts-t9n';
+import { Helmet } from 'react-helmet';
 import { testId } from '/imports/ui/components/Utils/TestUtils';
+import Col from '../../components/Col/Col';
 import Icon from '../../components/Icon/Icon';
 import OAuthLoginButtons from '../../components/OAuthLoginButtons/OAuthLoginButtons';
 import InputHint from '../../components/InputHint/InputHint';
 import AccountPageFooter from '../../components/AccountPageFooter/AccountPageFooter';
 import validate from '../../../modules/validate';
 import './Signup.scss';
-import { translate, Trans } from 'react-i18next';
-import { T9n } from 'meteor-accounts-t9n';
 
 class Signup extends React.Component {
   constructor(props) {
@@ -120,6 +122,9 @@ class Signup extends React.Component {
     const { t, history } = this.props;
     return (<div className="Signup">
       <Row className="align-items-center justify-content-center">
+        <Helmet>
+          <title>{this.t('AppName')}: {this.t('Registrarse')}</title>
+        </Helmet>
         <Col xs={12} sm={6} md={5} lg={4}>
           <h4 className="page-header">{t('Registrarse')}</h4>
           <Row>

@@ -65,8 +65,8 @@ module.exports = function doSteps(notos) {
    */
 
   function closeAlert() {
-    client.waitForVisible('.bert-alert', 5000);
-    client.click('.bert-content');
+    // client.waitForVisible('.bert-alert', 5000);
+    // client.click('.bert-content');
     client.waitUntil(() => client.isVisible('.bert-alert') === false, 10000);
   }
 

@@ -9,6 +9,7 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Trans, translate } from 'react-i18next';
 import { Bert } from 'meteor/themeteorchef:bert';
+import { Helmet } from 'react-helmet';
 import UserSubsToFiresCollection from '/imports/api/Subscriptions/Subscriptions';
 import SelectionMap, { action } from '/imports/ui/components/SelectionMap/SelectionMap';
 import confirm from '/imports/ui/components/Prompt/Confirm';
@@ -84,6 +85,9 @@ class Subscriptions extends Component {
     const firstBtnTitle = ['Añadir zona', '', 'Terminar']; // view, add, edit
     return (!loading ? (
       <div className="Subscriptions">
+        <Helmet>
+          <title>{t('AppName')}: {t('Suscripciones a alertas de fuegos en zonas de mi interés')}</title>
+        </Helmet>
         <h4 className="page-header"><Trans>Suscripciones a alertas de fuegos en zonas de mi interés</Trans></h4>
       { subscriptions.length === 0 ?
         <Alert bsStyle="warning"><Trans>No estás suscrito a fuegos en ninguna zona</Trans></Alert> :

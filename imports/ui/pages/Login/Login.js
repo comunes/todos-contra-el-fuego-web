@@ -6,6 +6,7 @@ import { Row, FormGroup, ControlLabel, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { Bert } from 'meteor/themeteorchef:bert';
+import { Helmet } from 'react-helmet';
 import { translate } from 'react-i18next';
 import { T9n } from 'meteor-accounts-t9n';
 import { testId } from '/imports/ui/components/Utils/TestUtils';
@@ -68,6 +69,9 @@ class Login extends React.Component {
   render() {
     return (
       <div className="Login">
+        <Helmet>
+          <title>{this.t('AppName')}: {this.t('Iniciar sesión')}</title>
+        </Helmet>
         <Row className="align-items-center justify-content-center">
           <Col xs={12} sm={6} md={5} lg={4}>
             <h4 className="page-header">{this.t('Iniciar sesión')}</h4>

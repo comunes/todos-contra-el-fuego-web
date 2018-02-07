@@ -15,7 +15,6 @@ const Page = ({ title, subtitle, content }) => (
     <Helmet>
       <meta charSet="utf-8" />
       <title>{i18n.t('AppName')}: {title}</title>
-      <meta name="description" content={content.substr(0, 100).lastIndexOf(' ')} />
     </Helmet>
     <PageHeader title={title} subtitle={subtitle} />
     <Content content={content} />
