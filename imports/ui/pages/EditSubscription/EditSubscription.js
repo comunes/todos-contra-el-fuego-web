@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { createContainer } from 'meteor/react-meteor-data';
+import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import Subscriptions from '../../../api/Subscriptions/Subscriptions';
 import SubscriptionEditor from '../../components/SubscriptionEditor/SubscriptionEditor';
@@ -22,7 +22,7 @@ EditSubscription.propTypes = {
   history: PropTypes.object.isRequired
 };
 
-export default createContainer(({ match }) => {
+export default withTracker(({ match }) => {
   const subscriptionId = match.params._id;
   const subscription = Meteor.subscribe('subscriptions.view', subscriptionId);
 
@@ -30,4 +30,4 @@ export default createContainer(({ match }) => {
     loading: !subscription.ready(),
     doc: Subscriptions.findOne(new Meteor.Collection.ObjectID(subscriptionId))
   };
-}, EditSubscription);
+})(EditSubscription);

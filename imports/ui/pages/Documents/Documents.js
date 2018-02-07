@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Table, Alert, Button } from 'react-bootstrap';
 import { timeago, monthDayYearAtTime } from '@cleverbeagle/dates';
 import { Meteor } from 'meteor/meteor';
-import { createContainer } from 'meteor/react-meteor-data';
+import { withTracker } from 'meteor/react-meteor-data';
 import { Bert } from 'meteor/themeteorchef:bert';
 import DocumentsCollection from '../../../api/Documents/Documents';
 import Loading from '../../components/Loading/Loading';
@@ -73,10 +73,10 @@ Documents.propTypes = {
   history: PropTypes.object.isRequired,
 };
 
-export default createContainer(() => {
+export default withTracker(() => {
   const subscription = Meteor.subscribe('documents');
   return {
     loading: !subscription.ready(),
     documents: DocumentsCollection.find().fetch(),
   };
-}, Documents);
+})(Documents);

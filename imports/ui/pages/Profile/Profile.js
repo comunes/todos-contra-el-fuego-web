@@ -10,7 +10,7 @@ import { Accounts } from 'meteor/accounts-base';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { testId } from '/imports/ui/components/Utils/TestUtils';
 import Col from '../../components/Col/Col';
-import { createContainer } from 'meteor/react-meteor-data';
+import { withTracker } from 'meteor/react-meteor-data';
 import InputHint from '../../components/InputHint/InputHint';
 import validate from '../../../modules/validate';
 import { translate } from 'react-i18next';
@@ -267,11 +267,11 @@ Profile.propTypes = {
   i18n: PropTypes.object.isRequired
 };
 
-export default translate([], { wait: true })(createContainer(() => {
+export default translate([], { wait: true })(withTracker(() => {
   const subscription = Meteor.subscribe('users.editProfile');
 
   return {
     loading: !subscription.ready(),
     user: Meteor.user()
   };
-}, Profile));
+})(Profile));

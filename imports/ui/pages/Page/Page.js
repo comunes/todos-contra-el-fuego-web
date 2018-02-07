@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
-import { createContainer } from 'meteor/react-meteor-data';
+import { withTracker } from 'meteor/react-meteor-data';
 import { ReactiveVar } from 'meteor/reactive-var';
 import i18n from '/imports/startup/client/i18n';
 import PageHeader from '../../components/PageHeader/PageHeader';
@@ -33,7 +33,7 @@ Page.propTypes = {
 
 const pageContent = new ReactiveVar('');
 
-export default createContainer(({ content, page }) => {
+export default withTracker(({ content, page }) => {
   window.scrollTo(0, 0); // Force window to top of page.
 
   Meteor.call('utility.getPage', page, i18n.language, (error, response) => {
@@ -47,4 +47,4 @@ export default createContainer(({ content, page }) => {
   return {
     content: content || pageContent.get()
   };
-}, Page);
+})(Page);
