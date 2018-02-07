@@ -186,6 +186,13 @@
   background-image: url('/home-slide4.jpg')
 }
 
+.carousel-snd-item-1 {
+  background-image: url('/home-slide-snd-1.jpg')
+}
+
+.carousel-snd-item-2 {
+  background-image: url('/home-slide-snd-2.jpg')
+}
 
 .participe-btn {
   background-color: $todos-palette1;
@@ -267,4 +274,8 @@
   font-size: 13px;
   margin-left: 20px;
   margin-right: 20px;
+}
+
+#carouselSndIndicators > div > div.carousel-item.carousel-snd-item-1 > div > h3 > span > a {
+  color: white;
 }

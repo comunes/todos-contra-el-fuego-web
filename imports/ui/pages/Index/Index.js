@@ -89,17 +89,16 @@ class Index extends Component {
             <header>
               <ReactResizeDetector handleWidth handleHeight onResize={this.onResize} />
               <div
-                  id="carouselExampleIndicators"
+                  id="carouselMainIndicators"
                   className="carousel slide"
-
                   ref={(ref) => { this.slides = ref; }}
               >
                 {/* for dev ^^^: data-interval=false */}
                 <ol className="carousel-indicators">
-                  <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active" />
-                  <li data-target="#carouselExampleIndicators" data-slide-to="1" />
-                  <li data-target="#carouselExampleIndicators" data-slide-to="2" />
-                  <li data-target="#carouselExampleIndicators" data-slide-to="3" />
+                  <li data-target="#carouselMainIndicators" data-slide-to="0" className="active" />
+                  <li data-target="#carouselMainIndicators" data-slide-to="1" />
+                  <li data-target="#carouselMainIndicators" data-slide-to="2" />
+                  <li data-target="#carouselMainIndicators" data-slide-to="3" />
                 </ol>
                 <div className="carousel-inner" role="listbox">
 
@@ -141,11 +140,11 @@ class Index extends Component {
                     </div>
                   </div>
                 </div>
-                <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <a className="carousel-control-prev" href="#carouselMainIndicators" role="button" data-slide="prev">
                   <span className="carousel-control-prev-icon" aria-hidden="true" />
                   <span className="sr-only"><Trans>Anterior</Trans></span>
                 </a>
-                <a className="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <a className="carousel-control-next" href="#carouselMainIndicators" role="button" data-slide="next">
                   <span className="carousel-control-next-icon" aria-hidden="true" />
                   <span className="sr-only"><Trans>Siguiente</Trans></span>
                 </a>
@@ -181,6 +180,41 @@ class Index extends Component {
               <SubscriptionsMap />
             </div>
           </section>
+
+          <div
+              id="carouselSndIndicators"
+              className="carousel slide"
+              ref={(ref) => { this.slidesSnd = ref; }}
+          >
+            {/* for dev ^^^: data-interval=false */}
+            <ol className="carousel-indicators">
+              <li data-target="#carouselSndIndicators" data-slide-to="0" className="active" />
+              <li data-target="#carouselSndIndicators" data-slide-to="1" />
+            </ol>
+            <div className="carousel-inner" role="listbox">
+
+              <div className="carousel-item carousel-snd-item-1 active">
+                <div className="carousel-caption">
+                  <h3><Trans i18nKey="CO2emisions">¿Sabías que los fuegos <a href="https://www.livescience.com/1981-wildfires-release-cars.html" target="_blank">producen tanto CO² como los coches</a> y <a href="https://www.motherjones.com/politics/2014/08/wild-fires-are-so-so-bad-climate/" target="_blank">aproximadamente ⅕ de todas nuestras emisiones</a>?</Trans></h3>
+                  <p />
+                </div>
+              </div>
+              <div className="carousel-item carousel-snd-item-2">
+                <div className="carousel-caption">
+                  <h3><Trans>Ayúdanos a combatir el cambio climático y a proteger el medioambiente</Trans></h3>
+                  <p />
+                </div>
+              </div>
+            </div>
+            <a className="carousel-control-prev" href="#carouselSndIndicators" role="button" data-slide="prev">
+              <span className="carousel-control-prev-icon" aria-hidden="true" />
+              <span className="sr-only"><Trans>Anterior</Trans></span>
+            </a>
+            <a className="carousel-control-next" href="#carouselSndIndicators" role="button" data-slide="next">
+              <span className="carousel-control-next-icon" aria-hidden="true" />
+              <span className="sr-only"><Trans>Siguiente</Trans></span>
+            </a>
+          </div>
 
           <a id="participe" name="participe" />
           <section className="sect4">
