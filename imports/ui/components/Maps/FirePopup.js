@@ -18,10 +18,11 @@ const FirePopup = ({
     <Popup className="fire-popup">
       <Fragment>
         <span>{t('Coordenadas:')} {lat}, {lon}</span><br />
-        <span>{t('Fuente')}: {t(nasa ? 'NASA' : 'nuestros usuarios/as')}</span><br />
-        <span>{t('Detectado')}: {moment(when).fromNow()}</span><br />
+        {nasa && <Fragment><span>{t('Fuente')}: {t(nasa ? 'NASA' : 'nuestros usuarios/as')}</span><br /></Fragment> }
+        {when && <Fragment><span>{t('Detectado')}: {moment(when).fromNow()}</span><br /></Fragment> }
         <span>
-          <a href="#" onClick={() => history.push(`/fire/active/${id}`)}>{t('Más información sobre este fuego')}</a>
+          { /* if nasa === null means that the is a false positive fire */ }
+          <a href="#" onClick={() => history.push(`/fire/${nasa ? 'active' : 'archive'}/${id}`)}>{t('Más información sobre este fuego')}</a>
         </span>
       </Fragment>
     </Popup>
@@ -33,10 +34,10 @@ FirePopup.propTypes = {
   // https://github.com/PaulLeCam/react-leaflet/tree/master/src/propTypes
   lat: PropTypes.number.isRequired,
   lon: PropTypes.number.isRequired,
-  nasa: PropTypes.bool.isRequired,
+  nasa: PropTypes.bool,
   id: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
-  when: PropTypes.instanceOf(Date).isRequired,
+  when: PropTypes.instanceOf(Date),
   t: PropTypes.func.isRequired
 };
 

@@ -12,6 +12,7 @@ We acknowledge the use of data and imagery from LANCE FIRMS operated by the NASA
 * Home slide secondary 2: Smog over Almaty city, Kazakhstan, January 2014, photo by Igors Jefimovs, CC-BY 3.0, [source](https://commons.wikimedia.org/wiki/File:Smog_over_Almaty.jpg)
 * Wildfire home photo: [California Wildfires, October 23th 2007](https://commons.wikimedia.org/wiki/File:California_Wildfires_October_23_2007.jpg), [fuente](http://www.nasa.gov/vision/earth/lookingatearth/socal_wildfires_oct07.html).
 * Default avatar: A colored Emoji from Noto project, released under Apache license, [source](https://commons.wikimedia.org/wiki/File:Emoji_u1f469_1f3fd_200d_1f692.svg).
+* Industry fire marker by Nicolas Mollet, released under CC-BY-SA 3.0, [source](https://mapicons.mapsmarker.com/category/markers/industry/).
 
 **Others**
 

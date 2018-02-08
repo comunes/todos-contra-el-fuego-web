@@ -26,3 +26,4 @@ import '../../api/SiteSettings/methods';
 import '../../api/SiteSettings/server/publications';
 
 import '../../api/FalsePositives/methods';
+import '../../api/FalsePositives/server/publications';

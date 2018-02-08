@@ -26,6 +26,7 @@ import FromNow from '/imports/ui/components/FromNow/FromNow';
 import Loading from '/imports/ui/components/Loading/Loading';
 import ActiveFiresCollection from '/imports/api/ActiveFires/ActiveFires';
 import FireAlertsCollection from '/imports/api/FireAlerts/FireAlerts';
+import FalsePositivesCollection from '/imports/api/FalsePositives/FalsePositives';
 import SiteSettings from '/imports/api/SiteSettings/SiteSettings';
 import UserSubsToFiresCollection from '/imports/api/Subscriptions/Subscriptions';
 import { isNotHomeAndMobile, isChrome } from '/imports/ui/components/Utils/isMobile';
@@ -134,7 +135,10 @@ class FiresMap extends React.Component {
 
   render() {
     const { t } = this.props;
-    console.log(`Rendering ${this.props.loading ? 'loading' : 'LOADED'} map ${this.props.activefires.length + this.props.firealerts.length} of ${this.props.activefirestotal} total. Subs users ready ${this.props.subsready} (${this.props.userSubs.length}), reactive ${this.state.viewport.zoom >= MAXZOOMREACTIVE}`);
+    console.log(`Rendering ${this.props.loading ? 'loading' : 'LOADED'} map ${this.props.activefires.length + this.props.firealerts.length} of ${this.props.activefirestotal} total. False positives: ${this.props.falsePositives.length}. Subs users ready ${this.props.subsready} (${this.props.userSubs.length}), reactive ${this.state.viewport.zoom >= MAXZOOMREACTIVE}`);
+    if (Meteor.isDevelopment) {
+      console.log(`False positives total: ${this.props.falsePositivesTotal}`);
+    }
     return (
       /* Large number of markers:
          https://stackoverflow.com/questions/43015854/large-dataset-of-markers-or-dots-in-leaflet/43019740#43019740 */
@@ -213,10 +217,20 @@ class FiresMap extends React.Component {
              <FireList
                  t={t}
                  history={this.props.history}
+                 fires={this.props.falsePositives}
+                 scale={this.state.viewport.zoom >= MAXZOOM}
+                 useMarkers={this.state.useMarkers}
+                 nasa={false}
+                 falsePositives
+             />
+             <FireList
+                 t={t}
+                 history={this.props.history}
                  fires={this.props.activefires}
                  scale={this.state.viewport.zoom >= MAXZOOM}
                  useMarkers={this.state.useMarkers}
                  nasa
+                 falsePositives={false}
              />
              <FireList
                  t={t}
@@ -225,6 +239,7 @@ class FiresMap extends React.Component {
                  scale={false}
                  useMarkers={this.state.useMarkers}
                  nasa={false}
+                 falsePositives={false}
              />
            </Fragment> }
            <DefMapLayers />
@@ -250,6 +265,8 @@ FiresMap.propTypes = {
   userSubs: PropTypes.arrayOf(PropTypes.object).isRequired,
   activefires: PropTypes.arrayOf(PropTypes.object).isRequired,
   firealerts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  falsePositives: PropTypes.arrayOf(PropTypes.object).isRequired,
+  falsePositivesTotal: PropTypes.number.isRequired,
   lastCheck: PropTypes.instanceOf(Date),
   activefirestotal: PropTypes.number.isRequired,
   center: PropTypes.arrayOf(PropTypes.number),
@@ -283,14 +300,23 @@ export default translate([], { wait: true })(withTracker(() => {
         mapSize.get()[1].lng,
         mapSize.get()[1].lat
       );
+      Meteor.subscribe(
+        'falsePositivesMyloc',
+        mapSize.get()[0].lng,
+        mapSize.get()[0].lat,
+        mapSize.get()[1].lng,
+        mapSize.get()[1].lat
+      );
     }
   });
 
   Meteor.subscribe('activefirestotal');
+  Meteor.subscribe('falsePositivesTotal');
   Meteor.subscribe('settings');
   const userSubs = Meteor.subscribe('userSubsToFires');
   const lastCheck = SiteSettings.findOne({ name: 'last-fire-check' });
   const fireAlerts = FireAlertsCollection.find().fetch();
+  const falsePositives = FalsePositivesCollection.find().fetch();
   return {
     loading: !subscription ? true : !subscription.ready(),
     userSubs: UserSubsToFiresCollection.find().fetch(),
@@ -298,7 +324,9 @@ export default translate([], { wait: true })(withTracker(() => {
     // Not reactive query depending on zoom level
     activefires: ActiveFiresCollection.find({}, { reactive: zoom.get() >= MAXZOOMREACTIVE }).fetch(),
     activefirestotal: Counter.get('countActiveFires') + fireAlerts.length,
+    falsePositivesTotal: Counter.get('countFalsePositives') + fireAlerts.length,
     firealerts: fireAlerts,
+    falsePositives,
     lastCheck: lastCheck ? lastCheck.value : null,
     center: geolocation.get(),
     zoom: zoom.get()

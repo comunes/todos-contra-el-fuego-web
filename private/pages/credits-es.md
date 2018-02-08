@@ -12,6 +12,7 @@ Reconocemos el uso de datos e imágenes de LANCE FIRMS operadas por NASA/GSFC/Ea
 * Diapositiva secundaria 2 del Inicio: Polución en la ciudad de Almaty, Kazakhstan, enero de 2014, foto de Igors Jefimovs, CC-BY 3.0, [source](https://commons.wikimedia.org/wiki/File:Smog_over_Almaty.jpg)
 * Foto de inicio de fuego forestal: [Incendios forestales de California, 23 de octubre de 2007](https://commons.wikimedia.org/wiki/File:California_Wildfires_October_23_2007.jpg), [fuente](http://www.nasa.gov/vision/earth/lookingatearth/socal_wildfires_oct07.html).
 * Avatar predeterminado: un Emoji coloreado del proyecto Noto, publicado bajo licencia Apache, [fuente](https://commons.wikimedia.org/wiki/File:Emoji_u1f469_1f3fd_200d_1f692.svg).
+* Marcador de industia por Nicolas Mollet, publicado bajo CC-BY-SA 3.0, [fuente](https://mapicons.mapsmarker.com/category/markers/industry/).
 
 **Otros**
 
