@@ -13,6 +13,7 @@ import { Trans, translate } from 'react-i18next';
 import { Map } from 'react-leaflet';
 import Control from 'react-leaflet-control';
 import _ from 'lodash';
+import store from 'store';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.css';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.js';
@@ -82,7 +83,8 @@ class FiresMap extends React.Component {
     const bounds = this.getMap().getBounds();
     // console.log(bounds);
     mapSize.set([bounds.getNorthEast(), bounds.getSouthWest()]);
-    /*
+    store.set('firesmap_center', viewport.center);
+    store.set('firesmap_zoom', viewport.zoom);
     if (viewport.center === this.state.viewport.center &&
         viewport.zoom === this.state.viewport.zoom) {
       // Do nothing, in same point
@@ -90,7 +92,7 @@ class FiresMap extends React.Component {
     }
     zoom.set(viewport.zoom);
     center.set(viewport.center);
-    this.setState({ viewport }); */
+    this.setState({ viewport });
   }
 
   centerOnUserLocation(viewport) {
@@ -279,9 +281,14 @@ let init = true;
 
 export default translate([], { wait: true })(withTracker(() => {
   let subscription;
+
+  const centerStored = store.get('firesmap_center');
+  const zoomStored = store.get('firesmap_zoom');
+  zoom.set(zoomStored || 8);
+
   Meteor.autorun(() => {
-    if (geolocation.get() && init) {
-      center.set(geolocation.get());
+    if ((centerStored || geolocation.get()) && init) {
+      center.set(centerStored || geolocation.get());
       // console.log(`Geolocation ${geolocation.get()}`);
       init = false;
     }
@@ -328,7 +335,7 @@ export default translate([], { wait: true })(withTracker(() => {
     firealerts: fireAlerts,
     falsePositives,
     lastCheck: lastCheck ? lastCheck.value : null,
-    center: geolocation.get(),
+    center: center.get(),
     zoom: zoom.get()
   };
 })(FiresMap));
