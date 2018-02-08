@@ -7,6 +7,7 @@ import urlEnc from '/imports/modules/url-encode';
 import { Promise } from 'meteor/promise';
 import NodeGeocoder from 'node-geocoder';
 import { gmapServerKey } from '/imports/startup/server/IPGeocoder';
+import ActiveFiresCollection from '/imports/api/ActiveFires/ActiveFires';
 import FiresCollection from '../Fires';
 
 function findFire(unsealed) {
@@ -36,6 +37,75 @@ const unseal = async (obj) => {
 
 const unsealW = obj => unseal(obj);
 
+const fixConfidence = (obj) => {
+  if (typeof obj.confidence === 'string') {
+    obj.confidence = Number.parseInt(obj.confidence, 10);
+  }
+  if (typeof obj.confidence === 'undefined' || isNaN(obj.confidence)) {
+    delete obj.confidence;
+  }
+  return obj;
+};
+
+const findOrCreateFire = (obj) => {
+  const fire = findFire(obj);
+  // console.log(`Found: ${fire.count()}`);
+  if (!obj.address) {
+    try {
+      const rev = Promise.await(geocoder.reverse({ lat: obj.lat, lon: obj.lon }));
+      if (rev[0]) {
+        obj.address = rev[0].formattedAddress;
+      }
+      // console.log(obj.address);
+    } catch (reve) {
+      console.warn(reve);
+    }
+  }
+  if (fire.count() === 0) {
+    // const result =
+    // console.log('Creating new fire');
+    FiresCollection.upsert({ ourid: obj.ourid, when: obj.when, type: obj.type }, { $set: obj }, { multi: false, upsert: true });
+    // console.log(JSON.stringify(result));
+  }
+  return findFire(obj);
+};
+
+Meteor.publish('fireFromActiveId', function fireFromActiveId(_id) {
+  try {
+    check(_id, String);
+    // console.log(`Looking for active fire ${_id}`);
+    const fire = ActiveFiresCollection.findOne(new Meteor.Collection.ObjectID(_id));
+    if (fire) {
+      // console.info(`Active fire found: ${_id}`);
+      return findOrCreateFire(fixConfidence(fire));
+    }
+    console.info(`Active fire not found: ${_id}`);
+    // Not found in active fires!
+    return this.ready();
+  } catch (e) {
+    console.info(`Active fire not found (with error): ${_id}`);
+    return this.ready();
+  }
+});
+
+Meteor.publish('fireFromId', function fireFromId(_id) {
+  try {
+    check(_id, String);
+    // console.log(`Looking for archive fire ${_id}`);
+    const fire = FiresCollection.find(new Meteor.Collection.ObjectID(_id));
+    if (fire.count() !== 0) {
+      // console.info(`Archive fire found: ${_id}`);
+      return fire;
+    }
+    console.info(`Fire not found: ${_id}`);
+    // Not found in active fires!
+    return this.ready();
+  } catch (e) {
+    console.info(`Active fire not found (with error): ${_id}`);
+    return this.ready();
+  }
+});
+
 Meteor.publish('fireFromHash', function fireFromHash(fireEnc) {
   check(fireEnc, String);
   try {
@@ -55,32 +125,9 @@ Meteor.publish('fireFromHash', function fireFromHash(fireEnc) {
     unsealed.updatedAt = !u ? new Date() : new Date(u);
     // console.log(unsealed);
     // FIXME:
-    if (typeof unsealed.confidence === 'string') {
-      unsealed.confidence = Number.parseInt(unsealed.confidence, 10);
-    }
-    if (typeof unsealed.confidence === 'undefined' || isNaN(unsealed.confidence)) {
-      delete unsealed.confidence;
-    }
-    FiresCollection.schema.validate(unsealed);
-    const fire = findFire(unsealed);
-    // console.log(`Found: ${fire.count()}`);
-    if (!unsealed.address) {
-      try {
-        const rev = Promise.await(geocoder.reverse({ lat: unsealed.lat, lon: unsealed.lon }));
-        if (rev[0]) {
-          unsealed.address = rev[0].formattedAddress;
-        }
-        // console.log(unsealed.address);
-      } catch (reve) {
-        console.warn(reve);
-      }
-    }
-    if (fire.count() === 0) {
-      // const result =
-      FiresCollection.upsert({ ourid: unsealed.ourid, when: unsealed.when, type: unsealed.type }, { $set: unsealed }, { multi: false, upsert: true });
-      // console.log(JSON.stringify(result));
-    }
-    return findFire(unsealed);
+    const unsealedFix = fixConfidence(unsealed);
+    FiresCollection.schema.validate(unsealedFix);
+    return findOrCreateFire(unsealedFix);
     /* console.log(`fires: ${fire.count()}`);
        * return fire; */
   } catch (e) {

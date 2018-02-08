@@ -40,3 +40,13 @@ h4.page-header {
 #react-root > div > div.container > div > div.alert {
   margin-top: 20px;
 }
+
+div.leaflet-pane.leaflet-popup-pane > div > div.leaflet-popup-content-wrapper > div > p,
+div.leaflet-pane.leaflet-popup-pane > div > div.leaflet-popup-content-wrapper > div > p > a {
+  font-size: 12px;
+}
+
+div.leaflet-pane.leaflet-popup-pane > div > div.leaflet-popup-content-wrapper > div > p > a:hover,
+div.leaflet-pane.leaflet-popup-pane > div > div.leaflet-popup-content-wrapper > div > p > a {
+//   color: $todos-palette2;
+}

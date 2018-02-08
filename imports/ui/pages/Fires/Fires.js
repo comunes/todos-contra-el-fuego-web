@@ -34,6 +34,10 @@ class Fire extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.when !== nextProps.when || this.props.loading !== nextProps.loading || this.props.notfound !== nextProps.notfound) {
       // console.log(`Next when ${nextProps.when}`);
+      if (nextProps.fire && (nextProps.active || nextProps.fromHash)) {
+        // change url to archive with new _id
+        nextProps.history.replace(`/fire/archive/${nextProps.fire._id}`);
+      }
       this.setState({
         loading: nextProps.loading,
         notfound: nextProps.notfound,
@@ -124,7 +128,7 @@ class Fire extends React.Component {
                       {Object.keys(FalsePositiveTypes).map(key => (
                          <button
                              className="dropdown-item"
-                             onClick={() => this.onTypeSelect(key)}
+                           onClick={() => this.onTypeSelect(key)}
                              key={key}
                              type="button"
                          >
@@ -161,8 +165,11 @@ class Fire extends React.Component {
 
 Fire.propTypes = {
   t: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
   notfound: PropTypes.bool.isRequired,
+  fromHash: PropTypes.bool.isRequired,
+  active: PropTypes.bool.isRequired,
   when: PropTypes.instanceOf(Date),
   fire: PropTypes.object
 };
@@ -173,8 +180,24 @@ Fire.defaultProps = {
 // export default translate([], { wait: true })(withTracker((props) => {
 
 const FireContainer = withTracker(({ match }) => {
-  const fireEncrypt = match.params.id;
-  const subscription = Meteor.subscribe('fireFromHash', fireEncrypt);
+  const id = match.params.id;
+  const fireType = match.params.type;
+  let subscription;
+  const active = fireType === 'active';
+  const archive = fireType === 'archive';
+  let fromHash = false;
+
+  if (active) {
+    subscription = Meteor.subscribe('fireFromActiveId', id);
+  } else if (archive) {
+    subscription = Meteor.subscribe('fireFromId', id);
+  } else {
+    console.log('Seems a fire from enc hash');
+    fromHash = true;
+    subscription = Meteor.subscribe('fireFromHash', id);
+  }
+
+  // console.log(`Type of '${fireType}' fire, active: ${active}, archive: ${archive}, fromHash: ${fromHash}`);
   // console.log(`Subs ready: ${subscription.ready()}, fire: ${JSON.stringify(FiresCollection.findOne())}`);
   const loading = !subscription.ready();
   const notfound = !loading && FiresCollection.find().count() === 0;
@@ -182,6 +205,8 @@ const FireContainer = withTracker(({ match }) => {
    * console.log(`Not found fire: ${notfound}`); */
   return {
     loading,
+    active,
+    fromHash,
     fire: FiresCollection.findOne(),
     notfound,
     when: subscription.ready() && FiresCollection.findOne() ? FiresCollection.findOne().when : null

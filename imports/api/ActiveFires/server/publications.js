@@ -27,6 +27,7 @@ const activefires = (northEastLng, northEastLat, southWestLng, southWestLat) => 
     fields: {
       lat: 1,
       lon: 1,
+      when: 1,
       scan: 1
     }
   });

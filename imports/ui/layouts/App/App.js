@@ -83,6 +83,7 @@ const App = props => (
                 <Authenticated exact path="/profile" component={Profile} {...props} />
                 <Authenticated exact path="/status" component={Status} {...props} />
                 <Route path="/fires" component={FiresMap} {...props} />
+                <Route path="/fire/:type(active|archive)/:id" component={Fires} {...props} />
                 <Route path="/fire/:id" component={Fires} {...props} />
                 <Public path="/auth/:token" component={Auth} {...props} />
                 <Public path="/signup" component={Signup} {...props} />

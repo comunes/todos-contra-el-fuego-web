@@ -53,7 +53,7 @@ i18nOpts.react = {
    nsMode: 'default' */
 };
 
-const sendMissing = true;
+const sendMissing = Meteor.isDevelopment;
 if (sendMissing && !Meteor.isProduction) {
   i18nOpts.sendMissing = true;
   i18nOpts.sendMissingTo = 'fallback';

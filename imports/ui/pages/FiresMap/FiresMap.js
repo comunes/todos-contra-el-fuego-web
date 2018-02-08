@@ -211,12 +211,16 @@ class FiresMap extends React.Component {
            {!this.props.loading &&
            <Fragment>
              <FireList
+                 t={t}
+                 history={this.props.history}
                  fires={this.props.activefires}
                  scale={this.state.viewport.zoom >= MAXZOOM}
                  useMarkers={this.state.useMarkers}
                  nasa
              />
              <FireList
+                 t={t}
+                 history={this.props.history}
                  fires={this.props.firealerts}
                  scale={false}
                  useMarkers={this.state.useMarkers}
@@ -250,6 +254,7 @@ FiresMap.propTypes = {
   activefirestotal: PropTypes.number.isRequired,
   center: PropTypes.arrayOf(PropTypes.number),
   zoom: PropTypes.number,
+  history: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired
 };
 

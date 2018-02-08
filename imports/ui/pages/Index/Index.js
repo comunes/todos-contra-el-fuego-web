@@ -42,12 +42,12 @@ class Index extends Component {
     this.myScaleFunction();
   }
 
-  getMap(isMobile) {
+  getMap(isMobile, props) {
     if (!isMobile) {
       return (
         <section className="sect5">
           <div className="container">
-            <FiresMap />
+            <FiresMap {...props} />
           </div>
         </section>);
     }
@@ -233,7 +233,7 @@ class Index extends Component {
             </div>
           </section>
 
-          {this.getMap(isAnyMobile)}
+          {this.getMap(isAnyMobile, this.props)}
 
           <section className="platf sect6">
             <div className="container">

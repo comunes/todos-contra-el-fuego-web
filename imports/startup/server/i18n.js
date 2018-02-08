@@ -11,7 +11,7 @@ i18nOpts.backend.addPath = `${Meteor.rootPath}/../web.browser/app/${i18nOpts.bac
 
 // console.log(i18nOpts.backend.loadPath);
 i18nOpts.debug = false;
-i18nOpts.saveMissing = true;
+i18nOpts.saveMissing = Meteor.isDevelopment;
 i18nOpts.initImmediate = false;
 
 i18n
