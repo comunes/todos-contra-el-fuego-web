@@ -103,9 +103,8 @@ class FiresMap extends React.Component {
     this.setState({ useMarkers: use });
   }
 
-  addScale() {
+  addScale(map) {
     // https://www.npmjs.com/package/leaflet-graphicscale
-    const map = this.getMap();
     const options = {
       fill: 'fill',
       showSubunits: true
@@ -120,7 +119,7 @@ class FiresMap extends React.Component {
         const bounds = lmap.getBounds();
         mapSize.set([bounds.getNorthEast(), bounds.getSouthWest()]);
         if (!this.state.scaleAdded) {
-          this.addScale();
+          this.addScale(lmap);
           this.state.scaleAdded = true;
         }
       } catch (e) {
