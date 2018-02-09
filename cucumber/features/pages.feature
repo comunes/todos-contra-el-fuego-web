@@ -1,4 +1,3 @@
-@watch
 Feature: Test all secundary pages
 
   Scenario: Check that all secondary pages work well

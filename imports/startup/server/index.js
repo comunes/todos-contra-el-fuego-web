@@ -8,3 +8,4 @@ import './migrations';
 import './notificationsObserver';
 import './facts';
 import '../common/comments';
+import './sitemaps';
