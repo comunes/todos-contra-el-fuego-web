@@ -6,17 +6,21 @@
 import { Map } from 'react-leaflet';
 import LGeo from 'leaflet-geodesy';
 import tunion from '@turf/union';
+import ttrunc from '@turf/truncate';
 import { check, Match } from 'meteor/check';
 
 // https://stackoverflow.com/questions/35394577/leaflet-js-union-merge-circles
+const truncOptions = { precision: 6, coordinates: 2 };
 
 function unify(polyList) {
   let unionTemp;
   for (let i = 0; i < polyList.length; i += 1) {
+    const pol = polyList[i].toGeoJSON();
+    const cleanPol = ttrunc(pol, truncOptions);
     if (i === 0) {
-      unionTemp = polyList[i].toGeoJSON();
+      unionTemp = cleanPol;
     } else {
-      unionTemp = tunion(unionTemp, polyList[i].toGeoJSON());
+      unionTemp = tunion(unionTemp, cleanPol);
     }
   }
   return unionTemp;
