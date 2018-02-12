@@ -44,6 +44,7 @@ import Terms from '../../pages/Terms/Terms';
 import Privacy from '../../pages/Privacy/Privacy';
 import License from '../../pages/License/License';
 import Credits from '../../pages/Credits/Credits';
+import ZonesMap from '../../pages/ZonesMap/ZonesMap';
 import ReSendEmail from '../../components/ReSendEmail/ReSendEmail';
 import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
 import history from '../../components/History/History';
@@ -83,6 +84,7 @@ const App = props => (
                 <Authenticated exact path="/profile" component={Profile} {...props} />
                 <Authenticated exact path="/status" component={Status} {...props} />
                 <Route path="/fires" component={FiresMap} {...props} />
+                <Route path="/zones" component={ZonesMap} {...props} />
                 <Route path="/fire/:type(active|archive)/:id" component={Fires} {...props} />
                 <Route path="/fire/:id" component={Fires} {...props} />
                 <Public path="/auth/:token" component={Auth} {...props} />

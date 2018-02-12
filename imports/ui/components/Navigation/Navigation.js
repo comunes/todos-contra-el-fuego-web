@@ -15,8 +15,9 @@ import NavItem from '../NavItem/NavItem';
 import './Navigation.scss';
 
 // removed class: fixed-top
+// md instead of lg: no menu in medium
 const Navigation = props => (
-  <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+  <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
     <div style={{ overflow: 'hidden' } /* for ribbon */} className="container">
       <BetaRibbon />
       {/* <Navbar bsClass="navbar navbar-dark bg-dark"> */}
@@ -48,6 +49,9 @@ const Navigation = props => (
           </LinkContainer>
           <LinkContainer id={testId('activeFires')} className="nav-item" anchorClassName="nav-link" to="/fires">
             <NavItem eventKey={2} href="/fires">{props.t('activeFires')}</NavItem>
+          </LinkContainer>
+          <LinkContainer id={testId('moniZones')} className="nav-item" anchorClassName="nav-link" to="/zones">
+            <NavItem eventKey={2.1} href="/zones">{props.t('Zonas vigiladas')}</NavItem>
           </LinkContainer>
         </ul>
         {!props.authenticated ? <PublicNavigation /> : <AuthenticatedNavigation {...props} />}

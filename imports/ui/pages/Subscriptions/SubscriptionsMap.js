@@ -9,6 +9,7 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Trans, translate } from 'react-i18next';
 import { Map } from 'react-leaflet';
+import { Helmet } from 'react-helmet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.css';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.js';
@@ -20,6 +21,7 @@ import DefMapLayers from '/imports/ui/components/Maps/DefMapLayers';
 import Loading from '/imports/ui/components/Loading/Loading';
 import UserSubsToFiresCollection from '/imports/api/Subscriptions/Subscriptions';
 import { isChrome } from '/imports/ui/components/Utils/isMobile';
+import { isHome } from '/imports/ui/components/Utils/location';
 
 import './SubscriptionsMap.scss';
 
@@ -82,9 +84,15 @@ class SubscriptionsMap extends React.Component {
   }
 
   render() {
+    const { t } = this.props;
     console.log(`Rendering Subs users ready ${this.props.subsready} subs: ${this.props.userSubs.length} viewport: ${JSON.stringify(this.state.viewport)}`);
     return (
       <Fragment>
+        { !isHome() &&
+          <Helmet>
+            <title>{t('AppName')}: {t('Zonas vigiladas')}</title>
+            <meta name="description" content={t('Zonas vigiladas por nuestros usuari@s actualmente')} />
+          </Helmet> }
         {!this.props.subsready ?
          <Row className="align-items-center justify-content-center">
            <Loading />
