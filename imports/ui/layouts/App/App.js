@@ -39,6 +39,9 @@ import RecoverPassword from '../../pages/RecoverPassword/RecoverPassword';
 import ResetPassword from '../../pages/ResetPassword/ResetPassword';
 import Profile from '../../pages/Profile/Profile';
 import NotFound from '../../pages/NotFound/NotFound';
+import FiresMap from '../../pages/FiresMap/FiresMap';
+import Fires from '../../pages/Fires/Fires';
+import Sandbox from '../../pages/Sandbox/Sandbox';
 import Footer from '../../components/Footer/Footer';
 import Terms from '../../pages/Terms/Terms';
 import Privacy from '../../pages/Privacy/Privacy';
@@ -49,9 +52,6 @@ import ReSendEmail from '../../components/ReSendEmail/ReSendEmail';
 import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
 import history from '../../components/History/History';
 import '../../components/NotificationsObserver/NotificationsObserver';
-import FiresMap from '../../pages/FiresMap/FiresMap';
-import Fires from '../../pages/Fires/Fires';
-import Sandbox from '../../pages/Sandbox/Sandbox';
 import './App.scss';
 
 const App = props => (
