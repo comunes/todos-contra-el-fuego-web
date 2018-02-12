@@ -35,9 +35,9 @@ class ErrorBoundary extends Component {
             <Col xs={12} sm={6} md={5} lg={4}>
               <h1 className="page-header">{this.t('AppNameFull')}</h1>
               <h4 className="page-header">{this.t('general-error-title')}</h4>
-              <Row>
+              <p>
                 {this.t('general-error-description')}
-              </Row>
+              </p>
             </Col>
           </Row>
         </div>
