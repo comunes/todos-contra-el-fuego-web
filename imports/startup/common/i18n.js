@@ -22,6 +22,7 @@ const i18nOpts = {
   backend: backOpts,
   //  lng: 'es',
   fallbackLng: ['es', 'en'],
+  sendMissingTo: 'fallback',
   interpolation: {
     escapeValue: false, // not needed for react!!
     formatSeparator: ',',
