@@ -81,19 +81,21 @@ class FiresMap extends React.Component {
 
   handleViewportChange(viewport) {
     console.log(`Viewport changed: ${JSON.stringify(viewport)}`);
-    const bounds = this.getMap().getBounds();
-    // console.log(bounds);
-    mapSize.set([bounds.getNorthEast(), bounds.getSouthWest()]);
-    store.set('firesmap_center', viewport.center);
-    store.set('firesmap_zoom', viewport.zoom);
-    if (viewport.center === this.state.viewport.center &&
-        viewport.zoom === this.state.viewport.zoom) {
-      // Do nothing, in same point
-      return;
+    if (this.fireMap) {
+      const bounds = this.getMap().getBounds();
+      // console.log(bounds);
+      mapSize.set([bounds.getNorthEast(), bounds.getSouthWest()]);
+      store.set('firesmap_center', viewport.center);
+      store.set('firesmap_zoom', viewport.zoom);
+      if (viewport.center === this.state.viewport.center &&
+          viewport.zoom === this.state.viewport.zoom) {
+        // Do nothing, in same point
+        return;
+      }
+      zoom.set(viewport.zoom);
+      center.set(viewport.center);
+      this.setState({ viewport });
     }
-    zoom.set(viewport.zoom);
-    center.set(viewport.center);
-    this.setState({ viewport });
   }
 
   centerOnUserLocation(viewport) {
@@ -149,117 +151,117 @@ class FiresMap extends React.Component {
           ref={(divElement) => { this.divElement = divElement; }}
       >
         { !isHome() &&
-        <Helmet>
-          <title>{title}</title>
-          <meta name="description" content={t('Fuegos activos en el mundo actualizados en tiempo real')} />
-        </Helmet> }
-        {this.props.loading || !this.props.subsready ?
-         <Row className="align-items-center justify-content-center">
-           <Loading />
-         </Row>
-         : ''}
-         <h4 className="page-header"><Trans parent="span">Fuegos activos</Trans></h4>
-         <Row>
-           <Col xs={12} sm={6} md={6} lg={6} >
-             <p className="firesmap-legend">
-               { (this.props.activefires.length + this.props.firealerts.length) === 0 ?
-                 <Fragment><Trans parent="span" i18nKey="noActiveFireInMapCount">No hay fuegos activos en esta zona del mapa. Hay un total de <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos detectados en todo el mundo.</Trans> <Trans>Datos actualizados <FromNow when={this.props.lastCheck} />.</Trans></Fragment> :
-                 <Fragment><Trans parent="span" i18nKey="activeFireInMapCount">En rojo, <strong>{{ count: this.props.activefires.length + this.props.firealerts.length }}</strong> fuegos activos en el mapa. Hay un total de <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos detectados en todo el mundo por la NASA.</Trans> <Trans>Datos actualizados <FromNow when={this.props.lastCheck} />.</Trans></Fragment>
-               }
-             </p>
-             {isNotHomeAndMobile &&
-              <p className="firesmap-legend"><Trans parent="span" i18nKey="activeNeigFireInMapCount">En naranja, los fuegos notificados por nuestros usuarios/as recientemente.</Trans></p> }
-           </Col>
-           <Col xs={12} sm={6} md={6} lg={6}>
-              {isNotHomeAndMobile &&
+          <Helmet>
+            <title>{title}</title>
+            <meta name="description" content={t('Fuegos activos en el mundo actualizados en tiempo real')} />
+          </Helmet> }
+          {this.props.loading || !this.props.subsready ?
+           <Row className="align-items-center justify-content-center">
+             <Loading />
+           </Row>
+           : ''}
+           <h4 className="page-header"><Trans parent="span">Fuegos activos</Trans></h4>
+           <Row>
+             <Col xs={12} sm={6} md={6} lg={6} >
+               <p className="firesmap-legend">
+                 { (this.props.activefires.length + this.props.firealerts.length) === 0 ?
+                   <Fragment><Trans parent="span" i18nKey="noActiveFireInMapCount">No hay fuegos activos en esta zona del mapa. Hay un total de <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos detectados en todo el mundo.</Trans> <Trans>Datos actualizados <FromNow when={this.props.lastCheck} />.</Trans></Fragment> :
+                   <Fragment><Trans parent="span" i18nKey="activeFireInMapCount">En rojo, <strong>{{ count: this.props.activefires.length + this.props.firealerts.length }}</strong> fuegos activos en el mapa. Hay un total de <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos detectados en todo el mundo por la NASA.</Trans> <Trans>Datos actualizados <FromNow when={this.props.lastCheck} />.</Trans></Fragment>
+                 }
+               </p>
+               {isNotHomeAndMobile &&
+                <p className="firesmap-legend"><Trans parent="span" i18nKey="activeNeigFireInMapCount">En naranja, los fuegos notificados por nuestros usuarios/as recientemente.</Trans></p> }
+             </Col>
+             <Col xs={12} sm={6} md={6} lg={6}>
+               {isNotHomeAndMobile &&
+                <Fragment>
+                  <Checkbox inline={false} defaultChecked={this.state.showSubsUnion} onClick={e => this.setShowSubsUnion(e.target.checked)}>
+                    <Trans className="mark-checkbox" parent="span">Resaltar en verde el área vigilada por nuestros usuarios/as</Trans>&nbsp;(*)
+                  </Checkbox>
+                  {(this.state.viewport.zoom >= MAXZOOM) &&
+                   <Checkbox inline={false} onClick={e => this.useMarkers(e.target.checked)}>
+                     <Trans className="mark-checkbox" parent="span">Resaltar los fuegos con un marcador</Trans>
+                   </Checkbox>}
+                </Fragment>}
+                <p className="firesmap-note">
+                  <em>{ this.state.viewport.zoom >= MAXZOOMREACTIVE ?
+                       <Trans>Los fuegos activos se actualizan en tiempo real.</Trans> :
+                       <Trans>Haga zoom en una zona de su interés si quiere que los fuegos se actualicen en tiempo real.</Trans>
+                      }
+                  </em>
+                </p>
+             </Col>
+           </Row>
+           {/* https://github.com/CliffCloud/Leaflet.Sleep */}
+           <Map
+               ref={(map) => {
+                   this.fireMap = map;
+                   this.handleLeafletLoad(map);
+                   }}
+               className="firesmap-leaflet-container"
+               animate
+               minZoom={5}
+               center={this.props.center}
+               zoom={this.props.zoom}
+               preferCanvas
+               onClick={this.onClickReset}
+               viewport={this.state.viewport}
+               onViewportChanged={this.onViewportChanged}
+               sleep={isHome() && !isChrome}
+               sleepTime={10750}
+               wakeTime={750}
+               sleepNote
+               hoverToWake={false}
+               wakeMessage={this.props.t('Pulsa para activar')}
+               wakeMessageTouch={this.props.t('Pulsa para activar')}
+               sleepOpacity={0.6}
+           >
+             {/* http://wiki.openstreetmap.org/wiki/Tile_servers */}
+             {!this.props.loading &&
              <Fragment>
-             <Checkbox inline={false} defaultChecked={this.state.showSubsUnion} onClick={e => this.setShowSubsUnion(e.target.checked)}>
-               <Trans className="mark-checkbox" parent="span">Resaltar en verde el área vigilada por nuestros usuarios/as</Trans>&nbsp;(*)
-             </Checkbox>
-             {(this.state.viewport.zoom >= MAXZOOM) &&
-              <Checkbox inline={false} onClick={e => this.useMarkers(e.target.checked)}>
-                <Trans className="mark-checkbox" parent="span">Resaltar los fuegos con un marcador</Trans>
-              </Checkbox>}
-             </Fragment>}
-              <p className="firesmap-note">
-                <em>{ this.state.viewport.zoom >= MAXZOOMREACTIVE ?
-                     <Trans>Los fuegos activos se actualizan en tiempo real.</Trans> :
-                     <Trans>Haga zoom en una zona de su interés si quiere que los fuegos se actualicen en tiempo real.</Trans>
-                    }
-                </em>
-              </p>
-           </Col>
-         </Row>
-         {/* https://github.com/CliffCloud/Leaflet.Sleep */}
-         <Map
-             ref={(map) => {
-                 this.fireMap = map;
-                 this.handleLeafletLoad(map);
-                 }}
-             className="firesmap-leaflet-container"
-             animate
-             minZoom={5}
-             center={this.props.center}
-             zoom={this.props.zoom}
-             preferCanvas
-             onClick={this.onClickReset}
-             viewport={this.state.viewport}
-             onViewportChanged={this.onViewportChanged}
-             sleep={isHome() && !isChrome}
-             sleepTime={10750}
-             wakeTime={750}
-             sleepNote
-             hoverToWake={false}
-             wakeMessage={this.props.t('Pulsa para activar')}
-             wakeMessageTouch={this.props.t('Pulsa para activar')}
-             sleepOpacity={0.6}
-         >
-           {/* http://wiki.openstreetmap.org/wiki/Tile_servers */}
-           {!this.props.loading &&
-           <Fragment>
-             <FireList
-                 t={t}
-                 history={this.props.history}
-                 fires={this.props.falsePositives}
-                 scale={this.state.viewport.zoom >= MAXZOOM}
-                 useMarkers={this.state.useMarkers}
-                 nasa={false}
-                 falsePositives
-             />
-             <FireList
-                 t={t}
-                 history={this.props.history}
-                 fires={this.props.activefires}
-                 scale={this.state.viewport.zoom >= MAXZOOM}
-                 useMarkers={this.state.useMarkers}
-                 nasa
-                 falsePositives={false}
-             />
-             <FireList
-                 t={t}
-                 history={this.props.history}
-                 fires={this.props.firealerts}
-                 scale={false}
-                 useMarkers={this.state.useMarkers}
-                 nasa={false}
-                 falsePositives={false}
-             />
-           </Fragment> }
-           <DefMapLayers />
-           <Control position="topright" >
-             <ButtonGroup>
-               <CenterInMyPosition onClick={viewport => this.centerOnUserLocation(viewport)} onlyIcon {... this.props} />
-             </ButtonGroup>
-           </Control>
-         </Map>
-         <Row>
-           <Col xs={12} sm={12} md={12} lg={12}>
-             <p className="firesmap-footnote"><span style={{ paddingRight: '5px' }}>(*)</span><Trans i18nKey="mapPrivacy" parent="span"><em>Para preservar la privacidad de nuestros usuarios/as, los datos reflejados están aleatoriamente alterados y son solo orientativos.</em></Trans></p>
-           </Col>
-         </Row>
-         { !isHome() &&
-           <ShareIt title={title} />
-         }
+               <FireList
+                   t={t}
+                   history={this.props.history}
+                   fires={this.props.falsePositives}
+                   scale={this.state.viewport.zoom >= MAXZOOM}
+                   useMarkers={this.state.useMarkers}
+                   nasa={false}
+                   falsePositives
+               />
+               <FireList
+                   t={t}
+                   history={this.props.history}
+                   fires={this.props.activefires}
+                   scale={this.state.viewport.zoom >= MAXZOOM}
+                   useMarkers={this.state.useMarkers}
+                   nasa
+                   falsePositives={false}
+               />
+               <FireList
+                   t={t}
+                   history={this.props.history}
+                   fires={this.props.firealerts}
+                   scale={false}
+                   useMarkers={this.state.useMarkers}
+                   nasa={false}
+                   falsePositives={false}
+               />
+             </Fragment> }
+             <DefMapLayers />
+             <Control position="topright" >
+               <ButtonGroup>
+                 <CenterInMyPosition onClick={viewport => this.centerOnUserLocation(viewport)} onlyIcon {... this.props} />
+               </ButtonGroup>
+             </Control>
+           </Map>
+           <Row>
+             <Col xs={12} sm={12} md={12} lg={12}>
+               <p className="firesmap-footnote"><span style={{ paddingRight: '5px' }}>(*)</span><Trans i18nKey="mapPrivacy" parent="span"><em>Para preservar la privacidad de nuestros usuarios/as, los datos reflejados están aleatoriamente alterados y son solo orientativos.</em></Trans></p>
+             </Col>
+           </Row>
+           { !isHome() &&
+             <ShareIt title={title} />
+           }
       </div>
     );
   }
