@@ -15,7 +15,7 @@ class Logout extends React.Component {
     return (
       <div className="Logout">
         <Helmet>
-          <title>{this.props.t('AppName')}: {this.props.t('Logout')}</title>
+          <title>{this.props.t('AppName')}: {this.props.t('Cerrar sesión')}</title>
         </Helmet>
         <h1><Trans parent="span">Gracias por Participar</Trans></h1>
         <p><Trans parent="span">También puedes seguirnos en la web</Trans></p>
