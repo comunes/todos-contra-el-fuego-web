@@ -79,4 +79,13 @@ body {
   .Footer, .Footer p {
     font-size: 13px;
   }
+
+  .Footer {
+    line-height: 1.8em;
+  }
+
+  .Footer ul li:first-child,
+  .Footer ul li:nth-child(2) {
+    margin-right: 7px;
+  }
 }
