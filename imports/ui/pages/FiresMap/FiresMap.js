@@ -32,6 +32,7 @@ import SiteSettings from '/imports/api/SiteSettings/SiteSettings';
 import UserSubsToFiresCollection from '/imports/api/Subscriptions/Subscriptions';
 import { isNotHomeAndMobile, isChrome } from '/imports/ui/components/Utils/isMobile';
 import { isHome } from '/imports/ui/components/Utils/location';
+import ShareIt from '/imports/ui/components/ShareIt/ShareIt';
 
 import './FiresMap.scss';
 
@@ -137,6 +138,7 @@ class FiresMap extends React.Component {
   render() {
     const { t } = this.props;
     console.log(`Rendering ${this.props.loading ? 'loading' : 'LOADED'} map ${this.props.activefires.length + this.props.firealerts.length} of ${this.props.activefirestotal} total. False positives: ${this.props.falsePositives.length}. Subs users ready ${this.props.subsready} (${this.props.userSubs.length}), reactive ${this.state.viewport.zoom >= MAXZOOMREACTIVE}`);
+    const title = `${t('AppName')}: ${t('Fuegos activos')}`;
     if (Meteor.isDevelopment) {
       console.log(`False positives total: ${this.props.falsePositivesTotal}`);
     }
@@ -148,7 +150,7 @@ class FiresMap extends React.Component {
       >
         { !isHome() &&
         <Helmet>
-          <title>{t('AppName')}: {t('Fuegos activos')}</title>
+          <title>{title}</title>
           <meta name="description" content={t('Fuegos activos en el mundo actualizados en tiempo real')} />
         </Helmet> }
         {this.props.loading || !this.props.subsready ?
@@ -255,6 +257,9 @@ class FiresMap extends React.Component {
              <p className="firesmap-footnote"><span style={{ paddingRight: '5px' }}>(*)</span><Trans i18nKey="mapPrivacy" parent="span"><em>Para preservar la privacidad de nuestros usuarios/as, los datos reflejados están aleatoriamente alterados y son solo orientativos.</em></Trans></p>
            </Col>
          </Row>
+         { !isHome() &&
+           <ShareIt title={title} />
+         }
       </div>
     );
   }

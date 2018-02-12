@@ -10,4 +10,12 @@ export const currentLocation = () => {
   return location.get();
 };
 
+export const currentLocationHref = () => {
+  if (Meteor.isClient) {
+    return window.location.href;
+  }
+  // FIXME
+  return location.get();
+};
+
 export const isHome = () => currentLocation() === '/';

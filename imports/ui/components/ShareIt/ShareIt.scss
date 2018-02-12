@@ -1,0 +1,19 @@
+.share_it {
+  vertical-align: top;
+  display: inline-block;
+  margin-right: 10px;
+  text-align: center;
+}
+
+.share_it__share-count {
+  margin-top: 3px;
+  font-size: 12px;
+}
+
+.share_it__share-button {
+  cursor: pointer;
+}
+
+.share_it__share-button:hover:not(:active) {
+  opacity: 0.75;
+}

@@ -22,6 +22,7 @@ import Loading from '/imports/ui/components/Loading/Loading';
 import UserSubsToFiresCollection from '/imports/api/Subscriptions/Subscriptions';
 import { isChrome } from '/imports/ui/components/Utils/isMobile';
 import { isHome } from '/imports/ui/components/Utils/location';
+import ShareIt from '/imports/ui/components/ShareIt/ShareIt';
 
 import './SubscriptionsMap.scss';
 
@@ -85,12 +86,13 @@ class SubscriptionsMap extends React.Component {
 
   render() {
     const { t } = this.props;
+    const title = `${t('AppName')}: ${t('Zonas vigiladas')}`;
     console.log(`Rendering Subs users ready ${this.props.subsready} subs: ${this.props.userSubs.length} viewport: ${JSON.stringify(this.state.viewport)}`);
     return (
       <Fragment>
         { !isHome() &&
           <Helmet>
-            <title>{t('AppName')}: {t('Zonas vigiladas')}</title>
+            <title>{title}</title>
             <meta name="description" content={t('Zonas vigiladas por nuestros usuari@s actualmente')} />
           </Helmet> }
         {!this.props.subsready ?
@@ -140,6 +142,9 @@ class SubscriptionsMap extends React.Component {
              <p className="subscriptionsmap-footnote"><span style={{ paddingRight: '5px' }}>(*)</span><Trans i18nKey="mapPrivacy" parent="span"><em>Para preservar la privacidad de nuestros usuarios/as, los datos reflejados están aleatoriamente alterados y son solo orientativos.</em></Trans></p>
            </Col>
          </Row>
+         { !isHome() &&
+           <ShareIt title={title} />
+         }
       </Fragment>
     );
   }

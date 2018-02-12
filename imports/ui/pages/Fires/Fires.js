@@ -19,6 +19,7 @@ import FromNow from '/imports/ui/components/FromNow/FromNow';
 import { dateLongFormat } from '/imports/api/Common/dates';
 import '/imports/startup/client/comments';
 import FalsePositiveTypes from '/imports/api/FalsePositives/FalsePositiveTypes';
+import ShareIt from '/imports/ui/components/ShareIt/ShareIt';
 import './Fires.scss';
 
 class Fire extends React.Component {
@@ -112,6 +113,8 @@ class Fire extends React.Component {
             {(fire.type === 'vecinal') &&
              <p><Trans>Fuego notificado por uno de nuestros usuarios/as <FromNow {...this.props} /></Trans></p>
             }
+
+             <ShareIt title={this.title} />
 
              {(fire.type !== 'vecinal') &&
               <Fragment>

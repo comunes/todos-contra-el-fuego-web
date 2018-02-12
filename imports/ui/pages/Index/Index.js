@@ -16,6 +16,7 @@ import 'bootstrap-carousel-swipe-haven/carousel-swipe';
 import { isAnyMobile } from '/imports/ui/components/Utils/isMobile';
 import SubscriptionEditor from '/imports/ui/components/SubscriptionEditor/SubscriptionEditor';
 import SubscriptionsMap from '/imports/ui/pages/Subscriptions/SubscriptionsMap';
+import ShareIt from '/imports/ui/components/ShareIt/ShareIt';
 import FiresMap from '../FiresMap/FiresMap';
 
 import './Index.scss';
@@ -35,7 +36,10 @@ class Index extends Component {
   }
 
   componentDidMount() {
-    $('.carousel').carousel();
+    const c = $('.carousel');
+    if (c.carousel) {
+      c.carousel();
+    }
   }
 
   onResize() {
@@ -78,10 +82,11 @@ class Index extends Component {
 
   render() {
     const { t } = this.props;
+    const title = `${t('AppName')}: ${t('Inicio')}`;
     return (
       <div className="IndexDisabled full-width">
         <Helmet>
-          <title>{t('AppName')}: {t('Inicio')}</title>
+          <title>{title}</title>
         </Helmet>
         {/* https://v4-alpha.getbootstrap.com/components/carousel/  */}
         <Fragment>
@@ -290,6 +295,9 @@ class Index extends Component {
                     </div>
                   </div>
                 </div>
+              </div>
+              <div className="text-center">
+                <ShareIt title={title} />
               </div>
             </div>
           </section>
