@@ -55,14 +55,19 @@ const subsUnion = (union, options) => {
         parts: 144
       };
       options.subs.forEach((sub) => {
-        if (sub.location && sub.location.lat && sub.location.lon && sub.distance) {
-          check(sub.location.lon, Number);
-          check(sub.location.lat, Number);
-          check(sub.distance, Number);
-          const circle = LGeo.circle([sub.location.lat, sub.location.lon], sub.distance * 1000, copts);
-          circle.addTo(unionGroup);
-        } else {
-          console.error(`Wrong subscription ${JSON.stringify(sub)}`);
+        try {
+          if (sub.location && sub.location.lat && sub.location.lon && sub.distance) {
+            check(sub.location.lon, Number);
+            check(sub.location.lat, Number);
+            check(sub.distance, Number);
+            const circle = LGeo.circle([sub.location.lat, sub.location.lon], sub.distance * 1000, copts);
+            circle.addTo(unionGroup);
+          } else {
+            console.error(`Wrong subscription ${JSON.stringify(sub)}`);
+          }
+        } catch (e) {
+          console.error(e);
+          console.error(`Wrong subscription trying to make union ${JSON.stringify(sub)}`);
         }
       });
       const unionJson = unify(unionGroup.getLayers());
