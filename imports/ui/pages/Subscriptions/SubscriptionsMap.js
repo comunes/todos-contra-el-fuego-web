@@ -81,6 +81,8 @@ class SubscriptionsMap extends React.Component {
     const element = document.querySelector('#participe');
     if (element) {
       element.scrollIntoView();
+    } else {
+      this.props.history.push('/subscriptions');
     }
   }
 
@@ -153,6 +155,7 @@ class SubscriptionsMap extends React.Component {
 SubscriptionsMap.propTypes = {
   subsready: PropTypes.bool.isRequired,
   userSubs: PropTypes.arrayOf(PropTypes.object).isRequired,
+  history: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired
 };
 

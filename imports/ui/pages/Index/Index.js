@@ -182,7 +182,7 @@ class Index extends Component {
 
           <section className="sect3">
             <div className="container">
-              <SubscriptionsMap />
+              <SubscriptionsMap {...this.props} />
             </div>
           </section>
 
