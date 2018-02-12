@@ -228,6 +228,7 @@
   "Última actualización, {{when}}": "Última actualización, {{when}}",
   "termsAccept": "Acepto las <1>condiciones de servicio</1> de este sitio",
   "Bienvenid@!": "Bienvenid@!",
+  "welcome": "Bienvenid@",
   "Has iniciado sesión con {{service}} usando la dirección de correo {{email}}.": "Has iniciado sesión con {{service}} usando la dirección de correo {{email}}.",
   "Verifica tu dirección de correo":
   "Verifica tu dirección de correo",
@@ -269,5 +270,7 @@
   "Detectado":
   "Detectado",
   "Zonas vigiladas por nuestros usuari@s actualmente":
-  "Zonas vigiladas por nuestros usuari@s actualmente"
+  "Zonas vigiladas por nuestros usuari@s actualmente",
+  "Iniciar sesión con Facebook":
+  "Iniciar sesión con Facebook"
 }

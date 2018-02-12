@@ -10,11 +10,12 @@ export default (options, user, lang) => {
   const applicationName = i18n.t('AppName');
   const firstName = OAuthProfile ? OAuthProfile.name.first : options.profile.name.first;
   const emailAddress = OAuthProfile ? OAuthProfile.email : options.email;
+  const welcome = i18n.t('welcome');
   if (emailAddress) {
     sendEmail({
       to: emailAddress,
       from: `${applicationName} <noreply@comunes.org>`,
-      subject: `[${applicationName}] Welcome, ${firstName}!`,
+      subject: `[${applicationName}] ${welcome} ${firstName}!`,
       lang,
       template: 'welcome',
       templateVars: {
