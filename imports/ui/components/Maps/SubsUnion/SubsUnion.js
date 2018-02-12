@@ -20,7 +20,7 @@ function unify(polyList) {
     if (i === 0) {
       unionTemp = cleanPol;
     } else {
-      unionTemp = tunion(unionTemp, cleanPol);
+      unionTemp = ttrunc(tunion(unionTemp, cleanPol), truncOptions);
     }
   }
   return unionTemp;
