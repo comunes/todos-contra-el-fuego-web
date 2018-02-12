@@ -13,6 +13,8 @@ Feature: Test all secundary pages
     Given a list of page urls and contents
       | login                  | Login                   | true  |
       | signup                 | Sign Up                 | true  |
+      | fires                  | Fires                   | true  |
+      | zones                  | Monitored               | true  |
       | recover-password       | Recover Password        | true  |
       | verify-email/something | Verify                  | true  |
       | fire/inexistent        | This page doesn't exist | false |

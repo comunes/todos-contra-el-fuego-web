@@ -12,7 +12,9 @@
           this.waitForEnabled(selector, timeout);
         });
         this.initMyCmds = true;
-      } */
+         } */
+
+      client.windowHandleSize({ width: 1500, height: 1000 });
 
       // server.call('fixtures/reset');
       // server.call('emailStub/reset');
