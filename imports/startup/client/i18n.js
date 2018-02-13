@@ -53,7 +53,7 @@ i18nOpts.react = {
    nsMode: 'default' */
 };
 
-const sendMissing = false; // Meteor.isDevelopment;
+const sendMissing = true; // Meteor.isDevelopment;
 if (sendMissing && Meteor.isDevelopment) {
   i18nOpts.sendMissing = true;
   i18nOpts.missingKeyHandler = function miss(lng, ns, key, defaultValue) {
