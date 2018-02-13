@@ -104,8 +104,21 @@ Meteor.startup(() => {
     }
   });
 
+  Migrations.add({
+    version: 7,
+    up: function defLangIfNull() {
+      Meteor.users.find({ lang: null }).forEach((user) => {
+        Meteor.users.update({ _id: user._id }, {
+          $set: {
+            lang: 'es'
+          }
+        });
+      });
+    }
+  });
+
   // Set createdAt in users & subs
   Migrations.migrateTo('latest');
 
-  // Migrations.migrateTo('5,rerun');
+  // Migrations.migrateTo('7,rerun');
 });
