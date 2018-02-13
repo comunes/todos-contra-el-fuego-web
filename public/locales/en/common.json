@@ -164,17 +164,26 @@
   "En verde, las zonas vigiladas por nuestros usuari@s actualmente": "In green, the areas monitored by our users currently",
   "Datos actualizados <1></1>.": "Data updated <1></1>.",
   "Información adicional sobre fuego": "Additional information about fire",
-  "CO2emisions":
-  "Did you know that wildfires <1>produce as much CO² as cars</1> and <3>about ⅕ of all our carbon emissions</3>?",
+  "CO2emisions": "Did you know that wildfires <1>produce as much CO² as cars</1> and <3>about ⅕ of all our carbon emissions</3>?",
   "Ayúdanos a combatir el cambio climático y a proteger el medioambiente": "Help us fight climate change and protect the environment",
-  "Fuego en La Tuna, Los Ángeles, Estados Unidos, septiembre de 2017":
-  "La Tuna fire, LA, United States, September 2017",
-  "Polución en la ciudad de Almaty, Kazakhstan, enero de 2014":
-  "Smog over Almaty city, Kazakhstan, January 2014",
+  "Fuego en La Tuna, Los Ángeles, Estados Unidos, septiembre de 2017": "La Tuna fire, LA, United States, September 2017",
+  "Polución en la ciudad de Almaty, Kazakhstan, enero de 2014": "Smog over Almaty city, Kazakhstan, January 2014",
   "Fuente": "Source",
   "NASA": "NASA",
   "nuestros usuarios/as": "our users",
   "Pulsa para más información": "Click for more information",
-  "Detectado":
-  "Detected"
+  "Detectado": "Detected",
+  "general-error-title": "Upppps: Something has gone wrong",
+  "general-error-description": "We are investigating the problem, try again in a while",
+  "Tomamos nota, ¡gracias por colaborar!": "We take note, thanks for collaborating!",
+  "Indícanos de que tipo de fuego se trata y ayúdanos así a mejorar nuestras notificaciones:": "Tell us what kind of fire it is and help us improve our notifications:",
+  "¿No es un fuego forestal?": "Isn't that a forest fire?",
+  "Regístrate o inicia sesión para aportar información sobre este fuego": "Sign up or login to provide information about this fire",
+  "Fuego no encontrado": "Fire not found",
+  "Es una industria": "It's an industry",
+  "Es una quema controlada": "It's a controlled burning",
+  "Parece una falsa alarma": "It seems a false alarm",
+  "Fuegos activos en el mundo actualizados en tiempo real": "Active fires in the world updated in real time",
+  "Zonas vigiladas por nuestros usuari@s actualmente": "Areas currently monitored by our users",
+  "Iniciar sesión con Facebook": "Login With Facebook"
 }
