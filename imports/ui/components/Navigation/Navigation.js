@@ -47,12 +47,13 @@ const Navigation = props => (
               {props.authenticated ? <Trans>Mis zonas</Trans> : <Trans>Participar</Trans>}
             </NavItem>
           </LinkContainer>
-          <LinkContainer id={testId('activeFires')} className="nav-item" anchorClassName="nav-link" to="/fires">
-            <NavItem eventKey={2} href="/fires">{props.t('activeFires')}</NavItem>
-          </LinkContainer>
           <LinkContainer id={testId('moniZones')} className="nav-item" anchorClassName="nav-link" to="/zones">
-            <NavItem eventKey={2.1} href="/zones">{props.t('Zonas vigiladas')}</NavItem>
+            <NavItem eventKey={2} href="/zones">{props.t('Zonas vigiladas')}</NavItem>
           </LinkContainer>
+          <LinkContainer id={testId('activeFires')} className="nav-item" anchorClassName="nav-link" to="/fires">
+            <NavItem eventKey={2.1} href="/fires">{props.t('activeFires')}</NavItem>
+          </LinkContainer>
+
         </ul>
         {!props.authenticated ? <PublicNavigation /> : <AuthenticatedNavigation {...props} />}
         {/* </Navbar.Collapse> */}
