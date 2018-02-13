@@ -41,6 +41,8 @@ const MAXZOOMREACTIVE = 6;
 const zoom = new ReactiveVar(8);
 const center = new ReactiveVar([0, 0]);
 const mapSize = new ReactiveVar();
+const marks = new ReactiveVar(false);
+const showUnion = new ReactiveVar(true);
 
 // Remove map in subscription
 class FiresMap extends React.Component {
@@ -51,9 +53,11 @@ class FiresMap extends React.Component {
         center: props.center,
         zoom: props.zoom
       },
-      useMarkers: false,
+      // init: true,
+      useMarkers: props.marks,
       scaleAdded: false,
-      showSubsUnion: true
+      moving: false,
+      showSubsUnion: props.showUnion
     };
     const self = this;
     // viewportchange
@@ -62,12 +66,43 @@ class FiresMap extends React.Component {
       self.handleViewportChange(viewport);
     }, 1500);
     this.onViewportChanged = this.onViewportChanged.bind(this);
+    this.onMoveEnd = this.onMoveEnd.bind(this);
+    this.onMoveStart = this.onMoveStart.bind(this);
   }
 
   componentDidMount() {
   }
 
+  /* shouldComponentUpdate(nextProps, nextState) {
+   *   const notMoving = !nextState.moving;
+   *   const markersChanged = this.state.useMarkers !== nextState.useMarkers;
+   *   const unionChanged = this.state.showSubsUnion !== nextState.showSubsUnion;
+   *   const otherViewport = this.state.viewport !== nextState.viewport;
+   *   // const init = nextState.viewport.center === [0, 0];
+   *   // console.log(notMoving ? 'Not moving map' : 'Moving map');
+   *   // console.log(otherViewport ? 'Other viewport' : 'Not other viewport');
+   *   console.log(`${otherViewport ? 'OTHER' : 'Not other'} viewport ${nextState.viewport.center} zoom: ${nextState.viewport.zoom}`);
+   *   return this.state.init || (notMoving && otherViewport && this.state.moved) || unionChanged || markersChanged;
+   * }
+   */
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const notMoving = !nextState.moving;
+    return notMoving;
+  }
+
+  onMoveStart() {
+    // this.setState({ moving: true });
+    this.state.moving = true;
+  }
+
+  onMoveEnd() {
+    // this.setState({ moving: false });
+    this.state.moving = false;
+  }
+
   onViewportChanged(viewport) {
+    this.debounceView.cancel();
     this.debounceView(viewport);
   }
 
@@ -77,6 +112,11 @@ class FiresMap extends React.Component {
 
   setShowSubsUnion(showSubsUnion) {
     this.setState({ showSubsUnion });
+    store.set('firesmap_showunion', showSubsUnion);
+  }
+
+  componentDidUnMount() {
+    // this.setState({ init: true });
   }
 
   handleViewportChange(viewport) {
@@ -94,7 +134,8 @@ class FiresMap extends React.Component {
       }
       zoom.set(viewport.zoom);
       center.set(viewport.center);
-      this.setState({ viewport });
+      // this.setState({ viewport });
+      this.state.viewport = viewport;
     }
   }
 
@@ -104,6 +145,7 @@ class FiresMap extends React.Component {
 
   useMarkers(use) {
     this.setState({ useMarkers: use });
+    store.set('firesmap_marks', use);
   }
 
   addScale(map) {
@@ -116,7 +158,7 @@ class FiresMap extends React.Component {
   }
 
   handleLeafletLoad(map) {
-    if (map && map.leafletElement) {
+    if (map && map.leafletElement && !this.state.moving) {
       const lmap = map.leafletElement;
       try {
         const bounds = lmap.getBounds();
@@ -179,7 +221,7 @@ class FiresMap extends React.Component {
                     <Trans className="mark-checkbox" parent="span">Resaltar en verde el área vigilada por nuestros usuarios/as</Trans>&nbsp;(*)
                   </Checkbox>
                   {(this.state.viewport.zoom >= MAXZOOM) &&
-                   <Checkbox inline={false} onClick={e => this.useMarkers(e.target.checked)}>
+                   <Checkbox inline={false} defaultChecked={this.state.useMarkers} onClick={e => this.useMarkers(e.target.checked)}>
                      <Trans className="mark-checkbox" parent="span">Resaltar los fuegos con un marcador</Trans>
                    </Checkbox>}
                 </Fragment>}
@@ -201,13 +243,16 @@ class FiresMap extends React.Component {
                className="firesmap-leaflet-container"
                animate
                minZoom={5}
-               center={this.props.center}
-               zoom={this.props.zoom}
+               center={this.state.viewport.center}
+               zoom={this.state.viewport.zoom}
                preferCanvas
-               onClick={this.onClickReset}
                viewport={this.state.viewport}
                onViewportChanged={this.onViewportChanged}
                sleep={isHome() && !isChrome}
+               onMoveend={this.onMoveEnd}
+               onMovestart={this.onMoveStart}
+               onZoomend={this.onMoveEnd}
+               onZoomstart={this.onMoveStart}
                sleepTime={10750}
                wakeTime={750}
                sleepNote
@@ -279,24 +324,33 @@ FiresMap.propTypes = {
   activefirestotal: PropTypes.number.isRequired,
   center: PropTypes.arrayOf(PropTypes.number),
   zoom: PropTypes.number,
+  marks: PropTypes.bool.isRequired,
+  showUnion: PropTypes.bool.isRequired,
   history: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired
 };
 
-let init = true;
+let geoInit = true;
 
 export default translate([], { wait: true })(withTracker(() => {
   let subscription;
 
   const centerStored = store.get('firesmap_center');
   const zoomStored = store.get('firesmap_zoom');
+  const marksStored = store.get('firesmap_marks');
+  const showUnionStored = store.get('firesmap_showunion');
   zoom.set(zoomStored || 8);
-
+  if (typeof marksStored === 'boolean') {
+    marks.set(marksStored);
+  }
+  if (typeof showUnionStored === 'boolean') {
+    showUnion.set(showUnionStored);
+  }
   Meteor.autorun(() => {
-    if ((centerStored || geolocation.get()) && init) {
+    if ((centerStored || geolocation.get()) && geoInit) {
       center.set(centerStored || geolocation.get());
       // console.log(`Geolocation ${geolocation.get()}`);
-      init = false;
+      geoInit = false;
     }
     if (mapSize.get() && mapSize.get()[0].lng && mapSize.get()[1].lat) {
       subscription = Meteor.subscribe(
@@ -342,6 +396,8 @@ export default translate([], { wait: true })(withTracker(() => {
     falsePositives,
     lastCheck: lastCheck ? lastCheck.value : null,
     center: center.get(),
+    marks: marks.get(),
+    showUnion: showUnion.get(),
     zoom: zoom.get()
   };
 })(FiresMap));
