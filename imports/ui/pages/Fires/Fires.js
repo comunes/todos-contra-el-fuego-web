@@ -125,7 +125,7 @@ class Fire extends React.Component {
                 <FormGroup>
                   <div className="btn-group">
                     <button className="btn btn-secondary btn-sm dropdown-toggle lang-selector" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      {'Elige un tipo'}
+                      {t('Elige un tipo')}
                     </button>
                     <div className="dropdown-menu">
                       {Object.keys(FalsePositiveTypes).map(key => (
