@@ -40,6 +40,7 @@ SiteSettings.getSchema = type => new SimpleSchema({
   type: String,
   description: String,
   value: SiteSettingsTypes[type].value,
+  isPublic: Boolean,
   createdAt: defaultCreatedAt,
   updatedAt: defaultUpdateAt
 });

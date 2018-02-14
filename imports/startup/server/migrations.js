@@ -117,6 +117,16 @@ Meteor.startup(() => {
     }
   });
 
+  Migrations.add({
+    version: 8,
+    up: function siteSettingsAddIndex() {
+      SiteSettings._ensureIndex({ isPublic: 1 }, { unique: 1 });
+      SiteSettings.find({ isPublic: null }).forEach((setting) => {
+        SiteSettings.update({ _id: setting._id }, { $set: { isPublic: true } });
+      });
+    }
+  });
+
   // Set createdAt in users & subs
   Migrations.migrateTo('latest');
 
