@@ -214,6 +214,7 @@ class Profile extends React.Component {
           }
           </div>
         </div>
+        <InputHint><i className="fa fa-language"></i> <a href="https://translate.comunes.org/projects/todos-contra-el-fuego/" rel="noopener noreferrer" target="_blank">{this.t('Puedes participar en las traducciones')}</a></InputHint>
       </FormGroup>
       <FormGroup>
         <ControlLabel>{this.t('Contraseña actual')}</ControlLabel>
