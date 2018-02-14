@@ -2,7 +2,7 @@
   "name": "tcef",
   "private": true,
   "scripts": {
-    "start": "MONGO_URL=mongodb://localhost:27017/fuegos  meteor --settings settings-development.json",
+    "start": "QT_QPA_PLATFORM='' MONGO_URL=mongodb://localhost:27017/fuegos  meteor --settings settings-development.json",
     "test": "jest"
   },
   "dependencies": {
