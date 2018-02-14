@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-href */
 /* eslint import/no-absolute-path: [2, { esmodule: false, commonjs: false, amd: false }] */
 
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Router, Switch, Route } from 'react-router-dom';
 import { Grid } from 'react-bootstrap';
@@ -54,11 +54,40 @@ import history from '../../components/History/History';
 import '../../components/NotificationsObserver/NotificationsObserver';
 import './App.scss';
 
+class LocationListener extends Component {
+  // https://stackoverflow.com/questions/43512450/react-router-v4-route-onchange-event
+  static contextTypes = {
+    router: PropTypes.object
+  };
+
+  componentDidMount() {
+    this.handleLocationChange(this.context.router.history.location);
+    this.unlisten =
+      this.context.router.history.listen(this.handleLocationChange);
+  }
+
+  componentWillUnmount() {
+    this.unlisten();
+  }
+
+  handleLocationChange(location) {
+    // your staff here
+    console.log(`----- location: '${location.pathname}'`);
+    Meteor.Piwik.trackPage(location.pathname);
+    // Meteor.isReadyForSpiderable = true;
+  }
+
+  render() {
+    return this.props.children;
+  }
+}
+
 const App = props => (
   /* https://react.i18next.com/components/i18nextprovider.html */
   <I18nextProvider i18n={i18n}>
     <ErrorBoundary>
       <Router history={history}>
+        <LocationListener>
         { !props.loading ?
           <div className="App">
             <Helmet>
@@ -112,6 +141,7 @@ const App = props => (
             <Blaze template="cookieConsent" />
             }
           </div> : ''}
+        </LocationListener>
       </Router>
     </ErrorBoundary>
   </I18nextProvider>

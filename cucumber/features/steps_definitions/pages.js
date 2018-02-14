@@ -71,4 +71,13 @@ module.exports = function () {
     }
     callback();
   });
+
+  this.Then(/^they are spiderable$/, (callback) => {
+    // Write code here that turns the phrase above into concrete actions
+    for (let i = 0; i < pages.length; i += 1) {
+      client.url(`${process.env.ROOT_URL}/${pages[i][0]}?_escaped_fragment_=`);
+      client.waitForText('#react-root', pages[i][1]);
+    }
+    callback();
+  });
 };

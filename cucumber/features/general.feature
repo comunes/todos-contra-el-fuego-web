@@ -11,4 +11,3 @@ Feature: This app should generate a correct sitemap, etc
       | fires   | Active Fires     |
       | login   | Login            |
       | signup  | Signup           |
-   # And should be spiderables
