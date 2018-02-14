@@ -21,6 +21,15 @@ More platforms and services in the future...
 We do tests via:
 ```
 TEST_WATCH=1 MONGO_URL=mongodb://localhost:27017/fuegos  meteor --settings settings-development.json test --driver-package meteortesting:mocha --port 3010
+
+# and
+
+chimp --watch --ddp=http://localhost:3000 --path=cucumber
+
+# and
+
+chimp --ddp=http://localhost:3000 --path=cucumber
+
 ```
 
 ## Data source acknowledgements
