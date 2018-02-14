@@ -1,11 +1,11 @@
 import { Meteor } from 'meteor/meteor';
-import { check } from 'meteor/check';
+/* import { check } from 'meteor/check';
 import SiteSettings from './SiteSettings';
-import SiteSettingsTypes from './SiteSettingsTypes';
+import SiteSettingsTypes from './SiteSettingsTypes'; */
 import rateLimit from '../../modules/rate-limit';
 
 Meteor.methods({
-  'siteSettings.insert': function siteSettingsInsert(setting) {
+/*  'siteSettings.insert': function siteSettingsInsert(setting) {
     check(setting, {
       name: String,
       type: String,
@@ -46,14 +46,14 @@ Meteor.methods({
     } catch (exception) {
       throw new Meteor.Error('500', exception);
     }
-  }
+  } */
 });
 
 rateLimit({
   methods: [
-    'siteSettings.insert',
+    /* 'siteSettings.insert',
     'siteSettings.update',
-    'siteSettings.remove'
+    'siteSettings.remove' */
   ],
   limit: 5,
   timeRange: 1000
