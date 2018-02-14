@@ -13,7 +13,7 @@ Meteor.startup(() => {
 
   Migrations.config({
     // Log job run details to console
-    log: true
+    log: Meteor.isProduction
   });
 
   Migrations.add({
@@ -120,7 +120,7 @@ Meteor.startup(() => {
   Migrations.add({
     version: 8,
     up: function siteSettingsAddIndex() {
-      SiteSettings._ensureIndex({ isPublic: 1 }, { unique: 1 });
+      SiteSettings._ensureIndex({ isPublic: 1 });
       SiteSettings.find({ isPublic: null }).forEach((setting) => {
         SiteSettings.update({ _id: setting._id }, { $set: { isPublic: true } });
       });

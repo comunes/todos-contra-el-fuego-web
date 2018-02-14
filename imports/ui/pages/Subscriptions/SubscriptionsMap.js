@@ -19,7 +19,7 @@ import CenterInMyPosition from '/imports/ui/components/CenterInMyPosition/Center
 import subsUnion from '/imports/ui/components/Maps/SubsUnion/SubsUnion';
 import DefMapLayers from '/imports/ui/components/Maps/DefMapLayers';
 import Loading from '/imports/ui/components/Loading/Loading';
-import UserSubsToFiresCollection from '/imports/api/Subscriptions/Subscriptions';
+import SiteSettings from '/imports/api/SiteSettings/SiteSettings';
 import { isChrome } from '/imports/ui/components/Utils/isMobile';
 import { isHome } from '/imports/ui/components/Utils/location';
 import ShareIt from '/imports/ui/components/ShareIt/ShareIt';
@@ -66,6 +66,8 @@ class SubscriptionsMap extends React.Component {
       this.state.union = subsUnion(this.state.union, {
         map,
         subs: this.props.userSubs,
+        bounds: this.props.userSubsBounds,
+        fromServer: true,
         show: true,
         fit: this.state.init
       });
@@ -89,7 +91,7 @@ class SubscriptionsMap extends React.Component {
   render() {
     const { t } = this.props;
     const title = `${t('AppName')}: ${t('Zonas vigiladas')}`;
-    console.log(`Rendering Subs users ready ${this.props.subsready} subs: ${this.props.userSubs.length} viewport: ${JSON.stringify(this.state.viewport)}`);
+    console.log(`Rendering Subs users ready ${this.props.subsready} viewport: ${JSON.stringify(this.state.viewport)}`);
     return (
       <Fragment>
         { !isHome() &&
@@ -153,16 +155,20 @@ class SubscriptionsMap extends React.Component {
 }
 
 SubscriptionsMap.propTypes = {
+  userSubs: PropTypes.string,
+  userSubsBounds: PropTypes.string,
   subsready: PropTypes.bool.isRequired,
-  userSubs: PropTypes.arrayOf(PropTypes.object).isRequired,
   history: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired
 };
 
 export default translate([], { wait: true })(withTracker(() => {
-  const userSubs = Meteor.subscribe('userSubsToFires');
+  const settingsSubs = Meteor.subscribe('settings');
+  const userSubs = SiteSettings.findOne({ name: 'subs-public-union' });
+  const userSubsBounds = SiteSettings.findOne({ name: 'subs-public-union-bounds' });
   return {
-    userSubs: UserSubsToFiresCollection.find().fetch(),
-    subsready: userSubs.ready()
+    userSubs: userSubs ? userSubs.value : null,
+    userSubsBounds: userSubs ? userSubsBounds.value : null,
+    subsready: settingsSubs.ready()
   };
 })(SubscriptionsMap));
