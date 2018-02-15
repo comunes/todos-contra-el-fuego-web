@@ -35,7 +35,7 @@ class Fire extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.when !== nextProps.when || this.props.loading !== nextProps.loading || this.props.notfound !== nextProps.notfound) {
       // console.log(`Next when ${nextProps.when}`);
-      if (nextProps.fire && (nextProps.active || nextProps.fromHash)) {
+      if (nextProps.fire && (nextProps.alert || nextProps.active || nextProps.fromHash)) {
         // change url to archive with new _id
         nextProps.history.replace(`/fire/archive/${nextProps.fire._id}`);
       }
@@ -173,6 +173,7 @@ Fire.propTypes = {
   notfound: PropTypes.bool.isRequired,
   fromHash: PropTypes.bool.isRequired,
   active: PropTypes.bool.isRequired,
+  alert: PropTypes.bool.isRequired,
   when: PropTypes.instanceOf(Date),
   fire: PropTypes.object
 };
@@ -188,10 +189,13 @@ const FireContainer = withTracker(({ match }) => {
   let subscription;
   const active = fireType === 'active';
   const archive = fireType === 'archive';
+  const alert = fireType === 'alert';
   let fromHash = false;
 
   if (active) {
     subscription = Meteor.subscribe('fireFromActiveId', id);
+  } else if (alert) {
+    subscription = Meteor.subscribe('fireFromAlertId', id);
   } else if (archive) {
     subscription = Meteor.subscribe('fireFromId', id);
   } else {
@@ -209,6 +213,7 @@ const FireContainer = withTracker(({ match }) => {
   return {
     loading,
     active,
+    alert,
     fromHash,
     fire: FiresCollection.findOne(),
     notfound,

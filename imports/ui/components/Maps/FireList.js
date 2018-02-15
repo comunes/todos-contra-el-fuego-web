@@ -18,7 +18,7 @@ export default function FireList(props) {
   if (useMarks) {
     items = fires.map(({ _id, ...otherProps }) => (<FireIconMark t={t} history={history} id={_id} key={_id} nasa={nasa} falsePositives={falsePositives} {...otherProps} />));
   } else if (usePixel && !falsePositives) {
-    items = fires.map(({ _id, ...otherProps }) => (<FirePixel key={_id} nasa={nasa} {...otherProps} />));
+    items = fires.map(({ _id, ...otherProps }) => (<FirePixel t={t} key={_id} id={_id} history={history} nasa={nasa} {...otherProps} />));
   } else if (!falsePositives) {
     items = fires.map(({ _id, ...otherProps }) => (<FireCircleMark t={t} history={history} id={_id} key={_id} nasa={nasa} {...otherProps} />));
   }

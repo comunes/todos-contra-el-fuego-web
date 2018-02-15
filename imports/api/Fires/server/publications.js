@@ -8,6 +8,7 @@ import { Promise } from 'meteor/promise';
 import NodeGeocoder from 'node-geocoder';
 import { gmapServerKey } from '/imports/startup/server/IPGeocoder';
 import ActiveFiresCollection from '/imports/api/ActiveFires/ActiveFires';
+import FireAlertsCollection from '/imports/api/FireAlerts/FireAlerts';
 import FiresCollection from '../Fires';
 
 function findFire(unsealed) {
@@ -69,6 +70,24 @@ const findOrCreateFire = (obj) => {
   }
   return findFire(obj);
 };
+
+Meteor.publish('fireFromAlertId', function fireFromAlertId(_id) {
+  try {
+    check(_id, String);
+    // console.log(`Looking for alert fire ${_id}`);
+    const fire = FireAlertsCollection.findOne(new Meteor.Collection.ObjectID(_id));
+    if (fire) {
+      // console.info(`Active fire found: ${_id}`);
+      return findOrCreateFire(fixConfidence(fire));
+    }
+    console.info(`Alert fire not found: ${_id}`);
+    // Not found in active fires!
+    return this.ready();
+  } catch (e) {
+    console.info(`Alert fire not found (with error): ${_id}`);
+    return this.ready();
+  }
+});
 
 Meteor.publish('fireFromActiveId', function fireFromActiveId(_id) {
   try {

@@ -22,7 +22,7 @@ const FirePopup = ({
         {when && <Fragment><span>{t('Detectado')}: {moment(when).fromNow()}</span><br /></Fragment> }
         <span>
           { /* if nasa === null means that the is a false positive fire */ }
-          <a href="#" onClick={() => history.push(`/fire/${nasa ? 'active' : 'archive'}/${id}`)}>{t('Más información sobre este fuego')}</a>
+          <a href="#" onClick={() => history.push(`/fire/${nasa ? 'active' : 'alert'}/${id}`)}>{t('Más información sobre este fuego')}</a>
         </span>
       </Fragment>
     </Popup>
