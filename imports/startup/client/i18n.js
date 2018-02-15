@@ -90,7 +90,7 @@ i18n.use(backend)
       position: 'bottom',
       linkText: 'Lee más',
       linkRouteName: '/privacy',
-      acceptButtonText: 'Aceptar',
+      acceptButtonText: t('Aceptar'),
       html: false,
       expirationInDays: 70,
       forceShow: false
