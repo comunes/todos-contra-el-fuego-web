@@ -94,6 +94,8 @@ const App = props => (
               <meta charSet="utf-8" />
               <title>{i18n.t('AppName')}</title>
               <meta name="description" content={`${i18n.t('AppDescrip')}: ${i18n.t('AppDescripLong')}`} />
+              <link rel="alternate" href="https://fires.comunes.org/" hrefLang="en" />
+              <link rel="alternate" href="https://fuegos.comunes.org/" hrefLang="es" />
             </Helmet>
             <Navigation {...props} />
             <ReSendEmail {...props} />
