@@ -10,3 +10,4 @@ import './facts';
 import '../common/comments';
 import './sitemaps';
 import './subsUnion';
+import './prerender';
