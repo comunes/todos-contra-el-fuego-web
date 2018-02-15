@@ -8,6 +8,10 @@ Comments.config({
   publishUserFields: {
     profile: 1
   },
+  mediaAnalyzers: [
+    Comments.analyzers.image,
+    Comments.analyzers.youtube
+  ],
   generateUsername: function genUser(user) {
     // console.log(JSON.stringify(user));
     // FIXME

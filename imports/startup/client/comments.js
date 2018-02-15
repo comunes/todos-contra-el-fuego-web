@@ -37,6 +37,6 @@ i18n.init((err, t) => {
     template: 'bootstrap', // default 'semantic-ui'
     // default 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'
     defaultAvatar: '/default-avatar.png',
-    markdown: false
+    markdown: true
   });
 });
