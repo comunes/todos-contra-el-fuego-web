@@ -43,6 +43,7 @@ module.exports = function () {
     for (let i = 0; i < pages.length; i += 1) {
       client.url(`${process.env.ROOT_URL}/${pages[i][0]}`);
       const content = pages[i][1];
+      client.waitForVisible('#react-root', 5000);
       client.waitForText('#react-root', content);
     }
     callback();
