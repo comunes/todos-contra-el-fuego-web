@@ -168,7 +168,7 @@ export default translate([], { wait: true })(withTracker(() => {
   const userSubsBounds = SiteSettings.findOne({ name: 'subs-public-union-bounds' });
   return {
     userSubs: userSubs ? userSubs.value : null,
-    userSubsBounds: userSubs ? userSubsBounds.value : null,
+    userSubsBounds: userSubsBounds ? userSubsBounds.value : null,
     subsready: settingsSubs.ready()
   };
 })(SubscriptionsMap));
