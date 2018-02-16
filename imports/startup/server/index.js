@@ -1,3 +1,4 @@
+import './ravenLogger';
 import './i18n';
 import './accounts';
 import './api';
