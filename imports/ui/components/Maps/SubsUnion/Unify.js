@@ -35,7 +35,7 @@ const calcUnion = (subs, group, decorated) => {
         const circle = LGeo.circle([dsub.location.lat, dsub.location.lon], dsub.distance * 1000, copts);
         circle.addTo(unionGroup);
       } else {
-        console.error(`Wrong subscription ${JSON.stringify(osub)}`);
+        console.info(`Wrong subscription ${JSON.stringify(osub)}`);
       }
     } catch (e) {
       console.error(e, `Wrong subscription trying to make union ${JSON.stringify(osub)}`);

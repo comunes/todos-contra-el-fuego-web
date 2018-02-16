@@ -185,7 +185,7 @@ class FiresMap extends React.Component {
     console.log(`Rendering ${this.props.loading ? 'loading' : 'LOADED'} map ${this.props.activefires.length + this.props.firealerts.length} of ${this.props.activefirestotal} total. False positives: ${this.props.falsePositives.length}. Reactive ${this.state.viewport.zoom >= MAXZOOMREACTIVE}`);
     const title = `${t('AppName')}: ${t('Fuegos activos')}`;
     if (Meteor.isDevelopment) {
-      console.log(`False positives total: ${this.props.falsePositivesTotal}`);
+      console.log(`False positives total: ${this.props.falsePositives.length}`);
     }
     return (
       /* Large number of markers:
@@ -321,7 +321,6 @@ FiresMap.propTypes = {
   activefires: PropTypes.arrayOf(PropTypes.object).isRequired,
   firealerts: PropTypes.arrayOf(PropTypes.object).isRequired,
   falsePositives: PropTypes.arrayOf(PropTypes.object).isRequired,
-  falsePositivesTotal: PropTypes.number.isRequired,
   lastCheck: PropTypes.instanceOf(Date),
   activefirestotal: PropTypes.number.isRequired,
   center: PropTypes.arrayOf(PropTypes.number),
@@ -370,24 +369,25 @@ export default translate([], { wait: true })(withTracker(() => {
         mapSize.get()[1].lng,
         mapSize.get()[1].lat
       );
-      Meteor.subscribe(
-        'falsePositivesMyloc',
-        mapSize.get()[0].lng,
-        mapSize.get()[0].lat,
-        mapSize.get()[1].lng,
-        mapSize.get()[1].lat
-      );
     }
   });
 
   Meteor.subscribe('activefirestotal');
-  Meteor.subscribe('falsePositivesTotal');
   const settingsSubs = Meteor.subscribe('settings');
   const lastCheck = SiteSettings.findOne({ name: 'last-fire-check' });
   const userSubs = SiteSettings.findOne({ name: 'subs-public-union' });
   const userSubsBounds = SiteSettings.findOne({ name: 'subs-public-union-bounds' });
   const fireAlerts = FireAlertsCollection.find().fetch();
-  const falsePositives = FalsePositivesCollection.find().fetch();
+  const falsePositives = FalsePositivesCollection.find().fetch().map((odoc) => {
+    const doc = odoc;
+    const geo = doc.geo;
+    doc.lat = geo.coordinates[1];
+    doc.lon = geo.coordinates[0];
+    doc._id = doc.fireId;
+    doc.id = doc.fireId;
+    delete doc.geo;
+    return doc;
+  });
   return {
     loading: !subscription ? true : !(subscription.ready() && settingsSubs.ready() && alertSubscription.ready()),
     userSubs: userSubs ? userSubs.value : null,
@@ -396,7 +396,6 @@ export default translate([], { wait: true })(withTracker(() => {
     // Not reactive query depending on zoom level
     activefires: ActiveFiresCollection.find({}, { reactive: zoom.get() >= MAXZOOMREACTIVE }).fetch(),
     activefirestotal: Counter.get('countActiveFires') + fireAlerts.length,
-    falsePositivesTotal: Counter.get('countFalsePositives') + fireAlerts.length,
     firealerts: fireAlerts,
     falsePositives,
     lastCheck: lastCheck ? lastCheck.value : null,
