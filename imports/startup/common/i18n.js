@@ -35,8 +35,7 @@ const i18nOpts = {
       return value;
     }
   },
-  whitelist: false,
-  // whitelist: ['es', 'en'], // allowed languages
+  whitelist: ['es', 'en'], // allowed languages
   load: 'languageOnly', // 'es' o 'en', previously: 'all', // es-ES -> es, en-US -> en
   debug: shouldDebug,
   ns: 'common',
