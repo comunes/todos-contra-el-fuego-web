@@ -336,6 +336,7 @@ let geoInit = true;
 
 export default translate([], { wait: true })(withTracker(() => {
   let subscription;
+  let alertSubscription;
 
   const centerStored = store.get('firesmap_center');
   const zoomStored = store.get('firesmap_zoom');
@@ -362,7 +363,7 @@ export default translate([], { wait: true })(withTracker(() => {
         mapSize.get()[1].lng,
         mapSize.get()[1].lat
       );
-      Meteor.subscribe(
+      alertSubscription = Meteor.subscribe(
         'fireAlerts',
         mapSize.get()[0].lng,
         mapSize.get()[0].lat,
@@ -388,7 +389,7 @@ export default translate([], { wait: true })(withTracker(() => {
   const fireAlerts = FireAlertsCollection.find().fetch();
   const falsePositives = FalsePositivesCollection.find().fetch();
   return {
-    loading: !subscription ? true : !(subscription.ready() && settingsSubs.ready()),
+    loading: !subscription ? true : !(subscription.ready() && settingsSubs.ready() && alertSubscription.ready()),
     userSubs: userSubs ? userSubs.value : null,
     userSubsBounds: userSubs ? userSubsBounds.value : null,
     subsready: settingsSubs.ready(),

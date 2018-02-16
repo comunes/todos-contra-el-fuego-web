@@ -9,6 +9,7 @@ const subsUnion = (union, options) => {
   const color = options.color || '#145A32';
   const fillColor = options.fillColor || 'green';
   const opacity = options.options || 0.1;
+  const interactive = options.interactive || false;
 
   if (options.subs) {
     const lmap = options.map.leafletElement;
@@ -18,10 +19,14 @@ const subsUnion = (union, options) => {
     union = null;
     if (options.show) {
       if (options.fromServer) {
+        // http://leafletjs.com/reference-1.3.0.html#geojson
         // We get the json from server side
         union = L.geoJson(JSON.parse(options.subs));
-        union.setStyle({ color, fillColor, fillOpacity: opacity });
+        union.setStyle({
+          color, fillColor, fillOpacity: opacity, interactive
+        });
         union.addTo(lmap);
+        union.bringToBack();
         if (options.fit && options.bounds) {
           // console.log(options.bounds);
           const bounds = JSON.parse(options.bounds);
@@ -34,7 +39,9 @@ const subsUnion = (union, options) => {
         const bounds = result[1];
 
         union = L.geoJson(unionJson);
-        union.setStyle({ color, fillColor, fillOpacity: opacity });
+        union.setStyle({
+          color, fillColor, fillOpacity: opacity, interactive
+        });
         union.addTo(lmap);
         if (options.fit) {
           options.map.leafletElement.fitBounds(bounds);
