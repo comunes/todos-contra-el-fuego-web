@@ -42,5 +42,5 @@ Meteor.startup(() => {
 
   WebApp.rawConnectHandlers.use(prerenderIO);
 
-  console.log('\nprerender service:', settings);
+  // console.log('\nprerender service:', settings);
 });
