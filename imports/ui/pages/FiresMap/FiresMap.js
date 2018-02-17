@@ -25,7 +25,6 @@ import FireList from '/imports/ui/components/Maps/FireList';
 import subsUnion from '/imports/ui/components/Maps/SubsUnion/SubsUnion';
 import DefMapLayers from '/imports/ui/components/Maps/DefMapLayers';
 import FromNow from '/imports/ui/components/FromNow/FromNow';
-import Loading from '/imports/ui/components/Loading/Loading';
 import ActiveFiresCollection from '/imports/api/ActiveFires/ActiveFires';
 import FireAlertsCollection from '/imports/api/FireAlerts/FireAlerts';
 import FalsePositivesCollection from '/imports/api/FalsePositives/FalsePositives';
@@ -127,13 +126,13 @@ class FiresMap extends React.Component {
       mapSize.set([bounds.getNorthEast(), bounds.getSouthWest()]);
       store.set('firesmap_center', viewport.center);
       store.set('firesmap_zoom', viewport.zoom);
-      if (viewport.zoom >= this.state.viewport.zoom) {
+      if (viewport.zoom > this.state.viewport.zoom) {
+        this.state.viewport = viewport;
         if (Meteor.isDevelopment) console.log('Don\'t query we are in the same point');
         return;
       }
       zoom.set(viewport.zoom);
       center.set(viewport.center);
-      // this.setState({ viewport });
       this.state.viewport = viewport;
     }
   }
@@ -185,6 +184,7 @@ class FiresMap extends React.Component {
     const { t } = this.props;
     console.log(`Rendering ${this.props.loading ? 'loading' : 'LOADED'}, zoom ${this.state.viewport.zoom}, map ${this.props.activefires.length + this.props.firealerts.length} of ${this.props.activefirestotal} total. False positives: ${this.props.falsePositives.length}. Reactive ${this.state.viewport.zoom >= MAXZOOMREACTIVE}`);
     const title = `${t('AppName')}: ${t('Fuegos activos')}`;
+
     if (Meteor.isDevelopment) {
       console.log(`False positives total: ${this.props.falsePositives.length}`);
     }
@@ -199,11 +199,6 @@ class FiresMap extends React.Component {
             <title>{title}</title>
             <meta name="description" content={t('Fuegos activos en el mundo actualizados en tiempo real')} />
           </Helmet> }
-          {this.props.loading || !this.props.subsready ?
-           <Row className="align-items-center justify-content-center">
-             <Loading />
-           </Row>
-           : ''}
            <h4 className="page-header"><Trans parent="span">Fuegos activos</Trans></h4>
            <Row>
              <Col xs={12} sm={6} md={6} lg={6} >
