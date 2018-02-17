@@ -1,6 +1,6 @@
 /* eslint-disable import/no-absolute-path */
-import React from 'react';
-import { CircleMarker, Marker } from 'react-leaflet';
+import React, { Fragment } from 'react';
+import { CircleMarker, Marker, Tooltip } from 'react-leaflet';
 import PropTypes from 'prop-types';
 import { fireIcon, nFireIcon, industryIcon } from '/imports/ui/components/Maps/Icons';
 import { translate } from 'react-i18next';
@@ -23,6 +23,7 @@ const FireIconMark = ({
       </Marker> }
     { falsePositives &&
       <Marker position={[lat, lon]} icon={industryIcon}>
+        <Tooltip><Fragment>{t('Es una industria')}</Fragment></Tooltip>
         { /* disabled because was a past fire (and can be marked multiple times) */ false && <FirePopup t={t} history={history} id={id} lat={lat} lon={lon} /> }
       </Marker>
     }
