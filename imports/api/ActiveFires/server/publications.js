@@ -32,12 +32,12 @@ const falsePositives = (fires) => {
     }
   });
 
-  /* console.log(`False positive total: ${falsePos.count()}`);
-   * console.log(`False positives: ${JSON.stringify(falsePos.fetch())}`); */
+  /*  console.log(`False positive total: ${falsePos.count()}`);
+  console.log(`False positives: ${JSON.stringify(falsePos.fetch())}`); */
   return falsePos;
 };
 
-const activefires = (northEastLng, northEastLat, southWestLng, southWestLat) => {
+const activefires = (northEastLng, northEastLat, southWestLng, southWestLat, withMarks) => {
   const fires = ActiveFires.find({
     ourid: {
       $geoWithin: {
@@ -56,23 +56,29 @@ const activefires = (northEastLng, northEastLat, southWestLng, southWestLat) => 
     }
   });
 
-  const group = new L.FeatureGroup();
-  const remap = fires.fetch().map(function remap(doc) {
-    return { location: { lat: doc.lat, lon: doc.lon }, distance: doc.scan };
-  });
-  const result = calcUnion(remap, group, sub => sub);
-  const falsePos = falsePositives(result[0]);
   // console.log(JSON.stringify(result));
   // console.log(`Fires total: ${fires.count()}`);
-  return [fires, falsePos];
+
+  if (withMarks && fires.fetch().length > 0) {
+    const group = new L.FeatureGroup();
+    const remap = fires.fetch().map(function remap(doc) {
+      return { location: { lat: doc.lat, lon: doc.lon }, distance: doc.scan };
+    });
+    const result = calcUnion(remap, group, sub => sub);
+    const falsePos = falsePositives(result[0]);
+    return [fires, falsePos];
+  }
+
+  return fires;
 };
 
-Meteor.publish('activefiresmyloc', function activeInMyLoc(northEastLng, northEastLat, southWestLng, southWestLat) {
+Meteor.publish('activefiresmyloc', function activeInMyLoc(northEastLng, northEastLat, southWestLng, southWestLat, withMarks) {
   // latitude -90 and 90 and the longitude between -180 and 180
   check(northEastLng, NumberBetween(-180, 180));
   check(southWestLat, NumberBetween(-90, 90));
   check(southWestLng, NumberBetween(-180, 180));
   check(northEastLat, NumberBetween(-90, 90));
+  check(withMarks, Boolean);
 
-  return activefires(northEastLng, northEastLat, southWestLng, southWestLat);
+  return activefires(northEastLng, northEastLat, southWestLng, southWestLat, withMarks);
 });

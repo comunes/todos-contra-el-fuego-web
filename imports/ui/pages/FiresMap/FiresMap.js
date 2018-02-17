@@ -146,6 +146,7 @@ class FiresMap extends React.Component {
   useMarkers(use) {
     this.setState({ useMarkers: use });
     store.set('firesmap_marks', use);
+    marks.set(use);
   }
 
   addScale(map) {
@@ -183,7 +184,7 @@ class FiresMap extends React.Component {
 
   render() {
     const { t } = this.props;
-    console.log(`Rendering ${this.props.loading ? 'loading' : 'LOADED'} map ${this.props.activefires.length + this.props.firealerts.length} of ${this.props.activefirestotal} total. False positives: ${this.props.falsePositives.length}. Reactive ${this.state.viewport.zoom >= MAXZOOMREACTIVE}`);
+    console.log(`Rendering ${this.props.loading ? 'loading' : 'LOADED'}, zoom ${this.state.viewport.zoom}, map ${this.props.activefires.length + this.props.firealerts.length} of ${this.props.activefirestotal} total. False positives: ${this.props.falsePositives.length}. Reactive ${this.state.viewport.zoom >= MAXZOOMREACTIVE}`);
     const title = `${t('AppName')}: ${t('Fuegos activos')}`;
     if (Meteor.isDevelopment) {
       console.log(`False positives total: ${this.props.falsePositives.length}`);
@@ -361,7 +362,8 @@ export default translate([], { wait: true })(withTracker(() => {
         mapSize.get()[0].lng,
         mapSize.get()[0].lat,
         mapSize.get()[1].lng,
-        mapSize.get()[1].lat
+        mapSize.get()[1].lat,
+        marks.get() && zoom.get() >= MAXZOOM
       );
       alertSubscription = Meteor.subscribe(
         'fireAlerts',
