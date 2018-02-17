@@ -127,9 +127,8 @@ class FiresMap extends React.Component {
       mapSize.set([bounds.getNorthEast(), bounds.getSouthWest()]);
       store.set('firesmap_center', viewport.center);
       store.set('firesmap_zoom', viewport.zoom);
-      if (viewport.center === this.state.viewport.center &&
-          viewport.zoom === this.state.viewport.zoom) {
-        // Do nothing, in same point
+      if (viewport.zoom >= this.state.viewport.zoom) {
+        if (Meteor.isDevelopment) console.log('Don\'t query we are in the same point');
         return;
       }
       zoom.set(viewport.zoom);
