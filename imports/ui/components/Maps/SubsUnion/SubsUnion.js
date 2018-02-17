@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-indent-props */
 /* eslint-disable import/no-absolute-path */
 /* eslint-disable import/no-absolute-path */
-/* global L */
 
+import L from 'leaflet';
 import calcUnion from '/imports/ui/components/Maps/SubsUnion/Unify';
 
 const subsUnion = (union, options) => {

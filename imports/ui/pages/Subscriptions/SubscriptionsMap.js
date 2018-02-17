@@ -1,7 +1,7 @@
-/* global L */
 /* eslint-disable import/no-absolute-path */
 /* eslint-disable react/jsx-indent-props */
 /* eslint-disable react/jsx-indent */
+
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Button, ButtonGroup, Row, Col } from 'react-bootstrap';
@@ -10,6 +10,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Trans, translate } from 'react-i18next';
 import { Map } from 'react-leaflet';
 import { Helmet } from 'react-helmet';
+import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.css';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.js';

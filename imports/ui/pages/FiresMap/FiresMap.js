@@ -1,4 +1,4 @@
-/* global L Counter */
+/* global Counter */
 /* eslint-disable import/no-absolute-path */
 /* eslint-disable react/jsx-indent-props */
 /* eslint-disable react/jsx-indent */
@@ -14,6 +14,7 @@ import { Map } from 'react-leaflet';
 import Control from 'react-leaflet-control';
 import _ from 'lodash';
 import store from 'store';
+import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.css';
 import 'leaflet-graphicscale/dist/Leaflet.GraphicScale.min.js';
