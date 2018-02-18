@@ -25,6 +25,7 @@ class Profile extends React.Component {
     this.t = this.props.t;
     this.getUserType = this.getUserType.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+
     this.renderOAuthUser = this.renderOAuthUser.bind(this);
     this.renderPasswordUser = this.renderPasswordUser.bind(this);
     this.renderProfileForm = this.renderProfileForm.bind(this);
@@ -67,7 +68,7 @@ class Profile extends React.Component {
           required: this.t('¿Cuál es tu apellido?')
         },
         emailAddress: {
-          required: this.t('Necesitamos una contraseña aquí.'),
+          required: this.t('Necesitamos un correo aquí.'),
           email: this.t('¿Es correcto este correo?')
         },
         currentPassword: {
