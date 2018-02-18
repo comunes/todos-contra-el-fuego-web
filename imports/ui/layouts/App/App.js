@@ -19,6 +19,7 @@ import '/imports/startup/client/ravenLogger';
 import '/imports/startup/client/geolocation';
 import '/imports/startup/client/piwik-start.js';
 import 'simple-line-icons/css/simple-line-icons.css';
+import { isHome } from '/imports/ui/components/Utils/location';
 import Reconnect from '../../components/Reconnect/Reconnect';
 import Navigation from '../../components/Navigation/Navigation';
 import Authenticated from '../../components/Authenticated/Authenticated';
@@ -139,7 +140,7 @@ const App = props => (
               </Switch>
             </Grid>
             <Footer />
-            { props.authenticated && <Feedback /> }
+            { !isHome() && <Feedback /> }
             <Reconnect />
             {props.i18nReady.get() &&
             <Blaze template="cookieConsent" />

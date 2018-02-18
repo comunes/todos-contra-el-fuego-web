@@ -8,6 +8,7 @@ import { Meteor } from 'meteor/meteor';
 import { translate } from 'react-i18next';
 import { FormGroup, Button, FormControl } from 'react-bootstrap';
 import { Bert } from 'meteor/themeteorchef:bert';
+import { withTracker } from 'meteor/react-meteor-data';
 import validate from '../../../modules/validate';
 
 import './Feedback.scss';
@@ -78,10 +79,11 @@ class Feedback extends Component {
               <input
                   onChange={this.handleChange}
                   name="email"
-                  autoFocus
                   className="form-control"
                   ref={email => (this.email = email)}
                   placeholder={this.t('Tu correo')}
+                  disabled={this.props.authenticated}
+                  defaultValue={this.props.authenticated ? Meteor.user().emails[0].address : ''}
                   type="email"
               />
             </FormGroup>
@@ -114,7 +116,10 @@ class Feedback extends Component {
 }
 
 Feedback.propTypes = {
-  t: PropTypes.func.isRequired
+  t: PropTypes.func.isRequired,
+  authenticated: PropTypes.bool.isRequired
 };
 
-export default translate([], { wait: true })(Feedback);
+export default translate([], { wait: true })(withTracker(() => ({
+  authenticated: !!Meteor.userId()
+}))(Feedback));

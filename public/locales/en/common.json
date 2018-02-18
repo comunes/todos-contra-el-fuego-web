@@ -204,5 +204,7 @@
   "Desconectado del servidor, reconectando...":
   "Disconnected from server, trying to reconnect...",
   "Reintentar ahora":
-  "Retry now"
+  "Retry now",
+  "Feedback recibido, gracias...":
+  "Feedback received, thanks..."
 }
