@@ -139,7 +139,7 @@ const App = props => (
               </Switch>
             </Grid>
             <Footer />
-            <Feedback />
+            { props.authenticated && <Feedback /> }
             <Reconnect />
             {props.i18nReady.get() &&
             <Blaze template="cookieConsent" />
