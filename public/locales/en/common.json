@@ -198,5 +198,11 @@
   "Enviar":
   "Send",
   "Tu correo":
-  "Your e-mail"
+  "Your e-mail",
+  "Desconectado del servidor, reconectando en %delay% segundos.":
+  "Disconnected from server, trying to reconnect in %delay%s.",
+  "Desconectado del servidor, reconectando...":
+  "Disconnected from server, trying to reconnect...",
+  "Reintentar ahora":
+  "Retry now"
 }

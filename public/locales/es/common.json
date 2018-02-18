@@ -285,5 +285,11 @@
   "Enviar":
   "Enviar",
   "Tu correo":
-  "Tu correo"
+  "Tu correo",
+  "Desconectado del servidor, reconectando en %delay% segundos.":
+  "Desconectado del servidor, reconectando en %delay% segundos.",
+  "Desconectado del servidor, reconectando...":
+  "Desconectado del servidor, reconectando...",
+  "Reintentar ahora":
+  "Reintentar ahora"
 }
