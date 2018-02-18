@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 import ReactResizeDetector from 'react-resize-detector';
 import _ from 'lodash';
 import 'html5-device-mockups/dist/device-mockups.min.css';
-import 'bootstrap-carousel-swipe-haven/carousel-swipe';
+import 'bootstrap-carousel-swipe/carousel-swipe';
 import { isAnyMobile } from '/imports/ui/components/Utils/isMobile';
 import SubscriptionEditor from '/imports/ui/components/SubscriptionEditor/SubscriptionEditor';
 import SubscriptionsMap from '/imports/ui/pages/Subscriptions/SubscriptionsMap';
@@ -36,10 +36,8 @@ class Index extends Component {
   }
 
   componentDidMount() {
-    const c = $('.carousel');
-    if (c.carousel) {
-      c.carousel();
-    }
+    $('#carouselMainIndicators').carousel();
+    $('#carouselSndIndicators').carousel();
   }
 
   onResize() {
