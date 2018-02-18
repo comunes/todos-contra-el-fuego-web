@@ -42,12 +42,13 @@ import NotFound from '../../pages/NotFound/NotFound';
 import FiresMap from '../../pages/FiresMap/FiresMap';
 import Fires from '../../pages/Fires/Fires';
 import Sandbox from '../../pages/Sandbox/Sandbox';
-import Footer from '../../components/Footer/Footer';
 import Terms from '../../pages/Terms/Terms';
 import Privacy from '../../pages/Privacy/Privacy';
 import License from '../../pages/License/License';
 import Credits from '../../pages/Credits/Credits';
 import ZonesMap from '../../pages/ZonesMap/ZonesMap';
+import Footer from '../../components/Footer/Footer';
+import Feedback from '../../components/Feedback/Feedback';
 import ReSendEmail from '../../components/ReSendEmail/ReSendEmail';
 import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
 import history from '../../components/History/History';
@@ -138,6 +139,7 @@ const App = props => (
               </Switch>
             </Grid>
             <Footer />
+            <Feedback />
             <Reconnect />
             {props.i18nReady.get() &&
             <Blaze template="cookieConsent" />

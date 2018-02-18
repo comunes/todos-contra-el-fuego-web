@@ -12,3 +12,4 @@ import '../common/comments';
 import './sitemaps';
 import './subsUnion';
 import './prerender';
+import './feedback';

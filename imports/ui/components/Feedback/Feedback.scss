@@ -1,0 +1,71 @@
+/* From: https://github.com/spektom/bootstrap-feedback-form */
+@import '../../stylesheets/mixins';
+
+#feedback {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  bottom: 0;
+  height: 350px;
+  margin-left: -3px;
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+
+@include breakpoint(tablet) {
+  #feedback {
+    height: 400px;
+  }
+}
+
+#feedback-form {
+  float: left;
+  width: 400px;
+  height: 100%;
+  z-index: 1000;
+  padding-left: 5px;
+  padding-right: 10px;
+  background-clip: padding-box;
+  border: 1px solid rgba(0,0,0,.2);
+  border-radius: 0px;
+  box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+@include breakpoint(mobile) {
+  #feedback-form {
+    width: 270px;
+  }
+}
+
+#feedback-tab {
+  float: right;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+  text-align: center;
+  width: 80px;
+  height: 24px;
+  background-color: rgba(0,0,0,0.5);
+  margin-top: 60px;
+  margin-left: -28px;
+  padding-top: 3px;
+  -webkit-border-top-left-radius: 3px;
+  -webkit-border-top-right-radius: 3px;
+  -moz-border-radius-topleft: 3px;
+  -moz-border-radius-topright: 3px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+#feedback-tab:hover {
+  background-color: rgba(0,0,0,0.4);
+}
+
+#feedback-form textarea {
+  resize: none;
+}
