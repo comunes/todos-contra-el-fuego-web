@@ -4,6 +4,10 @@ Hola, {{firstName}}!
 
 [Más información sobre este fuego]({{fireUrl}})
 
+¿No es un fuego forestal? En el enlace anterior puedes indicarnos de que tipo de fuego se trata y ayudarnos así a mejorar nuestras notificaciones.
+
+También puedes añadir comentarios en ese enlace si tienes información adicional sobre este fuego (cómo acceder a esa zona, si conoces cómo se originó el fuego, etc).
+
 Gracias!
 El equipo de {{applicationName}}
 

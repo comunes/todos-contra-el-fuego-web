@@ -4,6 +4,10 @@ Hey, {{firstName}}!
 
 [More information about this fire]({{fireUrl}})
 
+Isn't it a forest fire? In the previous link you can tell us what kind of fire it is and help us improve our notifications.
+
+You can also add comments on that link if you have additional information about this fire (how to access that area, if you know how the fire originated, etc).
+
 Thanks!
 {{applicationName}} Team
 
