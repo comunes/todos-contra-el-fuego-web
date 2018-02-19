@@ -20,8 +20,8 @@ class Subscriptions extends Component {
   constructor(props) {
     super(props);
     this.t = props.t;
-    if (props.location.state) {
-      const received = props.location.state;
+    const received = props.location.state;
+    if (received && received.location && received.location.lat && received.location.lon && received.distance) {
       props.history.push(`${this.props.match.url}/new`, {
         location: received.location,
         distance: received.distance,
