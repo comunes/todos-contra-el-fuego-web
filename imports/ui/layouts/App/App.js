@@ -140,8 +140,8 @@ const App = props => (
               </Switch>
             </Grid>
             <Footer />
-            { !isHome() && <Feedback /> }
-            <Reconnect />
+            { Meteor.isDevelopment && !props.isHome && <Feedback {...props} /> }
+            <Reconnect {...props} />
             {props.i18nReady.get() &&
             <Blaze template="cookieConsent" />
             }
@@ -162,7 +162,8 @@ App.propTypes = {
   i18nReady: PropTypes.object.isRequired,
   userId: PropTypes.string,
   emailAddress: PropTypes.string,
-  emailVerified: PropTypes.bool.isRequired
+  emailVerified: PropTypes.bool.isRequired,
+  isHome: PropTypes.bool.isRequired
 };
 
 const getUserName = name => ({
@@ -178,6 +179,7 @@ export default withTracker(() => {
   const name = user && user.profile && user.profile.name && getUserName(user.profile.name);
   const emailAddress = user && user.emails && user.emails[0].address;
   // console.log(`i18n ready?: ${i18nReady.get()}`);
+  console.log(`isHome?: ${isHome()}`);
   return {
     loading,
     loggingIn,
@@ -187,6 +189,7 @@ export default withTracker(() => {
     roles: !loading && Roles.getRolesForUser(userId),
     userId,
     emailAddress,
+    isHome: isHome(),
     emailVerified: user && user.emails ? user && user.emails && user.emails[0].verified : true
   };
 })(App);

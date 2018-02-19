@@ -82,8 +82,8 @@ class Feedback extends Component {
                   className="form-control"
                   ref={email => (this.email = email)}
                   placeholder={this.t('Tu correo')}
-                  disabled={this.props.authenticated}
-                  defaultValue={this.props.authenticated ? Meteor.user().emails[0].address : ''}
+                  disabled={this.props.emailVerified}
+                  defaultValue={this.props.emailVerified ? this.props.emailAddress : ''}
                   type="email"
               />
             </FormGroup>
@@ -117,9 +117,10 @@ class Feedback extends Component {
 
 Feedback.propTypes = {
   t: PropTypes.func.isRequired,
-  authenticated: PropTypes.bool.isRequired
+  emailAddress: PropTypes.string,
+  emailVerified: PropTypes.bool.isRequired
 };
-
-export default translate([], { wait: true })(withTracker(() => ({
-  authenticated: !!Meteor.userId()
+export default translate([], { wait: true })(withTracker(props => ({
+  emailAddress: props.emailAddress,
+  emailVerified: props.emailVerified
 }))(Feedback));
