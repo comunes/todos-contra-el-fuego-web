@@ -1,9 +1,9 @@
 {
   "extensions": [ "ttf", "woff", "woff2" ],
   "map": {
-    "node_modules/simple-line-icons/fonts/Simple-Line-Icons.woff": "fonts/Simple-Line-Icons.woff?v=2.4.1",
-    "node_modules/simple-line-icons/fonts/Simple-Line-Icons.woff2": "fonts/Simple-Line-Icons.woff2?v=2.4.1",
-    "node_modules/simple-line-icons/fonts/Simple-Line-Icons.ttf": "fonts/Simple-Line-Icons.ttf?v=2.4.1"
+    "node_modules/simple-line-icons/fonts/Simple-Line-Icons.woff": "/fonts/Simple-Line-Icons.woff?v=2.4.1",
+    "node_modules/simple-line-icons/fonts/Simple-Line-Icons.woff2": "/fonts/Simple-Line-Icons.woff2?v=2.4.1",
+    "node_modules/simple-line-icons/fonts/Simple-Line-Icons.ttf": "/fonts/Simple-Line-Icons.ttf?v=2.4.1"
   },
   "verbose": false
 }
