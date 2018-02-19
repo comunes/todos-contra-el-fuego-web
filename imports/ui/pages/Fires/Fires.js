@@ -100,7 +100,8 @@ class Fire extends React.Component {
                    center={[fire.lat, fire.lon]}
                    color="red"
                    fillColor="red"
-                   fillOpacity={0.1}
+                   fillOpacity={0.0}
+                   interactive={false}
                    radius={fire.scan ? fire.scan * 1000 : 300}
                />
              </Fragment>

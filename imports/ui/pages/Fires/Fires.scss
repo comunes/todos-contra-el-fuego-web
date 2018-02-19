@@ -2,7 +2,7 @@
 @import '../../stylesheets/mixins';
 
 .fire-leaflet-container {
-  min-height: 30vh;
+  min-height: 40vh;
   min-width: 40vw;
   width: 50%;
   margin: 0 0 10px 10px !important;
@@ -11,7 +11,8 @@
 }
 
 .ViewFire > h4.page-header {
-    line-height: 1.3em;
+  line-height: 1.3em;
+  font-size: 1.5em;
 }
 
 @media (max-width: 768px) {
