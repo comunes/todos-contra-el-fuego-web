@@ -131,11 +131,12 @@ class Fire extends React.Component {
 
              {(fire.type !== 'vecinal') &&
               <Fragment>
-                <Row>
-                  <Col>
-                    <Alert bsStyle="success"><Trans>Parece que este fuego no es un fuego forestal.</Trans></Alert>
-                  </Col>
-                </Row>
+                { this.props.falsePositives.length > 0 &&
+                  <Row>
+                    <Col>
+                      <Alert bsStyle="success"><Trans>Parece que este fuego no es un fuego forestal.</Trans></Alert>
+                    </Col>
+                  </Row> }
                 <h5>{t('¿No es un fuego forestal?')}</h5>
                 <div>
                   <Trans>Indícanos de que tipo de fuego se trata y ayúdanos así a mejorar nuestras notificaciones:</Trans>
