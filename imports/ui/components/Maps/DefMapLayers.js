@@ -56,9 +56,9 @@ class DefMapLayers extends Component {
           <GoogleLayer googlekey={this.state.gkey} maptype="TERRAIN" />
         </BaseLayer> }
         { this.state.gkey &&
-        <BaseLayer name={t('Mapa de satélite de Google')}>
-          <GoogleLayer googlekey={this.state.gkey} maptype="SATELLITE" />
-        </BaseLayer> }
+          <BaseLayer name={t('Mapa de satélite de Google')} checked={!this.props.gray}>
+            <GoogleLayer googlekey={this.state.gkey} maptype="SATELLITE" />
+          </BaseLayer> }
       </LayersControl>
     );
   }
