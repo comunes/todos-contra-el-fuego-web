@@ -6,7 +6,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import { translate, Trans } from 'react-i18next';
-import { FormGroup } from 'react-bootstrap';
+import { Row, Col, Alert, FormGroup } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { Helmet } from 'react-helmet';
@@ -15,10 +15,12 @@ import Blaze from 'meteor/gadicc:blaze-react-component';
 import DefMapLayers from '/imports/ui/components/Maps/DefMapLayers';
 import NotFound from '/imports/ui/pages/NotFound/NotFound';
 import FiresCollection from '/imports/api/Fires/Fires';
+import FireList from '/imports/ui/components/Maps/FireList';
 import FromNow from '/imports/ui/components/FromNow/FromNow';
 import { dateLongFormat } from '/imports/api/Common/dates';
 import '/imports/startup/client/comments';
 import FalsePositiveTypes from '/imports/api/FalsePositives/FalsePositiveTypes';
+import FalsePositivesCollection, { falsePositivesRemap } from '/imports/api/FalsePositives/FalsePositives';
 import ShareIt from '/imports/ui/components/ShareIt/ShareIt';
 import './Fires.scss';
 
@@ -67,6 +69,7 @@ class Fire extends React.Component {
     const {
       notfound, loading, fire, t
     } = this.props;
+    if (Meteor.isDevelopment) console.log(`False positives total: ${this.props.falsePositives.length}`);
     /* console.log(`loading fire: ${loading}`);
      * console.log(`Not found fire: ${notfound}`); */
     if (fire && fire.when) {
@@ -105,6 +108,15 @@ class Fire extends React.Component {
                    radius={fire.scan ? fire.scan * 1000 : 300}
                />
              </Fragment>
+             <FireList
+                 t={t}
+                 history={this.props.history}
+                 fires={this.props.falsePositives}
+                 scale
+                 useMarkers
+                 nasa={false}
+                 falsePositives
+             />
              <DefMapLayers />
            </Map>
            <p>{t('Coordenadas:')} {fire.lat}, {fire.lon}</p>
@@ -119,6 +131,11 @@ class Fire extends React.Component {
 
              {(fire.type !== 'vecinal') &&
               <Fragment>
+                <Row>
+                  <Col>
+                    <Alert bsStyle="success"><Trans>Parece que este fuego no es un fuego forestal.</Trans></Alert>
+                  </Col>
+                </Row>
                 <h5>{t('¿No es un fuego forestal?')}</h5>
                 <div>
                   <Trans>Indícanos de que tipo de fuego se trata y ayúdanos así a mejorar nuestras notificaciones:</Trans>
@@ -172,6 +189,7 @@ Fire.propTypes = {
   history: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
   notfound: PropTypes.bool.isRequired,
+  falsePositives: PropTypes.arrayOf(PropTypes.object).isRequired,
   fromHash: PropTypes.bool.isRequired,
   active: PropTypes.bool.isRequired,
   alert: PropTypes.bool.isRequired,
@@ -211,11 +229,13 @@ const FireContainer = withTracker(({ match }) => {
   const notfound = !loading && FiresCollection.find().count() === 0;
   /* console.log(`loading fire: ${loading}`);
    * console.log(`Not found fire: ${notfound}`); */
+  const falsePositives = FalsePositivesCollection.find().fetch().map(falsePositivesRemap);
   return {
     loading,
     active,
     alert,
     fromHash,
+    falsePositives,
     fire: FiresCollection.findOne(),
     notfound,
     when: subscription.ready() && FiresCollection.findOne() ? FiresCollection.findOne().when : null

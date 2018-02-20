@@ -27,7 +27,7 @@ import DefMapLayers from '/imports/ui/components/Maps/DefMapLayers';
 import FromNow from '/imports/ui/components/FromNow/FromNow';
 import ActiveFiresCollection from '/imports/api/ActiveFires/ActiveFires';
 import FireAlertsCollection from '/imports/api/FireAlerts/FireAlerts';
-import FalsePositivesCollection from '/imports/api/FalsePositives/FalsePositives';
+import FalsePositivesCollection, { falsePositivesRemap } from '/imports/api/FalsePositives/FalsePositives';
 import SiteSettings from '/imports/api/SiteSettings/SiteSettings';
 import { isNotHomeAndMobile, isChrome } from '/imports/ui/components/Utils/isMobile';
 import { isHome } from '/imports/ui/components/Utils/location';
@@ -185,9 +185,8 @@ class FiresMap extends React.Component {
     console.log(`Rendering ${this.props.loading ? 'loading' : 'LOADED'}, zoom ${this.state.viewport.zoom}, map ${this.props.activefires.length + this.props.firealerts.length} of ${this.props.activefirestotal} total. False positives: ${this.props.falsePositives.length}. Reactive ${this.state.viewport.zoom >= MAXZOOMREACTIVE}`);
     const title = `${t('AppName')}: ${t('Fuegos activos')}`;
 
-    if (Meteor.isDevelopment) {
-      console.log(`False positives total: ${this.props.falsePositives.length}`);
-    }
+    if (Meteor.isDevelopment) console.log(`False positives total: ${this.props.falsePositives.length}`);
+
     return (
       /* Large number of markers:
          https://stackoverflow.com/questions/43015854/large-dataset-of-markers-or-dots-in-leaflet/43019740#43019740 */
@@ -375,16 +374,7 @@ export default translate([], { wait: true })(withTracker(() => {
   const userSubs = SiteSettings.findOne({ name: 'subs-public-union' });
   const userSubsBounds = SiteSettings.findOne({ name: 'subs-public-union-bounds' });
   const fireAlerts = FireAlertsCollection.find().fetch();
-  const falsePositives = FalsePositivesCollection.find().fetch().map((odoc) => {
-    const doc = odoc;
-    const geo = doc.geo;
-    doc.lat = geo.coordinates[1];
-    doc.lon = geo.coordinates[0];
-    doc._id = doc.fireId;
-    doc.id = doc.fireId;
-    delete doc.geo;
-    return doc;
-  });
+  const falsePositives = FalsePositivesCollection.find().fetch().map(falsePositivesRemap);
   return {
     loading: !subscription ? true : !(subscription.ready() && settingsSubs.ready() && alertSubscription.ready()),
     userSubs: userSubs ? userSubs.value : null,

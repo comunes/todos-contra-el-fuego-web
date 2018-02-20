@@ -34,4 +34,15 @@ FalsePositives.schema = new SimpleSchema({
 
 FalsePositives.attachSchema(FalsePositives.schema);
 
+export const falsePositivesRemap = (odoc) => {
+  const doc = odoc;
+  const geo = doc.geo;
+  doc.lat = geo.coordinates[1];
+  doc.lon = geo.coordinates[0];
+  doc._id = doc.fireId;
+  doc.id = doc.fireId;
+  delete doc.geo;
+  return doc;
+};
+
 export default FalsePositives;

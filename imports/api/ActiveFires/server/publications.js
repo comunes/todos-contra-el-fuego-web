@@ -4,10 +4,8 @@
 
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
-import L from 'leaflet-headless';
 import { NumberBetween } from '/imports/modules/server/other-checks';
-import FalsePositives from '/imports/api/FalsePositives/FalsePositives';
-import calcUnion from '/imports/ui/components/Maps/SubsUnion/Unify';
+import { whichAreFalsePositives } from '/imports/api/FalsePositives/server/publications';
 import ActiveFires from '../ActiveFires';
 
 const counter = new Counter('countActiveFires', ActiveFires.find({}));
@@ -15,27 +13,6 @@ const counter = new Counter('countActiveFires', ActiveFires.find({}));
 Meteor.publish('activefirestotal', function total() {
   return counter;
 });
-
-const falsePositives = (fires) => {
-  const falsePos = FalsePositives.find({
-    geo: {
-      $geoWithin: {
-        $geometry: fires.geometry
-      }
-    }
-  }, {
-    fields: {
-      geo: 1,
-      // type: 1,
-      // when: 1,
-      fireId: 1
-    }
-  });
-
-  /*  console.log(`False positive total: ${falsePos.count()}`);
-  console.log(`False positives: ${JSON.stringify(falsePos.fetch())}`); */
-  return falsePos;
-};
 
 const activefires = (northEastLng, northEastLat, southWestLng, southWestLat, withMarks) => {
   const fires = ActiveFires.find({
@@ -60,12 +37,7 @@ const activefires = (northEastLng, northEastLat, southWestLng, southWestLat, wit
   // console.log(`Fires total: ${fires.count()}`);
 
   if (withMarks && fires.fetch().length > 0) {
-    const group = new L.FeatureGroup();
-    const remap = fires.fetch().map(function remap(doc) {
-      return { location: { lat: doc.lat, lon: doc.lon }, distance: doc.scan };
-    });
-    const result = calcUnion(remap, group, sub => sub);
-    const falsePos = falsePositives(result[0]);
+    const falsePos = whichAreFalsePositives(fires);
     return [fires, falsePos];
   }
 

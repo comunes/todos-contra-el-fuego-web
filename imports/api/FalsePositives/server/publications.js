@@ -5,6 +5,8 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { NumberBetween } from '/imports/modules/server/other-checks';
+import L from 'leaflet-headless';
+import calcUnion from '/imports/ui/components/Maps/SubsUnion/Unify';
 import FalsePositives from '../FalsePositives';
 
 const counter = new Counter('countFalsePositives', FalsePositives.find({}));
@@ -12,6 +14,33 @@ const counter = new Counter('countFalsePositives', FalsePositives.find({}));
 Meteor.publish('falsePositivesTotal', function total() {
   return counter;
 });
+
+export const whichAreFalsePositives = (fires) => {
+  const group = new L.FeatureGroup();
+  const remap = fires.fetch().map(function remap(doc) {
+    return { location: { lat: doc.lat, lon: doc.lon }, distance: doc.scan };
+  });
+  const result = calcUnion(remap, group, sub => sub);
+
+  const falsePos = FalsePositives.find({
+    geo: {
+      $geoWithin: {
+        $geometry: result[0].geometry
+      }
+    }
+  }, {
+    fields: {
+      geo: 1,
+      // type: 1,
+      // when: 1,
+      fireId: 1
+    }
+  });
+
+  /*  console.log(`False positive total: ${falsePos.count()}`);
+     console.log(`False positives: ${JSON.stringify(falsePos.fetch())}`); */
+  return falsePos;
+};
 
 const falsePositives = (northEastLng, northEastLat, southWestLng, southWestLat) => {
   const fires = FalsePositives.find({
