@@ -49,6 +49,7 @@ class Fire extends React.Component {
     }
   }
 
+
   shouldComponentUpdate(nextProps, nextState) {
     return !(nextState.when === this.state.when && nextState.loading === this.state.loading && this.state.notfound === nextState.notfound);
   }
@@ -63,6 +64,12 @@ class Fire extends React.Component {
         Bert.alert(this.props.t('Tomamos nota, ¡gracias por colaborar!'), 'success');
       }
     });
+  }
+
+  handleLeafletLoad(circle) {
+    if (this.fireMap && this.fireMap.leafletElement && circle && circle.leafletElement) {
+      this.fireMap.leafletElement.fitBounds(circle.leafletElement.getBounds());
+    }
   }
 
   render() {
@@ -89,14 +96,12 @@ class Fire extends React.Component {
          <Fragment>
            <h4 className="page-header">{this.title}</h4>
            <Map
-               ref={(map) => {
-                   this.fireMap = map;
-                 }}
+               ref={(map) => { this.fireMap = map; }}
                animate
                sleep={false}
                center={[fire.lat, fire.lon]}
                className="fire-leaflet-container"
-               zoom={12}
+               zoom={13}
            >
              <Fragment>
                <Circle
@@ -106,6 +111,7 @@ class Fire extends React.Component {
                    fillOpacity={0.0}
                    interactive={false}
                    radius={fire.scan ? fire.scan * 1000 : 300}
+                   ref={(circle) => { this.circle = circle; this.handleLeafletLoad(circle); }}
                />
              </Fragment>
              <FireList
