@@ -49,7 +49,6 @@ class Fire extends React.Component {
     }
   }
 
-
   shouldComponentUpdate(nextProps, nextState) {
     return !(nextState.when === this.state.when && nextState.loading === this.state.loading && this.state.notfound === nextState.notfound);
   }
