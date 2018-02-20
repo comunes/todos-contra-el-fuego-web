@@ -1,9 +1,8 @@
 /* eslint-disable import/no-absolute-path */
 import React, { Fragment } from 'react';
-import { Popup, Tooltip } from 'react-leaflet';
+import { Tooltip } from 'react-leaflet';
 import PropTypes from 'prop-types';
 import { translate } from 'react-i18next';
-import moment from 'moment';
 
 const FirePopup = ({
   lat,
@@ -15,17 +14,6 @@ const FirePopup = ({
   t
 }) => (
   <Fragment>
-    <Popup className="fire-popup">
-      <Fragment>
-        <span>{t('Coordenadas:')} {lat}, {lon}</span><br />
-        {nasa && <Fragment><span>{t('Fuente')}: {t(nasa ? 'NASA' : 'nuestros usuarios/as')}</span><br /></Fragment> }
-        {when && <Fragment><span>{t('Detectado')}: {moment(when).fromNow()}</span><br /></Fragment> }
-        <span>
-          { /* if nasa === null means that the is a false positive fire */ }
-          <a href="#" onClick={() => history.push(`/fire/${nasa ? 'active' : 'alert'}/${id}`)}>{t('Más información sobre este fuego')}</a>
-        </span>
-      </Fragment>
-    </Popup>
     <Tooltip><Fragment>{t('Pulsa para más información')}</Fragment></Tooltip>
   </Fragment>
 );
