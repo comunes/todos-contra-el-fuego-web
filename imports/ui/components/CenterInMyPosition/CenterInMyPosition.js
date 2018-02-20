@@ -7,7 +7,6 @@ import { Button } from 'react-bootstrap';
 import { translate } from 'react-i18next';
 
 import './CenterInMyPosition.scss';
-import 'simple-line-icons/css/simple-line-icons.css';
 
 class CenterInMyPosition extends React.Component {
   onClick() {
@@ -40,8 +39,8 @@ class CenterInMyPosition extends React.Component {
     const { onlyIcon, t } = this.props;
     const msg = t('Centrar en tu ubicación');
     return (
-      <Button bsStyle="default" onClick={() => this.onClick()}>
-        <i className="icons icon-target" title={!onlyIcon ? msg : ''} />{!onlyIcon ? msg : ''}
+      <Button bsStyle="default" title={msg} onClick={() => this.onClick()}>
+        <i className="fa fa-crosshairs" />{!onlyIcon ? msg : ''}
       </Button>);
   }
 }
