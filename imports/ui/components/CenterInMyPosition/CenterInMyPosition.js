@@ -5,7 +5,9 @@ import { Tracker } from 'meteor/tracker';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Button } from 'react-bootstrap';
 import { translate } from 'react-i18next';
+
 import './CenterInMyPosition.scss';
+import 'simple-line-icons/css/simple-line-icons.css';
 
 class CenterInMyPosition extends React.Component {
   onClick() {

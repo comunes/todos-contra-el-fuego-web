@@ -18,7 +18,6 @@ import '/imports/startup/client/meta';
 import '/imports/startup/client/ravenLogger';
 import '/imports/startup/client/geolocation';
 import '/imports/startup/client/piwik-start.js';
-import 'simple-line-icons/css/simple-line-icons.css';
 import { isHome } from '/imports/ui/components/Utils/location';
 import Reconnect from '../../components/Reconnect/Reconnect';
 import Navigation from '../../components/Navigation/Navigation';

@@ -19,6 +19,7 @@ import SubscriptionsMap from '/imports/ui/pages/Subscriptions/SubscriptionsMap';
 import ShareIt from '/imports/ui/components/ShareIt/ShareIt';
 import FiresMap from '../FiresMap/FiresMap';
 
+import 'simple-line-icons/css/simple-line-icons.css';
 import './Index.scss';
 import './Index-custom.scss';
 
