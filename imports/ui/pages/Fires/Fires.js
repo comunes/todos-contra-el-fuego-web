@@ -117,7 +117,7 @@ class Fire extends React.Component {
                  nasa={false}
                  falsePositives
              />
-             <DefMapLayers gray={false} />
+             <DefMapLayers satellite />
            </Map>
            <p>{t('Coordenadas:')} {fire.lat}, {fire.lon}</p>
            {(fire.type === 'modis' || fire.type === 'viirs') &&

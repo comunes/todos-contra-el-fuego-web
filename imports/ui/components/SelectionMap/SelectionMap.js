@@ -152,7 +152,7 @@ class SelectionMap extends Component {
         subs: this.props.currentSubs
       };
       if (this.props.action === action.add) {
-        subsOpts.color = '#F2F2F2';
+        subsOpts.color = 'gray';
       }
       this.state.union = subsUnion(this.state.union, subsOpts);
     }
@@ -183,7 +183,7 @@ class SelectionMap extends Component {
               wakeMessageTouch={t('Pulsa para activar')}
               sleepOpacity={0.6}
           >
-            <DefMapLayers gray={false} />
+            <DefMapLayers osmcolor />
             {this.props.action === action.edit &&
              this.props.currentSubs.map((subs, index) => (
                <Marker

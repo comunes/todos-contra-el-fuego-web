@@ -36,7 +36,7 @@ class DefMapLayers extends Component {
         />
       </BaseLayer>);
     const osmlayer = (
-      <BaseLayer checked={!this.props.gray} name={t('Mapa color de OpenStreetMap')}>
+      <BaseLayer checked={this.props.osmcolor} name={t('Mapa color de OpenStreetMap')}>
         <TileLayer
             attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -56,7 +56,7 @@ class DefMapLayers extends Component {
           <GoogleLayer googlekey={this.state.gkey} maptype="TERRAIN" />
         </BaseLayer> }
         { this.state.gkey &&
-          <BaseLayer name={t('Mapa de satélite de Google')} checked={!this.props.gray}>
+          <BaseLayer name={t('Mapa de satélite de Google')} checked={this.props.satellite}>
             <GoogleLayer googlekey={this.state.gkey} maptype="SATELLITE" />
           </BaseLayer> }
       </LayersControl>
@@ -66,11 +66,16 @@ class DefMapLayers extends Component {
 
 DefMapLayers.propTypes = {
   t: PropTypes.func.isRequired,
-  gray: PropTypes.bool
+  gray: PropTypes.bool,
+  osmcolor: PropTypes.bool,
+  satellite: PropTypes.bool
+
 };
 
 DefMapLayers.defaultProps = {
-  gray: true
+  gray: false,
+  osmcolor: false,
+  satellite: false
 };
 
 export default translate([], { wait: true })(DefMapLayers);

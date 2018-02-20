@@ -129,7 +129,7 @@ class SubscriptionsMap extends React.Component {
              wakeMessageTouch={this.props.t('Pulsa para activar')}
              sleepOpacity={0.6}
          >
-           <DefMapLayers />
+           <DefMapLayers gray />
            <Control position="topright" >
              <ButtonGroup>
                <CenterInMyPosition onClick={viewport => this.centerOnUserLocation(viewport)} onlyIcon {... this.props} />

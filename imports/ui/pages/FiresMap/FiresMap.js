@@ -288,7 +288,7 @@ class FiresMap extends React.Component {
                    falsePositives={false}
                />
              </Fragment> }
-             <DefMapLayers />
+             <DefMapLayers gray />
              <Control position="topright" >
                <ButtonGroup>
                  <CenterInMyPosition onClick={viewport => this.centerOnUserLocation(viewport)} onlyIcon {... this.props} />
