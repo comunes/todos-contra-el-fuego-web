@@ -8,6 +8,8 @@ function makeid(size) {
   return text;
 }
 
+export const randomText = n => makeid(n);
+
 export const randomUsername = () => makeid(7);
 
 export const randomPassword = () => randomUsername();

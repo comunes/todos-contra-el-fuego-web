@@ -9,7 +9,6 @@ Feature: Test all secundary pages
       | activeFires | Active Fires     |
     Then I check that all pages works properly
 
-  @watch
   Scenario: Check that all secondary pages work well
     Given a list of page urls and contents
       | login                  | Login                   | true  |
