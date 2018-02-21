@@ -12,7 +12,7 @@ Meteor.methods({
     check(feedback, String);
     const appName = i18n.t('AppName');
     sendEmail({
-      to: 'info@comunes.org',
+      to: 'fires@comunes.org',
       from: `${appName} <noreply@comunes.org>`,
       subject: `Feedback de ${email}!`,
       sendAt: new Date(),
