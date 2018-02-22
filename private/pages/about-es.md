@@ -11,7 +11,7 @@ Estos fuegos intencionados son comunes en España, de donde surge esta iniciativ
 
 Los incendiarios son más conscientes que nadie de este colapso y lo utilizan para que sus fuegos sean más efectivos. Como los avisos de fuegos no se comunican a las personas dispuestas a actuar o en peligro, la indefensión es total.
 
-**En la orografía quebrada de nuestra zona, un fuego te gana la espalda y no te enteras. Así que la detección tempranay pública de fuegos es crucial, más cuando tenemos pocos medios para combatirlos.**
+**En la orografía quebrada de nuestra zona, un fuego te gana la espalda y no te enteras. Así que la detección temprana y pública de fuegos es crucial, más cuando tenemos pocos medios para combatirlos.**
 
 Imaginamos que existen herramientas digitales de este tipo que gestionan los servicios de emergencia, pero no son públicos, por lo menos no aquí. Por eso nos animamos a desarrollar estas herramientas.
 
@@ -21,6 +21,8 @@ También mantenemos un archivo documental de los fuegos en el que los afectados 
 
 En un momento climático tan difícil, en el que lo último que tenemos que hacer es emitir más CO2, creemos que hay que tomar más medidas legales antes de llegar a este punto en el que ciertas personas se lucran de los incendios y otras personas como nosotras tengamos que andar apagándolos.
 
-Puedes participar en esta iniciativa, desde ayudando a vigilar tu zona, difundiendo esta iniciativa entre tus contactos, ayudando a traducir estas herramientas a tu idioma, aportando ideas o desarrollándolas, y/o ayudando a costear los gastos de [nuestros servidores](https://comunes.org/donate). Puedes contactarnos si tienes más dudas en [fuegos@comunes.org](mailto:fuegos@comunes.org).
+**También nos preguntan, porqué desarrollamos algo así si no nos enriquece [sic]. Quizás ese es exactamente el problema, que lo que enriquece a algunos es quemar lo que es de tod@s. ¿Y quien cuida lo que es de tod@s?**
+
+Puedes participar en esta iniciativa, desde ayudando a vigilar tu zona, difundiendo esta iniciativa entre tus contactos, [ayudando a traducir](https://translate.comunes.org/projects/todos-contra-el-fuego/) estas herramientas a tu idioma, aportando ideas o desarrollándolas, y/o ayudando a costear los gastos de [nuestros servidores](https://comunes.org/donate). Puedes contactarnos si tienes más dudas en [fuegos@comunes.org](mailto:fuegos@comunes.org).
 
 Gracias,

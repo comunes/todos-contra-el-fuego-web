@@ -21,6 +21,8 @@ We also maintain an archive as documentation of the fires. There, those affected
 
 In such a difficult climate, in which the last thing we have to do is emit more CO2, we believe that we must take more legal measures before reaching this point where certain people profit from fires and other people like us, we have to shut them down.
 
-You can participate in this initiative, from helping to monitor your area, spreanding the word about this initiative among your contacts, helping to translate these tools into your language, contributing ideas or developing them, and/or helping to pay for the [expenses of our servers](https://comunes.org/donate). You can contact us if you have more questions at [fires@comunes.org](mailto:fires@comunes.org).
+**They also ask us, why do we develop something like this if it does not enrich us [sic]. Maybe that's exactly the problem, that what enriches some is to burn what belongs to everyone. And who cares what is of everyone?**
+
+You can participate in this initiative, from helping to monitor your area, spreanding the word about this initiative among your contacts, [helping to translate](https://translate.comunes.org/projects/todos-contra-el-fuego/) these tools into your language, contributing ideas or developing them, and/or helping to pay for the [expenses of our servers](https://comunes.org/donate). You can contact us if you have more questions at [fires@comunes.org](mailto:fires@comunes.org).
 
 Thank you,
