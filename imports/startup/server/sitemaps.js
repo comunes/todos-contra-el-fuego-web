@@ -16,7 +16,7 @@ sitemaps.add('/sitemap.xml', () => {
   out.push({ page: '/terms', lastmod: today });
   out.push({ page: '/license', lastmod: today });
   out.push({ page: '/privacy', lastmod: today });
-
+  out.push({ page: '/about', lastmod: today });
 
   // When user has public page
   /*  const users = Meteor.users.find().fetch();

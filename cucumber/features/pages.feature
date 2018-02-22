@@ -7,6 +7,7 @@ Feature: Test all secundary pages
       | credits     | Credits          |
       | privacy     | Privacy Policy   |
       | activeFires | Active Fires     |
+      | about       | About            |
     Then I check that all pages works properly
 
   Scenario: Check that all secondary pages work well

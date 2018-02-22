@@ -208,5 +208,13 @@
   "Feedback recibido, gracias...":
   "Feedback received, thanks...",
   "Parece que este fuego no es un fuego forestal.":
-  "It seems that this is not a forest fire."
+  "It seems that this is not a forest fire.",
+  "Sobre nosotr@s":
+  "About us",
+  "Nosotr@s":
+  "About us",
+  "Sobre '{{appName}}'":
+  "About '{{appName}}'",
+  "¿Vecindarios vigilando y combatiendo fuegos? ¿de qué va todo esto?":
+  "Neighborhoods monitoring and fighting fires? What is all this about?"
 }

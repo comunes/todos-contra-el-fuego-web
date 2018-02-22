@@ -2,7 +2,7 @@
 @import './colors';
 
 a, a:hover  {
-  color: $todos-palette2;
+  color: $todos-palette1a;
 }
 
 .bg-dark {
@@ -49,4 +49,22 @@ div.leaflet-pane.leaflet-popup-pane > div > div.leaflet-popup-content-wrapper > 
 div.leaflet-pane.leaflet-popup-pane > div > div.leaflet-popup-content-wrapper > div > p > a:hover,
 div.leaflet-pane.leaflet-popup-pane > div > div.leaflet-popup-content-wrapper > div > p > a {
 //   color: $todos-palette2;
+}
+
+.bg-image-about-full {
+  background: no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  background-image: url('/photos/about-1.jpg');
+  height: 600px;
+  margin: 0px -350px 20px -350px;
+}
+
+@include breakpoint(mobile) {
+ .bg-image-about-full {
+   background-image: url('/photos/about-1-peq.jpg');
+   /* height: 400px; other photo */
+  }
 }

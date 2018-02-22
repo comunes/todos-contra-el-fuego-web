@@ -63,7 +63,10 @@ body {
 }
 
 @include breakpoint(tablet) {
-  .Footer ul li:first-child, .Footer ul li:nth-child(2) {
+  .Footer ul li:first-child,
+  .Footer ul li:nth-child(2),
+  .Footer ul li:nth-child(3),
+  .Footer ul li:nth-child(4){
     margin-right: 15px;
   }
 }
@@ -85,7 +88,8 @@ body {
   }
 
   .Footer ul li:first-child,
-  .Footer ul li:nth-child(2) {
+  .Footer ul li:nth-child(2),
+  .Footer ul li:nth-child(3) {
     margin-right: 7px;
   }
 }

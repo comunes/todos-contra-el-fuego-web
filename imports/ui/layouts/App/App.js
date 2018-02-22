@@ -42,6 +42,7 @@ import FiresMap from '../../pages/FiresMap/FiresMap';
 import Fires from '../../pages/Fires/Fires';
 import Sandbox from '../../pages/Sandbox/Sandbox';
 import Terms from '../../pages/Terms/Terms';
+import About from '../../pages/About/About';
 import Privacy from '../../pages/Privacy/Privacy';
 import License from '../../pages/License/License';
 import Credits from '../../pages/Credits/Credits';
@@ -133,6 +134,7 @@ const App = props => (
                 <Route name="privacy" path="/privacy" component={Privacy} />
                 <Route name="license" path="/license" component={License} />
                 <Route name="credits" path="/credits" component={Credits} />
+                <Route name="about" path="/about" component={About} />
 
                 <Route component={NotFound} />
               </Switch>

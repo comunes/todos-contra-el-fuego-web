@@ -24,9 +24,15 @@ const Footer = (props) => {
 
         <ul className="pull-right">
           <li>
+            <Link id={testId('about')} to="/about">
+              <span className="d-none d-lg-inline">{t('Sobre nosotr@s')}</span>
+              <span className="d-lg-none">{t('Nosotr@s')}</span>
+            </Link>
+          </li>
+          <li>
             <Link id={testId('tos')} to="/terms">
               <span className="d-none d-lg-inline">{t('Términos de Servicio')}</span>
-              <span className="d-lg-none">{t('Términos')}</span>
+              <span className="d-lg-none" />
             </Link>
           </li>
           <li>
