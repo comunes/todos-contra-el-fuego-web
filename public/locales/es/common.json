@@ -303,5 +303,6 @@
   "Sobre '{{appName}}'":
   "Sobre '{{appName}}'",
   "¿Vecindarios vigilando y combatiendo fuegos? ¿de qué va todo esto?":
-  "¿Vecindarios vigilando y combatiendo fuegos? ¿de qué va todo esto?"
+  "¿Vecindarios vigilando y combatiendo fuegos? ¿de qué va todo esto?",
+  "noActiveNeigFireInMap": "No hay fuegos notificados recientemente por nuestros usuarios/as en esta zona."
 }
