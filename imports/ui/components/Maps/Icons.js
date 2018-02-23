@@ -12,6 +12,24 @@ export const fireIcon = new Leaflet.Icon({
    * popupAnchor:  [-3, -76]// point from which the popup should open relative to the iconAnchor */
 });
 
+export const fireIconL = new Leaflet.Icon({
+  iconUrl: '/fire-marker-l.png',
+  iconSize: [16, 24],
+  iconAnchor: [8, 26]
+});
+
+export const fireIconM = new Leaflet.Icon({
+  iconUrl: '/fire-marker-m.png',
+  iconSize: [12, 17],
+  iconAnchor: [6, 19]
+});
+
+export const fireIconS = new Leaflet.Icon({
+  iconUrl: '/fire-marker-s.png',
+  iconSize: [8, 12],
+  iconAnchor: [4, 14]
+});
+
 export const industryIcon = new Leaflet.Icon({
   iconUrl: '/industry-marker.png',
   iconSize: [32, 37],

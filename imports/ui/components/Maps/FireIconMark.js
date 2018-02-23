@@ -2,7 +2,7 @@
 import React, { Component, Fragment } from 'react';
 import { CircleMarker, Marker, Tooltip } from 'react-leaflet';
 import PropTypes from 'prop-types';
-import { fireIcon, nFireIcon, industryIcon } from '/imports/ui/components/Maps/Icons';
+import { fireIconS, fireIconM, fireIconL, nFireIcon, industryIcon } from '/imports/ui/components/Maps/Icons';
 import { translate } from 'react-i18next';
 import FirePopup from './FirePopup';
 
@@ -18,10 +18,20 @@ class FireIconMark extends Component {
     this.props.history.push(`/fire/${this.props.nasa ? 'active' : 'alert'}/${this.props.id}`);
   }
 
+  // Some docs:
+  // https://earthdata.nasa.gov/what-is-new-collection-6-modis-active-fire-data
+  // https://cdn.earthdata.nasa.gov/conduit/upload/3865/MODIS_C6_Fire_User_Guide_A.pdf
+  getIcon(scan) {
+    if (scan <= 1) return fireIconS;
+    if (scan <= 2) return fireIconM;
+    return fireIconL;
+  }
+
   render() {
     const {
       lat,
       lon,
+      scan,
       nasa,
       id,
       history,
@@ -32,7 +42,7 @@ class FireIconMark extends Component {
     return (
       <div>
         { !falsePositives &&
-          <Marker position={[lat, lon]} icon={nasa ? fireIcon : nFireIcon} onClick={this.onClick} >
+          <Marker position={[lat, lon]} icon={nasa ? this.getIcon(scan) : nFireIcon} onClick={this.onClick} >
             <FirePopup t={t} history={history} id={id} nasa={nasa} lat={lat} lon={lon} when={when} />
           </Marker> }
         { falsePositives &&
@@ -54,6 +64,7 @@ FireIconMark.propTypes = {
   // https://github.com/PaulLeCam/react-leaflet/tree/master/src/propTypes
   lat: PropTypes.number.isRequired,
   lon: PropTypes.number.isRequired,
+  scan: PropTypes.number,
   nasa: PropTypes.bool,
   falsePositives: PropTypes.bool.isRequired,
   id: PropTypes.object.isRequired,
