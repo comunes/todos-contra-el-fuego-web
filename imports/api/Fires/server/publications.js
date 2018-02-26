@@ -9,7 +9,10 @@ import NodeGeocoder from 'node-geocoder';
 import { gmapServerKey } from '/imports/startup/server/IPGeocoder';
 import ActiveFiresCollection from '/imports/api/ActiveFires/ActiveFires';
 import FireAlertsCollection from '/imports/api/FireAlerts/FireAlerts';
-import { whichAreFalsePositives } from '/imports/api/FalsePositives/server/publications';
+import { whichAreFalsePositives, firesUnion } from '/imports/api/FalsePositives/server/publications';
+import FalsePositives from '/imports/api/FalsePositives/FalsePositives';
+import Industries from '/imports/api/Industries/Industries';
+
 import FiresCollection from '../Fires';
 
 function findFire(unsealed) {
@@ -115,8 +118,10 @@ Meteor.publish('fireFromId', function fireFromId(_id) {
     const fire = FiresCollection.find(new Meteor.Collection.ObjectID(_id));
     if (fire.count() !== 0) {
       // console.info(`Archive fire found: ${_id}`);
-      const falsePos = whichAreFalsePositives(fire);
-      return [fire, falsePos];
+      const union = firesUnion(fire);
+      const falsePos = whichAreFalsePositives(FalsePositives, union);
+      const industries = whichAreFalsePositives(Industries, union);
+      return [fire, falsePos, industries];
     }
     console.info(`Fire not found: ${_id}`);
     // Not found in active fires!

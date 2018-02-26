@@ -21,6 +21,7 @@ import { dateLongFormat } from '/imports/api/Common/dates';
 import '/imports/startup/client/comments';
 import FalsePositiveTypes from '/imports/api/FalsePositives/FalsePositiveTypes';
 import FalsePositivesCollection, { falsePositivesRemap } from '/imports/api/FalsePositives/FalsePositives';
+import IndustriesCollection, { industriesRemap } from '/imports/api/Industries/Industries';
 import ShareIt from '/imports/ui/components/ShareIt/ShareIt';
 import './Fires.scss';
 
@@ -76,6 +77,7 @@ class Fire extends React.Component {
       notfound, loading, fire, t
     } = this.props;
     if (Meteor.isDevelopment) console.log(`False positives total: ${this.props.falsePositives.length}`);
+    if (Meteor.isDevelopment) console.log(`Industries total: ${this.props.industries.length}`);
     /* console.log(`loading fire: ${loading}`);
      * console.log(`Not found fire: ${notfound}`); */
     if (fire && fire.when) {
@@ -109,7 +111,7 @@ class Fire extends React.Component {
                    fillColor="red"
                    fillOpacity={0.0}
                    interactive={false}
-                   radius={fire.scan ? fire.scan * 1000 : 300}
+                   radius={fire.scan ? fire.scan * 500 : 300}
                    ref={(circle) => { this.circle = circle; this.handleLeafletLoad(circle); }}
                />
              </Fragment>
@@ -121,6 +123,17 @@ class Fire extends React.Component {
                  useMarkers
                  nasa={false}
                  falsePositives
+                 industries={false}
+             />
+             <FireList
+                 t={t}
+                 history={this.props.history}
+                 fires={this.props.industries}
+                 scale
+                 useMarkers
+                 nasa={false}
+                 falsePositives={false}
+                 industries
              />
              <DefMapLayers satellite />
            </Map>
@@ -136,7 +149,7 @@ class Fire extends React.Component {
 
              {(fire.type !== 'vecinal') &&
               <Fragment>
-                { this.props.falsePositives.length > 0 &&
+                { (this.props.falsePositives.length > 0 || this.props.industries.length > 0) &&
                   <Row>
                     <Col>
                       <Alert bsStyle="success"><Trans>Parece que este fuego no es un fuego forestal.</Trans></Alert>
@@ -196,6 +209,7 @@ Fire.propTypes = {
   loading: PropTypes.bool.isRequired,
   notfound: PropTypes.bool.isRequired,
   falsePositives: PropTypes.arrayOf(PropTypes.object).isRequired,
+  industries: PropTypes.arrayOf(PropTypes.object).isRequired,
   fromHash: PropTypes.bool.isRequired,
   active: PropTypes.bool.isRequired,
   alert: PropTypes.bool.isRequired,
@@ -236,12 +250,14 @@ const FireContainer = withTracker(({ match }) => {
   /* console.log(`loading fire: ${loading}`);
    * console.log(`Not found fire: ${notfound}`); */
   const falsePositives = FalsePositivesCollection.find().fetch().map(falsePositivesRemap);
+  const industries = IndustriesCollection.find().fetch().map(industriesRemap);
   return {
     loading,
     active,
     alert,
     fromHash,
     falsePositives,
+    industries,
     fire: FiresCollection.findOne(),
     notfound,
     when: subscription.ready() && FiresCollection.findOne() ? FiresCollection.findOne().when : null

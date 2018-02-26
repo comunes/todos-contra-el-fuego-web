@@ -217,5 +217,7 @@
   "About '{{appName}}'",
   "¿Vecindarios vigilando y combatiendo fuegos? ¿de qué va todo esto?":
   "Neighborhoods monitoring and fighting fires? What is all this about?",
-  "noActiveNeigFireInMap": "There are no fires recently reported by our users in this area."
+  "noActiveNeigFireInMap": "There are no fires recently reported by our users in this area.",
+  "Es una industria (fuente: registro oficial)":
+  "It's an industry (source: oficial register)"
 }

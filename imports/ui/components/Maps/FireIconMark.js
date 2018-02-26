@@ -2,7 +2,8 @@
 import React, { Component, Fragment } from 'react';
 import { CircleMarker, Marker, Tooltip } from 'react-leaflet';
 import PropTypes from 'prop-types';
-import { fireIconS, fireIconM, fireIconL, nFireIcon, industryIcon } from '/imports/ui/components/Maps/Icons';
+import { fireIconS, fireIconM, fireIconL, nFireIcon, industryIcon, regIndustryIcon } from '/imports/ui/components/Maps/Icons';
+import { onMarkClick } from './MarkListeners';
 import { translate } from 'react-i18next';
 import FirePopup from './FirePopup';
 
@@ -14,8 +15,8 @@ class FireIconMark extends Component {
   }
 
   onClick() {
-    // console.log('onClick fired');
-    this.props.history.push(`/fire/${this.props.nasa ? 'active' : 'alert'}/${this.props.id}`);
+    const { history, nasa, id } = this.props;
+    onMarkClick(history, nasa, id);
   }
 
   // Some docs:
@@ -36,22 +37,34 @@ class FireIconMark extends Component {
       id,
       history,
       falsePositives,
+      industries,
       when,
       t
     } = this.props;
     return (
       <div>
-        { !falsePositives &&
+        { !falsePositives && !industries &&
           <Marker position={[lat, lon]} icon={nasa ? this.getIcon(scan) : nFireIcon} onClick={this.onClick} >
             <FirePopup t={t} history={history} id={id} nasa={nasa} lat={lat} lon={lon} when={when} />
           </Marker> }
-        { falsePositives &&
+        { industries && <Marker position={[lat, lon]} icon={regIndustryIcon}>
+          <Tooltip><Fragment>{t('Es una industria (fuente: registro oficial)')}</Fragment></Tooltip>
+                        </Marker> }
+        { /* disabled */ industries && false && <CircleMarker
+          center={[lat, lon]}
+          color="violet"
+          stroke={false}
+          fillOpacity="1"
+          fill
+          radius={1}
+        />}
+        { falsePositives && !industries &&
         <Marker position={[lat, lon]} icon={industryIcon} onClick={this.onClick}>
           <Tooltip><Fragment>{t('Es una industria')}</Fragment></Tooltip>
           { /* disabled because was a past fire (and can be marked multiple times) */ false && <FirePopup t={t} history={history} id={id} lat={lat} lon={lon} /> }
         </Marker>
           }
-        { !falsePositives &&
+        { !falsePositives && !industries &&
         <CircleMarker center={[lat, lon]} color={nasa ? 'red' : '#D35400'} stroke={false} fillOpacity="1" fill radius={1} onClick={this.onClick}>
           <FirePopup t={t} history={history} id={id} nasa={nasa} lat={lat} lon={lon} when={when} />
         </CircleMarker> }
@@ -67,6 +80,7 @@ FireIconMark.propTypes = {
   scan: PropTypes.number,
   nasa: PropTypes.bool,
   falsePositives: PropTypes.bool.isRequired,
+  industries: PropTypes.bool.isRequired,
   id: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   when: PropTypes.instanceOf(Date),

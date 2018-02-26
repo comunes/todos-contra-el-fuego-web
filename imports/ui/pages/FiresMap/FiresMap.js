@@ -27,6 +27,7 @@ import DefMapLayers from '/imports/ui/components/Maps/DefMapLayers';
 import FromNow from '/imports/ui/components/FromNow/FromNow';
 import ActiveFiresCollection from '/imports/api/ActiveFires/ActiveFires';
 import FireAlertsCollection from '/imports/api/FireAlerts/FireAlerts';
+import IndustriesCollection, { industriesRemap } from '/imports/api/Industries/Industries';
 import FalsePositivesCollection, { falsePositivesRemap } from '/imports/api/FalsePositives/FalsePositives';
 import SiteSettings from '/imports/api/SiteSettings/SiteSettings';
 import { isNotHomeAndMobile, isChrome } from '/imports/ui/components/Utils/isMobile';
@@ -187,6 +188,8 @@ class FiresMap extends React.Component {
 
     if (Meteor.isDevelopment) console.log(`False positives total: ${this.props.falsePositives.length}`);
 
+    if (Meteor.isDevelopment) console.log(`Industries total: ${this.props.industries.length}`);
+
     return (
       /* Large number of markers:
          https://stackoverflow.com/questions/43015854/large-dataset-of-markers-or-dots-in-leaflet/43019740#43019740 */
@@ -270,6 +273,17 @@ class FiresMap extends React.Component {
                    useMarkers={this.state.useMarkers}
                    nasa={false}
                    falsePositives
+                   industries={false}
+               />
+               <FireList
+                   t={t}
+                   history={this.props.history}
+                   fires={this.props.industries}
+                   scale={this.state.viewport.zoom >= MAXZOOM}
+                   useMarkers={this.state.useMarkers}
+                   nasa={false}
+                   falsePositives={false}
+                   industries
                />
                <FireList
                    t={t}
@@ -279,6 +293,7 @@ class FiresMap extends React.Component {
                    useMarkers={this.state.useMarkers}
                    nasa
                    falsePositives={false}
+                   industries={false}
                />
                <FireList
                    t={t}
@@ -288,6 +303,7 @@ class FiresMap extends React.Component {
                    useMarkers={this.state.useMarkers}
                    nasa={false}
                    falsePositives={false}
+                   industries={false}
                />
              </Fragment> }
              <DefMapLayers gray />
@@ -318,6 +334,7 @@ FiresMap.propTypes = {
   activefires: PropTypes.arrayOf(PropTypes.object).isRequired,
   firealerts: PropTypes.arrayOf(PropTypes.object).isRequired,
   falsePositives: PropTypes.arrayOf(PropTypes.object).isRequired,
+  industries: PropTypes.arrayOf(PropTypes.object).isRequired,
   lastCheck: PropTypes.instanceOf(Date),
   activefirestotal: PropTypes.number.isRequired,
   center: PropTypes.arrayOf(PropTypes.number),
@@ -331,6 +348,10 @@ FiresMap.propTypes = {
 let geoInit = true;
 
 export default translate([], { wait: true })(withTracker(() => {
+  // const firesType = match.params.type;
+  // const withIndustries = firesType === 'with-industries';
+  // console.log(`With industries: ${withIndustries}`);
+
   let subscription;
   let alertSubscription;
 
@@ -339,6 +360,7 @@ export default translate([], { wait: true })(withTracker(() => {
   const marksStored = store.get('firesmap_marks');
   const showUnionStored = store.get('firesmap_showunion');
   zoom.set(zoomStored || 8);
+  center.set(centerStored || [0, 0]);
   if (typeof marksStored === 'boolean') {
     marks.set(marksStored);
   }
@@ -346,7 +368,7 @@ export default translate([], { wait: true })(withTracker(() => {
     showUnion.set(showUnionStored);
   }
   Meteor.autorun(() => {
-    if ((centerStored || geolocation.get()) && geoInit) {
+    if ((centerStored !== [0, 0] || geolocation.get()) && geoInit) {
       center.set(centerStored || geolocation.get());
       // console.log(`Geolocation ${geolocation.get()}`);
       geoInit = false;
@@ -367,16 +389,28 @@ export default translate([], { wait: true })(withTracker(() => {
         mapSize.get()[1].lng,
         mapSize.get()[1].lat
       );
+      /* if (withIndustries) {
+        Meteor.subscribe(
+          'industriesMyloc',
+          mapSize.get()[0].lng,
+          mapSize.get()[0].lat,
+          mapSize.get()[1].lng,
+          mapSize.get()[1].lat
+        );
+      } */
     }
   });
 
   Meteor.subscribe('activefirestotal');
+
   const settingsSubs = Meteor.subscribe('settings');
   const lastCheck = SiteSettings.findOne({ name: 'last-fire-check' });
   const userSubs = SiteSettings.findOne({ name: 'subs-public-union' });
   const userSubsBounds = SiteSettings.findOne({ name: 'subs-public-union-bounds' });
   const fireAlerts = FireAlertsCollection.find().fetch();
   const falsePositives = FalsePositivesCollection.find().fetch().map(falsePositivesRemap);
+  const industries = IndustriesCollection.find().fetch().map(industriesRemap);
+
   return {
     loading: !subscription ? true : !(subscription.ready() && settingsSubs.ready() && alertSubscription.ready()),
     userSubs: userSubs ? userSubs.value : null,
@@ -387,6 +421,7 @@ export default translate([], { wait: true })(withTracker(() => {
     activefirestotal: Counter.get('countActiveFires') + fireAlerts.length,
     firealerts: fireAlerts,
     falsePositives,
+    industries,
     lastCheck: lastCheck ? lastCheck.value : null,
     center: center.get(),
     marks: marks.get(),

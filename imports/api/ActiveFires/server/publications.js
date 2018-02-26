@@ -5,7 +5,9 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { NumberBetween } from '/imports/modules/server/other-checks';
-import { whichAreFalsePositives } from '/imports/api/FalsePositives/server/publications';
+import { whichAreFalsePositives, firesUnion } from '/imports/api/FalsePositives/server/publications';
+import FalsePositives from '/imports/api/FalsePositives/FalsePositives';
+import Industries from '/imports/api/Industries/Industries';
 import ActiveFires from '../ActiveFires';
 
 const counter = new Counter('countActiveFires', ActiveFires.find({}));
@@ -37,8 +39,10 @@ const activefires = (northEastLng, northEastLat, southWestLng, southWestLat, wit
   // console.log(`Fires total: ${fires.count()}`);
 
   if (withMarks && fires.fetch().length > 0) {
-    const falsePos = whichAreFalsePositives(fires);
-    return [fires, falsePos];
+    const union = firesUnion(fires);
+    const falsePos = whichAreFalsePositives(FalsePositives, union);
+    const industries = whichAreFalsePositives(Industries, union);
+    return [fires, falsePos, industries];
   }
 
   return fires;

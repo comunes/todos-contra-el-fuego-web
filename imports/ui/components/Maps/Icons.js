@@ -36,6 +36,12 @@ export const industryIcon = new Leaflet.Icon({
   iconAnchor: [16, 20]
 });
 
+export const regIndustryIcon = new Leaflet.Icon({
+  iconUrl: '/industry-marker-reg.png',
+  iconSize: [32, 37],
+  iconAnchor: [16, 20]
+});
+
 export const nFireIcon = new Leaflet.Icon({
   iconUrl: '/n-fire-marker.png',
   iconSize: [16, 24], // size of the icon

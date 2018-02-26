@@ -7,6 +7,8 @@ import UserSubsToFiresCollection from '/imports/api/Subscriptions/Subscriptions'
 import FireAlertsCollection from '/imports/api/FireAlerts/FireAlerts';
 import SiteSettings from '/imports/api/SiteSettings/SiteSettings';
 import FalsePositives from '/imports/api/FalsePositives/FalsePositives';
+import Industries from '/imports/api/Industries/Industries';
+import IndustryRegistries from '/imports/api/Industries/IndustryRegistries';
 
 Meteor.startup(() => {
   // https://github.com/percolatestudio/meteor-migrations
@@ -123,6 +125,22 @@ Meteor.startup(() => {
       SiteSettings._ensureIndex({ isPublic: 1 });
       SiteSettings.find({ isPublic: null }).forEach((setting) => {
         SiteSettings.update({ _id: setting._id }, { $set: { isPublic: true } });
+      });
+    }
+  });
+
+  Migrations.add({
+    version: 9,
+    up: function siteSettingsAddIndex() {
+      Industries._ensureIndex({ registry: 1 });
+      Industries._ensureIndex({ geo: '2dsphere' });
+      // https://www.eea.europa.eu/data-and-maps/data/member-states-reporting-art-7-under-the-european-pollutant-release-and-transfer-register-e-prtr-regulation-16
+      IndustryRegistries.insert({
+        _id: '1', name: 'E-PRTR', agency: 'EEA', region: 'EU'
+      });
+      // https://www.epa.gov/enviro/epa-frs-facilities-state-single-file-csv-download
+      IndustryRegistries.insert({
+        _id: '2', name: 'FRS', agency: 'EPA', region: 'US'
       });
     }
   });

@@ -115,7 +115,8 @@ const App = props => (
                 <Authenticated exact path="/subscriptions/:_id/edit" component={EditSubscription} {...props} />
                 <Authenticated exact path="/profile" component={Profile} {...props} />
                 <Authenticated exact path="/status" component={Status} {...props} />
-                <Route path="/fires" component={FiresMap} {...props} />
+                {/* <Route path="/fires/:type(with-industries)" component={FiresMap} industries {...props} /> */}
+                <Route path="/fires" component={FiresMap} industries={false} {...props} />
                 <Route path="/zones" component={ZonesMap} {...props} />
                 <Route path="/fire/:type(active|archive|alert)/:id" component={Fires} {...props} />
                 <Route path="/fire/:id" component={Fires} {...props} />
