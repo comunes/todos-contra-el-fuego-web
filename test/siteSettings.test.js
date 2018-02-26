@@ -10,6 +10,7 @@ const setting = {
   name: 'site-test',
   value: 'Some value',
   description: 'Some description',
+  isPublic: true,
   type: 'string'
 };
 
@@ -19,6 +20,11 @@ describe('site settings store', () => {
   });
 
   it('should insert settings', () => {
+    // Remove previous test register
+    const alreadyInserted = SiteSettings.findOne({ name: 'site-test' });
+    if (alreadyInserted) {
+      SiteSettings.remove(alreadyInserted._id);
+    }
     const id = SiteSettings.insert(setting);
     SiteSettings.getSchema(setting.type).validate(setting);
 
