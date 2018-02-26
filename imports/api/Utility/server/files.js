@@ -1,15 +1,7 @@
 import fs from 'fs';
+import getFallbackLang from '/imports/startup/server/accounts/lang-fallback';
 
 const as = f => `assets/app/${f}`;
-
-export const getFallbackLang = (lang) => {
-  if (lang === 'ast' || lang === 'gl' || lang === 'eu' || lang === 'ca' ||
-      (lang && lang.match(/es_.*/)) ||
-      (lang && lang.match(/es-.*/))) {
-    return 'es';
-  }
-  return 'en';
-};
 
 export const getFileNameOfLang = (dir, fileName, ext, lang) => {
   const base = `${dir}/${fileName}`;

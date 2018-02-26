@@ -33,8 +33,4 @@ describe('get file of page', () => {
   it('lang es-PE retrieve es', async () => {
     chai.expect('pages/about-es.md').to.deep.equal(getFileNameOfLang('pages', 'about', 'md', 'es-PE'));
   });
-
-  it('lang es_PE retrieve es', async () => {
-    chai.expect('pages/about-es.md').to.deep.equal(getFileNameOfLang('pages', 'about', 'md', 'es_PE'));
-  });
 });
