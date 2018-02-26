@@ -6,6 +6,10 @@ import LocationSchema from '/imports/api/Utility/LocationSchema.js';
 
 const Industries = new Mongo.Collection('industries');
 
+// For now using:
+// https://www.eea.europa.eu/data-and-maps/data/member-states-reporting-art-7-under-the-european-pollutant-release-and-transfer-register-e-prtr-regulation-16
+// https://www.epa.gov/enviro/epa-frs-facilities-state-single-file-csv-download
+
 Industries.allow({
   insert: () => false,
   update: () => false,
