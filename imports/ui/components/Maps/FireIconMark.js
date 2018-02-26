@@ -60,7 +60,7 @@ class FireIconMark extends Component {
         />}
         { falsePositives && !industries &&
         <Marker position={[lat, lon]} icon={industryIcon} onClick={this.onClick}>
-          <Tooltip><Fragment>{t('Es una industria')}</Fragment></Tooltip>
+          <Tooltip><Fragment>{t('Es una industria (fuente: nuestros usuarios/as)')}</Fragment></Tooltip>
           { /* disabled because was a past fire (and can be marked multiple times) */ false && <FirePopup t={t} history={history} id={id} lat={lat} lon={lon} /> }
         </Marker>
           }
