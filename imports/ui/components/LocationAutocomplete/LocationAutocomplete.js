@@ -1,11 +1,11 @@
 /* eslint-disable react/jsx-indent-props */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Trans, translate } from 'react-i18next';
+import { translate } from 'react-i18next';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import { FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap';
 
-class SubsAutocomplete extends React.Component {
+class LocationAutocomplete extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -58,9 +58,7 @@ class SubsAutocomplete extends React.Component {
     return (
       <form>
         <FormGroup>
-          <ControlLabel>
-            {t(label)}
-          </ControlLabel>
+          { label.length > 0 && <ControlLabel>{t(label)}</ControlLabel> }
           <PlacesAutocomplete
               styles={myStyles}
               autocompleteItem={AutocompleteItem}
@@ -89,14 +87,14 @@ class SubsAutocomplete extends React.Component {
                   autoFocus: this.props.focusInput
                 }}
           />
-          <HelpBlock>{t(helpText)}</HelpBlock>
+          { helpText.length > 0 && <HelpBlock>{t(helpText)}</HelpBlock> }
         </FormGroup>
       </form>
     );
   }
 }
 
-SubsAutocomplete.propTypes = {
+LocationAutocomplete.propTypes = {
   focusInput: PropTypes.bool.isRequired,
   t: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
@@ -105,4 +103,4 @@ SubsAutocomplete.propTypes = {
   i18n: PropTypes.object.isRequired
 };
 
-export default translate([], { wait: true })(SubsAutocomplete);
+export default translate([], { wait: true })(LocationAutocomplete);

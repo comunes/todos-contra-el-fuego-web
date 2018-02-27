@@ -35,12 +35,15 @@ import { isNotHomeAndMobile, isChrome } from '/imports/ui/components/Utils/isMob
 import { isHome } from '/imports/ui/components/Utils/location';
 import ShareIt from '/imports/ui/components/ShareIt/ShareIt';
 import FullScreenMap from '/imports/ui/components/Maps/FullScreenMap';
+import LocationAutocomplete from '/imports/ui/components/LocationAutocomplete/LocationAutocomplete';
+import Gkeys from '/imports/startup/client/Gkeys';
 
 import './FiresMap.scss';
 
 const MAXZOOM = 6;
 const MAXZOOMREACTIVE = 6;
-const zoom = new ReactiveVar(8);
+const DEFZOOM = 8;
+const zoom = new ReactiveVar(DEFZOOM);
 const center = new ReactiveVar([0, 0]);
 const mapSize = new ReactiveVar();
 const marks = new ReactiveVar(false);
@@ -55,7 +58,7 @@ class FiresMap extends React.Component {
         center: props.center,
         zoom: props.zoom
       },
-      // init: true,
+      init: false,
       useMarkers: props.marks,
       scaleAdded: false,
       moving: false,
@@ -73,6 +76,10 @@ class FiresMap extends React.Component {
   }
 
   componentDidMount() {
+    const self = this;
+    Gkeys.load(() => {
+      self.setState({ init: true });
+    });
   }
 
   /* shouldComponentUpdate(nextProps, nextState) {
@@ -106,6 +113,10 @@ class FiresMap extends React.Component {
   onViewportChanged(viewport) {
     this.debounceView.cancel();
     this.debounceView(viewport);
+  }
+
+  onAutocompleteChange(value) {
+    this.handleViewportChange({ center: [value.lat, value.lng], zoom: DEFZOOM - 1 });
   }
 
   getMap() {
@@ -192,6 +203,10 @@ class FiresMap extends React.Component {
 
     if (Meteor.isDevelopment) console.log(`Industries total: ${this.props.industries.length}`);
 
+    if (!this.state.init) {
+      return <div />;
+    }
+
     return (
       /* Large number of markers:
          https://stackoverflow.com/questions/43015854/large-dataset-of-markers-or-dots-in-leaflet/43019740#43019740 */
@@ -220,6 +235,13 @@ class FiresMap extends React.Component {
              <Col xs={12} sm={6} md={6} lg={6}>
                {isNotHomeAndMobile &&
                 <Fragment>
+                  <LocationAutocomplete
+                      focusInput={false}
+                      label=""
+                      placeHolder="Escribe un lugar para centrar el mapa"
+                      helpText=""
+                      onChange={value => this.onAutocompleteChange(value)}
+                  />
                   <Checkbox inline={false} defaultChecked={this.state.showSubsUnion} onClick={e => this.setShowSubsUnion(e.target.checked)}>
                     <Trans className="mark-checkbox" parent="span">Resaltar en verde el área vigilada por nuestros usuarios/as</Trans>&nbsp;(*)
                   </Checkbox>
@@ -365,7 +387,7 @@ export default translate([], { wait: true })(withTracker(() => {
   const zoomStored = store.get('firesmap_zoom');
   const marksStored = store.get('firesmap_marks');
   const showUnionStored = store.get('firesmap_showunion');
-  zoom.set(zoomStored || 8);
+  zoom.set(zoomStored || DEFZOOM);
   center.set(centerStored || [0, 0]);
   if (typeof marksStored === 'boolean') {
     marks.set(marksStored);
@@ -396,13 +418,13 @@ export default translate([], { wait: true })(withTracker(() => {
         mapSize.get()[1].lat
       );
       /* if (withIndustries) {
-        Meteor.subscribe(
-          'industriesMyloc',
-          mapSize.get()[0].lng,
-          mapSize.get()[0].lat,
-          mapSize.get()[1].lng,
-          mapSize.get()[1].lat
-        );
+      Meteor.subscribe(
+        'industriesMyloc',
+        mapSize.get()[0].lng,
+        mapSize.get()[0].lat,
+        mapSize.get()[1].lng,
+        mapSize.get()[1].lat
+      );
       } */
     }
   });

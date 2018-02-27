@@ -223,5 +223,7 @@
   "Pantalla completa":
   "Fullscreen",
   "Salir de pantalla completa":
-  "Exit fullscreen mode"
+  "Exit fullscreen mode",
+  "Escribe un lugar para centrar el mapa":
+  "Write a place to center the map"
 }

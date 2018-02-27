@@ -7,8 +7,8 @@ import { translate } from 'react-i18next';
 import DistanceSlider from '/imports/ui/components/DistanceSlider/DistanceSlider';
 import SelectionMap, { action } from '/imports/ui/components/SelectionMap/SelectionMap';
 import Gkeys from '/imports/startup/client/Gkeys';
-import CenterInMyPosition from '/imports/ui/components/CenterInMyPosition/CenterInMyPosition.js';
-import SubsAutocomplete from './SubsAutocomplete';
+import CenterInMyPosition from '/imports/ui/components/CenterInMyPosition/CenterInMyPosition';
+import LocationAutocomplete from '/imports/ui/components/LocationAutocomplete/LocationAutocomplete';
 import { isNotHomeAndMobile } from '/imports/ui/components/Utils/isMobile';
 
 class FireSubscription extends React.Component {
@@ -76,7 +76,7 @@ class FireSubscription extends React.Component {
           {isNotHomeAndMobile &&
           <Col xs={12} sm={12} md={6} lg={6} >
             <div>
-              <SubsAutocomplete
+              <LocationAutocomplete
                   focusInput={this.props.focusInput}
                   label="Indícanos la posición de la zona a vigilar (por ej. tu pueblo, una calle, etc):"
                   placeHolder="Escribe aquí un lugar"
