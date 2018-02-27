@@ -6,9 +6,24 @@ import LocationSchema from '/imports/api/Utility/LocationSchema.js';
 
 const Industries = new Mongo.Collection('industries');
 
+// https://prtr.unece.org/prtr-global-map
 // For now using:
+
+// AUSTRALIA
+// https://data.gov.au/dataset/npi#
+//
+// EUROPE
 // https://www.eea.europa.eu/data-and-maps/data/member-states-reporting-art-7-under-the-european-pollutant-release-and-transfer-register-e-prtr-regulation-16
+//
+// CANADA
+// https://www.canada.ca/en/environment-climate-change/services/national-pollutant-release-inventory/tools-resources-data/access.html
+//
+// USA
 // https://www.epa.gov/enviro/epa-frs-facilities-state-single-file-csv-download
+
+// TODO:
+// http://www.nite.go.jp/
+// http://www.retc.cl/datos-retc/
 
 Industries.allow({
   insert: () => false,

@@ -145,6 +145,19 @@ Meteor.startup(() => {
     }
   });
 
+  Migrations.add({
+    version: 10,
+    up: function siteSettingsAddIndex() {
+      IndustryRegistries.insert({
+        _id: '3', name: 'NPRI', agency: 'GCODP', region: 'Canada'
+      });
+      IndustryRegistries.insert({
+        _id: '4', name: 'NPI', agency: 'DEE', region: 'Australia'
+      });
+    }
+  });
+
+
   // Set createdAt in users & subs
   Migrations.migrateTo('latest');
 
