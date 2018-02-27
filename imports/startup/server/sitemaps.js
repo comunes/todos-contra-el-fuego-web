@@ -27,7 +27,7 @@ sitemaps.add('/sitemap.xml', () => {
     });
      }); */
 
-  Fires.find().fetch().forEach((fire) => {
+  Fires.find({}, { limit: 100, sort: { createdAt: -1 } }).fetch().forEach((fire) => {
     // Search the last comment of tha fire
     const lastComment = Comments.getCollection().findOne({ referenceId: `fire-${fire._id}` }, { sort: { createdAt: -1 } });
     out.push({
