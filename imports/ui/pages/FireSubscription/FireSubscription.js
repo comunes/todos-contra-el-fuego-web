@@ -78,6 +78,9 @@ class FireSubscription extends React.Component {
             <div>
               <SubsAutocomplete
                   focusInput={this.props.focusInput}
+                  label="Indícanos la posición de la zona a vigilar (por ej. tu pueblo, una calle, etc):"
+                  placeHolder="Escribe aquí un lugar"
+                  helpText="También puedes seleccionar la zona en el mapa arrastrando el puntero naranja."
                   onChange={value => this.onAutocompleteChange(value)}
               />
             </div>

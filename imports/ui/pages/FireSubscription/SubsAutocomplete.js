@@ -20,12 +20,7 @@ class SubsAutocomplete extends React.Component {
     geocodeByAddress(address)
       .then(results => getLatLng(results[0]))
       .then(({ lat, lng }) => {
-        // console.log('Success Yay', { lat, lng })
-        // const newState = update(this.state, {$merge: {lat: lat, lng: lng}});
-        // console.log(newState);
-        // this.setState(newState);
         self.props.onChange({ lat, lng });
-        // console.log(this.state);
       })
       .catch((error) => {
         console.log(error);
@@ -56,11 +51,15 @@ class SubsAutocomplete extends React.Component {
         <small className="text-muted">{formattedSuggestion.secondaryText}</small>
       </div>);
 
+    const {
+      t, label, placeHolder, helpText
+    } = this.props;
+
     return (
       <form>
         <FormGroup>
           <ControlLabel>
-            <Trans parent="span">Indícanos la posición de la zona a vigilar (por ej. tu pueblo, una calle, etc):</Trans>
+            {t(label)}
           </ControlLabel>
           <PlacesAutocomplete
               styles={myStyles}
@@ -84,13 +83,13 @@ class SubsAutocomplete extends React.Component {
                 {
                   value: this.state.address,
                   onChange: address => this.onChange(address),
-                  placeholder: this.props.t('Escribe aquí un lugar'),
+                  placeholder: t(placeHolder),
                   onBlur: () => { /* console.log('Blur event!'); */ },
                   onFocus: () => { /* console.log('Focused!'); */ },
                   autoFocus: this.props.focusInput
                 }}
           />
-          <HelpBlock><Trans parent="span">También puedes seleccionar la zona en el mapa arrastrando el puntero naranja.</Trans></HelpBlock>
+          <HelpBlock>{t(helpText)}</HelpBlock>
         </FormGroup>
       </form>
     );
@@ -100,6 +99,9 @@ class SubsAutocomplete extends React.Component {
 SubsAutocomplete.propTypes = {
   focusInput: PropTypes.bool.isRequired,
   t: PropTypes.func.isRequired,
+  label: PropTypes.string.isRequired,
+  placeHolder: PropTypes.string.isRequired,
+  helpText: PropTypes.string.isRequired,
   i18n: PropTypes.object.isRequired
 };
 
