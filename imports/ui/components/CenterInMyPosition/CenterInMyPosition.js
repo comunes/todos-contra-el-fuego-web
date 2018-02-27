@@ -16,7 +16,6 @@ class CenterInMyPosition extends React.Component {
     // only with SSL:
     // https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition
 
-    console.log('Center');
     // https://stackoverflow.com/questions/31608579/somethings-wrong-with-my-meteor-geolocation-functions
     const userGeoLocation = new ReactiveVar(null);
     const self = this;
@@ -29,8 +28,6 @@ class CenterInMyPosition extends React.Component {
           zoom: 11
         };
         self.props.onClick(viewport);
-        // console.log(viewport);
-        // self.onViewportChanged(viewport);
         computation.stop();
       }
       // https://developer.mozilla.org/en-US/docs/Web/API/PositionError)
