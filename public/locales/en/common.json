@@ -227,5 +227,6 @@
   "Escribe un lugar para centrar el mapa":
   "Write a place to center the map",
   "geo-not-perms-error": "Upppps: it seems we do not have permission to know your location",
-  "geo-not-avail-error": "Upppps: it seems your location is not available"
+  "geo-not-avail-error": "Upppps: it seems your location is not available",
+  "geo-not-timeout-error": "Upppps: Your device is taking too long to know your location"
 }

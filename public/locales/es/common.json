@@ -314,5 +314,6 @@
   "Escribe un lugar para centrar el mapa":
   "Escribe un lugar para centrar el mapa",
   "geo-not-perms-error": "Upppps: parece que no tenemos permiso para conocer tu ubicación",
-  "geo-not-avail-error": "Upppps: parece tu ubicación no está disponible"
+  "geo-not-avail-error": "Upppps: parece tu ubicación no está disponible",
+  "geo-not-timeout-error": "Upppps: tu dispositivo está tardando demasiado en conocer tu ubicación"
 }

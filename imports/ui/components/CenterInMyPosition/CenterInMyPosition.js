@@ -37,6 +37,7 @@ class CenterInMyPosition extends React.Component {
         // window.alert(cod);
         if (cod === 1) Bert.alert(self.props.t('geo-not-perms-error'), 'danger');
         else if (cod === 2) Bert.alert(self.props.t('geo-not-avail-error'), 'danger');
+        else if (cod === 3) Bert.alert(self.props.t('geo-not-timeout-error'), 'danger');
         else Bert.alert(error.message, 'danger');
         computation.stop();
       }
