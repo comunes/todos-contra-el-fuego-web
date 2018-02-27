@@ -23,6 +23,7 @@ import FalsePositiveTypes from '/imports/api/FalsePositives/FalsePositiveTypes';
 import FalsePositivesCollection, { falsePositivesRemap } from '/imports/api/FalsePositives/FalsePositives';
 import IndustriesCollection, { industriesRemap } from '/imports/api/Industries/Industries';
 import ShareIt from '/imports/ui/components/ShareIt/ShareIt';
+import FullScreenMap from '/imports/ui/components/Maps/FullScreenMap';
 import './Fires.scss';
 
 class Fire extends React.Component {
@@ -136,6 +137,7 @@ class Fire extends React.Component {
                  industries
              />
              <DefMapLayers satellite />
+             <FullScreenMap />
            </Map>
            <p>{t('Coordenadas:')} {fire.lat}, {fire.lon}</p>
            {(fire.type === 'modis' || fire.type === 'viirs') &&

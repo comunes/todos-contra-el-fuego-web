@@ -219,5 +219,9 @@
   "Neighborhoods monitoring and fighting fires? What is all this about?",
   "noActiveNeigFireInMap": "There are no fires recently reported by our users in this area.",
   "Es una industria (fuente: registro oficial)":
-  "It's an industry (source: oficial register)"
+  "It's an industry (source: oficial register)",
+  "Pantalla completa":
+  "Fullscreen",
+  "Salir de pantalla completa":
+  "Exit fullscreen mode"
 }

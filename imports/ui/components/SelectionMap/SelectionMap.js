@@ -23,6 +23,8 @@ import { Row, Col, Button, ButtonGroup } from 'react-bootstrap';
 import subsUnion from '/imports/ui/components/Maps/SubsUnion/SubsUnion';
 import UserSubsToFiresCollection from '/imports/api/Subscriptions/Subscriptions';
 import { isChrome } from '/imports/ui/components/Utils/isMobile';
+import FullScreenMap from '/imports/ui/components/Maps/FullScreenMap';
+
 import './SelectionMap.scss';
 
 export const action = {
@@ -253,6 +255,7 @@ class SelectionMap extends Component {
                       </Button>
                   </ButtonGroup>
                 </Control>
+                <FullScreenMap />
           </Map>
         </Col>
       </Row>

@@ -34,6 +34,7 @@ import SiteSettings from '/imports/api/SiteSettings/SiteSettings';
 import { isNotHomeAndMobile, isChrome } from '/imports/ui/components/Utils/isMobile';
 import { isHome } from '/imports/ui/components/Utils/location';
 import ShareIt from '/imports/ui/components/ShareIt/ShareIt';
+import FullScreenMap from '/imports/ui/components/Maps/FullScreenMap';
 
 import './FiresMap.scss';
 
@@ -316,6 +317,7 @@ class FiresMap extends React.Component {
                  <CenterInMyPosition onClick={viewport => this.centerOnUserLocation(viewport)} onlyIcon {... this.props} />
                </ButtonGroup>
              </Control>
+             <FullScreenMap />
            </Map>
            <Row>
              <Col xs={12} sm={12} md={12} lg={12}>

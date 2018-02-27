@@ -24,6 +24,7 @@ import SiteSettings from '/imports/api/SiteSettings/SiteSettings';
 import { isChrome } from '/imports/ui/components/Utils/isMobile';
 import { isHome } from '/imports/ui/components/Utils/location';
 import ShareIt from '/imports/ui/components/ShareIt/ShareIt';
+import FullScreenMap from '/imports/ui/components/Maps/FullScreenMap';
 
 import './SubscriptionsMap.scss';
 
@@ -141,6 +142,7 @@ class SubscriptionsMap extends React.Component {
                </Button>
              </ButtonGroup>
            </Control>
+           <FullScreenMap />
          </Map>
          <Row>
            <Col xs={12} sm={12} md={12} lg={12}>
