@@ -12,6 +12,7 @@ import { Helmet } from 'react-helmet';
 import { Trans, translate } from 'react-i18next';
 import { Map } from 'react-leaflet';
 import Control from 'react-leaflet-control';
+import LoadingBar from '/imports/ui/components/Loading/LoadingBar';
 import _ from 'lodash';
 import store from 'store';
 import L from 'leaflet';
@@ -235,6 +236,9 @@ class FiresMap extends React.Component {
                 </p>
              </Col>
            </Row>
+           {this.props.loading || !this.props.subsready ?
+            <LoadingBar progress={this.props.loading ? 0.9 : 1} />
+            : ''}
            {/* https://github.com/CliffCloud/Leaflet.Sleep */}
            <Map
                ref={(map) => {
