@@ -312,5 +312,7 @@
   "Salir de pantalla completa":
   "Salir de pantalla completa",
   "Escribe un lugar para centrar el mapa":
-  "Escribe un lugar para centrar el mapa"
+  "Escribe un lugar para centrar el mapa",
+  "geo-not-perms-error": "Upppps: parece que no tenemos permiso para conocer tu ubicación",
+  "geo-not-avail-error": "Upppps: parece tu ubicación no está disponible"
 }

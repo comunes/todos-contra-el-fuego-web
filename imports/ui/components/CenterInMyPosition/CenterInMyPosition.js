@@ -5,6 +5,7 @@ import { Tracker } from 'meteor/tracker';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Button } from 'react-bootstrap';
 import { translate } from 'react-i18next';
+import { Bert } from 'meteor/themeteorchef:bert';
 
 import './CenterInMyPosition.scss';
 
@@ -30,6 +31,16 @@ class CenterInMyPosition extends React.Component {
         self.props.onClick(viewport);
         // console.log(viewport);
         // self.onViewportChanged(viewport);
+        computation.stop();
+      }
+      // https://developer.mozilla.org/en-US/docs/Web/API/PositionError)
+      const error = Geolocation.error();
+      if (error) {
+        const cod = error.code;
+        // window.alert(cod);
+        if (cod === 1) Bert.alert(self.props.t('geo-not-perms-error'), 'danger');
+        else if (cod === 2) Bert.alert(self.props.t('geo-not-avail-error'), 'danger');
+        else Bert.alert(error.message, 'danger');
         computation.stop();
       }
     });
