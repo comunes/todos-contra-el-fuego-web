@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-indent-props */
 /* eslint-disable import/no-absolute-path */
 
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
 import { translate } from 'react-i18next';
 import { Meteor } from 'meteor/meteor';
@@ -10,20 +10,25 @@ import Blaze from 'meteor/gadicc:blaze-react-component';
 
 class Reconnect extends Component {
   render() {
-    const { t } = this.props;
+    const { t, authenticated } = this.props;
+    // console.log(`Reconnect ${!authenticated ? 'enabled' : 'disabled'}`);
     return (
-      <Blaze
+      <Fragment>
+        { !authenticated &&
+        <Blaze
           template="meteorStatus"
           textDisconnect={t('Desconectado del servidor, reconectando en %delay% segundos.')}
           textConnecting={t('Desconectado del servidor, reconectando...')}
           linkText={t('Reintentar ahora')}
-      />
+        /> }
+      </Fragment>
     );
   }
 }
 
 Reconnect.propTypes = {
-  t: PropTypes.func.isRequired
+  t: PropTypes.func.isRequired,
+  authenticated: PropTypes.bool.isRequired
 };
 
 Reconnect.defaultProps = {
