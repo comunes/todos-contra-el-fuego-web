@@ -227,13 +227,13 @@ class FiresMap extends React.Component {
                    <Fragment><Trans parent="span" i18nKey="activeFireInMapCount">En rojo, <strong>{{ count: this.props.activefires.length + this.props.firealerts.length }}</strong> fuegos activos en el mapa. Hay un total de <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos detectados en todo el mundo por la NASA.</Trans> <Trans>Datos actualizados <FromNow when={this.props.lastCheck} />.</Trans></Fragment>
                  }
                </p>
-               {isNotHomeAndMobile && this.props.firealerts.length > 0 &&
+               {isNotHomeAndMobile() && this.props.firealerts.length > 0 &&
                 <p className="firesmap-legend"><Trans parent="span" i18nKey="activeNeigFireInMapCount">En naranja, los fuegos notificados por nuestros usuarios/as recientemente.</Trans></p> }
-                {isNotHomeAndMobile && this.props.firealerts.length === 0 &&
+                {isNotHomeAndMobile() && this.props.firealerts.length === 0 &&
                  <p className="firesmap-legend"><Trans parent="span" i18nKey="noActiveNeigFireInMap">No hay fuegos notificados recientemente por nuestros usuarios/as en esta zona.</Trans></p> }
              </Col>
              <Col xs={12} sm={6} md={6} lg={6}>
-               {isNotHomeAndMobile &&
+               {isNotHomeAndMobile() &&
                 <Fragment>
                   <LocationAutocomplete
                       focusInput={false}

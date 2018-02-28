@@ -73,7 +73,7 @@ class FireSubscription extends React.Component {
     return (
       <div>
         <Row>
-          {isNotHomeAndMobile &&
+          {isNotHomeAndMobile() &&
           <Col xs={12} sm={12} md={6} lg={6} >
             <div>
               <LocationAutocomplete
@@ -87,7 +87,7 @@ class FireSubscription extends React.Component {
           </Col> }
           <Col xs={12} sm={12} md={6} lg={6} >
             <DistanceSlider onChange={value => this.onSliderChange(value)} />
-            {isNotHomeAndMobile &&
+            {isNotHomeAndMobile() &&
             <Row className="center-in-my-pos">
               <CenterInMyPosition onClick={viewport => this.centerOnUserLocation(viewport)} />
             </Row>
