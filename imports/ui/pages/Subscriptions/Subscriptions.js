@@ -80,7 +80,8 @@ class Subscriptions extends Component {
     const {
       loading,
       t,
-      subscriptions
+      subscriptions,
+      maxDistance
     } = this.props;
     const firstBtnTitle = ['Añadir zona', '', 'Terminar']; // view, add, edit
     return (!loading ? (
@@ -92,6 +93,9 @@ class Subscriptions extends Component {
       { subscriptions.length === 0 ?
         <Alert bsStyle="warning"><Trans>No estás suscrito a fuegos en ninguna zona</Trans></Alert> :
         <Alert bsStyle="success"><Trans>En verde, áreas de las que recibirás alertas de fuegos</Trans></Alert>
+      }
+        { maxDistance && maxDistance.distance > 20 &&
+          <Alert bsStyle="warning"><Trans>Estás subscrito a una zona muy grande</Trans></Alert>
         }
         <br />
         <SelectionMap
@@ -118,6 +122,7 @@ Subscriptions.propTypes = {
   match: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
+  maxDistance: PropTypes.object,
   location: PropTypes.object
 };
 
@@ -126,6 +131,7 @@ export default translate([], { wait: true })(withTracker(() => {
   // console.log(UserSubsToFiresCollection.find().fetch());
   return {
     loading: !subscription.ready(),
-    subscriptions: UserSubsToFiresCollection.find({ owner: Meteor.userId() }).fetch()
+    subscriptions: UserSubsToFiresCollection.find({ owner: Meteor.userId() }).fetch(),
+    maxDistance: UserSubsToFiresCollection.findOne({ owner: Meteor.userId() }, { sort: { distance: -1 } })
   };
 })(Subscriptions));
