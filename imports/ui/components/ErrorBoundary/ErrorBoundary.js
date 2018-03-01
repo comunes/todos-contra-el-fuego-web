@@ -22,8 +22,10 @@ class ErrorBoundary extends Component {
     // Display fallback UI
     this.setState({ hasError: true });
     // You can also log the error to an error reporting service
-    ravenLogger.log(error);
-    ravenLogger.log(info);
+    // console.log(`typeof error ${typeof error}`);
+    // console.log(`typeof info ${typeof info}`);
+    ravenLogger.log(error, info);
+    // ravenLogger.log(info);
   }
 
   render() {
