@@ -19,7 +19,7 @@ Además, según nos cuentan amigos de otras latitudes estos mismos problemas suc
 
 También mantenemos un archivo documental de los fuegos en el que los afectados puedan aportar información y así ayudar, por ejemplo, a la investigación sobre las causas de cada fuego. Y estamos desarrollando más herramientas de este tipo.
 
-En un momento climático tan difícil, en el que lo último que tenemos que hacer es emitir más CO2, creemos que hay que tomar más medidas legales antes de llegar a este punto en el que ciertas personas se lucran de los incendios y otras personas como nosotras tengamos que andar apagándolos.
+En un momento climático tan difícil, en el que lo último que tenemos que hacer es emitir más CO2, creemos que hay que tomar más medidas legales (como [está](https://www.ecologistasenaccion.org/article35834.html)) antes de llegar a este punto en el que ciertas personas se lucran de los incendios y otras personas como nosotras tengamos que andar apagándolos.
 
 **También nos preguntan, porqué desarrollamos algo así si no nos enriquece [sic]. Quizás ese es exactamente el problema, que lo que enriquece a algunos es quemar lo que es de tod@s. ¿Y quien cuida lo que es de tod@s?**
 
