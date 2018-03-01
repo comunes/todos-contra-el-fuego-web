@@ -232,5 +232,7 @@
   "Estás subscrito a una zona muy grande":
   "You are subscribed to a very large area",
   "Lugar no encontrado":
-  "Place not found"
+  "Place not found",
+  "on-already-subscribed":
+  "Upppps: You have already subscribed to that zone before"
 }

@@ -25,6 +25,10 @@ Meteor.methods({
         ...doc
       };
       // console.log(newDoc);
+      const already = Subscriptions.findOne(newDoc);
+      if (already) {
+        throw new Meteor.Error('500', 'on-already-subscribed');
+      }
       return Subscriptions.insert(newDoc);
     } catch (exception) {
       console.error(exception);
