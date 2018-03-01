@@ -4,30 +4,55 @@ import PropTypes from 'prop-types';
 import { translate } from 'react-i18next';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import { FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap';
+import { Bert } from 'meteor/themeteorchef:bert';
 
+
+// Sample:
+// https://github.com/kenny-hibino/react-places-autocomplete/blob/master/demo/components/SearchBar.js
 class LocationAutocomplete extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      address: ''
+      address: '',
+      loading: false // we can use it with a spinner
     };
+    this.handleSelect = this.handleSelect.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.onError = this.onError.bind(this);
   }
 
-  onChange(address) { this.setState({ address }); }
+  onError(error) {
+    if (error === 'ZERO_RESULTS') {
+      Bert.alert(this.props.t('Lugar no encontrado'), 'alert');
+    }
+  }
+
+  handleChange(address) {
+    this.setState({ address });
+  }
 
   handleSelect(address) {
+    this.setState({
+      address,
+      loading: true
+    });
     const self = this;
-    geocodeByAddress(address)
-      .then(results => getLatLng(results[0]))
-      .then(({ lat, lng }) => {
-        self.props.onChange({ lat, lng });
-      })
-      .catch((error) => {
-        console.log(error);
-        if (error === 'ZERO_RESULTS') {
-          console.log('No results');
-        }
-      });
+    try {
+      geocodeByAddress(address)
+        .then(results => getLatLng(results[0]))
+        .then((result) => {
+          if (result && result.lat && result.lng) {
+            const { lat, lng } = result;
+            self.props.onChange({ lat, lng });
+            self.setState({
+              loading: false
+            });
+          }
+        })
+        .catch((error) => { self.onError(error); });
+    } catch (error) {
+      self.onError(error);
+    }
   }
 
   render() {
@@ -69,8 +94,10 @@ class LocationAutocomplete extends React.Component {
               }}
               googleLogo={false}
               highlightFirstSuggestion
-              onSelect={address => this.handleSelect(address)}
-              onEnterKeyDown={address => this.handleSelect(address)}
+              onChange={this.handleChange}
+              onSelect={this.handleSelect}
+              onEnterKeyDown={this.handleSelect}
+              onError={this.onError}
               options={{
                 // location: new google.maps.LatLng(-34, 151),
                 // radius: 2000,
@@ -80,7 +107,7 @@ class LocationAutocomplete extends React.Component {
               inputProps={
                 {
                   value: this.state.address,
-                  onChange: address => this.onChange(address),
+                  onChange: this.handleChange,
                   placeholder: t(placeHolder),
                   onBlur: () => { /* console.log('Blur event!'); */ },
                   onFocus: () => { /* console.log('Focused!'); */ },

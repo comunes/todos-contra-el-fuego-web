@@ -230,5 +230,7 @@
   "geo-not-avail-error": "Upppps: it seems your location is not available",
   "geo-not-timeout-error": "Upppps: Your device is taking too long to know your location",
   "Estás subscrito a una zona muy grande":
-  "You are subscribed to a very large area"
+  "You are subscribed to a very large area",
+  "Lugar no encontrado":
+  "Place not found"
 }
