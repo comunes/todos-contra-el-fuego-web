@@ -68,6 +68,7 @@ class SubscriptionEditor extends React.Component {
           zoom={this.state.zoom}
           distance={doc.distance}
           focusInput={focus}
+          history={this.props.history}
           disableFstBtn={this.state.disableFstBtn}
           subsBtn={isEdit ? t('Actualizar') : t(isAnyMobile ? 'Suscribirme a este radio' : 'Suscribirme a fuegos en este radio')}
           onSubs={state => this.onSubs(state)}

@@ -244,7 +244,7 @@ class SelectionMap extends Component {
                           bsStyle="warning"
                           onClick={event => this.onSndBtn(event)}
                       >
-                        {this.props.sndBtn}
+                        {this.props.sndBtn.match(/^fa-/) ? <i className={`fa ${this.props.sndBtn}`} /> : this.props.sndBtn }
                       </Button>
                     }
                       <Button

@@ -20,10 +20,7 @@ class FireSubscription extends React.Component {
       zoom: this.props.zoom,
       distance: this.props.distance
     };
-    /* if (props.location) {
-      console.log(props.location.state);
-    }
-    console.log(this.state); */
+    this.onCancel = this.onCancel.bind(this);
   }
 
   componentDidMount() {
@@ -60,6 +57,10 @@ class FireSubscription extends React.Component {
 
   onSubs(value) {
     this.props.onSubs(value);
+  }
+
+  onCancel() {
+    this.props.history.push('/subscriptions');
   }
 
   centerOnUserLocation(value) {
@@ -103,6 +104,8 @@ class FireSubscription extends React.Component {
             distance={this.state.distance}
             fstBtn={this.props.subsBtn}
             onFstBtn={state => this.onSubs(state)}
+            sndBtn="fa-times"
+            onSndBtn={this.onCancel}
             onSelection={state => this.onSelection(state)}
             action={action.add}
             disableFstBtn={this.props.disableFstBtn}
@@ -119,6 +122,7 @@ FireSubscription.propTypes = {
   focusInput: PropTypes.bool.isRequired,
   subsBtn: PropTypes.string.isRequired,
   onSubs: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
   disableFstBtn: PropTypes.bool.isRequired
 };
 
