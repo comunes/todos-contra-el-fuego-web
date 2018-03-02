@@ -40,8 +40,10 @@ class SubscriptionEditor extends React.Component {
       Meteor.call(methodToCall, doc, (error, subscriptionId) => {
         if (error) {
           self.setState({ disableFstBtn: false });
-          if (error.reason && error.reason.reason) {
-            Bert.alert(t(error.reason.reason), 'danger');
+          if (error.error && error.error === 'on-already-subscribed') {
+            Bert.alert(t(error.error), 'danger');
+          } else if (error.reason) {
+            Bert.alert(error.reason, 'danger');
           }
         } else {
           self.setState({ disableFstBtn: false });
