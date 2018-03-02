@@ -49,7 +49,7 @@ class CenterInMyPosition extends React.Component {
     const msg = t('Centrar en tu ubicación');
     return (
       <Button bsStyle="default" title={msg} onClick={() => this.onClick()}>
-        <i className="fa fa-crosshairs" />{!onlyIcon ? msg : ''}
+        <i className="fa fa-crosshairs" />{!onlyIcon ? ` ${msg}` : ''}
       </Button>);
   }
 }
