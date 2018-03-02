@@ -249,6 +249,7 @@ class SelectionMap extends Component {
                     }
                       <Button
                           bsStyle="success"
+                          disabled={this.props.disableFstBtn}
                           onClick={event => this.onFstBtn(event)}
                       >
                         {this.props.fstBtn}
@@ -282,6 +283,7 @@ SelectionMap.propTypes = {
   onRemove: PropTypes.func,
   action: PropTypes.number.isRequired,
   loadingSubs: PropTypes.bool.isRequired,
+  disableFstBtn: PropTypes.bool.isRequired,
   currentSubs: PropTypes.arrayOf(PropTypes.shape({
     location: PropTypes.shape({ latitude: PropTypes.number, longitude: PropTypes.number }).isRequired,
     distance: PropTypes.number.isRequired

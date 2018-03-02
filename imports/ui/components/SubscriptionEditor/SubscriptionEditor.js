@@ -16,7 +16,8 @@ class SubscriptionEditor extends React.Component {
     super(props);
     this.state = {
       center: props.center || [null, null],
-      zoom: props.zoom || null
+      zoom: props.zoom || null,
+      disableFstBtn: false
     };
   }
 
@@ -32,14 +33,18 @@ class SubscriptionEditor extends React.Component {
     if (existingSubscription) doc._id = existingSubscription;
 
     const authenticated = !!Meteor.userId();
+    const self = this;
+    self.setState({ disableFstBtn: true });
 
     if (authenticated) {
       Meteor.call(methodToCall, doc, (error, subscriptionId) => {
         if (error) {
+          self.setState({ disableFstBtn: false });
           if (error.reason && error.reason.reason) {
             Bert.alert(t(error.reason.reason), 'danger');
           }
         } else {
+          self.setState({ disableFstBtn: false });
           const confirmation = existingSubscription ? t('Zona actualizada') : t('Zona añadida');
           Bert.alert(confirmation, 'success');
           // history.push(`/subscriptions/${subscriptionId}`);
@@ -61,6 +66,7 @@ class SubscriptionEditor extends React.Component {
           zoom={this.state.zoom}
           distance={doc.distance}
           focusInput={focus}
+          disableFstBtn={this.state.disableFstBtn}
           subsBtn={isEdit ? t('Actualizar') : t(isAnyMobile ? 'Suscribirme a este radio' : 'Suscribirme a fuegos en este radio')}
           onSubs={state => this.onSubs(state)}
       />

@@ -35,6 +35,9 @@ class FireSubscription extends React.Component {
 
 
   shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps.disableFstBtn !== this.props.disableFstBtn) {
+      return true;
+    }
     if (this.state.init &&
         nextState.center === this.state.center &&
         nextState.distance === this.state.distance) {
@@ -95,13 +98,14 @@ class FireSubscription extends React.Component {
           </Col>
         </Row>
         <SelectionMap
-              center={this.state.center}
-              zoom={this.state.zoom}
-              distance={this.state.distance}
-              fstBtn={this.props.subsBtn}
-              onFstBtn={state => this.onSubs(state)}
-              onSelection={state => this.onSelection(state)}
-              action={action.add}
+            center={this.state.center}
+            zoom={this.state.zoom}
+            distance={this.state.distance}
+            fstBtn={this.props.subsBtn}
+            onFstBtn={state => this.onSubs(state)}
+            onSelection={state => this.onSelection(state)}
+            action={action.add}
+            disableFstBtn={this.props.disableFstBtn}
         />
       </div>
     );
@@ -114,7 +118,8 @@ FireSubscription.propTypes = {
   distance: PropTypes.number,
   focusInput: PropTypes.bool.isRequired,
   subsBtn: PropTypes.string.isRequired,
-  onSubs: PropTypes.func.isRequired
+  onSubs: PropTypes.func.isRequired,
+  disableFstBtn: PropTypes.bool.isRequired
 };
 
 export default translate([], { wait: true })(FireSubscription);
