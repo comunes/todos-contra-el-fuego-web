@@ -1,8 +1,7 @@
-Meteor.startup(function() {
-  return Tracker.autorun(function() {
-    var userId;
-    userId = Meteor.userId();
-    // console.log(userId);
-    Meteor.Piwik.setUserInfo(userId);
-  });
-});
+import { Meteor } from 'meteor/meteor';
+import { Tracker } from 'meteor/tracker';
+
+Meteor.startup(() => Tracker.autorun(() => {
+  const userId = Meteor.userId();
+  Meteor.Piwik.setUserInfo(userId);
+}));
