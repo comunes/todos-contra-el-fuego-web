@@ -42,7 +42,7 @@ class SelectionMap extends Component {
       zoom: props.zoom || 11,
       distance: props.distance,
       draggable: true,
-      subsFit: true
+      subsFit: this.props.action !== action.add
     };
 
     this.getMap = this.getMap.bind(this);
@@ -68,11 +68,11 @@ class SelectionMap extends Component {
       marker: nextMarker,
       distance: nextProps.distance || this.state.distance
     });
-    this.fit();
+    // this.fit();
   }
 
   componentDidUpdate() {
-    // this.fit();
+    this.fit();
   }
 
   onFstBtn() {
