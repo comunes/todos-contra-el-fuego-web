@@ -89,7 +89,8 @@ class Signup extends React.Component {
       } else {
         Meteor.call('users.sendVerificationEmail');
         Bert.alert(t('Bienvenid@!'), 'success');
-        history.push('/subscriptions');
+        // Already done in Public.js with state (for add)
+        // history.push('/subscriptions');
       }
     });
   }
