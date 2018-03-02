@@ -34,9 +34,9 @@ class SubscriptionEditor extends React.Component {
 
     const authenticated = !!Meteor.userId();
     const self = this;
-    self.setState({ disableFstBtn: true });
 
     if (authenticated) {
+      self.setState({ disableFstBtn: true });
       Meteor.call(methodToCall, doc, (error, subscriptionId) => {
         if (error) {
           self.setState({ disableFstBtn: false });
