@@ -54,7 +54,7 @@ class DistanceSlider extends React.Component {
   render() {
     return (
       <div className="dist-slider">
-        <p><Trans parent="span">¿A que distancia a la redonda quieres recibir notificaciones?</Trans></p>
+        <p><Trans parent="span">¿A que distancia a la redonda quieres recibir notificaciones de fuegos?</Trans></p>
         <Slider
             min={1}
             max={105}

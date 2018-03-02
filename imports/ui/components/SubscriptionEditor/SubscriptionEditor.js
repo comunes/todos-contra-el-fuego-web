@@ -9,6 +9,7 @@ import { Meteor } from 'meteor/meteor';
 import { Bert } from 'meteor/themeteorchef:bert';
 import FireSubscription from '/imports/ui/pages/FireSubscription/FireSubscription';
 import { translate } from 'react-i18next';
+import { isAnyMobile } from '/imports/ui/components/Utils/isMobile';
 
 class SubscriptionEditor extends React.Component {
   constructor(props) {
@@ -60,7 +61,7 @@ class SubscriptionEditor extends React.Component {
           zoom={this.state.zoom}
           distance={doc.distance}
           focusInput={focus}
-          subsBtn={isEdit ? t('Actualizar') : t('Subscribirme a fuegos en este radio')}
+          subsBtn={isEdit ? t('Actualizar') : t(isAnyMobile ? 'Suscribirme a este radio' : 'Suscribirme a fuegos en este radio')}
           onSubs={state => this.onSubs(state)}
       />
     );
