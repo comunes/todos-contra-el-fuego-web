@@ -63,7 +63,7 @@ class Subscriptions extends Component {
           if (error) {
             Bert.alert(error.reason, 'danger');
           } else {
-            Bert.alert('Subscription deleted!', 'success');
+            Bert.alert(t('Desuscrito'), 'success');
             if (num === 1) { // it was 1, now deleted
               this.setState({ action: action.view });
             }
@@ -110,6 +110,7 @@ class Subscriptions extends Component {
             loadingSubs={this.props.loading}
             currentSubs={this.props.subscriptions}
             onRemove={(id) => { this.handleRemove(id); }}
+            disableFstBtn={false}
         />
       </div>
     ) : <Loading />);

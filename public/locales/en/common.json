@@ -61,6 +61,8 @@
   "Todavía sin subscriptiones": "No subscriptions yet",
   "Suscripción añadida": "Subscription added",
   "Suscripción actualizada": "Subscription updated",
+  "Desuscrito":
+  "Subscription deleted",
   "Última actualización, {{when}}": "Last updated, {{when}}",
   "Has iniciado sesión con {{service}} usando la dirección de correo {{email}}.": "You're logged in with {{service}} using the email address {{email}}.",
   "Uso de Cookies": "Use of Cookies",
