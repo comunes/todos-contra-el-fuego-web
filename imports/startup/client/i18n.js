@@ -70,15 +70,16 @@ i18n.use(backend)
       console.error(err);
       return;
     }
-    i18nReady.set(true);
+    console.log(`Language initialized: ${i18n.language}`);
+
     // document.title = t('AppName');
     // Accounts translation
     // https://github.com/softwarerero/meteor-accounts-t9n
-    // console.log("Language: " + i18n.language);
     T9n.setLanguage(i18n.language);
     // console.log(T9n.get('error.accounts.User not found'));
-
     moment.locale(i18n.language);
+
+    i18nReady.set(true);
 
     // cookies eu consent
     const cookiesOpt = {
