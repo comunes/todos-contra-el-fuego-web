@@ -3,20 +3,16 @@
 /* eslint-disable import/no-absolute-path */
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { translate } from 'react-i18next';
-import { withTracker } from 'meteor/react-meteor-data';
 
 class TestError extends Component {
   constructor(props) {
     super(props);
-    this.t = props.t;
     this.state = {
     };
+    throw new Error('Just testing');
   }
 
   render() {
-    throw new Error('Just testing');
     return (
       <div />
     );
@@ -24,13 +20,9 @@ class TestError extends Component {
 }
 
 TestError.propTypes = {
-  t: PropTypes.func.isRequired
 };
 
 TestError.defaultProps = {
 };
 
-// export default translate([], { wait: true })(TestError);
-export default translate([], { wait: true })(withTracker(props => ({
-  // props.something
-}))(TestError));
+export default TestError;
