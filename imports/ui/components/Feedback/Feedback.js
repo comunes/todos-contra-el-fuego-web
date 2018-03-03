@@ -2,7 +2,7 @@
 /* eslint-disable import/no-absolute-path */
 /* eslint-disable import/no-absolute-path */
 
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { translate } from 'react-i18next';
@@ -18,13 +18,13 @@ import './Feedback.scss';
 class Feedback extends Component {
   constructor(props) {
     super(props);
-    this.t = props.t;
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onTabClick = this.onTabClick.bind(this);
   }
 
   componentDidMount() {
     const component = this;
+    const { t } = this.props;
 
     validate(component.form, {
       rules: {
@@ -38,11 +38,11 @@ class Feedback extends Component {
       },
       messages: {
         feedbackText: {
-          required: this.t('Por favor, escribe aquí tu feedback...')
+          required: t('Por favor, escribe aquí tu feedback...')
         },
         email: {
-          required: this.t('Tu correo'),
-          email: this.t('¿Es correcto este correo?')
+          required: t('Tu correo'),
+          email: t('¿Es correcto este correo?')
         }
       },
       submitHandler() { component.handleSubmit(); }
@@ -71,8 +71,9 @@ class Feedback extends Component {
   render() {
     // console.log(`Render Feedback because isHome ${this.props.isHome}, email: '${this.props.emailAddress}'`);
     const disabled = this.props.emailVerified && this.props.emailAddress;
+    const { t } = this.props;
     return (
-      <Fragment>
+      <div>
         { !this.props.isHome &&
           <div id="feedback">
             <div id="feedback-form" ref={formdiv => (this.formdiv = formdiv)} style={{ display: 'none' }} className="card">
@@ -88,7 +89,7 @@ class Feedback extends Component {
                       name="email"
                       className="form-control"
                       ref={email => (this.email = email)}
-                      placeholder={this.t('Tu correo')}
+                      placeholder={t('Tu correo')}
                       key={disabled ? 'disabledEmail' : 'enabledEmail'}
                       disabled={disabled}
                       defaultValue={disabled ? this.props.emailAddress : ''}
@@ -103,13 +104,13 @@ class Feedback extends Component {
                       className="form-control"
                       name="feedbackText"
                       ref={feedbackText => (this.feedbackText = feedbackText)}
-                      placeholder={this.t('Por favor, escribe aquí tu feedback...')}
+                      placeholder={t('Por favor, escribe aquí tu feedback...')}
                       rows="6"
                   />
                   <FormControl.Feedback />
                 </FormGroup>
                 <Button type="submit" bsStyle="success" className="float-right" id={testId('sendFeedbackBtn')} >
-                  {this.t('Enviar')}
+                  {t('Enviar')}
                 </Button>
               </form>
             </div>
@@ -117,11 +118,11 @@ class Feedback extends Component {
                 id="feedback-tab"
                 onClick={(event) => { this.onTabClick(event); }}
             >
-              {this.t('Feedback')}
+              {t('Feedback')}
             </div>
           </div>
         }
-      </Fragment>
+      </div>
     );
   }
 }
@@ -133,7 +134,7 @@ Feedback.propTypes = {
   isHome: PropTypes.bool.isRequired
 };
 
-export default translate([], { wait: true })(withTracker(props => ({
+export default translate()(withTracker(props => ({
   emailAddress: props.emailAddress,
   emailVerified: props.emailVerified,
   isHome: isHome()
