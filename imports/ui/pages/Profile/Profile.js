@@ -269,7 +269,7 @@ Profile.propTypes = {
   i18n: PropTypes.object.isRequired
 };
 
-export default translate([], { wait: true })(withTracker(() => {
+export default translate()(withTracker(() => {
   const subscription = Meteor.subscribe('users.editProfile');
 
   return {
