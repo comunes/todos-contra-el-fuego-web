@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-indent-props */
 /* eslint-disable react/jsx-indent */
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, ButtonGroup, Row, Col } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
@@ -95,7 +95,7 @@ class SubscriptionsMap extends React.Component {
     const title = `${t('AppName')}: ${t('Zonas vigiladas')}`;
     console.log(`Rendering Subs users ready ${this.props.subsready} viewport: ${JSON.stringify(this.state.viewport)}`);
     return (
-      <Fragment>
+      <div>
         { !isHome() &&
           <Helmet>
             <title>{title}</title>
@@ -152,7 +152,7 @@ class SubscriptionsMap extends React.Component {
          { !isHome() &&
            <ShareIt title={title} />
          }
-      </Fragment>
+      </div>
     );
   }
 }
