@@ -4,9 +4,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { translate } from 'react-i18next';
 import { Row, Col } from 'react-bootstrap';
-import { withTracker } from 'meteor/react-meteor-data';
 import ravenLogger from '/imports/startup/client/ravenLogger';
 import './ErrorBoundary.scss';
 
@@ -14,7 +12,6 @@ import './ErrorBoundary.scss';
 class ErrorBoundary extends Component {
   constructor(props) {
     super(props);
-    this.t = props.t;
     this.state = { hasError: false };
   }
 
@@ -29,33 +26,41 @@ class ErrorBoundary extends Component {
   }
 
   render() {
+    const {
+      appName, title, subTitle, children
+    } = this.props;
     if (this.state.hasError) {
       // You can render any custom fallback UI
       return (
         <div className="error-boundary">
           <Row className="align-items-center justify-content-center">
             <Col xs={12} sm={6} md={5} lg={4}>
-              <h1 className="page-header">{this.t('AppNameFull')}</h1>
-              <h4 className="page-header">{this.t('general-error-title')}</h4>
-              <p>
-                {this.t('general-error-description')}
-              </p>
+              <h1 className="page-header">{appName}</h1>
+              <h4 className="page-header">{title}</h4>
+              <p>{subTitle}</p>
             </Col>
           </Row>
         </div>
       );
     }
-    return this.props.children;
+    return children;
   }
 }
 
 ErrorBoundary.propTypes = {
-  t: PropTypes.func.isRequired
+  appName: PropTypes.string,
+  title: PropTypes.string,
+  subTitle: PropTypes.string,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]).isRequired
 };
 
 ErrorBoundary.defaultProps = {
+  appName: 'All Against Fire!',
+  title: 'Upppps: Something has gone wrong',
+  subTitle: 'We are investigating the problem, try again in a while'
 };
 
-export default translate([], { wait: true })(withTracker(props => ({
-  // props.something
-}))(ErrorBoundary));
+export default ErrorBoundary;

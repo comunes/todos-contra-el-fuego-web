@@ -37,16 +37,16 @@ import VerifyEmail from '../../pages/VerifyEmail/VerifyEmail';
 import RecoverPassword from '../../pages/RecoverPassword/RecoverPassword';
 import ResetPassword from '../../pages/ResetPassword/ResetPassword';
 import Profile from '../../pages/Profile/Profile';
-import NotFound from '../../pages/NotFound/NotFound';
-import FiresMap from '../../pages/FiresMap/FiresMap';
 import Fires from '../../pages/Fires/Fires';
 import Sandbox from '../../pages/Sandbox/Sandbox';
+import ZonesMap from '../../pages/ZonesMap/ZonesMap';
+import FiresMap from '../../pages/FiresMap/FiresMap';
+import NotFound from '../../pages/NotFound/NotFound';
 import Terms from '../../pages/Terms/Terms';
 import About from '../../pages/About/About';
 import Privacy from '../../pages/Privacy/Privacy';
 import License from '../../pages/License/License';
 import Credits from '../../pages/Credits/Credits';
-import ZonesMap from '../../pages/ZonesMap/ZonesMap';
 import Footer from '../../components/Footer/Footer';
 import Feedback from '../../components/Feedback/Feedback';
 import ReSendEmail from '../../components/ReSendEmail/ReSendEmail';
@@ -57,9 +57,6 @@ import './App.scss';
 
 class LocationListener extends Component {
   // https://stackoverflow.com/questions/43512450/react-router-v4-route-onchange-event
-  static contextTypes = {
-    router: PropTypes.object
-  };
 
   componentDidMount() {
     this.handleLocationChange(this.context.router.history.location);
@@ -75,82 +72,90 @@ class LocationListener extends Component {
     // your staff here
     console.log(`----- location: '${location.pathname}'`);
     Meteor.Piwik.trackPage(location.pathname);
-    // Meteor.isReadyForSpiderable = true;
   }
 
+  // https://stackoverflow.com/questions/39133797/react-only-return-props-children
   render() {
     return this.props.children;
   }
 }
 
+LocationListener.contextTypes = {
+  router: PropTypes.object
+};
+
+LocationListener.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]).isRequired
+};
+
 const App = props => (
   /* https://react.i18next.com/components/i18nextprovider.html */
-  <I18nextProvider i18n={i18n}>
-    <ErrorBoundary>
-      <Router history={history}>
-        <LocationListener>
-        { !props.loading ?
-          <div className="App">
-            <Helmet>
-              <meta charSet="utf-8" />
-              <title>{i18n.t('AppName')}</title>
-              <meta name="description" content={`${i18n.t('AppDescrip')}: ${i18n.t('AppDescripLong')}`} />
-              <link rel="alternate" href="https://fires.comunes.org/" hrefLang="en" />
-              <link rel="alternate" href="https://fuegos.comunes.org/" hrefLang="es" />
-            </Helmet>
-            <Navigation {...props} />
-            <ReSendEmail {...props} />
+  <div>
+    {props.i18nReady.get() &&
+     <ErrorBoundary>
+       <I18nextProvider i18n={i18n}>
+         <ErrorBoundary appName={i18n.t('AppNameFull')} title={i18n.t('general-error-title')} subTitle={i18n.t('general-error-description')}>
+           <Router history={history}>
+             <LocationListener>
+               { !props.loading &&
+                 <div className="App">
+                   <Helmet>
+                     <meta charSet="utf-8" />
+                     <title>{i18n.t('AppName')}</title>
+                     <meta name="description" content={`${i18n.t('AppDescrip')}: ${i18n.t('AppDescripLong')}`} />
+                     <link rel="alternate" href="https://fires.comunes.org/" hrefLang="en" />
+                     <link rel="alternate" href="https://fuegos.comunes.org/" hrefLang="es" />
+                   </Helmet>
+                   <Navigation {...props} />
+                   <ReSendEmail {...props} />
 
-            <Grid>
-              <Switch>
-                <Route exact name="index" path="/" component={Index} />
-                {/* <Authenticated exact path="/documents" component={Documents} {...props} />
-                <Authenticated exact path="/documents/new" component={NewDocument} {...props} />
-                <Authenticated exact path="/documents/:_id" component={ViewDocument} {...props} />
-                <Authenticated exact path="/documents/:_id/edit" component={EditDocument} {...props} />
-                */}
-                <Authenticated exact path="/subscriptions" component={Subscriptions} {...props} />
-                <Authenticated exact path="/subscriptions/new" component={NewSubscription} {...props} />
-                <Authenticated exact path="/subscriptions/:_id" component={ViewSubscription} {...props} />
-                <Authenticated exact path="/subscriptions/:_id/edit" component={EditSubscription} {...props} />
-                <Authenticated exact path="/profile" component={Profile} {...props} />
-                <Authenticated exact path="/status" component={Status} {...props} />
-                {/* <Route path="/fires/:type(with-industries)" component={FiresMap} industries {...props} /> */}
-                <Route path="/fires" component={FiresMap} industries={false} {...props} />
-                <Route path="/zones" component={ZonesMap} {...props} />
-                <Route path="/fire/:type(active|archive|alert)/:id" component={Fires} {...props} />
-                <Route path="/fire/:id" component={Fires} {...props} />
-                <Public path="/auth/:token" component={Auth} {...props} />
-                <Public path="/signup" component={Signup} {...props} />
-                <Public path="/login" component={Login} {...props} />
-                <Route path="/logout" component={Logout} {...props} />
-                <Route path="/sandbox" component={Sandbox} {...props} />
-                <Route path="/error" component={TestError} {...props} />
-                {/* <Route path="/subscriptions" render={props => <FireSubscription focusInput {...props} />} /> */}
+                   <Grid>
+                     <Switch>
+                       <Route exact name="index" path="/" component={Index} />
+                       <Authenticated exact path="/subscriptions" component={Subscriptions} {...props} />
+                       <Authenticated exact path="/subscriptions/new" component={NewSubscription} {...props} />
+                       <Authenticated exact path="/subscriptions/:_id" component={ViewSubscription} {...props} />
+                       <Authenticated exact path="/subscriptions/:_id/edit" component={EditSubscription} {...props} />
+                       <Authenticated exact path="/profile" component={Profile} {...props} />
+                       <Authenticated exact path="/status" component={Status} {...props} />
+                       <Route path="/fires" component={FiresMap} industries={false} {...props} />
+                       <Route path="/zones" component={ZonesMap} {...props} />
 
-                <Route name="verify-email" path="/verify-email/:token" component={VerifyEmail} />
-                <Route name="recover-password" path="/recover-password" component={RecoverPassword} />
-                <Route name="reset-password" path="/reset-password/:token" component={ResetPassword} />
-                <Route name="terms" path="/terms" component={Terms} />
-                <Route name="privacy" path="/privacy" component={Privacy} />
-                <Route name="license" path="/license" component={License} />
-                <Route name="credits" path="/credits" component={Credits} />
-                <Route name="about" path="/about" component={About} />
+                       <Route path="/fire/:type(active|archive|alert)/:id" component={Fires} {...props} />
+                       <Route path="/fire/:id" component={Fires} {...props} />
+                       <Public path="/auth/:token" component={Auth} {...props} />
+                       <Public path="/signup" component={Signup} {...props} />
+                       <Public path="/login" component={Login} {...props} />
+                       <Route path="/logout" component={Logout} {...props} />
+                       <Route path="/sandbox" component={Sandbox} {...props} />
+                       <Route path="/error" component={TestError} {...props} />
 
-                <Route component={NotFound} />
-              </Switch>
-            </Grid>
-            <Footer />
-            <Reconnect {...props} />
-            <Feedback history={history} {...props} />
-            {props.i18nReady.get() &&
-            <Blaze template="cookieConsent" />
-            }
-          </div> : ''}
-        </LocationListener>
-      </Router>
-    </ErrorBoundary>
-  </I18nextProvider>
+                       <Route name="verify-email" path="/verify-email/:token" component={VerifyEmail} />
+                       <Route name="recover-password" path="/recover-password" component={RecoverPassword} />
+                       <Route name="reset-password" path="/reset-password/:token" component={ResetPassword} />
+                       <Route name="terms" path="/terms" component={Terms} />
+                       <Route name="privacy" path="/privacy" component={Privacy} />
+                       <Route name="license" path="/license" component={License} />
+                       <Route name="credits" path="/credits" component={Credits} />
+                       <Route name="about" path="/about" component={About} />
+
+                       <Route component={NotFound} />
+                     </Switch>
+                   </Grid>
+                   <Footer />
+                   <Reconnect {...props} />
+                   <Feedback {...props} />
+                   {props.i18nReady.get() && <Blaze template="cookieConsent" /> }
+                 </div>}
+             </LocationListener>
+           </Router>
+         </ErrorBoundary>
+       </I18nextProvider>
+     </ErrorBoundary> }
+  </div>
 );
 
 App.defaultProps = {
