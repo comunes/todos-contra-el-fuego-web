@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-indent-props */
 /* eslint-disable key-spacing */
 /* eslint-env jquery */
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { translate, Trans } from 'react-i18next';
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
@@ -54,7 +54,7 @@ class Index extends Component {
           </div>
         </section>);
     }
-    return (<Fragment />);
+    return (<div />);
   }
 
   scaleHeader() {
@@ -88,7 +88,7 @@ class Index extends Component {
           <title>{title}</title>
         </Helmet>
         {/* https://v4-alpha.getbootstrap.com/components/carousel/  */}
-        <Fragment>
+        <div>
           <section className="sect1">
             <header>
               <ReactResizeDetector handleWidth handleHeight onResize={this.onResize} />
@@ -99,10 +99,10 @@ class Index extends Component {
               >
                 {/* for dev ^^^: data-interval=false */}
                 <ol className="carousel-indicators">
-                  <li data-target="#carouselMainIndicators" data-slide-to="0" className="active" />
-                  <li data-target="#carouselMainIndicators" data-slide-to="1" />
-                  <li data-target="#carouselMainIndicators" data-slide-to="2" />
-                  <li data-target="#carouselMainIndicators" data-slide-to="3" />
+                  <li key="sl1-1" data-target="#carouselMainIndicators" data-slide-to="0" className="active" />
+                  <li key="sl1-2" data-target="#carouselMainIndicators" data-slide-to="1" />
+                  <li key="sl1-3" data-target="#carouselMainIndicators" data-slide-to="2" />
+                  <li key="sl1-4" data-target="#carouselMainIndicators" data-slide-to="3" />
                 </ol>
                 <div className="carousel-inner" role="listbox">
 
@@ -192,8 +192,8 @@ class Index extends Component {
           >
             {/* for dev ^^^: data-interval=false */}
             <ol className="carousel-indicators">
-              <li data-target="#carouselSndIndicators" data-slide-to="0" className="active" />
-              <li data-target="#carouselSndIndicators" data-slide-to="1" />
+              <li key="sl2-1" data-target="#carouselSndIndicators" data-slide-to="0" className="active" />
+              <li key="sl2-2" data-target="#carouselSndIndicators" data-slide-to="1" />
             </ol>
             <div className="carousel-inner" role="listbox">
 
@@ -300,7 +300,7 @@ class Index extends Component {
               </div>
             </div>
           </section>
-        </Fragment>
+        </div>
       </div>
     );
   }
