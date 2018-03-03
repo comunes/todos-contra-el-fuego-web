@@ -1,26 +1,28 @@
+/* eslint-disable react/jsx-indent-props */
 /* eslint-disable import/no-absolute-path */
-import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
-import { translate } from 'react-i18next';
+/* eslint-disable import/no-absolute-path */
+
+import React, { Component } from 'react';
 import SubscriptionsMap from '/imports/ui/pages/Subscriptions/SubscriptionsMap';
 
-class ZonesMap extends React.Component {
+export default class ZonesMap extends Component {
   constructor(props) {
     super(props);
-    this.t = props.t;
+    this.state = {
+    };
   }
 
   render() {
     return (
-      <Fragment>
+      <div>
         <SubscriptionsMap {...this.props} />
-      </Fragment>
+      </div>
     );
   }
 }
 
 ZonesMap.propTypes = {
-  history: PropTypes.object.isRequired
 };
 
-export default translate([], { wait: true })(ZonesMap);
+ZonesMap.defaultProps = {
+};
