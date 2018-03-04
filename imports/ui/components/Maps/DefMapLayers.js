@@ -11,6 +11,8 @@ import { TileLayer, LayersControl } from 'react-leaflet';
 
 const { BaseLayer } = LayersControl;
 
+const defOpacity = 0.7;
+
 class DefMapLayers extends Component {
   constructor(props) {
     super(props);
@@ -31,6 +33,7 @@ class DefMapLayers extends Component {
     const osmgraylayer = (
       <BaseLayer checked={this.props.gray} name={t('Mapa gris de OpenStreetMap')}>
         <TileLayer
+            opacity={defOpacity}
             attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
             url="https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png"
         />
@@ -38,6 +41,7 @@ class DefMapLayers extends Component {
     const osmlayer = (
       <BaseLayer checked={this.props.osmcolor} name={t('Mapa color de OpenStreetMap')}>
         <TileLayer
+            opacity={defOpacity}
             attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
@@ -49,15 +53,15 @@ class DefMapLayers extends Component {
         {/* React.Fragment does not work here */}
         { this.state.gkey &&
         <BaseLayer name={t('Mapa de carreteras de Google')}>
-          <GoogleLayer googlekey={this.state.gkey} maptype="ROADMAP" />
+          <GoogleLayer opacity={defOpacity} googlekey={this.state.gkey} maptype="ROADMAP" />
         </BaseLayer> }
         { this.state.gkey &&
         <BaseLayer name={t('Mapa de terreno de Google')}>
-          <GoogleLayer googlekey={this.state.gkey} maptype="TERRAIN" />
+          <GoogleLayer opacity={defOpacity} googlekey={this.state.gkey} maptype="TERRAIN" />
         </BaseLayer> }
         { this.state.gkey &&
           <BaseLayer name={t('Mapa de satélite de Google')} checked={this.props.satellite}>
-            <GoogleLayer googlekey={this.state.gkey} maptype="SATELLITE" />
+            <GoogleLayer opacity={defOpacity} googlekey={this.state.gkey} maptype="SATELLITE" />
           </BaseLayer> }
       </LayersControl>
     );
