@@ -54,6 +54,13 @@
   font-size: 16px;
 }
 
+@include breakpoint(mobile) {
+  p.firesmap-note,
+  p.firesmap-legend {
+    margin-bottom: 10px;
+  }
+}
+
 .firesmap-note,
 .firesmap-footnote {
   font-size: 14px;
