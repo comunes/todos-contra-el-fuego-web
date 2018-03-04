@@ -70,8 +70,10 @@
   "Participa": "Get Involved",
   "activeFires": "Active Fires",
   "Fuegos activos": "Active Fires",
-  "noActiveFireInMapCount": "There are no active fires in this area of the map. There is a total of <1><0>{{countTotal}}</0></1> active fires detected worldwide.",
-  "activeFireInMapCount": "On the map marked in red <1><0>{{count,number}}</0></1> active fires. There is a total of <3><0>{{countTotal,number}} </0></3> active fires detected worldwide by NASA.",
+  "noActiveFireInMapCount":
+  "There are no active fires in this area of the map. <1><0>{{countTotal}}</0></1> active fires worldwide.",
+  "activeFireInMapCount":
+  "Marked in red <1><0>{{count,number}}</0></1> active fires. <3><0>{{countTotal,number}} </0></3> active fires worldwide.",
   "activeNeigFireInMapCount": "In Orange, the fires recently reported by our users.",
   "Centrar en tu ubicación": "Center on your location",
   "Resaltar en verde el área vigilada por nuestros usuarios/as": "The area monitored by our users is highlighted in green",
@@ -102,7 +104,7 @@
   "Terminar": "Finish",
   "Pulsa para borrar": "Click to delete",
   "Pulsa aquí para borrar la zona": "Click here to remove the area",
-  "Los fuegos activos se actualizan en tiempo real.": "Fires are updated in real-time.",
+  "Los fuegos activos se actualizan en tiempo cuasi real.": "Fires are updated in near real-time.",
   "Somos muchos ojos": "We are many eyes",
   "Usa nuestro bot de Telegram para estar al tanto de los fuegos en tus área": "Use our Telegram bot to be aware of the fires in your area",
   "Otros dispositivos": "Other Devices",
@@ -165,7 +167,7 @@
   "Verifica tu dirección de correo": "Verify Your Email Address",
   "Zonas vigiladas": "Monitored areas",
   "En verde, las zonas vigiladas por nuestros usuari@s actualmente": "In green, the areas monitored by our users currently",
-  "Datos actualizados <1></1>.": "Data updated <1></1>.",
+  "Actualizado <1></1>.": "Updated <1></1>.",
   "Información adicional sobre fuego": "Additional information about fire",
   "CO2emisions": "Did you know that wildfires <1>produce as much CO² as cars</1> and <3>about ⅕ of all our carbon emissions</3>?",
   "Ayúdanos a combatir el cambio climático y a proteger el medioambiente": "Help us fight climate change and protect the environment",
@@ -239,5 +241,7 @@
   "on-already-subscribed":
   "Upppps: You have already subscribed to that zone before",
   "Cancelar":
-  "Cancel"
+  "Cancel",
+  "Nota: Las nubes pueden entorpecer la detección de fuegos activos.":
+  "Note: Cloud cover might obscure active fire detections."
 }

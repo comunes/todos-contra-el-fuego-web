@@ -31,7 +31,7 @@ import FireAlertsCollection from '/imports/api/FireAlerts/FireAlerts';
 import IndustriesCollection, { industriesRemap } from '/imports/api/Industries/Industries';
 import FalsePositivesCollection, { falsePositivesRemap } from '/imports/api/FalsePositives/FalsePositives';
 import SiteSettings from '/imports/api/SiteSettings/SiteSettings';
-import { isNotHomeAndMobile, isChrome } from '/imports/ui/components/Utils/isMobile';
+import { isNotHomeAndMobile, isChrome, isAnyMobile } from '/imports/ui/components/Utils/isMobile';
 import { isHome } from '/imports/ui/components/Utils/location';
 import ShareIt from '/imports/ui/components/ShareIt/ShareIt';
 import FullScreenMap from '/imports/ui/components/Maps/FullScreenMap';
@@ -223,13 +223,13 @@ class FiresMap extends React.Component {
              <Col xs={12} sm={6} md={6} lg={6} >
                <p className="firesmap-legend">
                  { (this.props.activefires.length + this.props.firealerts.length) === 0 ?
-                   <Fragment><Trans parent="span" i18nKey="noActiveFireInMapCount">No hay fuegos activos en esta zona del mapa. Hay un total de <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos detectados en todo el mundo.</Trans> <Trans>Datos actualizados <FromNow when={this.props.lastCheck} />.</Trans></Fragment> :
-                   <Fragment><Trans parent="span" i18nKey="activeFireInMapCount">En rojo, <strong>{{ count: this.props.activefires.length + this.props.firealerts.length }}</strong> fuegos activos en el mapa. Hay un total de <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos detectados en todo el mundo por la NASA.</Trans> <Trans>Datos actualizados <FromNow when={this.props.lastCheck} />.</Trans></Fragment>
+                   <Fragment><Trans parent="span" i18nKey="noActiveFireInMapCount">No hay fuegos activos en esta zona del mapa. <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos en el mundo.</Trans> <Trans>Actualizado <FromNow when={this.props.lastCheck} />.</Trans></Fragment> :
+                 <Fragment><Trans parent="span" i18nKey="activeFireInMapCount">En rojo, <strong>{{ count: this.props.activefires.length + this.props.firealerts.length }}</strong> fuegos activos. <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos en el mundo.</Trans> <Trans>Actualizado <FromNow when={this.props.lastCheck} />.</Trans></Fragment>
                  }
                </p>
                {isNotHomeAndMobile() && this.props.firealerts.length > 0 &&
                 <p className="firesmap-legend"><Trans parent="span" i18nKey="activeNeigFireInMapCount">En naranja, los fuegos notificados por nuestros usuarios/as recientemente.</Trans></p> }
-                {isNotHomeAndMobile() && this.props.firealerts.length === 0 &&
+                {isNotHomeAndMobile() && this.props.firealerts.length === 0 && !isAnyMobile &&
                  <p className="firesmap-legend"><Trans parent="span" i18nKey="noActiveNeigFireInMap">No hay fuegos notificados recientemente por nuestros usuarios/as en esta zona.</Trans></p> }
              </Col>
              <Col xs={12} sm={6} md={6} lg={6}>
@@ -252,7 +252,7 @@ class FiresMap extends React.Component {
                 </Fragment>}
                 <p className="firesmap-note">
                   <em>{ this.state.viewport.zoom >= MAXZOOMREACTIVE ?
-                       <Trans>Los fuegos activos se actualizan en tiempo real.</Trans> :
+                       <Trans>Los fuegos activos se actualizan en tiempo cuasi real.</Trans> :
                        <Trans>Haga zoom en una zona de su interés si quiere que los fuegos se actualicen en tiempo real.</Trans>
                       }
                   </em>
@@ -344,6 +344,7 @@ class FiresMap extends React.Component {
            <Row>
              <Col xs={12} sm={12} md={12} lg={12}>
                <p className="firesmap-footnote"><span style={{ paddingRight: '5px' }}>(*)</span><Trans i18nKey="mapPrivacy" parent="span"><em>Para preservar la privacidad de nuestros usuarios/as, los datos reflejados están aleatoriamente alterados y son solo orientativos.</em></Trans></p>
+               <p className="firesmap-footnote"><em><Trans>Nota: Las nubes pueden entorpecer la detección de fuegos activos.</Trans></em></p>
              </Col>
            </Row>
            { !isHome() &&

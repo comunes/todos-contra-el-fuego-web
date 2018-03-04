@@ -113,9 +113,9 @@
   "Fuegos activos":
   "Fuegos activos",
   "noActiveFireInMapCount":
-  "No hay fuegos activos en esta zona del mapa. Hay un total de <1><0>{{countTotal}}</0></1> fuegos activos detectados en todo el mundo.",
+  "No hay fuegos activos en esta zona del mapa. <1><0>{{countTotal}}</0></1> fuegos activos en el mundo.",
   "activeFireInMapCount":
-  "En rojo, <1><0>{{count,number}}</0></1> fuegos activos en el mapa. Hay un total de <3><0>{{countTotal,number}}</0></3> fuegos activos detectados en todo el mundo por la NASA.",
+  "En rojo, <1><0>{{count,number}}</0></1> fuegos activos. <3><0>{{countTotal,number}}</0></3> fuegos activos en el mundo.",
   "activeNeigFireInMapCount":
   "En naranja, los fuegos notificados por nuestros usuarios/as recientemente.",
   "Centrar en tu ubicación":
@@ -162,7 +162,7 @@
   "Terminar": "Terminar",
   "Pulsa para borrar": "Pulsa para borrar",
   "Pulsa aquí para borrar la zona": "Pulsa aquí para borrar la zona",
-  "Los fuegos activos se actualizan en tiempo real.": "Los fuegos activos se actualizan en tiempo real.",
+  "Los fuegos activos se actualizan en tiempo cuasi real.": "Los fuegos activos se actualizan en tiempo cuasi real.",
   "Somos muchos ojos": "Somos muchos ojos",
   "Usa nuestro bot de Telegram para estar al tanto de los fuegos en tus área": "Usa nuestro bot de Telegram para estar al tanto de los fuegos en tus área",
   "Otros dispositivos": "Otros dispositivos",
@@ -237,7 +237,7 @@
   "Verifica tu dirección de correo",
   "Zonas vigiladas": "Zonas vigiladas",
   "En verde, las zonas vigiladas por nuestros usuari@s actualmente": "En verde, las zonas vigiladas por nuestros usuari@s actualmente",
-  "Datos actualizados <1></1>.": "Datos actualizados <1></1>.",
+  "Actualizado <1></1>.": "Actualizado <1></1>.",
   "Tomamos nota, ¡gracias por colaborar!":
   "Tomamos nota, ¡gracias por colaborar!",
   "Indícanos de que tipo de fuego se trata y ayúdanos así a mejorar nuestras notificaciones:": "Indícanos de que tipo de fuego se trata y ayúdanos así a mejorar nuestras notificaciones:",
@@ -326,5 +326,7 @@
   "on-already-subscribed":
   "Upppps: Ya te habías suscrito a esa zona antes",
   "Cancelar":
-  "Cancelar"
+  "Cancelar",
+  "Nota: Las nubes pueden entorpecer la detección de fuegos activos.":
+  "Nota: Las nubes pueden entorpecer la detección de fuegos activos."
 }
