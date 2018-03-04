@@ -10,6 +10,7 @@ import Gkeys from '/imports/startup/client/Gkeys';
 import CenterInMyPosition from '/imports/ui/components/CenterInMyPosition/CenterInMyPosition';
 import LocationAutocomplete from '/imports/ui/components/LocationAutocomplete/LocationAutocomplete';
 import { isNotHomeAndMobile } from '/imports/ui/components/Utils/isMobile';
+import { isHome } from '/imports/ui/components/Utils/location';
 
 class FireSubscription extends React.Component {
   constructor(props) {
@@ -104,8 +105,9 @@ class FireSubscription extends React.Component {
             distance={this.state.distance}
             fstBtn={this.props.subsBtn}
             onFstBtn={state => this.onSubs(state)}
-            sndBtn="fa-times"
+            sndBtn={isHome() ? null : 'fa-times'}
             onSndBtn={this.onCancel}
+            sndBtnTitle={this.props.t('Cancelar')}
             onSelection={state => this.onSelection(state)}
             action={action.add}
             disableFstBtn={this.props.disableFstBtn}
@@ -116,6 +118,7 @@ class FireSubscription extends React.Component {
 }
 
 FireSubscription.propTypes = {
+  t: PropTypes.func.isRequired,
   center: PropTypes.arrayOf(PropTypes.number),
   zoom: PropTypes.number,
   distance: PropTypes.number,

@@ -242,6 +242,7 @@ class SelectionMap extends Component {
                     { this.props.sndBtn && this.props.onSndBtn &&
                       <Button
                           bsStyle="warning"
+                          title={this.props.sndBtnTitle}
                           onClick={event => this.onSndBtn(event)}
                       >
                         {this.props.sndBtn.match(/^fa-/) ? <i className={`fa ${this.props.sndBtn}`} /> : this.props.sndBtn }
@@ -266,7 +267,8 @@ class SelectionMap extends Component {
 }
 
 SelectionMap.defaultProps = {
-  zoom: 11
+  zoom: 11,
+  sndBtnTitle: ''
 };
 
 SelectionMap.propTypes = {
@@ -280,6 +282,7 @@ SelectionMap.propTypes = {
   onFstBtn: PropTypes.func.isRequired,
   sndBtn: PropTypes.string,
   onSndBtn: PropTypes.func,
+  sndBtnTitle: PropTypes.string,
   onRemove: PropTypes.func,
   action: PropTypes.number.isRequired,
   loadingSubs: PropTypes.bool.isRequired,
