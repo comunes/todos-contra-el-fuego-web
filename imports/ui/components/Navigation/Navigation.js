@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Trans, translate } from 'react-i18next';
 import { testId } from '/imports/ui/components/Utils/TestUtils';
-import BetaRibbon from '../../components/BetaRibbon/BetaRibbon';
+/* import BetaRibbon from '../../components/BetaRibbon/BetaRibbon'; */
 import PublicNavigation from '../PublicNavigation/PublicNavigation';
 import AuthenticatedNavigation from '../AuthenticatedNavigation/AuthenticatedNavigation';
 import NavItem from '../NavItem/NavItem';
@@ -19,7 +19,7 @@ import './Navigation.scss';
 const Navigation = props => (
   <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
     <div style={{ overflow: 'hidden' } /* for ribbon */} className="container">
-      <BetaRibbon />
+      {/* <BetaRibbon /> */}
       {/* <Navbar bsClass="navbar navbar-dark bg-dark"> */}
       {/* https://github.com/react-bootstrap/react-bootstrap/blob/master/src/Navbar.js */}
       <Navbar.Header>
