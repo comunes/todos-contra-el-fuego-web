@@ -2,7 +2,7 @@ Hey, {{firstName}}!
 
 {{message}}
 
-[More information about this fire]({{fireUrl}})
+More information about this fire: {{fireUrl}}
 
 Isn't it a forest fire? In the previous link you can tell us what kind of fire it is and help us improve our notifications.
 

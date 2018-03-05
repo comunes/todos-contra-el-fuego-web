@@ -4,7 +4,7 @@ Welcome to {{applicationName}}. We thank you for collaborating with us.
 
 Ready to get started?
 
-[View Your Subscriptions to Fires]({{welcomeUrl}})
+View Your Subscriptions to Fires: {{welcomeUrl}}
 
 Thanks,
 {{applicationName}} Team

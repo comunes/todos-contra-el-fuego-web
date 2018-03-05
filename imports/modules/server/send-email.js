@@ -1,11 +1,21 @@
+/* eslint-disable import/no-absolute-path */
+
 import { Meteor } from 'meteor/meteor';
-// import { Email } from 'meteor/email';
+import i18n from 'i18next';
+import { getFileNameOfLang } from '/imports/api/Utility/server/files.js';
+import sendMail from '/imports/startup/server/email';
 import getPrivateFile from './get-private-file';
 import templateToText from './handlebars-email-to-text';
 import templateToHTML from './handlebars-email-to-html';
-import { getFileNameOfLang } from '/imports/api/Utility/server/files.js';
-import sendMail from '/imports/startup/server/email';
-import i18n from 'i18next';
+
+export function subjectTruncate(n = 70, useWordBoundary = true) {
+  // https://stackoverflow.com/questions/1199352/smart-way-to-shorten-long-strings-with-javascript
+  if (this.length <= n) {
+    return `${this}`;
+  }
+  const subString = this.substr(0, n - 1);
+  return `${useWordBoundary ? subString.substr(0, subString.lastIndexOf(' ')) : subString}...`;
+}
 
 const sendEmail = (options, { resolve, reject }) => {
   try {

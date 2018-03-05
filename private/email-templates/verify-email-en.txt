@@ -2,7 +2,7 @@ Hey, {{firstName}}!
 
 Can you do us a favor and verify your email address?
 
-[Verify Email Address]({{verifyUrl}})
+Verify Email Address: {{verifyUrl}}
 
 Thanks!
 {{applicationName}} Team

@@ -4,7 +4,7 @@ Bienvenid@ a {{applicationName}}. Te agradecemos que colabores con nosotr@s.
 
 ¿Preparada para empezar?
 
-[Ver tus subscripciones a fuegos]({{welcomeUrl}})
+Ver tus subscripciones a fuegos: {{welcomeUrl}}
 
 Gracias,
 El equipo de {{applicationName}}

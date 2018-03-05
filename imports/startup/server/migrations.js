@@ -1,4 +1,4 @@
-/* global Migrations */
+/* global Migrations, Comments */
 /* eslint-disable import/no-absolute-path */
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
@@ -157,6 +157,12 @@ Meteor.startup(() => {
     }
   });
 
+  Migrations.add({
+    version: 11,
+    up: function noAnonComments() {
+      Comments.getCollection().remove({ isAnonymous: true });
+    }
+  });
 
   // Set createdAt in users & subs
   Migrations.migrateTo('latest');

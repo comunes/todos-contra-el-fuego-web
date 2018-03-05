@@ -2,7 +2,7 @@ Hola, {{firstName}}!
 
 {{message}}
 
-[Más información sobre este fuego]({{fireUrl}})
+Más información sobre este fuego: {{fireUrl}}
 
 ¿No es un fuego forestal? En el enlace anterior puedes indicarnos de que tipo de fuego se trata y ayudarnos así a mejorar nuestras notificaciones.
 

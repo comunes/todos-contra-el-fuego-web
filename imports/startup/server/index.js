@@ -8,7 +8,7 @@ import './IPGeocoder';
 import './migrations';
 import './notificationsObserver';
 import './facts';
-import '../common/comments';
+import './comments';
 import './sitemaps';
 import './subsUnion';
 import './prerender';

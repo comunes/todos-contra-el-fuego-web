@@ -1,0 +1,8 @@
+Hola, {{firstName}}!
+
+Hay más información sobre un fuego al que hiciste comentarios:
+
+{{fireUrl}}
+
+Gracias!
+El equipo de {{applicationName}}

@@ -2,7 +2,7 @@ Hola, {{firstName}}!
 
 ¿Nos puedes hacer un favor y verificar tu correo electrónico?
 
-[Verificar correo electrónico]({{verifyUrl}})
+Verificar correo electrónico: {{verifyUrl}}
 
 Gracias!
 El equipo de {{applicationName}}
