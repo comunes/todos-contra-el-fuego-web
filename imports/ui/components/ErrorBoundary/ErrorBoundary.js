@@ -58,7 +58,7 @@ ErrorBoundary.propTypes = {
 };
 
 ErrorBoundary.defaultProps = {
-  appName: 'All Against Fire!',
+  appName: 'All Against the Fire!',
   title: 'Upppps: Something has gone wrong',
   subTitle: 'We are investigating the problem, try again in a while'
 };
