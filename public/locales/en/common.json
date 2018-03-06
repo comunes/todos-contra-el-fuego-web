@@ -76,7 +76,7 @@
   "Marked in red <1><0>{{count,number}}</0></1> active fires. <3><0>{{countTotal,number}} </0></3> active fires worldwide.",
   "activeNeigFireInMapCount": "In Orange, the fires recently reported by our users.",
   "Centrar en tu ubicación": "Center on your location",
-  "Resaltar en verde el área vigilada por nuestros usuarios/as": "The area monitored by our users is highlighted in green",
+  "Resaltar en verde el área vigilada por nuestros usuarios/as": "Highlight in green the area monitored by our users",
   "Resaltar los fuegos con un marcador": "Highlight the fires with a marker",
   "mapPrivacy": "<0>In order to preserve the privacy of our users, the reflected data are randomly altered and are only indicative.</0>",
   "Nuevas notificaciones de {{app}}": "New notifications of {{app}}",
@@ -225,6 +225,8 @@
   "noActiveNeigFireInMap": "There are no fires recently reported by our users in this area.",
   "Es una industria (fuente: registro oficial)":
   "It's an industry (source: oficial register)",
+  "Es una industria (fuente: nuestros usuarios/as)":
+  "It's an industry (source: our users):",
   "Pantalla completa":
   "Fullscreen",
   "Salir de pantalla completa":
