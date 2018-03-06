@@ -45,7 +45,6 @@ natestrauser:publish-performant-counts
 maximum:server-transform
 mys:fonts                     # fonst in npm
 ostrio:mailer                 # mailer
-mizzao:user-status            # user status (online, etc)
 # babrahams:constellation     # dev utility
 percolate:migrations          # db migrations
 ostrio:meteor-root
