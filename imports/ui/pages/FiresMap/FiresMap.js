@@ -152,7 +152,7 @@ class FiresMap extends React.Component {
   }
 
   centerOnUserLocation(viewport) {
-    this.setState({ viewport });
+    this.setState({ viewport: { center: viewport.center, zoom: 10 } });
   }
 
   useMarkers(use) {
@@ -218,50 +218,51 @@ class FiresMap extends React.Component {
             <title>{title}</title>
             <meta name="description" content={t('Fuegos activos en el mundo actualizados en tiempo real')} />
           </Helmet> }
-           <h4 className="page-header"><Trans parent="span">Fuegos activos</Trans></h4>
-           <Row>
-             <Col xs={12} sm={6} md={6} lg={6} >
-               <p className="firesmap-legend">
-                 { (this.props.activefires.length + this.props.firealerts.length) === 0 ?
-                   <Fragment><Trans parent="span" i18nKey="noActiveFireInMapCount">No hay fuegos activos en esta zona del mapa. <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos en el mundo.</Trans> <Trans>Actualizado <FromNow when={this.props.lastCheck} />.</Trans></Fragment> :
-                 <Fragment><Trans parent="span" i18nKey="activeFireInMapCount">En rojo, <strong>{{ count: this.props.activefires.length + this.props.firealerts.length }}</strong> fuegos activos. <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos en el mundo.</Trans> <Trans>Actualizado <FromNow when={this.props.lastCheck} />.</Trans></Fragment>
-                 }
-               </p>
-               {isNotHomeAndMobile() && this.props.firealerts.length > 0 &&
-                <p className="firesmap-legend"><Trans parent="span" i18nKey="activeNeigFireInMapCount">En naranja, los fuegos notificados por nuestros usuarios/as recientemente.</Trans></p> }
-                {isNotHomeAndMobile() && this.props.firealerts.length === 0 && !isAnyMobile &&
+          <h4 className="page-header"><Trans parent="span">Fuegos activos</Trans></h4>
+          <Row>
+            <Col xs={12} sm={6} md={6} lg={6}>
+              {isNotHomeAndMobile() &&
+               <Fragment>
+                 <LocationAutocomplete
+                     focusInput={false}
+                     label=""
+                     placeHolder="Escribe un lugar para centrar el mapa"
+                     helpText=""
+                     onChange={value => this.onAutocompleteChange(value)}
+                 />
+                 <Checkbox inline={false} defaultChecked={this.state.showSubsUnion} onClick={e => this.setShowSubsUnion(e.target.checked)}>
+                   <Trans className="mark-checkbox" parent="span">Resaltar en verde el área vigilada por nuestros usuarios/as</Trans>&nbsp;(*)
+                 </Checkbox>
+                 {(this.state.viewport.zoom >= MAXZOOM) &&
+                  <Checkbox inline={false} defaultChecked={this.state.useMarkers} onClick={e => this.useMarkers(e.target.checked)}>
+                    <Trans className="mark-checkbox" parent="span">Resaltar los fuegos con un marcador</Trans>
+                  </Checkbox>}
+               </Fragment>}
+            </Col>
+            <Col xs={12} sm={6} md={6} lg={6} >
+              <p className="firesmap-legend">
+                { (this.props.activefires.length + this.props.firealerts.length) === 0 ?
+                  <Fragment><Trans parent="span" i18nKey="noActiveFireInMapCount">No hay fuegos activos en esta zona del mapa. <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos en el mundo.</Trans> <Trans>Actualizado <FromNow when={this.props.lastCheck} />.</Trans></Fragment> :
+                  <Fragment><Trans parent="span" i18nKey="activeFireInMapCount">En rojo, <strong>{{ count: this.props.activefires.length + this.props.firealerts.length }}</strong> fuegos activos. <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos en el mundo.</Trans> <Trans>Actualizado <FromNow when={this.props.lastCheck} />.</Trans></Fragment>
+                }
+              </p>
+              {isNotHomeAndMobile() && this.props.firealerts.length > 0 &&
+               <p className="firesmap-legend"><Trans parent="span" i18nKey="activeNeigFireInMapCount">En naranja, los fuegos notificados por nuestros usuarios/as recientemente.</Trans></p> }
+               { /* disabled */ false && isNotHomeAndMobile() && this.props.firealerts.length === 0 && !isAnyMobile &&
                  <p className="firesmap-legend"><Trans parent="span" i18nKey="noActiveNeigFireInMap">No hay fuegos notificados recientemente por nuestros usuarios/as en esta zona.</Trans></p> }
-             </Col>
-             <Col xs={12} sm={6} md={6} lg={6}>
-               {isNotHomeAndMobile() &&
-                <Fragment>
-                  <LocationAutocomplete
-                      focusInput={false}
-                      label=""
-                      placeHolder="Escribe un lugar para centrar el mapa"
-                      helpText=""
-                      onChange={value => this.onAutocompleteChange(value)}
-                  />
-                  <Checkbox inline={false} defaultChecked={this.state.showSubsUnion} onClick={e => this.setShowSubsUnion(e.target.checked)}>
-                    <Trans className="mark-checkbox" parent="span">Resaltar en verde el área vigilada por nuestros usuarios/as</Trans>&nbsp;(*)
-                  </Checkbox>
-                  {(this.state.viewport.zoom >= MAXZOOM) &&
-                   <Checkbox inline={false} defaultChecked={this.state.useMarkers} onClick={e => this.useMarkers(e.target.checked)}>
-                     <Trans className="mark-checkbox" parent="span">Resaltar los fuegos con un marcador</Trans>
-                   </Checkbox>}
-                </Fragment>}
-                <p className="firesmap-note">
-                  <em>{ this.state.viewport.zoom >= MAXZOOMREACTIVE ?
-                       <Trans>Los fuegos activos se actualizan en tiempo cuasi real.</Trans> :
-                       <Trans>Haga zoom en una zona de su interés si quiere que los fuegos se actualicen en tiempo real.</Trans>
-                      }
-                  </em>
-                </p>
-             </Col>
-           </Row>
-           {this.props.loading || !this.props.subsready ?
-            <LoadingBar progress={this.props.loading ? 0.9 : 1} />
-            : ''}
+
+                 <p className="firesmap-note">
+                   <em>{ this.state.viewport.zoom >= MAXZOOMREACTIVE ?
+                        <Trans>Los fuegos activos se actualizan en tiempo cuasi real.</Trans> :
+                        <Trans>Haga zoom en una zona de su interés si quiere que los fuegos se actualicen en tiempo real.</Trans>
+                       }
+                   </em>
+                 </p>
+            </Col>
+          </Row>
+          {this.props.loading || !this.props.subsready ?
+           <LoadingBar progress={this.props.loading ? 0.9 : 1} />
+           : ''}
            {/* https://github.com/CliffCloud/Leaflet.Sleep */}
            <Map
                ref={(map) => {
@@ -419,14 +420,14 @@ export default translate([], { wait: true })(withTracker(() => {
         mapSize.get()[1].lat
       );
       /* if (withIndustries) {
-      Meteor.subscribe(
-        'industriesMyloc',
-        mapSize.get()[0].lng,
-        mapSize.get()[0].lat,
-        mapSize.get()[1].lng,
-        mapSize.get()[1].lat
-      );
-      } */
+         Meteor.subscribe(
+         'industriesMyloc',
+         mapSize.get()[0].lng,
+         mapSize.get()[0].lat,
+         mapSize.get()[1].lng,
+         mapSize.get()[1].lat
+         );
+         } */
     }
   });
 
