@@ -164,8 +164,19 @@ Meteor.startup(() => {
     }
   });
 
+  Migrations.add({
+    version: 12,
+    up: function setTelegramUsersBotId() {
+      Meteor.users.update({ telegramChatId: { $ne: null }, telegramBot: null }, {
+        $set: {
+          telegramBot: 'es'
+        }
+      });
+    }
+  });
+
   // Set createdAt in users & subs
   Migrations.migrateTo('latest');
 
-  // Migrations.migrateTo('7,rerun');
+  // Migrations.migrateTo('12,rerun');
 });

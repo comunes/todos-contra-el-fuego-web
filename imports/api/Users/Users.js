@@ -106,6 +106,7 @@ const schemaUser = new SimpleSchema({
   'name.first': String,
   'name.last': String, */
   lang: { type: String, optional: true },
+  telegramBot: { type: String, optional: true },
   telegramChatId: { type: SimpleSchema.Integer, optional: true },
   telegramUsername: { type: String, optional: true },
   telegramFirstName: { type: String, optional: true },
