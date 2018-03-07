@@ -18,6 +18,7 @@ import '/imports/startup/client/meta';
 import '/imports/startup/client/ravenLogger';
 import '/imports/startup/client/geolocation';
 import '/imports/startup/client/piwik-start.js';
+import '/imports/startup/client/reconnect.js';
 import Reconnect from '../../components/Reconnect/Reconnect';
 import Navigation from '../../components/Navigation/Navigation';
 import Authenticated from '../../components/Authenticated/Authenticated';

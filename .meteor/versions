@@ -90,6 +90,7 @@ mys:fonts@0.0.2
 natestrauser:publish-performant-counts@0.1.2
 npm-bcrypt@0.9.3
 npm-mongo@2.2.34
+nspangler:autoreconnect@0.0.1
 oauth@1.2.0
 oauth2@1.2.0
 observe-sequence@1.0.16
