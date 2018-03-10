@@ -9,14 +9,14 @@ import FirePixel from '/imports/ui/components/Maps/FirePixel';
 
 export default function FireList(props) {
   const {
-    fires, scale, useMarkers, nasa, t, history, falsePositives, industries
+    fires, scale, useMarkers, nasa, t, history, falsePositives, industries, neighbour
   } = props;
   const useMarks = useMarkers && scale;
   const usePixel = !nasa || !scale;
   /* console.log(`Using marks: ${useMarks}, using pixels: ${usePixel}`); */
   let items;
   if (useMarks) {
-    items = fires.map(({ _id, ...otherProps }) => (<FireIconMark t={t} history={history} id={_id} key={_id} nasa={nasa} falsePositives={falsePositives} industries={industries} {...otherProps} />));
+    items = fires.map(({ _id, ...otherProps }) => (<FireIconMark t={t} history={history} id={_id} key={_id} nasa={nasa} neighbour={neighbour} falsePositives={falsePositives} industries={industries} {...otherProps} />));
   } else if (usePixel && !falsePositives && !industries) {
     items = fires.map(({ _id, ...otherProps }) => (<FirePixel t={t} key={_id} id={_id} history={history} nasa={nasa} {...otherProps} />));
   } else if (!falsePositives && !industries) {
@@ -32,6 +32,7 @@ FireList.propTypes = {
   nasa: PropTypes.bool.isRequired,
   falsePositives: PropTypes.bool.isRequired,
   industries: PropTypes.bool.isRequired,
+  neighbour: PropTypes.bool.isRequired,
   history: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired
 };

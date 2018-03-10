@@ -124,6 +124,7 @@ class Fire extends React.Component {
                  useMarkers
                  nasa={false}
                  falsePositives
+                 neighbour={false}
                  industries={false}
              />
              <FireList
@@ -134,6 +135,7 @@ class Fire extends React.Component {
                  useMarkers
                  nasa={false}
                  falsePositives={false}
+                 neighbour={false}
                  industries
              />
              <DefMapLayers satellite />

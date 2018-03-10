@@ -38,6 +38,7 @@ class FireIconMark extends Component {
       history,
       falsePositives,
       industries,
+      neighbour,
       when,
       t
     } = this.props;
@@ -81,6 +82,7 @@ FireIconMark.propTypes = {
   nasa: PropTypes.bool,
   falsePositives: PropTypes.bool.isRequired,
   industries: PropTypes.bool.isRequired,
+  neighbour: PropTypes.bool.isRequired,
   id: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   when: PropTypes.instanceOf(Date),

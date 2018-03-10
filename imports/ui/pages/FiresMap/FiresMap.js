@@ -301,6 +301,7 @@ class FiresMap extends React.Component {
                    useMarkers={this.state.useMarkers}
                    nasa={false}
                    falsePositives
+                   neighbour={false}
                    industries={false}
                />
                <FireList
@@ -310,6 +311,7 @@ class FiresMap extends React.Component {
                    scale={this.state.viewport.zoom >= MAXZOOM}
                    useMarkers={this.state.useMarkers}
                    nasa={false}
+                   neighbour={false}
                    falsePositives={false}
                    industries
                />
@@ -320,6 +322,7 @@ class FiresMap extends React.Component {
                    scale={this.state.viewport.zoom >= MAXZOOM}
                    useMarkers={this.state.useMarkers}
                    nasa
+                   neighbour={false}
                    falsePositives={false}
                    industries={false}
                />
@@ -327,9 +330,10 @@ class FiresMap extends React.Component {
                    t={t}
                    history={this.props.history}
                    fires={this.props.firealerts}
-                   scale={false}
+                   scale={this.state.viewport.zoom >= MAXZOOM}
                    useMarkers={this.state.useMarkers}
                    nasa={false}
+                   neighbour
                    falsePositives={false}
                    industries={false}
                />
