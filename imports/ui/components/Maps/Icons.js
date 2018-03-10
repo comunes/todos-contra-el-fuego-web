@@ -13,19 +13,19 @@ export const fireIcon = new Leaflet.Icon({
 });
 
 export const fireIconL = new Leaflet.Icon({
-  iconUrl: '/fire-marker-l.png',
+  iconUrl: '/fire-marker-l.png?v2',
   iconSize: [28, 28],
   iconAnchor: [14, 30]
 });
 
 export const fireIconM = new Leaflet.Icon({
-  iconUrl: '/fire-marker-m.png',
+  iconUrl: '/fire-marker-m.png?v2',
   iconSize: [28, 28],
   iconAnchor: [14, 30]
 });
 
 export const fireIconS = new Leaflet.Icon({
-  iconUrl: '/fire-marker-s.png',
+  iconUrl: '/fire-marker-s.png?v2',
   iconSize: [28, 28],
   iconAnchor: [14, 30]
 });
