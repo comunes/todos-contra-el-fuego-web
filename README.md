@@ -1,5 +1,7 @@
 # Tod@s contra el Fuego (All Against Fire)
 
+[![Build Status](http://ci.comunes.org/buildStatus/icon?job=todos-contra-el-fuego-web)](http://ci.comunes.org/job/todos-contra-el-fuego-web/)
+
 This is web service that notifies about fires detected in an area of your interest. It helps the early detection of fires and facilitates local mobilization, while the professional extinction services arrive.
 
 ## Install
