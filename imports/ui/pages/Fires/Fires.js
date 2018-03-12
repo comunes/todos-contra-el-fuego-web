@@ -17,7 +17,7 @@ import NotFound from '/imports/ui/pages/NotFound/NotFound';
 import FiresCollection from '/imports/api/Fires/Fires';
 import FireList from '/imports/ui/components/Maps/FireList';
 import FromNow from '/imports/ui/components/FromNow/FromNow';
-import { dateLongFormat } from '/imports/api/Common/dates';
+import { dateLongFormat, dateYYYYMMDD } from '/imports/api/Common/dates';
 import '/imports/startup/client/comments';
 import FalsePositiveTypes from '/imports/api/FalsePositives/FalsePositiveTypes';
 import FalsePositivesCollection, { falsePositivesRemap } from '/imports/api/FalsePositives/FalsePositives';
@@ -52,7 +52,7 @@ class Fire extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return !(nextState.when === this.state.when && nextState.loading === this.state.loading && this.state.notfound === nextState.notfound);
+    return !(nextState.when === this.state.when && nextState.loading === this.state.loading && this.state.notfound === nextState.notfound && nextState.nasaLink === this.state.nasaLink);
   }
 
   onTypeSelect(key) {
@@ -67,7 +67,18 @@ class Fire extends React.Component {
     });
   }
 
-  handleLeafletLoad(circle) {
+  handleLeafletMapLoad(map) {
+    if (map && map.leafletElement) {
+      const lmap = map.leafletElement;
+      const bounds = lmap.getBounds();
+      const ne = bounds.getNorthEast();
+      const sw = bounds.getSouthWest();
+      console.log(`${sw},${ne}`);
+      this.setState({ nasaLink: `https://worldview.earthdata.nasa.gov/?p=geographic&l=VIIRS_SNPP_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor,MODIS_Fires_All,MODIS_Fires_Aqua,VIIRS_SNPP_Fires_375m_Night,VIIRS_SNPP_Fires_375m_Day,MODIS_Fires_Terra,Reference_Labels(hidden),Reference_Features(hidden),Coastlines&t=${this.dateYYYYMMDD}&z=3&v=${sw.lng},${sw.lat},${ne.lng},${ne.lat}&ab=off&as=${this.dateYYYYMMDD}&ae=${this.dateYYYYMMDD}&av=3&al=true` });
+    }
+  }
+
+  handleLeafletCircleLoad(circle) {
     if (this.fireMap && this.fireMap.leafletElement && circle && circle.leafletElement) {
       this.fireMap.leafletElement.fitBounds(circle.leafletElement.getBounds());
     }
@@ -83,6 +94,7 @@ class Fire extends React.Component {
      * console.log(`Not found fire: ${notfound}`); */
     if (fire && fire.when) {
       this.dateLongFormat = dateLongFormat(fire.when);
+      this.dateYYYYMMDD = dateYYYYMMDD(fire.when);
       this.title = fire.address ?
         t('Información adicional sobre fuego detectado en {{where}} el {{when}}', { where: fire.address, when: this.dateLongFormat }) :
         t('Información adicional sobre fuego detectado el {{when}}', { when: this.dateLongFormat });
@@ -98,7 +110,10 @@ class Fire extends React.Component {
          <Fragment>
            <h4 className="page-header">{this.title}</h4>
            <Map
-               ref={(map) => { this.fireMap = map; }}
+               ref={(map) => {
+                   this.fireMap = map;
+                   this.handleLeafletMapLoad(map);
+                 }}
                animate
                sleep={false}
                center={[fire.lat, fire.lon]}
@@ -113,7 +128,7 @@ class Fire extends React.Component {
                    fillOpacity={0.0}
                    interactive={false}
                    radius={fire.scan ? fire.scan * 500 : 300}
-                   ref={(circle) => { this.circle = circle; this.handleLeafletLoad(circle); }}
+                   ref={(circle) => { this.circle = circle; this.handleLeafletCircleLoad(circle); }}
                />
              </Fragment>
              <FireList
@@ -143,7 +158,10 @@ class Fire extends React.Component {
            </Map>
            <p>{t('Coordenadas:')} {fire.lat}, {fire.lon}</p>
            {(fire.type === 'modis' || fire.type === 'viirs') &&
-            <p><Trans>Fuego detectado por satélites de la NASA <FromNow {...this.props} /></Trans></p>
+            <Fragment>
+              <p><a target="_blank" href={`${this.state.nasaLink}`}><Trans>Fuego detectado por satélites de la NASA <FromNow {...this.props} /></Trans></a>
+              </p>
+            </Fragment>
            }
             {(fire.type === 'vecinal') &&
              <p><Trans>Fuego notificado por uno de nuestros usuarios/as <FromNow {...this.props} /></Trans></p>
