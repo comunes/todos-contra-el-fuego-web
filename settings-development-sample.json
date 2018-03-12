@@ -1,6 +1,7 @@
 {
   "gmaps": {
     "key": ""
+    "serverKey": ""
   },
   "piwik": {
     "url": "",
@@ -16,6 +17,7 @@
     "testMailer": false,
     "debugMailer": false,
     "MAIL_URL": "",
+    "fireIconUrl": "https://testfuegos.comunes.org/fire-marker.png",
     "OAuth": {
       "facebook": {
         "appId": "",
