@@ -48,6 +48,7 @@ Subscriptions.schema = new SimpleSchema({
   geo: LocationSchema,
   distance: Number,
   chatId: { type: Number, optional: true }, // only in 'telegram' type
+  telegramBot: { type: String, optional: true }, // only in 'telegram' type
   owner: String,
   type: String,
   createdAt: defaultCreatedAt,

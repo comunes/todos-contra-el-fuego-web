@@ -171,12 +171,34 @@ Meteor.startup(() => {
         $set: {
           telegramBot: 'es'
         }
-      });
+      }, { multi: true });
+    }
+  });
+
+  Migrations.add({
+    version: 13,
+    up: function removeTelegramBotFromUsersId() {
+      Meteor.users.update({}, {
+        $unset: {
+          telegramBot: ''
+        }
+      }, { multi: true });
+    }
+  });
+
+  Migrations.add({
+    version: 14,
+    up: function setTelegramUsersBotId() {
+      UserSubsToFiresCollection.update({ chatId: { $ne: null }, telegramBot: null }, {
+        $set: {
+          telegramBot: 'es'
+        }
+      }, { multi: true });
     }
   });
 
   // Set createdAt in users & subs
   Migrations.migrateTo('latest');
 
-  // Migrations.migrateTo('12,rerun');
+  // Migrations.migrateTo('14,rerun');
 });
