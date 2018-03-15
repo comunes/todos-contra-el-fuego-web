@@ -75,7 +75,7 @@ class Fire extends React.Component {
       const sw = bounds.getSouthWest();
       // console.log(`${sw},${ne}`);
       // const nasaLinkBase = 'https://worldview.earthdata.nasa.gov/?p=geographic&l=VIIRS_SNPP_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor,MODIS_Fires_All,MODIS_Fires_Aqua,VIIRS_SNPP_Fires_375m_Night,VIIRS_SNPP_Fires_375m_Day,MODIS_Fires_Terra,Reference_Labels(hidden),Reference_Features(hidden),Coastlines&t='
-      const nasaLinkBase = 'https://worldview.earthdata.nasa.gov/?p=geographic&l=VIIRS_SNPP_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor,MODIS_Terra_CorrectedReflectance_TrueColor,MODIS_Terra_Data_No_Data,MODIS_Fires_All,MODIS_Fires_Aqua,VIIRS_SNPP_Fires_375m_Night,VIIRS_SNPP_Fires_375m_Day,MODIS_Fires_Terra,Reference_Labels,Reference_Features,Coastlines&t=';
+      const nasaLinkBase = 'https://worldview.earthdata.nasa.gov/?p=geographic&l=VIIRS_SNPP_CorrectedReflectance_TrueColor,MODIS_Aqua_CorrectedReflectance_TrueColor,MODIS_Terra_CorrectedReflectance_TrueColor,MODIS_Terra_Data_No_Data(hidden),MODIS_Fires_All,MODIS_Fires_Aqua,VIIRS_SNPP_Fires_375m_Night,VIIRS_SNPP_Fires_375m_Day,MODIS_Fires_Terra,Reference_Labels,Reference_Features,Coastlines&t=';
       this.setState({ nasaLink: `${nasaLinkBase}${this.dateYYYYMMDD}&z=3&v=${sw.lng},${sw.lat},${ne.lng},${ne.lat}&ab=off&as=${this.dateYYYYMMDD}&ae=${this.dateYYYYMMDD}&av=3&al=true` });
     }
   }
