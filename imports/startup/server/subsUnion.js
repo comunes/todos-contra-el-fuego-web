@@ -26,59 +26,66 @@ Meteor.startup(() => {
     return sub;
   };
 
-  const process = () => {
+  const process = (isPublic) => {
     const group = new L.FeatureGroup();
-    const result = calcUnion(Subscriptions.find().fetch(), group, addNoisy);
+    const result = calcUnion(Subscriptions.find().fetch(), group, isPublic ? addNoisy : sub => sub);
     const union = result[0];
     const bounds = result[1];
+
+    const publicl = isPublic ? 'public' : 'private';
+    const Publicl = publicl.replace(/\b\w/g, l => l.toUpperCase());
 
     if (typeof union === 'object') {
       const unionSet = {
         $set: {
-          name: 'subs-public-union',
+          name: `subs-${publicl}-union`,
           value: JSON.stringify(union),
-          isPublic: true,
-          description: 'Public subscriptions union',
+          isPublic,
+          description: `${Publicl} subscriptions union`,
           type: 'string'
         }
       };
       const boundsSet = {
         $set: {
-          name: 'subs-public-union-bounds',
+          name: `subs-${publicl}-union-bounds`,
           value: JSON.stringify(bounds),
-          isPublic: true,
-          description: 'Public subscriptions union bounds',
+          isPublic,
+          description: `${Publicl} subscriptions union bounds`,
           type: 'string'
         }
       };
       // FIXME, take care of object size:
       // https://stackoverflow.com/questions/10827812/what-is-the-length-maximum-for-a-string-data-type-in-mongodb-used-with-ruby
-      SiteSettings.upsert({ name: 'subs-public-union' }, unionSet, { multi: false });
-      SiteSettings.upsert({ name: 'subs-public-union-bounds' }, boundsSet, { multi: false });
-      if (Meteor.isDevelopment) console.log('Subscription union calculated');
+      SiteSettings.upsert({ name: `subs-${publicl}-union` }, unionSet, { multi: false });
+      SiteSettings.upsert({ name: `subs-${publicl}-union-bounds` }, boundsSet, { multi: false });
+      if (Meteor.isDevelopment) console.log(`${Publicl} subscription union calculated`);
     } else {
       console.log('Subscription union failed!');
     }
   };
 
   // At startup
-  process();
+  process(true);
+  process(false);
 
   Subscriptions.find({ createdAt: { $gt: new Date() } }).observe({
     added: function newSubAdded() { // doc) {
       if (Meteor.isDevelopment) console.log('Subs added so recreate union');
-      process();
+      process(true);
+      process(false);
     }
   });
 
   Subscriptions.find().observe({
     changed: function subsChanged() { // updatedDoc, oldDoc) {
       if (Meteor.isDevelopment) console.log('Subs changed so recreate union');
-      process();
+      process(true);
+      process(false);
     },
     removed: function subsRemoved() { // oldDoc) {
       if (Meteor.isDevelopment) console.log('Subs removed so recreate union');
-      process();
+      process(true);
+      process(false);
     }
   });
 });
