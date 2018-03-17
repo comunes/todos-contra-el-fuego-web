@@ -2,6 +2,7 @@
 
 const types = {
   industry: 'Es una industria',
+  // TODO volcano: 'Es un volcán',
   controled: 'Es una quema controlada',
   falsealarm: 'Parece una falsa alarma'
 };
