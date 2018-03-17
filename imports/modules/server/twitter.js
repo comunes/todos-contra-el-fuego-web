@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import Twit from 'twit';
 
+// https://www.npmjs.com/package/twit
 const confTwitter = (lang) => {
   const tConf = Meteor.settings.private.twitter[lang];
 
