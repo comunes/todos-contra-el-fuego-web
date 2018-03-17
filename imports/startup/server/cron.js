@@ -1,6 +1,8 @@
 /* global SyncedCron */
+/* eslint-disable import/no-absolute-path */
 
 import { Meteor } from 'meteor/meteor';
+import { tweetFires } from '/imports/api/ActiveFires/server/tweetFiresInZone';
 
 // https://github.com/thesaucecode/meteor-synced-cron/
 
@@ -42,13 +44,19 @@ Meteor.startup(() => {
     // context: {
     //  userID: 'xyz'
     // },
-    schedule: parser =>
+    schedule: (parser) => {
       // this.magic = true; // Context is accesible here as this context.
       // parser is a later.parse object
       // return parser.text('every 2 minutes');
       // http://bunkat.github.io/later/
-      parser.text('at 9:15 am also at 15:15 pm also at 22:00 pm'),
+      const sched = parser.text(Meteor.settings.private.twitter.es.when);
+      if (sched.error !== -1) {
+        console.error(`Twitter cron 'when' field parsed with errors: ${sched.error}`);
+      }
+      return sched;
+    },
     job: () => {
+      tweetFires();
       // console.log('cron is working');
       /* console.log(this.userID) // Context Object becomes this argument
        * console.log(this.magic) /

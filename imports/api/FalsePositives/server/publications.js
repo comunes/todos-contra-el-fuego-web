@@ -18,7 +18,8 @@ Meteor.publish('falsePositivesTotal', function total() {
 
 export const firesUnion = (fires) => {
   const group = new L.FeatureGroup();
-  const remap = fires.fetch().map(function remap(doc) {
+  const firesArray = Array.isArray(fires) ? fires : fires.fetch(); // if not is a cursor
+  const remap = firesArray.map(function remap(doc) {
     // default scan: 1 for neightbor alerts
     return { location: { lat: doc.lat, lon: doc.lon }, distance: doc.scan || 1 };
   });
