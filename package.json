@@ -76,7 +76,8 @@
     "reactstrap": "^5.0.0-alpha.3",
     "simpl-schema": "^0.3.2",
     "simple-line-icons": "^2.4.1",
-    "store": "^2.0.12"
+    "store": "^2.0.12",
+    "twit": "^2.2.9"
   },
   "devDependencies": {
     "babel-jest": "^21.2.0",
