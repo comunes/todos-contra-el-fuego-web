@@ -13,3 +13,4 @@ import './sitemaps';
 import './subsUnion';
 import './prerender';
 import './feedback';
+import './cron';
