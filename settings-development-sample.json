@@ -1,4 +1,8 @@
 {
+  "PrerenderIO": {
+    "serviceUrl": "http://localhost:8080/",
+    "token": "yourtoken"
+  },
   "gmaps": {
     "key": ""
     "serverKey": ""
@@ -19,17 +23,7 @@
     "MAIL_URL": "",
     "fireIconUrl": "https://testfuegos.comunes.org/fire-marker.png",
     "OAuth": {
-      "facebook": {
-        "appId": "",
-        "secret": "",
-        "loginStyle": "popup"
-      },
       "google": {
-        "clientId": "",
-        "secret": "",
-        "loginStyle": "popup"
-      },
-      "github": {
         "clientId": "",
         "secret": "",
         "loginStyle": "popup"
@@ -37,5 +31,14 @@
     },
     "proxies_count": 0,
     "ironPassword": "SomePasswordAlLeast32LongYouKnowHowToCount"
+    "twitter": {
+      "es": {
+        "when": "at 9:15 am also at 3:15 pm also at 10:00 pm",
+        "consumer_key": "...",
+        "consumer_secret": "...",
+        "access_token": "...",
+        "access_token_secret": "..."
+      }
+    }
   }
 }
