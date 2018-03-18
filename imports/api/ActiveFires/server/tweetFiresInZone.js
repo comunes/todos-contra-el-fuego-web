@@ -40,7 +40,7 @@ const composeTweet = (num, stats) => {
   return `${text}`;
 };
 
-const tweetHeaders = ['🔥 '];
+const tweetHeaders = ['🔥'];
 const tweetFooters = ['Más info en: https://fuegos.comunes.org/fires'];
 
 const tweetFires = () => {
