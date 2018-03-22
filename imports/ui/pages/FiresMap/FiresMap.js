@@ -44,9 +44,10 @@ const MAXZOOM = 6;
 const MAXZOOMREACTIVE = 6;
 const DEFZOOM = 8;
 const zoom = new ReactiveVar(DEFZOOM);
-const center = new ReactiveVar([0, 0]);
+// https://en.wikipedia.org/wiki/Geographical_midpoint_of_Europe
+const center = new ReactiveVar([53.5775, 3.106111]);
 const mapSize = new ReactiveVar();
-const marks = new ReactiveVar(false);
+const marks = new ReactiveVar(true);
 const showUnion = new ReactiveVar(true);
 
 // Remove map in subscription
