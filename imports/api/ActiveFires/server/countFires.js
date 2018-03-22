@@ -34,6 +34,7 @@ const countFires = (regions, stringsToRemove) => {
 
   regions.features.forEach((region) => {
     const regionName = cleanProv(region.properties.name, stringsToRemove);
+    if (debug) console.log(`${regionName} -----`);
     try {
       const fires = findFiresInRegion(region);
       // TODO Also check neighbour fires (when better implementation of that part)

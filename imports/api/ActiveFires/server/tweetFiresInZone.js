@@ -16,11 +16,12 @@ const stringsToRemove = [
   ['Región de', ''],
   ['Valencia', 'CValenciana'],
   ['Comunidad de Madrid', 'CMadrid'],
-  ['La Mancha', 'CLMancha'],
-  ['León', 'CyL'],
+  ['León', 'CyLeón'],
+  ['Leon', 'CyLeón'],
   ['Castilla-', ''],
   ['Cataluña/', ''],
   ['Cataluña', 'Catalunya'],
+  ['La Mancha', 'CLMancha'],
   ['Baleares', 'IllesBalears'],
   ['Galicia', 'Galiza'],
   ['Principado de', ''],
@@ -65,7 +66,9 @@ const tweetFires = () => {
     } else {
       tweet(tweetText, 'es');
     }
+    return tweetText;
   }
+  return '';
 };
 
 if (Meteor.isDevelopment) {

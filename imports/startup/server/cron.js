@@ -55,14 +55,13 @@ Meteor.startup(() => {
       }
       return sched;
     },
-    job: () => {
-      tweetFires();
-      // console.log('cron is working');
-      /* console.log(this.userID) // Context Object becomes this argument
-       * console.log(this.magic) /
-       * var numbersCrunched = CrushSomeNumbers();
-       * return numbersCrunched; */
-    }
+    job: () => tweetFires()
+    /* console.log('cron is working');
+     * console.log(this.userID) // Context Object becomes this argument
+     * console.log(this.magic) /
+     * var numbersCrunched = CrushSomeNumbers();
+     * return numbersCrunched;
+       return tweetFires(); */
   });
 
   SyncedCron.start();
