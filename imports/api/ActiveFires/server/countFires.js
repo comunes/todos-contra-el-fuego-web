@@ -4,6 +4,8 @@ import FalsePositives from '/imports/api/FalsePositives/FalsePositives';
 import Industries from '/imports/api/Industries/Industries';
 import ActiveFires from '../ActiveFires';
 
+const debug = 0;
+
 const cleanProv = (prov, stringsToRemove) => {
   let lprov = prov;
   stringsToRemove.forEach((st) => {
@@ -35,25 +37,31 @@ const countFires = (regions, stringsToRemove) => {
     try {
       const fires = findFiresInRegion(region);
       // TODO Also check neighbour fires (when better implementation of that part)
-      let count = fires.count();
+      const initialCount = fires.count();
+      let count = initialCount;
       if (count > 0) {
-        /* console.log(regionName);
-         * console.log(count); */
+        const realFires = [];
         fires.forEach((fire) => {
           const union = firesUnion([fire]);
           const falsePos = whichAreFalsePositives(FalsePositives, union);
           const industries = whichAreFalsePositives(Industries, union);
-          if (falsePos.count() > 0 || industries.count() > 0) {
+          if (falsePos.count() === 0 && industries.count() === 0) {
+            realFires.push(fire);
+          } else {
             count -= 1;
           }
         });
-        // console.log(count);
-        if (count > 0) {
-          total += count;
-          fireStats[regionName] = count;
+        // group fires
+        const realUnion = firesUnion(realFires);
+        const unionCount = realUnion[0] &&
+                           realUnion[0].geometry &&
+                           realUnion[0].geometry.coordinates ? realUnion[0].geometry.coordinates.length : 0;
+        if (debug) console.log(`${regionName} initial: ${initialCount}, first calc: ${count} union calc: ${unionCount}`);
+        if (unionCount > 0) {
+          total += unionCount;
+          fireStats[regionName] = unionCount;
         }
       }
-      // console.log(countFiresInRegion(prov));
     } catch (e) {
       console.log(e);
     }

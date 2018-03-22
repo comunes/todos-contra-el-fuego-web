@@ -13,8 +13,10 @@ const stringsToRemove = [
   'País Vasco/',
   'Comunidad Foral de',
   'Región de',
+  // FIXME Madrid y Valencia
   'Comunidad de',
   'Cataluña/',
+  // FIXME Castilla-León
   'Castilla-',
   'Principado de',
   ' '
@@ -52,9 +54,9 @@ const tweetFires = () => {
 
   // console.log(`Total fires ${total}, ${JSON.stringify(fires)}`);
   if (total > 0) {
-    const tweetText = `${tweetHeaders[0]} ${composeTweet(total, fires)}. ${tweetFooters[0]}`;
+    const tweetText = `${tweetHeaders[0].trim()} ${composeTweet(total, fires)}. ${tweetFooters[0]}`;
     if (Meteor.isDevelopment) {
-      console.log(tweet);
+      console.log(tweetText);
     } else {
       tweet(tweetText, 'es');
     }
