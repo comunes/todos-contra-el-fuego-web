@@ -9,17 +9,22 @@ const autonomies = tbuffer(JSON.parse(getPrivateFile('data/es-atlas-autonomies.j
 const portugal = tbuffer(JSON.parse(getPrivateFile('data/pt-atlas.json')), 0);
 
 const stringsToRemove = [
-  'Ciudad Autónoma de',
-  'País Vasco/',
-  'Comunidad Foral de',
-  'Región de',
-  // FIXME Madrid y Valencia
-  'Comunidad de',
-  'Cataluña/',
-  // FIXME Castilla-León
-  'Castilla-',
-  'Principado de',
-  ' '
+  ['Ciudad Autónoma de', ''],
+  ['País Vasco/', ''],
+  ['Pais Vasco', 'Euskadi'],
+  ['Comunidad Foral de', ''],
+  ['Región de', ''],
+  ['Valencia', 'CValenciana'],
+  ['Comunidad de Madrid', 'CMadrid'],
+  ['La Mancha', 'CLMancha'],
+  ['León', 'CyL'],
+  ['Castilla-', ''],
+  ['Cataluña/', ''],
+  ['Cataluña', 'Catalunya'],
+  ['Baleares', 'IllesBalears'],
+  ['Galicia', 'Galiza'],
+  ['Principado de', ''],
+  [' ', '']
 ];
 
 const composeTweet = (num, stats) => {

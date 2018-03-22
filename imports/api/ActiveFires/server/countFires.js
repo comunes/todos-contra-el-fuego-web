@@ -9,7 +9,7 @@ const debug = 0;
 const cleanProv = (prov, stringsToRemove) => {
   let lprov = prov;
   stringsToRemove.forEach((st) => {
-    lprov = lprov.replace(st, '');
+    lprov = lprov.replace(st[0], st[1]);
   });
   return lprov;
 };
