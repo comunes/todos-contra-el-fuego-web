@@ -58,3 +58,7 @@ Meteor.publish('activefiresmyloc', function activeInMyLoc(northEastLng, northEas
 
   return activefires(northEastLng, northEastLat, southWestLng, southWestLat, withMarks);
 });
+
+Meteor.publish('lastFireDetected', function lastFireDetected() {
+  return ActiveFires.find({}, { limit: 1, sort: { when: -1 } });
+});
