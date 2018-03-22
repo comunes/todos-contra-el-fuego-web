@@ -2,7 +2,7 @@
 /* eslint-disable import/no-absolute-path */
 
 import { Meteor } from 'meteor/meteor';
-import { tweetFires } from '/imports/api/ActiveFires/server/tweetFiresInZone';
+import { tweetIberiaFires, tweetEuropeFires } from '/imports/api/ActiveFires/server/tweetFiresInZone';
 
 // https://github.com/thesaucecode/meteor-synced-cron/
 
@@ -55,13 +55,26 @@ Meteor.startup(() => {
       }
       return sched;
     },
-    job: () => tweetFires()
+    job: () => tweetIberiaFires()
     /* console.log('cron is working');
      * console.log(this.userID) // Context Object becomes this argument
      * console.log(this.magic) /
      * var numbersCrunched = CrushSomeNumbers();
      * return numbersCrunched;
        return tweetFires(); */
+  });
+
+  SyncedCron.add({
+    name: 'Check for fires stats in Europe and tweet about',
+    timezone: 'Europe/Madrid',
+    schedule: (parser) => {
+      const sched = parser.text(Meteor.settings.private.twitter.en.when);
+      if (sched.error !== -1) {
+        console.error(`Twitter cron 'when' field parsed with errors: ${sched.error}`);
+      }
+      return sched;
+    },
+    job: () => tweetEuropeFires()
   });
 
   SyncedCron.start();
