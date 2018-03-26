@@ -9,6 +9,7 @@ import SiteSettings from '/imports/api/SiteSettings/SiteSettings';
 import FalsePositives from '/imports/api/FalsePositives/FalsePositives';
 import Industries from '/imports/api/Industries/Industries';
 import IndustryRegistries from '/imports/api/Industries/IndustryRegistries';
+import { Mongo } from 'meteor/mongo';
 
 Meteor.startup(() => {
   // https://github.com/percolatestudio/meteor-migrations
@@ -194,6 +195,17 @@ Meteor.startup(() => {
           telegramBot: 'es'
         }
       }, { multi: true });
+    }
+  });
+
+  Migrations.add({
+    version: 15,
+    up: function moveToFalsePositivesUppercase() {
+      const falsepositiveslower = new Mongo.Collection('falsepositives', { idGeneration: 'MONGO' });
+      falsepositiveslower.find({}).forEach((falseDoc) => {
+        FalsePositives.insert(falseDoc);
+      });
+      // TODO remove falsepositives lowercase collection
     }
   });
 
