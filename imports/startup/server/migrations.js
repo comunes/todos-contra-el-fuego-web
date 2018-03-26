@@ -200,17 +200,6 @@ Meteor.startup(() => {
 
   Migrations.add({
     version: 15,
-    up: function moveToFalsePositivesUppercase() {
-      const falsepositiveslower = new Mongo.Collection('falsepositives', { idGeneration: 'MONGO' });
-      falsepositiveslower.find({}).forEach((falseDoc) => {
-        FalsePositives.insert(falseDoc);
-      });
-      // TODO remove falsepositives lowercase collection
-    }
-  });
-
-  Migrations.add({
-    version: 16,
     up: function moveToFalsePositivesUppercaseWithUser() {
       const falsepositiveslower = new Mongo.Collection('falsepositives', { idGeneration: 'MONGO' });
       falsepositiveslower.find({}).forEach((falseDoc) => {
