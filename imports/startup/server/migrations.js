@@ -213,11 +213,15 @@ Meteor.startup(() => {
     version: 16,
     up: function moveToFalsePositivesUppercaseWithUser() {
       const falsepositiveslower = new Mongo.Collection('falsepositives', { idGeneration: 'MONGO' });
+      const now = new Date();
       falsepositiveslower.find({}).forEach((falseDoc) => {
         const user = Meteor.users.findOne({ telegramChatId: falseDoc.chatId });
         if (user) {
           falseDoc.owner= user._id;
         }
+        falseDoc.type = 'industry';
+        falseDoc.createdAt = now;
+        falseDoc.updatedAt = now;
         FalsePositives.insert(falseDoc);
       });
     }
