@@ -209,6 +209,20 @@ Meteor.startup(() => {
     }
   });
 
+  Migrations.add({
+    version: 16,
+    up: function moveToFalsePositivesUppercaseWithUser() {
+      const falsepositiveslower = new Mongo.Collection('falsepositives', { idGeneration: 'MONGO' });
+      falsepositiveslower.find({}).forEach((falseDoc) => {
+        const user = Meteor.users.findOne({ telegramChatId: falseDoc.chatId });
+        if (user) {
+          falseDoc.owner= user._id;
+        }
+        FalsePositives.insert(falseDoc);
+      });
+    }
+  });
+
   // Set createdAt in users & subs
   Migrations.migrateTo('latest');
 
