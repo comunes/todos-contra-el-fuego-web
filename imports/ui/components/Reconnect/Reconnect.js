@@ -4,13 +4,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { translate } from 'react-i18next';
-import { Meteor } from 'meteor/meteor';
-import { Tracker } from 'meteor/tracker';
+/* import { Meteor } from 'meteor/meteor';
+import { Tracker } from 'meteor/tracker'; */
 import Blaze from 'meteor/gadicc:blaze-react-component';
 
 const Reconnect = ({ t, authenticated }) => (
   <div>
-    { !authenticated &&
+    { /* !authenticated && */ true &&
       <Blaze
           template="meteorStatus"
           textDisconnect={t('Desconectado del servidor, reconectando en %delay% segundos.')}
