@@ -36,46 +36,55 @@ Meteor.startup(() => {
     // collectionTTL: 172800
   });
 
-  SyncedCron.add({
-    name: 'Check for fires stats in Spain and tweet about',
-    timezone: 'Europe/Madrid',
-    // Optionally set a positive offset if you wish to 'snooze' a schedule
-    // offset: 30 * 60 * 100,
-    // context: {
-    //  userID: 'xyz'
-    // },
-    schedule: (parser) => {
+  const esEn = Meteor.settings.private.twitter.es.enabled;
+  const enEn = Meteor.settings.private.twitter.en.enabled;
+
+  if (esEn) {
+    SyncedCron.add({
+      name: 'Check for fires stats in Spain and tweet about',
+      timezone: 'Europe/Madrid',
+      // Optionally set a positive offset if you wish to 'snooze' a schedule
+      // offset: 30 * 60 * 100,
+      // context: {
+      //  userID: 'xyz'
+      // },
+      schedule: (parser) => {
       // this.magic = true; // Context is accesible here as this context.
       // parser is a later.parse object
       // return parser.text('every 2 minutes');
       // http://bunkat.github.io/later/
-      const sched = parser.text(Meteor.settings.private.twitter.es.when);
-      if (sched.error !== -1) {
-        console.error(`Twitter cron 'when' field parsed with errors: ${sched.error}`);
-      }
-      return sched;
-    },
-    job: () => tweetIberiaFires()
+        const sched = parser.text(Meteor.settings.private.twitter.es.when);
+        if (sched.error !== -1) {
+          console.error(`Twitter cron 'when' field parsed with errors: ${sched.error}`);
+        }
+        return sched;
+      },
+      job: () => tweetIberiaFires()
     /* console.log('cron is working');
      * console.log(this.userID) // Context Object becomes this argument
      * console.log(this.magic) /
      * var numbersCrunched = CrushSomeNumbers();
      * return numbersCrunched;
        return tweetFires(); */
-  });
+    });
+  }
 
-  SyncedCron.add({
-    name: 'Check for fires stats in Europe and tweet about',
-    timezone: 'Europe/Madrid',
-    schedule: (parser) => {
-      const sched = parser.text(Meteor.settings.private.twitter.en.when);
-      if (sched.error !== -1) {
-        console.error(`Twitter cron 'when' field parsed with errors: ${sched.error}`);
-      }
-      return sched;
-    },
-    job: () => tweetEuropeFires()
-  });
+  if (enEn) {
+    SyncedCron.add({
+      name: 'Check for fires stats in Europe and tweet about',
+      timezone: 'Europe/Madrid',
+      schedule: (parser) => {
+        const sched = parser.text(Meteor.settings.private.twitter.en.when);
+        if (sched.error !== -1) {
+          console.error(`Twitter cron 'when' field parsed with errors: ${sched.error}`);
+        }
+        return sched;
+      },
+      job: () => tweetEuropeFires()
+    });
+  }
 
-  SyncedCron.start();
+  if (esEn || enEn) {
+    SyncedCron.start();
+  }
 });
