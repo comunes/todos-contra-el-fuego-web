@@ -10,6 +10,7 @@ import calcUnion from '/imports/ui/components/Maps/SubsUnion/Unify';
 // sudo apt-get install libcairo2-dev libjpeg-dev libgif-dev
 
 Meteor.startup(() => {
+  const debug = true; // Meteor.isDevelopment;
   Perlin.seed(Math.random());
 
   const addNoisy = (osub) => {
@@ -58,7 +59,7 @@ Meteor.startup(() => {
       // https://stackoverflow.com/questions/10827812/what-is-the-length-maximum-for-a-string-data-type-in-mongodb-used-with-ruby
       SiteSettings.upsert({ name: `subs-${publicl}-union` }, unionSet, { multi: false });
       SiteSettings.upsert({ name: `subs-${publicl}-union-bounds` }, boundsSet, { multi: false });
-      if (Meteor.isDevelopment) console.log(`${Publicl} subscription union calculated`);
+      if (debug) console.log(`${Publicl} subscription union calculated`);
     } else {
       console.log('Subscription union failed!');
     }
@@ -70,7 +71,7 @@ Meteor.startup(() => {
 
   Subscriptions.find({ createdAt: { $gt: new Date() } }).observe({
     added: function newSubAdded() { // doc) {
-      if (Meteor.isDevelopment) console.log('Subs added so recreate union');
+      if (debug) console.log('Subs added so recreate union');
       process(true);
       process(false);
     }
@@ -78,12 +79,12 @@ Meteor.startup(() => {
 
   Subscriptions.find().observe({
     changed: function subsChanged() { // updatedDoc, oldDoc) {
-      if (Meteor.isDevelopment) console.log('Subs changed so recreate union');
+      if (debug) console.log('Subs changed so recreate union');
       process(true);
       process(false);
     },
     removed: function subsRemoved() { // oldDoc) {
-      if (Meteor.isDevelopment) console.log('Subs removed so recreate union');
+      if (debug) console.log('Subs removed so recreate union');
       process(true);
       process(false);
     }
