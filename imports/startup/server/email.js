@@ -3,6 +3,7 @@ import { Mongo } from 'meteor/mongo';
 import nodemailer from 'nodemailer';
 import { MailTime } from 'meteor/ostrio:mailer';
 import i18n from 'i18next';
+import isMaster from './isMaster';
 
 const transports = [];
 
@@ -22,7 +23,8 @@ export const hr = `<table cellspacing="0" cellpadding="0" border="0" width="100%
 
 let MailQueue;
 
-if (Meteor.settings.private.isMailServer) {
+if (Meteor.settings.private.isMailServer && isMaster) {
+  console.log('I\'m the mail server');
   MailQueue = new MailTime({
     db,
     type: 'server',
@@ -47,6 +49,7 @@ if (Meteor.settings.private.isMailServer) {
     template: MailTime.Template // Use default template
   });
 } else {
+  console.log('I\'m a mail client');
   MailQueue = new MailTime({
     db,
     type: 'client',

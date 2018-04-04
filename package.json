@@ -49,6 +49,7 @@
     "moment-timezone": "^0.5.14",
     "node-geocoder": "^3.21.1",
     "nodemailer": "^4.4.2",
+    "pm2-master": "^1.1.3",
     "popper.js": "^1.12.7",
     "prerender-node": "^2.7.4",
     "prop-types": "^15.6.0",
