@@ -21,6 +21,8 @@
     "testMailer": false,
     "debugMailer": false,
     "MAIL_URL": "",
+    "// isMailServer": "See: https://github.com/VeliovGroup/Mail-Time",
+    "isMailServer": true,
     "fireIconUrl": "https://testfuegos.comunes.org/fire-marker.png",
     "OAuth": {
       "google": {
