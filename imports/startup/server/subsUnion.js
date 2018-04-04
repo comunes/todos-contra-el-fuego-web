@@ -27,9 +27,11 @@ Meteor.startup(() => {
     return sub;
   };
 
+  const noNoisy = sub => sub;
+
   const process = (isPublic) => {
     const group = new L.FeatureGroup();
-    const result = calcUnion(Subscriptions.find().fetch(), group, isPublic ? addNoisy : sub => sub);
+    const result = calcUnion(Subscriptions.find().fetch(), group, isPublic ? addNoisy : noNoisy);
     const union = result[0];
     const bounds = result[1];
 
