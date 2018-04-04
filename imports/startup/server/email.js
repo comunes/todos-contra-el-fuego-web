@@ -23,7 +23,7 @@ export const hr = `<table cellspacing="0" cellpadding="0" border="0" width="100%
 
 let MailQueue;
 
-if (Meteor.settings.private.isMailServer && isMaster) {
+if (Meteor.settings.private.isMailServer && isMaster()) {
   console.log('I\'m the mail server');
   MailQueue = new MailTime({
     db,
