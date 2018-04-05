@@ -13,5 +13,5 @@ import './sitemaps';
 import './subsUnion';
 import './prerender';
 import './feedback';
-// import './cron';
+import './cron';
 import './isMaster';
