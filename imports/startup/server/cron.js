@@ -3,6 +3,7 @@
 
 import { Meteor } from 'meteor/meteor';
 import { tweetIberiaFires, tweetEuropeFires } from '/imports/api/ActiveFires/server/tweetFiresInZone';
+import { isMailServerMaster, sendEmailsFromQueue } from '/imports/startup/server/email';
 
 // https://github.com/thesaucecode/meteor-synced-cron/
 
@@ -23,18 +24,34 @@ Meteor.startup(() => {
     // timezone: 'utc',
 
     /*
-      TTL in seconds for history records in collection to expire
-      NOTE: Unset to remove expiry but ensure you remove the index from
-      mongo by hand
+       TTL in seconds for history records in collection to expire
+       NOTE: Unset to remove expiry but ensure you remove the index from
+       mongo by hand
 
-      ALSO: SyncedCron can't use the `_ensureIndex` command to modify
-      the TTL index. The best way to modify the default value of
-      `collectionTTL` is to remove the index by hand (in the mongo shell
-      run `db.cronHistory.dropIndex({startedAt: 1})`) and re-run your
-      project. SyncedCron will recreate the index with the updated TTL.
-    */
+       ALSO: SyncedCron can't use the `_ensureIndex` command to modify
+       the TTL index. The best way to modify the default value of
+       `collectionTTL` is to remove the index by hand (in the mongo shell
+       run `db.cronHistory.dropIndex({startedAt: 1})`) and re-run your
+       project. SyncedCron will recreate the index with the updated TTL.
+     */
     // collectionTTL: 172800
   });
+
+  if (isMailServerMaster) {
+    SyncedCron.add({
+      name: 'Send emails',
+      timezone: 'Europe/Madrid',
+      schedule: (parser) => {
+        // http://bunkat.github.io/later/
+        const sched = parser.text('every 1 min');
+        if (sched.error !== -1) {
+          console.error(`Mail cron 'when' field parsed with errors: ${sched.error}`);
+        }
+        return sched;
+      },
+      job: () => sendEmailsFromQueue()
+    });
+  }
 
   const esEn = Meteor.settings.private.twitter.es.enabled;
   const enEn = Meteor.settings.private.twitter.en.enabled;
@@ -49,10 +66,10 @@ Meteor.startup(() => {
       //  userID: 'xyz'
       // },
       schedule: (parser) => {
-      // this.magic = true; // Context is accesible here as this context.
-      // parser is a later.parse object
-      // return parser.text('every 2 minutes');
-      // http://bunkat.github.io/later/
+        // this.magic = true; // Context is accesible here as this context.
+        // parser is a later.parse object
+        // return parser.text('every 2 minutes');
+        // http://bunkat.github.io/later/
         const sched = parser.text(Meteor.settings.private.twitter.es.when);
         if (sched.error !== -1) {
           console.error(`Twitter cron 'when' field parsed with errors: ${sched.error}`);
@@ -60,12 +77,12 @@ Meteor.startup(() => {
         return sched;
       },
       job: () => tweetIberiaFires()
-    /* console.log('cron is working');
-     * console.log(this.userID) // Context Object becomes this argument
-     * console.log(this.magic) /
-     * var numbersCrunched = CrushSomeNumbers();
-     * return numbersCrunched;
-       return tweetFires(); */
+      /* console.log('cron is working');
+       * console.log(this.userID) // Context Object becomes this argument
+       * console.log(this.magic) /
+       * var numbersCrunched = CrushSomeNumbers();
+       * return numbersCrunched;
+         return tweetFires(); */
     });
   }
 
@@ -84,7 +101,8 @@ Meteor.startup(() => {
     });
   }
 
-  if (esEn || enEn) {
+
+  if (isMailServerMaster || esEn || enEn) {
     SyncedCron.start();
   }
 });

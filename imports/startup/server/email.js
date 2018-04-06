@@ -1,5 +1,4 @@
 import { Meteor } from 'meteor/meteor';
-import { Mongo } from 'meteor/mongo';
 import nodemailer from 'nodemailer';
 import { MailTime } from 'meteor/ostrio:mailer';
 import i18n from 'i18next';
@@ -23,13 +22,14 @@ export const hr = `<table cellspacing="0" cellpadding="0" border="0" width="100%
 
 let MailQueue;
 
-const isMailServerMaster = Meteor.settings.private.isMailServer && isMaster();
+export const isMailServerMaster = Meteor.settings.private.isMailServer && isMaster();
 
 if (isMailServerMaster) {
   console.log('I\'m the mail server');
   MailQueue = new MailTime({
     db,
-    type: 'server',
+    type: 'client', // instead of 'server' for now to avoid use the JosK  task manager at 250ms, we use our cron
+    // see https://github.com/VeliovGroup/Mail-Time/issues/5
     strategy: 'balancer', // Transports will be used in round robin chain
     transports,
     from(transport) {
@@ -86,31 +86,6 @@ if (Meteor.settings.private.testMailer) {
   sendMail(emailOpts, true);
 }
 
-if (isMailServerMaster) {
-  // Set interval to greater than 256
-  // https://github.com/VeliovGroup/Mail-Time/issues/5
-  const MailJobs = new Mongo.Collection('__JobTasks__mailTimeQueue', { idGeneration: 'MONGO' });
-
-  const updateJob = (mailJob, updated) => {
-    const delay = 60000;
-    if (Meteor.isDevelopment) console.log(`${updated ? 'Update old' : 'Update just added'} mailjob with ${delay} delay`);
-    if (mailJob.delay !== delay) {
-      MailJobs.update(mailJob._id, { $set: { delay } });
-    }
-  };
-
-  const mailJob = MailJobs.findOne();
-
-  if (mailJob) {
-    updateJob(mailJob);
-  }
-
-  MailJobs.find().observe({
-    added: function notifAdded(item) {
-      updateJob(item, false);
-    },
-    changed: function notifChanged(item) {
-      updateJob(item, true);
-    }
-  });
-}
+export const sendEmailsFromQueue = () => {
+  MailQueue.___send(() => { });
+};
