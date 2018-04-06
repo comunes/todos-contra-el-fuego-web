@@ -23,7 +23,9 @@ export const hr = `<table cellspacing="0" cellpadding="0" border="0" width="100%
 
 let MailQueue;
 
-if (Meteor.settings.private.isMailServer && isMaster()) {
+const isMailServerMaster = Meteor.settings.private.isMailServer && isMaster();
+
+if (isMailServerMaster) {
   console.log('I\'m the mail server');
   MailQueue = new MailTime({
     db,
@@ -31,10 +33,10 @@ if (Meteor.settings.private.isMailServer && isMaster()) {
     strategy: 'balancer', // Transports will be used in round robin chain
     transports,
     from(transport) {
-    // To pass spam-filters `from` field should be correctly set
-    // for each transport, check `transport` object for more options
+      // To pass spam-filters `from` field should be correctly set
+      // for each transport, check `transport` object for more options
       if (!Meteor.isProduction) {
-      // only for test purposes
+        // only for test purposes
         return `${i18n.t('AppName')} <notify@example.org>`;
       }
       return `${i18n.t('AppName')} <${transport.options.auth.user}>`;
@@ -43,8 +45,8 @@ if (Meteor.settings.private.isMailServer && isMaster()) {
     concatEmails: true, // Concatenate emails to the same addressee
     concatSubject: `${i18n.t('Nuevas notificaciones de {{app}}', { app: i18n.t('AppName') })}`,
     /* eslint-disable */
-  concatDelimiter: hr + '<h2>{{{subject}}}</h2>', // Start each concatenated email with it's own subject
-  /* eslint-enable */
+    concatDelimiter: hr + '<h2>{{{subject}}}</h2>', // Start each concatenated email with it's own subject
+    /* eslint-enable */
     // concatThrottling: 30,
     template: MailTime.Template // Use default template
   });
@@ -84,30 +86,31 @@ if (Meteor.settings.private.testMailer) {
   sendMail(emailOpts, true);
 }
 
+if (isMailServerMaster) {
+  // Set interval to greater than 256
+  // https://github.com/VeliovGroup/Mail-Time/issues/5
+  const MailJobs = new Mongo.Collection('__JobTasks__mailTimeQueue', { idGeneration: 'MONGO' });
 
-// Set interval to greater than 256
-// https://github.com/VeliovGroup/Mail-Time/issues/5
-const MailJobs = new Mongo.Collection('__JobTasks__mailTimeQueue', { idGeneration: 'MONGO' });
+  const updateJob = (mailJob, updated) => {
+    const delay = 60000;
+    if (Meteor.isDevelopment) console.log(`${updated ? 'Update old' : 'Update just added'} mailjob with ${delay} delay`);
+    if (mailJob.delay !== delay) {
+      MailJobs.update(mailJob._id, { $set: { delay } });
+    }
+  };
 
-const updateJob = (mailJob, updated) => {
-  const delay = 60000;
-  if (Meteor.isDevelopment) console.log(`${updated ? 'Update old' : 'Update just added'} mailjob with ${delay} delay`);
-  if (mailJob.delay !== delay) {
-    MailJobs.update(mailJob._id, { $set: { delay } });
+  const mailJob = MailJobs.findOne();
+
+  if (mailJob) {
+    updateJob(mailJob);
   }
-};
 
-const mailJob = MailJobs.findOne();
-
-if (mailJob) {
-  updateJob(mailJob);
+  MailJobs.find().observe({
+    added: function notifAdded(item) {
+      updateJob(item, false);
+    },
+    changed: function notifChanged(item) {
+      updateJob(item, true);
+    }
+  });
 }
-
-MailJobs.find().observe({
-  added: function notifAdded(item) {
-    updateJob(item, false);
-  },
-  changed: function notifChanged(item) {
-    updateJob(item, true);
-  }
-});
