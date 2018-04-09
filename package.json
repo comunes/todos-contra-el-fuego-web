@@ -76,6 +76,7 @@
     "react-router-hash-link": "^1.1.1",
     "react-share": "^2.0.0",
     "reactstrap": "^5.0.0-alpha.3",
+    "segfault-handler": "^1.0.0",
     "simpl-schema": "^0.3.2",
     "simple-line-icons": "^2.4.1",
     "store": "^2.0.12",

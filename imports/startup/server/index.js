@@ -15,3 +15,4 @@ import './prerender';
 import './feedback';
 import './cron';
 import './isMaster';
+import './segfaults';
