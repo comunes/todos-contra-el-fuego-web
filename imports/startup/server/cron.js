@@ -10,10 +10,11 @@ import { isMailServerMaster, sendEmailsFromQueue } from '/imports/startup/server
 Meteor.startup(() => {
   SyncedCron.config({
     // Log job run details to console
-    log: true
+    log: Meteor.settings.private.cron.debug || false,
 
     // Use a custom logger function (defaults to Meteor's logging package)
-    // logger: null
+    // workaround to disable logging succesfully
+    logger: Meteor.settings.private.cron.debug ? null : () => {}
 
     // Name of collection to use for synchronisation and logging
     // collectionName: 'cronHistory',

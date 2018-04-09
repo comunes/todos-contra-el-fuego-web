@@ -33,6 +33,9 @@
     },
     "proxies_count": 0,
     "ironPassword": "SomePasswordAlLeast32LongYouKnowHowToCount",
+    "cron": {
+      "debug": false
+    },
     "twitter": {
       "es": {
         "enabled": true,
