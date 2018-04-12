@@ -25,6 +25,10 @@ Feature: Test all secundary pages
 
   Scenario: Check that other non visible pages work well
     Given a list of non visible pages ids and contents
-      | status      | Status           |
-      | error       | Upps             |
+      | status                           | Status      |
+      | error                            | Upps        |
+      # FIXME: find a way to monitor json pages
+      # | api/v1/status/last-fire-detected | updateAt    |
+      # | api/v1/status/last-fire-check    | description |
+      # | api/v1/status/active-fires-count | total       |
     Then I check that all non visible pages works properly

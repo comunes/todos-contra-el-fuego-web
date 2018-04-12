@@ -92,6 +92,7 @@ mongo-id@1.0.6
 mongo-livedata@1.0.12
 mys:fonts@0.0.2
 natestrauser:publish-performant-counts@0.1.2
+nimble:restivus@0.8.12
 npm-bcrypt@0.9.3
 npm-mongo@2.2.34
 nspangler:autoreconnect@0.0.1
@@ -126,6 +127,7 @@ service-configuration@1.0.11
 session@1.1.7
 sha@1.0.9
 shell-server@0.3.0
+simple:json-routes@2.1.0
 spacebars@1.0.15
 spacebars-compiler@1.1.3
 srp@1.0.10

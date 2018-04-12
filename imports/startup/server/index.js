@@ -16,3 +16,4 @@ import './feedback';
 import './cron';
 import './isMaster';
 import './segfaults';
+import './rest';
