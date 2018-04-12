@@ -10,6 +10,7 @@ Feature: Allow users to give feedback
     # Because is not verified
     Then I can send feedback with email
     When I sign out
+    Given I'm not logged
     Then I can send feedback with email
 
   Scenario: A anon user can give feedback
