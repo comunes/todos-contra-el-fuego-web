@@ -78,11 +78,8 @@ const schemaUser = new SimpleSchema({
   // Option 2: [String] type
   // If you are sure you will never need to use role groups, then
   // you can specify [String] as the type
-  roles: {
-    type: Array,
-    // autoform: { type: 'hidden' },
-    optional: true
-  },
+  roles: { type: Array, optional: true },
+  'roles.$': { type: String, optional: true },
   // https://github.com/todda00/meteor-friendly-slugs/issues/1
   friendlySlugs: {
     type: Object,
