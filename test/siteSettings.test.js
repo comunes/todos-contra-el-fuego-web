@@ -5,6 +5,10 @@
 import { chai } from 'meteor/practicalmeteor:chai';
 import SiteSettings from '/imports/api/SiteSettings/SiteSettings';
 import SiteSettingsTypes from '/imports/api/SiteSettings/SiteSettingsTypes';
+import { resetDatabase } from 'meteor/xolvio:cleaner';
+
+resetDatabase('siteSettings');
+SiteSettings._ensureIndex({ name: 1 }, { unique: 1 });
 
 const setting = {
   name: 'site-test',
@@ -35,12 +39,12 @@ describe('site settings store', () => {
     chai.expect(SiteSettings.find({ _id: inserted }).count()).equal(0);
   });
 
-  it('should not insert twice', () => {
+  it('should not be inserted twice', () => {
     const id = SiteSettings.insert(setting);
     // If this fails manual check that the setting it's not already in the db.
     chai.expect(() => {
       SiteSettings.insert(setting);
-    }).to.throw('E11000 duplicate key error collection: fuegos.siteSettings index: name_1 dup key: { : "site-test" }');
+    }).to.throw();
     const inserted = SiteSettings.find(id).count();
     chai.expect(inserted).equal(1);
     SiteSettings.remove(id);
