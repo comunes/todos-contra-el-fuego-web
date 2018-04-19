@@ -56,9 +56,9 @@ class DefMapLayers extends Component {
           <GoogleLayer opacity={defOpacity} googlekey={this.state.gkey} maptype="ROADMAP" />
         </BaseLayer> }
         { this.state.gkey &&
-        <BaseLayer name={t('Mapa de terreno de Google')}>
-          <GoogleLayer opacity={defOpacity} googlekey={this.state.gkey} maptype="TERRAIN" />
-        </BaseLayer> }
+          <BaseLayer name={t('Mapa de terreno de Google')} checked={this.props.terrain}>
+            <GoogleLayer opacity={defOpacity} googlekey={this.state.gkey} maptype="TERRAIN" />
+          </BaseLayer> }
         { this.state.gkey &&
           <BaseLayer name={t('Mapa de satélite de Google')} checked={this.props.satellite}>
             <GoogleLayer opacity={defOpacity} googlekey={this.state.gkey} maptype="SATELLITE" />
@@ -72,6 +72,7 @@ DefMapLayers.propTypes = {
   t: PropTypes.func.isRequired,
   gray: PropTypes.bool,
   osmcolor: PropTypes.bool,
+  terrain: PropTypes.bool,
   satellite: PropTypes.bool
 
 };
@@ -79,6 +80,7 @@ DefMapLayers.propTypes = {
 DefMapLayers.defaultProps = {
   gray: false,
   osmcolor: false,
+  terrain: false,
   satellite: false
 };
 
