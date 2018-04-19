@@ -36,6 +36,6 @@ Meteor.publish('fireAlerts', function fireAlerts(northEastLng, northEastLat, sou
       scan: 1
     }
   });
-  // console.log(`Fires total: ${fires.count()}`);
+  if (Meteor.isDevelopment) console.log(`Neighbour alerts total: ${fires.count()}`);
   return fires;
 });
