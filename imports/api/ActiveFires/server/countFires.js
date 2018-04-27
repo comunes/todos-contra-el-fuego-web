@@ -5,7 +5,7 @@ import Industries from '/imports/api/Industries/Industries';
 import ravenLogger from '/imports/startup/client/ravenLogger';
 import ActiveFires from '../ActiveFires';
 
-const debug = 0;
+const debug = 1;
 
 const cleanProv = (prov, stringsToRemove) => {
   let lprov = prov;
