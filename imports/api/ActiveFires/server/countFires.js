@@ -2,6 +2,7 @@
 import { whichAreFalsePositives, firesUnion } from '/imports/api/FalsePositives/server/publications';
 import FalsePositives from '/imports/api/FalsePositives/FalsePositives';
 import Industries from '/imports/api/Industries/Industries';
+import ravenLogger from '/imports/startup/client/ravenLogger';
 import ActiveFires from '../ActiveFires';
 
 const debug = 0;
@@ -64,7 +65,7 @@ const countFires = (regions, stringsToRemove) => {
         }
       }
     } catch (e) {
-      console.log(e);
+      ravenLogger.log(e);
     }
   });
   return { total, fires: fireStats };
