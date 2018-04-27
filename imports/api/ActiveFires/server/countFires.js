@@ -2,7 +2,7 @@
 import { whichAreFalsePositives, firesUnion } from '/imports/api/FalsePositives/server/publications';
 import FalsePositives from '/imports/api/FalsePositives/FalsePositives';
 import Industries from '/imports/api/Industries/Industries';
-import ravenLogger from '/imports/startup/client/ravenLogger';
+import ravenLogger from '/imports/startup/server/ravenLogger';
 import ActiveFires from '../ActiveFires';
 
 const debug = 1;
