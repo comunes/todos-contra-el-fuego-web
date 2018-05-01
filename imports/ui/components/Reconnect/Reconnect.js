@@ -10,7 +10,7 @@ import Blaze from 'meteor/gadicc:blaze-react-component';
 
 const Reconnect = ({ t, authenticated }) => (
   <div>
-    { /* !authenticated && */ true &&
+    { !authenticated &&
       <Blaze
           template="meteorStatus"
           textDisconnect={t('Desconectado del servidor, reconectando en %delay% segundos.')}
