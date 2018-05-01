@@ -37,7 +37,7 @@ import ShareIt from '/imports/ui/components/ShareIt/ShareIt';
 import FullScreenMap from '/imports/ui/components/Maps/FullScreenMap';
 import LocationAutocomplete from '/imports/ui/components/LocationAutocomplete/LocationAutocomplete';
 import Gkeys from '/imports/startup/client/Gkeys';
-
+import FireStats from './FireStats';
 import './FiresMap.scss';
 
 const MAXZOOM = 6;
@@ -74,7 +74,6 @@ class FiresMap extends React.Component {
     this.onViewportChanged = this.onViewportChanged.bind(this);
     this.onMoveEnd = this.onMoveEnd.bind(this);
     this.onMoveStart = this.onMoveStart.bind(this);
-    this.fireStats = this.fireStats.bind(this);
   }
 
   componentDidMount() {
@@ -196,15 +195,6 @@ class FiresMap extends React.Component {
     }
   }
 
-  fireStats() {
-    return (
-      <Fragment>
-      { this.props.lastCheck && this.props.lastFireDetected &&
-        <Trans>Actualizado <FromNow when={this.props.lastCheck} />, último fuego detectado <FromNow when={this.props.lastFireDetected.when} />.</Trans>}
-      </Fragment>
-    );
-  }
-
   render() {
     const { t } = this.props;
     console.log(`Rendering ${this.props.loading ? 'loading' : 'LOADED'}, zoom ${this.state.viewport.zoom}, map ${this.props.activefires.length + this.props.firealerts.length} of ${this.props.activefirestotal} total. False positives: ${this.props.falsePositives.length}. Reactive ${this.state.viewport.zoom >= MAXZOOMREACTIVE}`);
@@ -253,8 +243,8 @@ class FiresMap extends React.Component {
             <Col xs={12} sm={6} md={6} lg={6} >
               <p className="firesmap-legend">
                 { (this.props.activefires.length + this.props.firealerts.length) === 0 ?
-                  <Fragment><Trans parent="span" i18nKey="noActiveFireInMapCount">No hay fuegos activos en esta zona del mapa. <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos en el mundo.</Trans> {this.fireStats()}</Fragment> :
-                  <Fragment><Trans parent="span" i18nKey="activeFireInMapCount">En rojo, <strong>{{ count: this.props.activefires.length + this.props.firealerts.length }}</strong> fuegos activos. <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos en el mundo.</Trans> {this.fireStats()}</Fragment>
+                  <Fragment><Trans parent="span" i18nKey="noActiveFireInMapCount">No hay fuegos activos en esta zona del mapa. <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos en el mundo.</Trans> <FireStats {... this.props} /></Fragment> :
+                  <Fragment><Trans parent="span" i18nKey="activeFireInMapCount">En rojo, <strong>{{ count: this.props.activefires.length + this.props.firealerts.length }}</strong> fuegos activos. <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos en el mundo.</Trans> <FireStats {... this.props} /></Fragment>
                 }
               </p>
               {isNotHomeAndMobile() && this.props.firealerts.length > 0 &&
