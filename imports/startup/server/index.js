@@ -1,4 +1,5 @@
 import './ravenLogger';
+import './catchExceptions';
 import './i18n';
 import './accounts';
 import './api';

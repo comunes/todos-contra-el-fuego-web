@@ -20,3 +20,6 @@ SegfaultHandler.registerHandler(`/var/tmp/tcef-stacktrace-${dateFileFormat}.log`
 
 // Only uncomment for segv tests
 // SegfaultHandler.causeSegfault();
+
+// Or this for normal error (should go to raven in configured)
+// throw new Error('This is just a test of error in server');
