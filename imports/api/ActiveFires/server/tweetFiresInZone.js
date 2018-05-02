@@ -31,6 +31,15 @@ const stringsToRemoveIberia = [
   [' ', '']
 ];
 
+const emoji = (key, name, fires) => {
+  const emo = emojiFlags.countryCode(key.code);
+  if (!emo) {
+    if (Meteor.isDevelopment) console.log(`Cannot find flag for country ${name}: ${JSON.stringify(key)}`);
+    return '';
+  }
+  return `${emo.emoji} ${fires},`;
+};
+
 const composeEuropeTweet = (num, stats, abrev) => {
   if (num <= 0) {
     return '';
@@ -42,7 +51,7 @@ const composeEuropeTweet = (num, stats, abrev) => {
     const zoneFires = stats[key].count;
     const zoneFiresText = zoneFires > 1 ? index === 0 ? zoneFires : `${zoneFires}` : index === 0 ? 'One' : '1';
     const what = index > 0 ? ' ' : zoneFires > 1 ? ' active #wildfires ' : ' active #wildfire ';
-    const subText = abrev ? `${emojiFlags.countryCode(stats[key].code).emoji} ${zoneFires},` :
+    const subText = abrev ? emoji(stats[key], key, zoneFires) :
       `${zoneFiresText}${what}in #{key}`;
     const delimiter = abrev ? '' : index === numZones - 1 ? ' and' : ',';
     const subTexts = index === 0 ? subText : `${delimiter} ${subText}`;
@@ -79,7 +88,7 @@ const tweetFooters = ['Más info en: https://fuegos.comunes.org/fires'];
 const correctTweetSize = (tweetText) => {
   const length = tweetText.length;
   if (length > 280) {
-    console.log(`Tweet is too big (${length}): ${tweetText}`);
+    if (Meteor.isDevelopment) console.log(`Tweet is too big (${length}): ${tweetText}`);
     return false;
   }
   return true;
@@ -93,12 +102,13 @@ const tweetEuropeFires = () => {
     if (!correctTweetSize(tweetText)) {
       tweetText = `${tweetHeaders[0].trim()} ${composeEuropeTweet(resultEu.total, resultEu.fires, true)}. More info: https://fires.comunes.org/fires`;
     }
-    if (correctTweetSize(tweetText)) {
-      if (Meteor.isDevelopment) {
-        console.log(tweetText);
-      } else {
-        tweet(tweetText, 'en');
-      }
+    if (!correctTweetSize(tweetText)) {
+      tweetText = `${tweetHeaders[0].trim()} There are ${resultEu.total} active #wildfires in #Europe. More info: https://fires.comunes.org/fires`;
+    }
+    if (Meteor.isDevelopment) {
+      console.log(tweetText);
+    } else {
+      tweet(tweetText, 'en');
     }
     return tweetText;
   }
