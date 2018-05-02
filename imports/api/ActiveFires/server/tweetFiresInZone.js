@@ -2,6 +2,7 @@
 import getPrivateFile from '/imports/modules/server/get-private-file';
 import { Meteor } from 'meteor/meteor';
 import tbuffer from '@turf/buffer';
+import emojiFlags from 'emoji-flags';
 import tweet from '/imports/modules/server/twitter';
 import countFires from './countFires';
 
@@ -30,19 +31,20 @@ const stringsToRemoveIberia = [
   [' ', '']
 ];
 
-const composeEuropeTweet = (num, stats) => {
+const composeEuropeTweet = (num, stats, abrev) => {
   if (num <= 0) {
     return '';
   }
   const keys = Object.keys(stats);
   const numZones = keys.length;
-  let text = '';
+  let text = abrev ? 'Active #wildfires:\n' : '';
   keys.map((key, index) => { // , index
-    const zoneFires = stats[key];
+    const zoneFires = stats[key].count;
     const zoneFiresText = zoneFires > 1 ? index === 0 ? zoneFires : `${zoneFires}` : index === 0 ? 'One' : '1';
     const what = index > 0 ? ' ' : zoneFires > 1 ? ' active #wildfires ' : ' active #wildfire ';
-    const subText = `${zoneFiresText}${what}in #${key}`;
-    const delimiter = index === numZones - 1 ? ' and' : ',';
+    const subText = abrev ? `${emojiFlags.countryCode(stats[key].code).emoji} ${zoneFires},` :
+      `${zoneFiresText}${what}in #{key}`;
+    const delimiter = abrev ? '' : index === numZones - 1 ? ' and' : ',';
     const subTexts = index === 0 ? subText : `${delimiter} ${subText}`;
     text += subTexts;
     return '';
@@ -58,7 +60,7 @@ const composeIberiaTweet = (num, stats) => {
   const numZones = keys.length;
   let text = '';
   keys.map((key, index) => { // , index
-    const zoneFires = stats[key];
+    const zoneFires = stats[key].count;
     const zoneFiresText = zoneFires > 1 ? index === 0 ? zoneFires : `otros ${zoneFires}` : index === 0 ? 'Un' : 'otro';
     const what = index > 0 ? ' ' : zoneFires > 1 ? ' #fuegos activos ' : ' #fuego activo ';
     const subText = `${zoneFiresText}${what}en #${key}`;
@@ -73,15 +75,30 @@ const composeIberiaTweet = (num, stats) => {
 const tweetHeaders = ['🔥'];
 const tweetFooters = ['Más info en: https://fuegos.comunes.org/fires'];
 
+
+const correctTweetSize = (tweetText) => {
+  const length = tweetText.length;
+  if (length > 280) {
+    console.log(`Tweet is too big (${length}): ${tweetText}`);
+    return false;
+  }
+  return true;
+};
+
 const tweetEuropeFires = () => {
   const resultEu = countFires(europe, [[' ', '']]);
 
   if (resultEu.total > 0) {
-    const tweetText = `${tweetHeaders[0].trim()} ${composeEuropeTweet(resultEu.total, resultEu.fires)}. More info: https://fires.comunes.org/fires`;
-    if (Meteor.isDevelopment) {
-      console.log(tweetText);
-    } else {
-      tweet(tweetText, 'en');
+    let tweetText = `${tweetHeaders[0].trim()} ${composeEuropeTweet(resultEu.total, resultEu.fires, false)}. More info: https://fires.comunes.org/fires`;
+    if (!correctTweetSize(tweetText)) {
+      tweetText = `${tweetHeaders[0].trim()} ${composeEuropeTweet(resultEu.total, resultEu.fires, true)}. More info: https://fires.comunes.org/fires`;
+    }
+    if (correctTweetSize(tweetText)) {
+      if (Meteor.isDevelopment) {
+        console.log(tweetText);
+      } else {
+        tweet(tweetText, 'en');
+      }
     }
     return tweetText;
   }
@@ -97,10 +114,12 @@ const tweetIberiaFires = () => {
   // console.log(`Total fires ${total}, ${JSON.stringify(fires)}`);
   if (total > 0) {
     const tweetText = `${tweetHeaders[0].trim()} ${composeIberiaTweet(total, fires)}. ${tweetFooters[0]}`;
-    if (Meteor.isDevelopment) {
-      console.log(tweetText);
-    } else {
-      tweet(tweetText, 'es');
+    if (correctTweetSize(tweetText)) {
+      if (Meteor.isDevelopment) {
+        console.log(tweetText);
+      } else {
+        tweet(tweetText, 'es');
+      }
     }
     return tweetText;
   }

@@ -19,6 +19,7 @@
     "commonmark": "^0.28.1",
     "core-js": "^2.5.1",
     "crypto-random-hex": "^1.0.0",
+    "emoji-flags": "^1.2.0",
     "fs": "0.0.1-security",
     "google-maps": "^3.2.1",
     "google-maps-image-api-url": "^1.0.3",
@@ -80,7 +81,7 @@
     "react-share": "^2.0.0",
     "reactstrap": "^5.0.0-alpha.3",
     "segfault-handler": "^1.0.0",
-    "simpl-schema": "^1.4.3",
+    "simpl-schema": "^1.5.0",
     "simple-line-icons": "^2.4.1",
     "store": "^2.0.12",
     "twit": "^2.2.9"

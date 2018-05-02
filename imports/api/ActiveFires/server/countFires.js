@@ -5,7 +5,7 @@ import Industries from '/imports/api/Industries/Industries';
 import ravenLogger from '/imports/startup/server/ravenLogger';
 import ActiveFires from '../ActiveFires';
 
-const debug = 1;
+const debug = 0;
 
 const cleanProv = (prov, stringsToRemove) => {
   let lprov = prov;
@@ -35,6 +35,7 @@ const countFires = (regions, stringsToRemove) => {
 
   regions.features.forEach((region) => {
     const regionName = cleanProv(region.properties.name, stringsToRemove);
+    const regionCode = region.properties.iso_a2;
     if (debug) console.log(`${regionName} -----`);
     try {
       const fires = findFiresInRegion(region);
@@ -61,7 +62,7 @@ const countFires = (regions, stringsToRemove) => {
         if (debug) console.log(`${regionName} initial: ${initialCount}, first calc: ${count} union calc: ${unionCount}`);
         if (unionCount > 0) {
           total += unionCount;
-          fireStats[regionName] = unionCount;
+          fireStats[regionName] = { count: unionCount, code: regionCode };
         }
       }
     } catch (e) {
