@@ -7,9 +7,7 @@ Meteor.startup(() => {
   const bound = Meteor.bindEnvironment((callback) => { callback(); });
   process.on('uncaughtException', (err) => {
     bound(() => {
-      // console.error('Server crashed!', err);
       console.error(err);
-      // console.error(err.stack);
 
       // https://github.com/flowkey/meteor-raven
       ravenLogger.log(err);
