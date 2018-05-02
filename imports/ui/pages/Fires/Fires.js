@@ -169,7 +169,7 @@ class Fire extends React.Component {
                  neighbour={false}
                  industries
              />
-             <DefMapLayers terrain />
+             <DefMapLayers satellite />
              <FullScreenMap />
            </Map>
            <p>{t('Coordenadas:')} {fire.lat}, {fire.lon}</p>
