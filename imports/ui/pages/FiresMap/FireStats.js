@@ -11,8 +11,9 @@ class FireStats extends Component {
   render() {
     return (
       <Fragment>
-        { this.props.lastCheck && this.props.lastFireDetected &&
-          <Trans>Actualizado <FromNow when={this.props.lastCheck} />, último fuego detectado <FromNow when={this.props.lastFireDetected.when} />.</Trans>}
+        { this.props.lastCheck && this.props.lastFireDetected ?
+          <Trans>Actualizado <FromNow when={this.props.lastCheck} />, último fuego detectado <FromNow when={this.props.lastFireDetected.when} />.</Trans>
+          : '' }
       </Fragment>
     );
   }
