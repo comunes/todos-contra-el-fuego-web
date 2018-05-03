@@ -31,7 +31,8 @@ Meteor.startup(() => {
 
   const process = (isPublic) => {
     const group = new L.FeatureGroup();
-    const result = calcUnion(Subscriptions.find().fetch(), group, isPublic ? addNoisy : noNoisy);
+    const subscribers = Subscriptions.find().fetch();
+    const result = calcUnion(subscribers, group, isPublic ? addNoisy : noNoisy);
     const union = result[0];
     const bounds = result[1];
 
@@ -57,19 +58,42 @@ Meteor.startup(() => {
           type: 'string'
         }
       };
+      const sizeSet = {
+        $set: {
+          name: 'subs-union-count',
+          value: subscribers.length,
+          isPublic: false,
+          description: 'Subscriptions count',
+          type: 'number'
+        }
+      };
       // FIXME, take care of object size:
       // https://stackoverflow.com/questions/10827812/what-is-the-length-maximum-for-a-string-data-type-in-mongodb-used-with-ruby
       SiteSettings.upsert({ name: `subs-${publicl}-union` }, unionSet, { multi: false });
       SiteSettings.upsert({ name: `subs-${publicl}-union-bounds` }, boundsSet, { multi: false });
+      SiteSettings.upsert({ name: 'subs-union-count' }, sizeSet, { multi: false });
       if (debug) console.log(`${Publicl} subscription union calculated`);
     } else {
       console.log('Subscription union failed!');
     }
   };
 
-  // At startup
-  process(true);
-  process(false);
+  // At startup, we check if it's necessary to calc subscriptions union again
+  const currentUnion = SiteSettings.findOne({ name: 'subs-public-union' });
+  const lastSubs = Subscriptions.findOne({}, { sort: { updatedAt: -1 } });
+  const countUnionSubs = SiteSettings.findOne({ name: 'subs-union-count' });
+  const countSubs = Subscriptions.find({}).count();
+  if (currentUnion && lastSubs) {
+    const lastUnionUpdated = currentUnion.updatedAt;
+    const lastSubsUpdated = lastSubs.updatedAt;
+    if (lastUnionUpdated > lastSubsUpdated || !countUnionSubs || countSubs !== countUnionSubs.value) {
+      console.log('Subs union outdated');
+      process(true);
+      process(false);
+    } else {
+      console.log('Subs union up-to-date');
+    }
+  }
 
   Subscriptions.find({ createdAt: { $gt: new Date() } }).observe({
     added: function newSubAdded() { // doc) {
