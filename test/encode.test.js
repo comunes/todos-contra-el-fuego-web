@@ -5,8 +5,43 @@
 import { chai } from 'meteor/practicalmeteor:chai';
 import ActiveFiresCollection from '/imports/api/ActiveFires/ActiveFires';
 import urlEnc from '/imports/modules/url-encode';
+import seeder from '@cleverbeagle/seeder';
 import { Accounts } from 'meteor/accounts-base';
 
+const firesSeed = () => ({
+  collection: ActiveFiresCollection,
+  environments: ['development', 'staging'],
+  noLimit: true,
+  modelCount: 5,
+  model(dataIndex) {
+    return {
+      ourid: {
+        type: 'Point',
+        coordinates: [
+          149.751 + dataIndex,
+          -10.021 + dataIndex
+        ]
+      },
+      type: 'modis',
+      lat: -10.021 + dataIndex,
+      lon: 149.751 + dataIndex,
+      updatedAt: Date('2018-05-02T16:11:04.617Z'),
+      acq_date: '2018-05-02',
+      acq_time: '00:05',
+      scan: 1.5,
+      track: 1.2,
+      satellite: 'T',
+      confidence: 57,
+      version: '6.0NRT',
+      frp: 7.8,
+      daynight: 'D',
+      brightness: 304.3,
+      bright_t31: 283.4,
+      when: Date('2018-05-01T22:05:00.000Z'),
+      createdAt: Date('2018-05-02T16:11:04.617Z')
+    };
+  }
+});
 
 async function encAndDec(obj) {
   delete obj._id;
@@ -72,6 +107,7 @@ describe('url encoding', () => {
 
   // This fails because Date is return as String (not as Date) and because _id
   it('should encrypt and dcrypt collection objects', async () => {
+    seeder(ActiveFiresCollection, firesSeed());
     const obj = ActiveFiresCollection.findOne();
     encAndDec(obj);
   });
@@ -95,6 +131,7 @@ describe('url encoding', () => {
 
   // limit 0 for no limit and test everything (and increase timeout)
   it('should encrypt and dcrypt all collection objects', async () => {
+    seeder(ActiveFiresCollection, firesSeed());
     ActiveFiresCollection.find({}, { limit: 1000 }).fetch().forEach((obj) => {
       encAndDec(obj);
     });
