@@ -63,7 +63,7 @@ facts@1.0.9
 gadicohen:sitemaps
 nspangler:autoreconnect
 saucecode:timezoned-synced-cron
-lmachens:kadira
+# lmachens:kadira
 meteorhacks:zones
 nimble:restivus
 xolvio:cleaner
