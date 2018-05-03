@@ -12,10 +12,10 @@ const LocationSchema = new SimpleSchema({
     minCount: 2,
     maxCount: 2,
     custom: function custom() {
-      if (!(this.value[0] >= -90 && this.value[0] <= 90)) {
+      if (!(this.value[0] >= -180 && this.value[0] <= 180)) {
         return 'lngOutOfRange';
       }
-      if (!(this.value[1] >= -180 && this.value[1] <= 180)) {
+      if (!(this.value[1] >= -90 && this.value[1] <= 90)) {
         return 'latOutOfRange';
       }
       return true;
@@ -27,8 +27,8 @@ const LocationSchema = new SimpleSchema({
 });
 
 LocationSchema.messageBox.messages({
-  lonOutOfRange: '[label] longitude should be between -90 and 90',
-  latOutOfRange: '[label] latitude should be between -180 and 180'
+  latOutOfRange: '[label] latitude should be between -90 and 90',
+  lngOutOfRange: '[label] longitude should be between -180 and 180'
 });
 
 export default LocationSchema;
