@@ -136,9 +136,9 @@ const tweetIberiaFires = () => {
   return '';
 };
 
-if (Meteor.isDevelopment) {
-  tweetIberiaFires();
-  tweetEuropeFires();
-}
+/* if (Meteor.isDevelopment) {
+ *   tweetIberiaFires();
+ *   tweetEuropeFires();
+ * } */
 
 export { composeIberiaTweet, tweetHeaders, tweetFooters, tweetIberiaFires, tweetEuropeFires };
