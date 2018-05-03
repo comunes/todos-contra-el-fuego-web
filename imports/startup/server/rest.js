@@ -7,6 +7,8 @@ import SiteSettings from '/imports/api/SiteSettings/SiteSettings';
 import ActiveFiresCollection from '/imports/api/ActiveFires/ActiveFires';
 
 Meteor.startup(() => {
+  const uptime = new Date();
+
   const apiV1 = new Restivus({
     useDefaultAuth: true,
     apiPath: 'api',
@@ -64,6 +66,13 @@ Meteor.startup(() => {
   apiV1.addRoute('status/active-fires-count', { authRequired: false }, {
     get: function get() {
       return { total: ActiveFiresCollection.find({}).count() };
+    }
+  });
+
+  // Maps to: /api/v1/status/uptime
+  apiV1.addRoute('status/uptime', { authRequired: false }, {
+    get: function get() {
+      return { ms: new Date() - uptime };
     }
   });
 });
