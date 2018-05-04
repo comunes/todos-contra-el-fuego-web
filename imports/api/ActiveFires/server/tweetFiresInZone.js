@@ -6,6 +6,8 @@ import emojiFlags from 'emoji-flags';
 import tweet from '/imports/modules/server/twitter';
 import countFires from './countFires';
 
+const debug = false;
+
 const autonomies = tbuffer(JSON.parse(getPrivateFile('data/es-atlas-autonomies.json')), 0);
 const portugal = tbuffer(JSON.parse(getPrivateFile('data/pt-atlas.json')), 0);
 
@@ -37,7 +39,7 @@ const emoji = (key, name, fires) => {
     if (Meteor.isDevelopment) console.log(`Cannot find flag for country ${name}: ${JSON.stringify(key)}`);
     return '';
   }
-  return `${emo.emoji} ${fires},`;
+  return `${emo.emoji} ${fires}`;
 };
 
 const composeEuropeTweet = (num, stats, abrev) => {
@@ -46,14 +48,20 @@ const composeEuropeTweet = (num, stats, abrev) => {
   }
   const keys = Object.keys(stats);
   const numZones = keys.length;
-  let text = abrev ? 'Active #wildfires:\n' : '';
+  let text = '';
   keys.map((key, index) => { // , index
     const zoneFires = stats[key].count;
     const zoneFiresText = zoneFires > 1 ? index === 0 ? zoneFires : `${zoneFires}` : index === 0 ? 'One' : '1';
     const what = index > 0 ? ' ' : zoneFires > 1 ? ' active #wildfires ' : ' active #wildfire ';
     const subText = abrev ? emoji(stats[key], key, zoneFires) :
       `${zoneFiresText}${what}in #{key}`;
-    const delimiter = abrev ? '' : index === numZones - 1 ? ' and' : ',';
+    let delimiter;
+    if (!abrev) {
+      delimiter = index === numZones - 1 ? ' and' : ',';
+    } else {
+      delimiter = ',';
+    }
+
     const subTexts = index === 0 ? subText : `${delimiter} ${subText}`;
     text += subTexts;
     return '';
@@ -100,7 +108,10 @@ const tweetEuropeFires = () => {
   if (resultEu.total > 0) {
     let tweetText = `${tweetHeaders[0].trim()} ${composeEuropeTweet(resultEu.total, resultEu.fires, false)}. More info: https://fires.comunes.org/fires`;
     if (!correctTweetSize(tweetText)) {
-      tweetText = `${tweetHeaders[0].trim()} ${composeEuropeTweet(resultEu.total, resultEu.fires, true)}. More info: https://fires.comunes.org/fires`;
+      tweetText = `${tweetHeaders[0].trim()}Active #wildfires in #Europe:\n${composeEuropeTweet(resultEu.total, resultEu.fires, true)}. More info: https://fires.comunes.org/fires`;
+    }
+    if (!correctTweetSize(tweetText)) {
+      tweetText = `${tweetHeaders[0].trim()}Active #wildfires in #Europe:\n${composeEuropeTweet(resultEu.total, resultEu.fires, true)}`;
     }
     if (!correctTweetSize(tweetText)) {
       tweetText = `${tweetHeaders[0].trim()} There are ${resultEu.total} active #wildfires in #Europe. More info: https://fires.comunes.org/fires`;
@@ -136,9 +147,9 @@ const tweetIberiaFires = () => {
   return '';
 };
 
-/* if (Meteor.isDevelopment) {
- *   tweetIberiaFires();
- *   tweetEuropeFires();
- * } */
+if (Meteor.isDevelopment && debug) {
+  tweetIberiaFires();
+  tweetEuropeFires();
+}
 
 export { composeIberiaTweet, tweetHeaders, tweetFooters, tweetIberiaFires, tweetEuropeFires };
