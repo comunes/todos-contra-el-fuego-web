@@ -200,8 +200,10 @@ class FiresMap extends React.Component {
     console.log(`Rendering ${this.props.loading ? 'loading' : 'LOADED'}, zoom ${this.state.viewport.zoom}, map ${this.props.activefires.length + this.props.firealerts.length} of ${this.props.activefirestotal} total. False positives: ${this.props.falsePositives.length}. Reactive ${this.state.viewport.zoom >= MAXZOOMREACTIVE}`);
     const title = `${t('AppName')}: ${t('Fuegos activos')}`;
 
+    if (Meteor.isDevelopment && this.props.activefires.length === 1) console.log(`Active fire: ${JSON.stringify(this.props.activefires[0])}`);
+    if (Meteor.isDevelopment) console.log(`Active fires total: ${this.props.activefires.length}`);
     if (Meteor.isDevelopment) console.log(`False positives total: ${this.props.falsePositives.length}`);
-
+    if (Meteor.isDevelopment) console.log(`Fire alerts total: ${this.props.firealerts.length}`);
     if (Meteor.isDevelopment) console.log(`Industries total: ${this.props.industries.length}`);
 
     if (!this.state.init) {
@@ -403,7 +405,8 @@ export default translate([], { wait: true })(withTracker(() => {
   if (typeof showUnionStored === 'boolean') {
     showUnion.set(showUnionStored);
   }
-  Meteor.subscribe('lastFireDetected');
+  // Disable, because this increase the number of fires by one
+  // Meteor.subscribe('lastFireDetected');
   Meteor.autorun(() => {
     if ((centerStored !== [0, 0] || geolocation.get()) && geoInit) {
       center.set(centerStored || geolocation.get());
@@ -447,6 +450,7 @@ export default translate([], { wait: true })(withTracker(() => {
   const fireAlerts = FireAlertsCollection.find().fetch();
   const falsePositives = FalsePositivesCollection.find().fetch().map(falsePositivesRemap);
   const industries = IndustriesCollection.find().fetch().map(industriesRemap);
+  const lastFireDetected = ActiveFiresCollection.findOne({}, { sort: { when: -1 } });
 
   return {
     loading: !subscription ? true : !(subscription.ready() && settingsSubs.ready() && alertSubscription.ready()),
@@ -460,7 +464,7 @@ export default translate([], { wait: true })(withTracker(() => {
     falsePositives,
     industries,
     lastCheck: lastCheck ? lastCheck.value : null,
-    lastFireDetected: ActiveFiresCollection.findOne({}, { sort: { when: -1 } }),
+    lastFireDetected,
     center: center.get(),
     marks: marks.get(),
     showUnion: showUnion.get(),

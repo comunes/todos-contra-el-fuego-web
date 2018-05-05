@@ -35,8 +35,7 @@ const activefires = (northEastLng, northEastLat, southWestLng, southWestLat, wit
     }
   });
 
-  // console.log(JSON.stringify(result));
-  // console.log(`Fires total: ${fires.count()}`);
+  if (Meteor.isDevelopment) console.log(`Active fires total: ${fires.count()}`);
 
   if (withMarks && fires.fetch().length > 0) {
     const union = firesUnion(fires);
@@ -59,6 +58,7 @@ Meteor.publish('activefiresmyloc', function activeInMyLoc(northEastLng, northEas
   return activefires(northEastLng, northEastLat, southWestLng, southWestLat, withMarks);
 });
 
+// Warning: this increase always by one the fire stats
 Meteor.publish('lastFireDetected', function lastFireDetected() {
   return ActiveFires.find({}, { limit: 1, sort: { when: -1 } });
 });
