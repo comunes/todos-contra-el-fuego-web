@@ -60,6 +60,8 @@ class LocationListener extends Component {
   // https://stackoverflow.com/questions/43512450/react-router-v4-route-onchange-event
 
   componentDidMount() {
+    // https://github.com/GoogleChrome/rendertron#rendering-budget-timeout
+    window.renderComplete = true;
     this.handleLocationChange(this.context.router.history.location);
     this.unlisten =
       this.context.router.history.listen(this.handleLocationChange);
