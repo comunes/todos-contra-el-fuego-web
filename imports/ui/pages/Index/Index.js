@@ -41,8 +41,10 @@ class Index extends Component {
     const car2 = $('#carouselSndIndicators');
     car1.carousel();
     car2.carousel();
+    _.defer(() => {
+      $('#firsthomeslide').addClass('lazy');
+    });
     const loadLazy = (ev) => {
-      // console.log('Slide');
       ev.relatedTarget.classList.add('lazy');
     };
     car1.on('slide.bs.carousel', loadLazy);
@@ -114,7 +116,7 @@ class Index extends Component {
                 </ol>
                 <div className="carousel-inner" role="listbox">
 
-                  <div className="carousel-item carousel-item-1 active">
+                  <div id="firsthomeslide" className="carousel-item carousel-item-1 active">
                     <div
                         tabIndex={0}
                         role="button"
