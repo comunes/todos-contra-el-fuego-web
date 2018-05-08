@@ -48,6 +48,7 @@
     "maxmind": "^2.3.0",
     "meteor-accounts-t9n": "^2.0.3",
     "meteor-node-stubs": "^0.3.2",
+    "modernizr": "^3.6.0",
     "moment": "^2.19.1",
     "moment-timezone": "^0.5.14",
     "node-geocoder": "^3.21.1",

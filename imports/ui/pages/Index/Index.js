@@ -37,8 +37,16 @@ class Index extends Component {
   }
 
   componentDidMount() {
-    $('#carouselMainIndicators').carousel();
-    $('#carouselSndIndicators').carousel();
+    const car1 = $('#carouselMainIndicators');
+    const car2 = $('#carouselSndIndicators');
+    car1.carousel();
+    car2.carousel();
+    const loadLazy = (ev) => {
+      // console.log('Slide');
+      ev.relatedTarget.classList.add('lazy');
+    };
+    car1.on('slide.bs.carousel', loadLazy);
+    car2.on('slide.bs.carousel', loadLazy);
   }
 
   onResize() {
@@ -250,7 +258,7 @@ class Index extends Component {
                     <div className="device" data-device="iPhone6" data-orientation="portrait" data-color="white">
                       <div className="screen">
                         {/* Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! */}
-                        <img src="/telegram-screen.png" className="img-fluid" alt="" />
+                        <img src="/images/telegram-screen.png" className="img-fluid" alt="" />
                       </div>
                       <div className="button" tabIndex="-1" onKeyDown={() => {}} role="button" onClick={() => this.handleBtnClick()} />
                     </div>

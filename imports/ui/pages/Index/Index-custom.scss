@@ -187,28 +187,52 @@
   transform: translate3d(0, 0, 0);
 }
 
-.carousel-item-1 {
-  background-image: url('/home-slide1.jpg')
+.no-webp .carousel-item-1 {
+  background-image: url('/images/home-slide1.jpg')
 }
 
-.carousel-item-2 {
-  background-image: url('/home-slide2.jpg')
+.no-webp .carousel-item-2.lazy {
+  background-image: url('/images/home-slide2.jpg')
 }
 
-.carousel-item-3 {
-  background-image: url('/home-slide3.jpg')
+.no-webp .carousel-item-3.lazy {
+  background-image: url('/images/home-slide3.jpg')
 }
 
-.carousel-item-4 {
-  background-image: url('/home-slide4.jpg')
+.no-webp .carousel-item-4.lazy {
+  background-image: url('/images/home-slide4.jpg')
 }
 
-.carousel-snd-item-1 {
-  background-image: url('/home-slide-snd-1.jpg')
+.no-webp .carousel-snd-item-1 {
+  background-image: url('/images/home-slide-snd-1.jpg')
 }
 
-.carousel-snd-item-2 {
-  background-image: url('/home-slide-snd-2.jpg')
+.no-webp .carousel-snd-item-2.lazy {
+  background-image: url('/images/home-slide-snd-2.jpg')
+}
+
+.webp .carousel-item-1 {
+  background-image: url('/images/home-slide1.webp')
+}
+
+.webp .carousel-item-2.lazy {
+  background-image: url('/images/home-slide2.webp')
+}
+
+.webp .carousel-item-3.lazy {
+  background-image: url('/images/home-slide3.webp')
+}
+
+.webp .carousel-item-4.lazy {
+  background-image: url('/images/home-slide4.webp')
+}
+
+.webp .carousel-snd-item-1 {
+  background-image: url('/images/home-slide-snd-1.webp')
+}
+
+.webp .carousel-snd-item-2.lazy {
+  background-image: url('/images/home-slide-snd-2.webp')
 }
 
 .participe-btn {
@@ -225,28 +249,52 @@
   -moz-background-size: cover;
   background-size: cover;
   -o-background-size: cover;
-  background-image: url('/home-fires.jpg');
+}
+
+.no-webp .bg-image-full {
+  background-image: url('/images/home-fires.jpg');
+}
+
+.webp .bg-image-full {
+  background-image: url('/images/home-fires.webp');
 }
 
 @media only screen and (max-width: 767px) {
-  .bg-image-full {
-    background-image: url('/home-fires-800.jpg');
+  .no-webp .bg-image-full {
+    background-image: url('/images/home-fires-800.jpg');
+  }
+
+  .webp .bg-image-full {
+    background-image: url('/images/home-fires-800.webp');
   }
 }
 
 @media only screen and (max-width: 400px) {
-  .bg-image-full {
-    background-image: url('/home-fires-400.jpg');
+  .no-webp .bg-image-full {
+    background-image: url('/images/home-fires-400.jpg');
+  }
+
+  .webp .bg-image-full {
+    background-image: url('/images/home-fires-400.webp');
   }
 }
 
 @media only screen and (max-width: 1000px) {
-  .bg-image-full {
-    background-image: url('/home-fires-1000.jpg'); }
+  .no-webp .bg-image-full {
+    background-image: url('/images/home-fires-1000.jpg');
+  }
+
+  .webp .bg-image-full {
+    background-image: url('/images/home-fires-1000.webp');
+  }
 }
 
-.device[data-device=iPhone6][data-orientation=portrait][data-color=white] {
-  background-image: url(/mobile.png);
+.nowebp .device[data-device=iPhone6][data-orientation=portrait][data-color=white] {
+  background-image: url(/images/mobile.png);
+}
+
+.webp .device[data-device=iPhone6][data-orientation=portrait][data-color=white] {
+  background-image: url(/images/mobile.webp);
 }
 
 .full-width .page-header { // section titles
