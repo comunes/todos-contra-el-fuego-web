@@ -2,6 +2,7 @@
 /* eslint-disable react/jsx-indent-props */
 /* eslint-disable key-spacing */
 /* eslint-env jquery */
+import 'simple-line-icons/css/simple-line-icons.css';
 import React, { Component } from 'react';
 import { translate, Trans } from 'react-i18next';
 import { Helmet } from 'react-helmet';
@@ -19,7 +20,6 @@ import SubscriptionsMap from '/imports/ui/pages/Subscriptions/SubscriptionsMap';
 import ShareIt from '/imports/ui/components/ShareIt/ShareIt';
 import FiresMap from '../FiresMap/FiresMap';
 
-import 'simple-line-icons/css/simple-line-icons.css';
 import './Index.scss';
 import './Index-custom.scss';
 
