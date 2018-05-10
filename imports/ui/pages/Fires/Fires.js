@@ -278,7 +278,7 @@ const FireContainer = withTracker(({ match }) => {
   } else {
     console.log('Seems a fire from enc hash');
     fromHash = true;
-    subscription = Meteor.subscribe('fireFromHash', id);
+    subscription = Meteor.subscribe('fireFromHash', id, match.params);
   }
 
   // console.log(`Type of '${fireType}' fire, active: ${active}, archive: ${archive}, fromHash: ${fromHash}`);

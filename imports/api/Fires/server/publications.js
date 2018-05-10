@@ -132,14 +132,20 @@ Meteor.publish('fireFromId', function fireFromId(_id) {
   }
 });
 
-Meteor.publish('fireFromHash', function fireFromHash(fireEnc) {
+function logUrl(fireEnc, params) {
+  console.log(`Wrong fire: ${fireEnc}.`);
+  console.log(`Params received in url: ${JSON.stringify(params)}`);
+}
+
+Meteor.publish('fireFromHash', function fireFromHash(fireEnc, params) {
   check(fireEnc, String);
+  check(params, Object);
   try {
     // console.log(fireEnc);
     // const unsealed = Promise.await(urlEnc.decrypt(fireEnc));
     const unsealed = Promise.await(unsealW(fireEnc));
     if (unsealed === undefined) {
-      console.info(`Wrong fire: ${fireEnc}`);
+      logUrl(fireEnc, params);
       // https://guide.meteor.com/data-loading.html
       return this.ready();
     }
@@ -158,6 +164,7 @@ Meteor.publish('fireFromHash', function fireFromHash(fireEnc) {
        * return fire; */
   } catch (e) {
     console.warn(e);
+    logUrl(fireEnc, params);
     return this.ready();
   }
 });
