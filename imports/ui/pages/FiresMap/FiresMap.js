@@ -197,7 +197,8 @@ class FiresMap extends React.Component {
 
   render() {
     const { t } = this.props;
-    console.log(`Rendering ${this.props.loading ? 'loading' : 'LOADED'}, zoom ${this.state.viewport.zoom}, map ${this.props.activefires.length + this.props.firealerts.length} of ${this.props.activefirestotal} total. False positives: ${this.props.falsePositives.length}. Reactive ${this.state.viewport.zoom >= MAXZOOMREACTIVE}`);
+    const loading = this.props.loading || !this.props.subsready;
+    console.log(`Rendering ${loading ? 'loading' : 'LOADED'}, zoom ${this.state.viewport.zoom}, map ${this.props.activefires.length + this.props.firealerts.length} of ${this.props.activefirestotal} total. False positives: ${this.props.falsePositives.length}. Reactive ${this.state.viewport.zoom >= MAXZOOMREACTIVE}`);
     const title = `${t('AppName')}: ${t('Fuegos activos')}`;
 
     if (Meteor.isDevelopment && this.props.activefires.length === 1) console.log(`Active fire: ${JSON.stringify(this.props.activefires[0])}`);
@@ -263,7 +264,7 @@ class FiresMap extends React.Component {
                  </p>
             </Col>
           </Row>
-          {this.props.loading || !this.props.subsready ?
+          {loading ?
            <LoadingBar progress={this.props.loading ? 0.9 : 1} />
            : ''}
            {/* https://github.com/CliffCloud/Leaflet.Sleep */}
@@ -453,7 +454,7 @@ export default translate([], { wait: true })(withTracker(() => {
   const lastFireDetected = ActiveFiresCollection.findOne({}, { sort: { when: -1 } });
 
   return {
-    loading: !subscription ? true : !(subscription.ready() && settingsSubs.ready() && alertSubscription.ready()),
+    loading: Meteor.status().status !== 'connected' || !subscription ? true : !(subscription.ready() && settingsSubs.ready() && alertSubscription.ready()),
     userSubs: userSubs ? userSubs.value : null,
     userSubsBounds: userSubs ? userSubsBounds.value : null,
     subsready: settingsSubs.ready(),

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Meteor } from 'meteor/meteor';
 import { Line } from 'react-progressbar.js';
 
 import './LoadingBar.scss';
@@ -10,7 +11,7 @@ import './LoadingBar.scss';
 const LoadingBar = ({ progress }) => (
   <div className="loading-bar">
     <Line
-      progress={progress}
+      progress={Meteor.status().status !== 'connected' ? Meteor.status().retryCount / 10 : progress}
       options={{ strokeWidth: 2, color: '#5A7636' }}
       initialAnimate
     />
