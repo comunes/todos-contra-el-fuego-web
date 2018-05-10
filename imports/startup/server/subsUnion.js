@@ -6,10 +6,15 @@ import SiteSettings from '/imports/api/SiteSettings/SiteSettings';
 import Perlin from 'loms.perlin';
 import L from 'leaflet-headless';
 import calcUnion from '/imports/ui/components/Maps/SubsUnion/Unify';
+import { isMailServerMaster } from '/imports/startup/server/email';
 
 // sudo apt-get install libcairo2-dev libjpeg-dev libgif-dev
 
 Meteor.startup(() => {
+  if (!isMailServerMaster) {
+    console.log('We only process subsUnion in master');
+    return;
+  }
   const debug = true; // Meteor.isDevelopment;
   Perlin.seed(Math.random());
 
