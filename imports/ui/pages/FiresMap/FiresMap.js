@@ -25,7 +25,6 @@ import CenterInMyPosition from '/imports/ui/components/CenterInMyPosition/Center
 import FireList from '/imports/ui/components/Maps/FireList';
 import subsUnion from '/imports/ui/components/Maps/SubsUnion/SubsUnion';
 import DefMapLayers from '/imports/ui/components/Maps/DefMapLayers';
-import FromNow from '/imports/ui/components/FromNow/FromNow';
 import ActiveFiresCollection from '/imports/api/ActiveFires/ActiveFires';
 import FireAlertsCollection from '/imports/api/FireAlerts/FireAlerts';
 import IndustriesCollection, { industriesRemap } from '/imports/api/Industries/Industries';
