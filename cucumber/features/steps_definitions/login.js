@@ -74,8 +74,9 @@ module.exports = function doSteps(notos) {
     if (client.isVisible('.bert-alert')) {
       client.waitUntil(() => client.isVisible('.bert-alert') === false, 10000);
     }
-    client.waitForVisible('#logout', 5000);
+    client.waitForVisible('#logout', 10000);
     client.click('#logout');
+    client.waitForVisible('#login', 10000);
   });
 
   function login(badpass) {
