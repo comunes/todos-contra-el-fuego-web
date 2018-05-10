@@ -12,6 +12,7 @@ import FireAlertsCollection from '/imports/api/FireAlerts/FireAlerts';
 import { whichAreFalsePositives, firesUnion } from '/imports/api/FalsePositives/server/publications';
 import FalsePositives from '/imports/api/FalsePositives/FalsePositives';
 import Industries from '/imports/api/Industries/Industries';
+import ravenLogger from '/imports/startup/server/ravenLogger';
 
 import FiresCollection from '../Fires';
 
@@ -133,8 +134,9 @@ Meteor.publish('fireFromId', function fireFromId(_id) {
 });
 
 function logUrl(fireEnc, params) {
-  console.log(`Wrong fire: ${fireEnc}.`);
-  console.log(`Params received in url: ${JSON.stringify(params)}`);
+  const message = `Wrong fire: ${fireEnc}. Params received in url: ${JSON.stringify(params)}`;
+  console.log(message);
+  ravenLogger.log(message);
 }
 
 Meteor.publish('fireFromHash', function fireFromHash(fireEnc, params) {
@@ -165,6 +167,7 @@ Meteor.publish('fireFromHash', function fireFromHash(fireEnc, params) {
   } catch (e) {
     console.warn(e);
     logUrl(fireEnc, params);
+
     return this.ready();
   }
 });
