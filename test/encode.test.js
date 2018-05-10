@@ -103,6 +103,8 @@ describe('url encoding', () => {
     chai.expect(unsealed).to.deep.equal(obj);
     chai.expect(sealed).to.equal(encodeURI(sealed));
     chai.expect(sealed).to.not.equal(sealed2);
+    chai.expect(sealed).to.not.include('/');
+    chai.expect(sealed).to.not.include('%');
   });
 
   // This fails because Date is return as String (not as Date) and because _id
@@ -113,7 +115,7 @@ describe('url encoding', () => {
   });
 
   it('should decrypt node-red enc objects', async () => {
-    const sealed = 'Fe26.2**750f04110aef0f20d1093aa3f2a54dac3d7d5cc86e864e2c7d71b0ead88bc5b9*rX653dosl4BiM2L4fmZiiA*xuKj8XojCaS38R6X1EXkXBWjOidpnB0EVgGbdod_4vACHSl1w61hgXkU6SOq8HdURakJKCyIqWrsrdGt6DI6bl1xgfZ4ejlRMV_Keu0-WV0BVqrxbw0NlMN9KPexRDsy15yZou4ExU1yE36PBsfZIYysUrIsXwiBz3D5KvDaW0BnAXZ4sUR5Kyvk8g75QQmBth_LVHaEWE_OMarQUXDvFZ33R2_vM_i89QSj-wzwG5v-lbYrimE_5SMhEngRJFjihtQ_LfQlkH0wrpe5SUIdNL-DzsRxswvY7RIuMKHVLWSy8So66PxCuVJKa-DGvclX7tj7NO9RgNidfqP8U0izTpoV7dJB44Bwi4NOwLKGwNO9NG7jt-KGb2P6FeLTJYq8Mt0qqNsYXWUMpuhgXlKc2SuKT0avh-kYdovFO3YztGg5dz_Asu5hGZtkzRG6oGrvZxU8j7VDDNSQLLHo67Skmqg5_0e6Bp0gqpz13bmCSVvM_IpOkJLIgkRkGAvFoPy-woBqWiBU3NICo0z9X35WJ8j2xFY5niidGPXkP_uo5JbpGkmLH1tL06UUqjXZ5GS7gVhi8ii0vZt5zgaM4z0g4Q**96aa408156b0952f0d90e7c6d3960c06595543ffcfd642274138631b51b03383*BRnu9clkqVeKeXfWVe8i_Dh6TgqstVgV9HafoiLKxks';
+    const sealed = 'Fe26.2**7ae64199b871901d16a6ba031198c57b43b4a9231e15b851ff80014a8de230ca*RkB3_Uu_oJnTefyzB-Ocqg*2Z9rXYf--GxLJnYESHvdK5rC6lOMlSbMJ6YQyR2Mgpl57iBYopAHPWRLNTBgNkbUHFYa0IlEjdyeEz5VvLDtVvlSr1Sam-Cx8GUai4mharZO5-Wkze0dTr7M56WofSC9jpkv3kANrpsrit3HASE_E-5Z1JVYQVQqehw-VbSZTorrYj0GCJiAgXE5I0iY4boXRDYCv7fm_pzcuAbHlnNkKT1GbMFEPjyVViP4mVMRI5PDUhcWb0f62goMX4UnYLZXum4oYOIr84DG8AxqIdW2L94yslt0EZkD3yVhvKEGoauMpy6ry2illpSgaMaj4sU3AKWIjfAsJXvM6bHwbNh6G1_BJfCapuu3KijBBQPQMAnhYuwLAlY56WN-Y2efNIBJkp__kO6ak2nFqu8PufpxE-cv0uW7x6GWUtCpnFO2SeUJWVVMddUgJjLiM8Hkdl1v9huB0WdIvsoPEV0ZOwHZaC3jtdKFSO7Xe6LdqTXjXmdBMwtOv-HefyaB8LnEN6dAeKWwJuDu7g03QFTryDIiuwtpQ8mcLWTJGHcxoaluNhUESOBULkWSv_E1vOM1_fFv**1e41101b27c5da58bc11177448e91d88d7801bf911088a895844db0c542dfa7c*dPlOhtXJcyR47ezuL7CEgC2Z8d6C1asNOiqZmhD5TXY';
     const unsealed = await urlEnc.decrypt(sealed);
     // console.log(unsealed);
   });
