@@ -1,5 +1,7 @@
+/* eslint-disable import/no-absolute-path */
+
 import fs from 'fs';
-import getFallbackLang from '/imports/startup/server/accounts/lang-fallback';
+import getFallbackLang from '/imports/modules/lang-fallback';
 
 const as = f => `assets/app/${f}`;
 

@@ -18,6 +18,7 @@ import { isAnyMobile } from '/imports/ui/components/Utils/isMobile';
 import SubscriptionEditor from '/imports/ui/components/SubscriptionEditor/SubscriptionEditor';
 import SubscriptionsMap from '/imports/ui/pages/Subscriptions/SubscriptionsMap';
 import ShareIt from '/imports/ui/components/ShareIt/ShareIt';
+import getFallbackLang from '/imports/modules/lang-fallback';
 import FiresMap from '../FiresMap/FiresMap';
 
 import './Index.scss';
@@ -34,6 +35,7 @@ class Index extends Component {
       self.scaleHeader();
     }, 250);
     this.onResize = this.onResize.bind(this);
+    this.getBotUrl = this.getBotUrl.bind(this);
   }
 
   componentDidMount() {
@@ -67,6 +69,14 @@ class Index extends Component {
     return (<div />);
   }
 
+  getBotUrl() {
+    const fallbackLng = getFallbackLang(this.props.i18n.language);
+    console.log(`language: ${this.props.i18n.language}, fallback: ${fallbackLng}`);
+    return fallbackLng === 'es' ?
+      'https://t.me/TodosContraElFuego_bot' :
+      'https://t.me/AllAgainstTheFire_bot';
+  }
+
   scaleHeader() {
     const scalable = document.getElementById('tcefh1');
     const margin = 10;
@@ -79,7 +89,7 @@ class Index extends Component {
   }
 
   handleBtnClick() {
-    window.open('https://t.me/TodosContraElFuego_bot', '_blank');
+    window.open(this.getBotUrl(), '_blank');
   }
 
   gotoParticipe() {
@@ -270,7 +280,7 @@ class Index extends Component {
                   <div className="container-fluid">
                     <div className="row">
                       <div className="col-lg-6">
-                        <a className="feature-link" rel="noopener noreferrer" target="_blank" href="https://t.me/TodosContraElFuego_bot">
+                        <a className="feature-link" rel="noopener noreferrer" target="_blank" href={this.getBotUrl()}>
                           <div className="feature-item">
                             <i className="fa fa-telegram text-primary" />
                             <h3>Telegram</h3>
@@ -318,6 +328,7 @@ class Index extends Component {
 
 Index.propTypes = {
   history: PropTypes.object.isRequired,
+  i18n: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired
 };
 

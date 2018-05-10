@@ -1,7 +1,9 @@
+/* eslint-disable import/no-absolute-path */
+
 import { Accounts } from 'meteor/accounts-base';
-import sendWelcomeEmail from '../../../api/Users/server/send-welcome-email';
-import getOAuthProfile from '../../../modules/get-oauth-profile';
-import getFallbackLang from './lang-fallback';
+import getFallbackLang from '/imports/modules/lang-fallback';
+import sendWelcomeEmail from '/imports/api/Users/server/send-welcome-email';
+import getOAuthProfile from '/imports/modules/get-oauth-profile';
 
 Accounts.onCreateUser((options, user) => {
   const userToCreate = user;
