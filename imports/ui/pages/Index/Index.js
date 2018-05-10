@@ -43,9 +43,9 @@ class Index extends Component {
     const car2 = $('#carouselSndIndicators');
     car1.carousel();
     car2.carousel();
-    _.defer(() => {
+    /* _.defer(() => {
       $('#firsthomeslide').addClass('lazy');
-    });
+    }); */
     const loadLazy = (ev) => {
       ev.relatedTarget.classList.add('lazy');
     };
