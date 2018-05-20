@@ -33,6 +33,7 @@
     },
     "proxies_count": 0,
     "ironPassword": "SomePasswordAlLeast32LongYouKnowHowToCount",
+    "internalApiToken": "someSimilarPasswordForUseOurAPIinternally",
     "cron": {
       "debug": false
     },

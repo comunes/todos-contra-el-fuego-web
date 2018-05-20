@@ -29,7 +29,25 @@ const findFiresInRegion = (zone) => {
   return result;
 };
 
-const countFires = (regions, stringsToRemove) => {
+export const countRealFires = (firesCursor) => {
+  const realFires = [];
+  firesCursor.forEach((fire) => {
+    const union = firesUnion([fire]);
+    const falsePos = whichAreFalsePositives(FalsePositives, union);
+    const industries = whichAreFalsePositives(Industries, union);
+    if (falsePos.count() === 0 && industries.count() === 0) {
+      realFires.push(fire);
+    }
+  });
+  // group fires
+  const realUnion = firesUnion(realFires);
+  const unionCount = realUnion[0] &&
+                     realUnion[0].geometry &&
+                     realUnion[0].geometry.coordinates ? realUnion[0].geometry.coordinates.length : 0;
+  return unionCount;
+};
+
+const countFiresInRegions = (regions, stringsToRemove) => {
   let total = 0;
   const fireStats = {};
 
@@ -41,25 +59,9 @@ const countFires = (regions, stringsToRemove) => {
       const fires = findFiresInRegion(region);
       // TODO Also check neighbour fires (when better implementation of that part)
       const initialCount = fires.count();
-      let count = initialCount;
-      if (count > 0) {
-        const realFires = [];
-        fires.forEach((fire) => {
-          const union = firesUnion([fire]);
-          const falsePos = whichAreFalsePositives(FalsePositives, union);
-          const industries = whichAreFalsePositives(Industries, union);
-          if (falsePos.count() === 0 && industries.count() === 0) {
-            realFires.push(fire);
-          } else {
-            count -= 1;
-          }
-        });
-        // group fires
-        const realUnion = firesUnion(realFires);
-        const unionCount = realUnion[0] &&
-                           realUnion[0].geometry &&
-                           realUnion[0].geometry.coordinates ? realUnion[0].geometry.coordinates.length : 0;
-        if (debug) console.log(`${regionName} initial: ${initialCount}, first calc: ${count} union calc: ${unionCount}`);
+      if (initialCount > 0) {
+        const unionCount = countRealFires(fires);
+        if (debug) console.log(`${regionName} initial: ${initialCount}, union calc: ${unionCount}`);
         if (unionCount > 0) {
           total += unionCount;
           fireStats[regionName] = { count: unionCount, code: regionCode };
@@ -72,4 +74,4 @@ const countFires = (regions, stringsToRemove) => {
   return { total, fires: fireStats };
 };
 
-export default countFires;
+export default countFiresInRegions;

@@ -4,7 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import tbuffer from '@turf/buffer';
 import emojiFlags from 'emoji-flags';
 import tweet from '/imports/modules/server/twitter';
-import countFires from './countFires';
+import countFiresInRegions from './countFires';
 
 const debug = false;
 
@@ -103,7 +103,7 @@ const correctTweetSize = (tweetText) => {
 };
 
 const tweetEuropeFires = () => {
-  const resultEu = countFires(europe, [[' ', '']]);
+  const resultEu = countFiresInRegions(europe, [[' ', '']]);
 
   if (resultEu.total > 0) {
     let tweetText = `${tweetHeaders[0].trim()} ${composeEuropeTweet(resultEu.total, resultEu.fires, false)}. More info: https://fires.comunes.org/fires`;
@@ -126,8 +126,8 @@ const tweetEuropeFires = () => {
 };
 
 const tweetIberiaFires = () => {
-  const resultEs = countFires(autonomies, stringsToRemoveIberia);
-  const resultPt = countFires(portugal, stringsToRemoveIberia);
+  const resultEs = countFiresInRegions(autonomies, stringsToRemoveIberia);
+  const resultPt = countFiresInRegions(portugal, stringsToRemoveIberia);
 
   const fires = Object.assign(resultEs.fires, resultPt.fires);
   const total = resultEs.total + resultPt.total;

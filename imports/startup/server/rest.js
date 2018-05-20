@@ -2,9 +2,12 @@
 /* eslint-disable import/no-absolute-path */
 
 import { Meteor } from 'meteor/meteor';
+import { NumberBetween } from '/imports/modules/server/other-checks';
 import Fires from '/imports/api/Fires/Fires';
+import { check } from 'meteor/check';
 import SiteSettings from '/imports/api/SiteSettings/SiteSettings';
 import ActiveFiresCollection from '/imports/api/ActiveFires/ActiveFires';
+import { countRealFires } from '/imports/api/ActiveFires/server/countFires';
 
 Meteor.startup(() => {
   const uptime = new Date();
@@ -19,7 +22,7 @@ Meteor.startup(() => {
   // Generates: POST on /api/users and GET, DELETE /api/users/:id for
   // Meteor.users collection
   /* apiV1.addCollection(Meteor.users, {
-   *   excludedEndpoints: ['getAll', 'put'],
+   *   excludedEndpoints: ['getAll', 'put', 'delete', 'patch', 'get'],
    *   routeOptions: {
    *     authRequired: true
    *   },
@@ -73,6 +76,42 @@ Meteor.startup(() => {
   apiV1.addRoute('status/uptime', { authRequired: false }, {
     get: function get() {
       return { ms: new Date() - uptime };
+    }
+  });
+
+  // Maps to: /api/v1/fires-in/:lat/:lng/:km
+  // Ex: http://127.0.0.1:3000/api/v1/fires-in/38.736946/-9.142685/100
+  apiV1.addRoute('fires-in/:token/:lat/:lng/:km', { authRequired: false }, {
+    get: function get() {
+      const lat = Number(this.urlParams.lat);
+      const lng = Number(this.urlParams.lng);
+      const km = Number(this.urlParams.km);
+      const { token } = this.urlParams;
+      check(lng, NumberBetween(-180, 180));
+      check(lat, NumberBetween(-90, 90));
+      check(km, NumberBetween(0, 100));
+      check(token, String);
+
+      console.log(`Query for fires in ${lat}, ${lng} in ${km} km radius`);
+
+      if (token !== Meteor.settings.private.internalApiToken) {
+        return {};
+      }
+
+      const fires = ActiveFiresCollection.find({
+        ourid: {
+          $near: {
+            $geometry: {
+              type: 'Point',
+              coordinates: [lng, lat]
+            },
+            $maxDistance: km * 1000,
+            $minDistance: 0
+          }
+        }
+      });
+
+      return { total: fires.count(), real: countRealFires(fires) };
     }
   });
 });
