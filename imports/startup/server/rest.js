@@ -92,11 +92,12 @@ Meteor.startup(() => {
       check(km, NumberBetween(0, 100));
       check(token, String);
 
-      console.log(`Query for fires in ${lat}, ${lng} in ${km} km radius`);
-
       if (token !== Meteor.settings.private.internalApiToken) {
+        console.warn(`WARNING: Query for fires in ${lat}, ${lng} in ${km} km radius with wrong token`);
         return {};
       }
+
+      console.log(`Query for fires in ${lat}, ${lng} in ${km} km radius`);
 
       const fires = ActiveFiresCollection.find({
         ourid: {
