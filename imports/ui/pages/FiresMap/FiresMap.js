@@ -245,8 +245,8 @@ class FiresMap extends React.Component {
             <Col xs={12} sm={6} md={6} lg={6} >
               <p className="firesmap-legend">
                 { (this.props.activefires.length + this.props.firealerts.length) === 0 ?
-                  <Fragment><Trans parent="span" i18nKey="noActiveFireInMapCount">No hay fuegos activos en esta zona del mapa. <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos en el mundo.</Trans> <FireStats {... this.props} /></Fragment> :
-                  <Fragment><Trans parent="span" i18nKey="activeFireInMapCount">En rojo, <strong>{{ count: this.props.activefires.length + this.props.firealerts.length }}</strong> fuegos activos. <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos en el mundo.</Trans> <FireStats {... this.props} /></Fragment>
+                  <Fragment><Trans parent="span" i18nKey="noActiveFireInMapCount">No hay fuegos activos en esta zona del mapa. <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos en el mundo.</Trans> <FireStats loadingAll={loading} {... this.props} /></Fragment> :
+                  <Fragment><Trans parent="span" i18nKey="activeFireInMapCount">En rojo, <strong>{{ count: this.props.activefires.length + this.props.firealerts.length }}</strong> fuegos activos. <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos en el mundo.</Trans> <FireStats loadingAll={loading} {... this.props} /></Fragment>
                 }
               </p>
               {isNotHomeAndMobile() && this.props.firealerts.length > 0 &&
