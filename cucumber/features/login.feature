@@ -1,3 +1,4 @@
+@watch
 Feature: Allow users to login and logout
 
   As a user

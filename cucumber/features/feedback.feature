@@ -1,4 +1,3 @@
-@watch
 Feature: Allow users to give feedback
 
   As a user (authenticated or not)

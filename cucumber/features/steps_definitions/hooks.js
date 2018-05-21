@@ -5,14 +5,14 @@
     this.Before(() => {
       //  global.expect = require('@xolvio/jasmine-expect').expect;
 
-      /* Not used
+      // https://github.com/webdriverio/webdriverio/issues/1145
       if (!this.initMyCmds) {
         client.addCommand('waitForClickable', function elementClickable(selector, timeout) {
           this.waitForVisible(selector, timeout);
           this.waitForEnabled(selector, timeout);
         });
         this.initMyCmds = true;
-         } */
+      }
 
       client.windowHandleSize({ width: 1500, height: 1000 });
 
