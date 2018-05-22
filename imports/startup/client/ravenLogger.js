@@ -11,4 +11,6 @@ const ravenLogger = enabled ? new RavenLogger({
   trackUser: true // default
 }, ravenOptions) : { log: (error) => { console.log(error); } };
 
+console.log(`ravenLogger ${enabled ? 'enabled' : 'disabled'}`);
+
 export default ravenLogger;
