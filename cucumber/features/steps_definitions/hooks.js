@@ -2,6 +2,31 @@
 
 (function () {
   module.exports = function () {
+    const printLog = (type) => {
+      client.log(type).value.forEach((logItem) => {
+        const { source, message } = logItem;
+        if (type === 'browser' && source === 'console-api') {
+          // Clean messages of type:
+          // http://localhost:3000/app/app.js?hash=34da4258bd2caa4e14c7c0c20ba6396f309e7236 13325:18 "GMaps script just loaded"
+          // to get the last part
+          const cleanMessage = message.replace(/[^ ]{1,} [^ ]{1,} "(.*)"$/g, '$1');
+          console.log(`${logItem.level}: ${cleanMessage}`);
+        } else {
+          // Right now we don't need logs like:
+          // %cDownload the React DevTools for a better development experience: https://fb.me/react-devtools
+          // console.log(`${logItem.level}: ${message}`);
+        }
+      });
+    };
+
+    this.StepResult((stepResult) => {
+      if (stepResult.getStatus() === 'failed') {
+        // http://webdriver.io/api/protocol/log.html
+        console.log(`Step result: ${stepResult.getStatus()}`);
+        printLog('browser');
+      }
+    });
+
     this.Before(() => {
       //  global.expect = require('@xolvio/jasmine-expect').expect;
 

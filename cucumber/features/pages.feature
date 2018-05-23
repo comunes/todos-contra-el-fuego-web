@@ -1,5 +1,8 @@
 Feature: Test all secundary pages
 
+  Background:
+    Given I am on the home page
+
   Scenario: Check that all secondary pages work well
     Given a list of page ids and contents
       | license     | License          |
