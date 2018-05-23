@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 
 const ravenOptions = {};
 const publicDSN = Meteor.settings.public.sentryPublicDSN;
-const enabled = !Meteor.isDevelopment && publicDSN;
+const enabled = !!publicDSN;
 
 const ravenLogger = enabled ? new RavenLogger({
   publicDSN, // will be used on the client
