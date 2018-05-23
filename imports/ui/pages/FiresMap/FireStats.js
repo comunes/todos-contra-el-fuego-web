@@ -44,7 +44,7 @@ class FireStats extends Component {
     if (this.state.lastCheck && this.state.lastFireDetected) {
       return (<Fragment><br /><Trans>Actualizado <FromNow when={this.state.lastCheck} />, último fuego detectado <FromNow when={this.state.lastFireDetected.when} />.</Trans></Fragment>);
     }
-    return (<Fragment />);
+    return null;
   }
 }
 
