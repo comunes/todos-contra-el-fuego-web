@@ -35,18 +35,23 @@ module.exports = function doSteps(notos) {
   function waitNoBert() {
     client.pause(2000);
     if (client.isVisible('.bert-container')) {
-      console.log('Removing bert alert');
+      // console.log('Removing bert alert');
       client.click('.bert-container');
       client.waitForVisible('.bert-container', 10000, true);
     } else {
-      console.log('No bert alert');
+      // console.log('No bert alert');
     }
   }
 
-  function register() {
+  function logoutIfLogged() {
     if (client.isVisible('#logout')) {
       client.click('#logout');
     }
+    client.waitForVisible('#signup', 10000);
+  }
+
+  function register() {
+    logoutIfLogged();
     client.waitForVisible('#signup', 10000);
     client.click('#signup');
     setUserValues();
@@ -54,7 +59,13 @@ module.exports = function doSteps(notos) {
       client.click('input[name="tos"]');
     }
     client.click('#signUpSubmit');
+    client.waitForVisible('#logout', 10000);
   }
+
+  this.Given(/^I logout if logged$/, () => {
+    waitNoBert();
+    logoutIfLogged();
+  });
 
   this.Given(/^I have an account and I logged in$/, () => {
     register();
@@ -62,8 +73,8 @@ module.exports = function doSteps(notos) {
 
   function checkName() {
     client.waitForVisible('#profile', 5000);
-    client.waitForText('#profile', firstName);
-    client.waitForText('#profile', lastName);
+    client.waitUntilText('#profile', firstName);
+    client.waitUntilText('#profile', lastName);
   }
 
   this.Then(/^I should be logged in$/, () => {

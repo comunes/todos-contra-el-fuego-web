@@ -11,6 +11,14 @@
           this.waitForVisible(selector, timeout);
           this.waitForEnabled(selector, timeout);
         });
+
+        client.addCommand('waitUntilText', function waitUntilText(selector, text, ms) {
+          ms = ms || 5000;
+          this.waitForVisible(selector);
+          const self = this;
+          this.waitUntil(() => self.getText(selector).includes(text), ms, `expected text in ${selector} be different after ${ms / 1000}s. Obtained: '${self.getText(selector)}' expected: '${text}'`);
+        });
+
         this.initMyCmds = true;
       }
 
