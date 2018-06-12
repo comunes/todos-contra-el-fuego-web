@@ -9,3 +9,6 @@ npm-debug.log
 .deploy/
 public/locales/undefined/
 .deploy-staging
+.screenshots
+.vscode
+output.json
