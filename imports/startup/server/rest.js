@@ -119,8 +119,10 @@ Meteor.startup(() => {
       }
     });
 
+    const result = { total: fires.count(), real: countRealFires(fires) };
+
     if (!full) {
-      return { total: fires.count(), real: countRealFires(fires) };
+      return result;
     }
 
     // TODO only get real
@@ -129,9 +131,16 @@ Meteor.startup(() => {
       const union = firesUnion(fires);
       const falsePos = whichAreFalsePositives(FalsePositives, union);
       const industries = whichAreFalsePositives(Industries, union);
-      return { fires: firesA, falsePos: falsePos.fetch(), industries: industries.fetch() };
+      result.fires = firesA;
+      result.industries = industries.fetch();
+      result.falsePos = falsePos.fetch();
+      return result;
     }
-    return { fires: [] };
+
+    // otherwise
+    return {
+      total: 0, real: 0, fires: [], falsePos: [], industries: []
+    };
   }
 
 
