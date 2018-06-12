@@ -453,7 +453,7 @@ export default translate([], { wait: true })(withTracker(() => {
   const lastFireDetected = ActiveFiresCollection.findOne({}, { sort: { when: -1 } });
 
   return {
-    loading: Meteor.status().status !== 'connected' || !subscription ? true : !(subscription.ready() && settingsSubs.ready() && alertSubscription.ready()),
+    loading: Meteor.status().status !== 'connected' || !subscription ? true : !(subscription.ready() && settingsSubs.ready() && alertSubscription.ready() && settingsSubs.ready()),
     userSubs: userSubs ? userSubs.value : null,
     userSubsBounds: userSubs ? userSubsBounds.value : null,
     subsready: settingsSubs.ready(),
