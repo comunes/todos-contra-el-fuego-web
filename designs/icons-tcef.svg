@@ -247,7 +247,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.23559314"
-     inkscape:cx="-1825.0924"
+     inkscape:cx="-2890.4884"
      inkscape:cy="-486.23766"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -620,6 +620,40 @@
          xlink:href="#g22554-4"
          y="0"
          x="0" />
+    </g>
+    <g
+       transform="translate(176.48029,228.33241)"
+       id="g8543-0"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/fires_flutter/images/logo-1024.png"
+       inkscape:export-xdpi="147.38"
+       inkscape:export-ydpi="147.38">
+      <rect
+         y="108.84225"
+         x="-419.07861"
+         height="176.48029"
+         width="176.48029"
+         id="rect17701-2"
+         style="opacity:1;vector-effect:none;fill:none;fill-opacity:1;stroke:none;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <g
+         style="stroke-width:0.88457036"
+         inkscape:export-ydpi="4.0856881"
+         inkscape:export-xdpi="4.0856881"
+         inkscape:export-filename="/mnt/md1/proyectos/dev/todos-contra-el-fuego-web/public/fire-marker.png"
+         transform="matrix(1.1304923,0,0,1.1304923,-313.01185,70.713452)"
+         id="g22554-4-3">
+        <path
+           sodipodi:nodetypes="cszzcczasc"
+           inkscape:connector-curvature="0"
+           id="path5329-5-7"
+           d="m -25.638382,38.048346 c 11.566313,13.887908 17.1215844,22.244854 13.751242,33.868326 -2.465387,8.50265 -8.895424,18.626534 -18.100172,25.532106 -9.204776,6.905572 -20.549951,13.517692 -24.263404,17.728802 -3.71348,4.21108 -9.835779,11.6046 -10.976769,21.82688 -2.725208,24.7073 15.038044,45.63926 39.702238,48.35952 11.289242,1.2311 26.6324564,-5.2645 34.2331684,-10.31973 C 16.308659,169.98901 28.520768,152.76263 31.570884,138.81099 35.854436,119.21732 35.065926,96.385127 23.626002,79.16853 12.946123,63.095807 3.8673424,50.775037 -25.638382,38.048346 Z"
+           style="fill:#d41300;fill-opacity:1;stroke:none;stroke-width:9.36170292;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        <path
+           sodipodi:nodetypes="cszzcczcsc"
+           inkscape:connector-curvature="0"
+           id="path5331-3-5"
+           d="m -7.5198746,101.09834 c 4.018254,8.70077 3.821166,14.69136 0.49964,20.18233 -2.429696,4.01667 -7.1125824,8.31964 -12.7749834,10.59336 -5.662401,2.27373 -12.38086,4.1034 -14.860826,5.75067 -2.479966,1.64727 -6.630512,4.59399 -8.617877,9.67322 -4.786736,12.28103 1.27127,26.11038 13.530846,30.8887 5.613373,2.17993 11.515354,2.13146 17.442629,-0.0849 5.9272234,-2.21636 14.0405914,-9.44377 18.0234704,-15.42084 6.3490206,-9.59829 8.9531296,-23.76395 5.4565016,-34.15229 -3.2643496,-9.69812 -4.6224286,-12.3603 -18.6994006,-27.43025 z"
+           style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:9.36170292;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      </g>
     </g>
   </g>
 </svg>
