@@ -65,7 +65,7 @@ Meteor.startup(() => {
     }
   });
 
-  // Maps to: /api/v1/status/last-fire-detected
+  // Maps to: /api/v1/status/last-fires-count
   apiV1.addRoute('status/active-fires-count', { authRequired: false }, {
     get: function get() {
       return { total: ActiveFiresCollection.find({}).count() };
@@ -80,7 +80,8 @@ Meteor.startup(() => {
   });
 
   // Maps to: /api/v1/fires-in/:lat/:lng/:km
-  // Ex: http://127.0.0.1:3000/api/v1/fires-in/38.736946/-9.142685/100
+  // 100 km max
+  // Ex: http://127.0.0.1:3000/api/v1/fires-in/token/38.736946/-9.142685/100
   apiV1.addRoute('fires-in/:token/:lat/:lng/:km', { authRequired: false }, {
     get: function get() {
       const lat = Number(this.urlParams.lat);
@@ -94,7 +95,7 @@ Meteor.startup(() => {
 
       if (token !== Meteor.settings.private.internalApiToken) {
         console.warn(`WARNING: Query for fires in ${lat}, ${lng} in ${km} km radius with wrong token`);
-        return {};
+        return { error: 'Unauthorized' };
       }
 
       console.log(`Query for fires in ${lat}, ${lng} in ${km} km radius`);
