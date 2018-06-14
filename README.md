@@ -24,7 +24,7 @@ More platforms and services in the future...
 
 We do tests via:
 ```
-TEST_WATCH=1 MONGO_URL=mongodb://localhost:27017/fuegostest  meteor --settings settings-development.json test --driver-package meteortesting:mocha --port 3010
+TEST_PORT=3000 TEST_WATCH=1 TEST_CLIENT=0 MONGO_URL=mongodb://localhost:27017/fuegostest  meteor --settings settings-development.json test --driver-package meteortesting:mocha --port 3010
 
 # and
 
