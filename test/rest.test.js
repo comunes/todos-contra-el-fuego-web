@@ -5,11 +5,10 @@
 import { chai } from 'meteor/practicalmeteor:chai';
 import { Meteor } from 'meteor/meteor';
 import { HTTP } from 'meteor/http';
-import { Accounts } from 'meteor/accounts-base';
-import Subscriptions from '/imports/api/Subscriptions/Subscriptions';
 
+const testPort = process.env.TEST_PORT;
 function url(path) {
-  return `http://127.0.0.1:3000/${path}`;
+  return `http://127.0.0.1:${testPort}/${path}`;
 }
 
 describe('basic api v1 returns', () => {
