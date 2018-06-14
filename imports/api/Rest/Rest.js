@@ -321,3 +321,46 @@ apiV1.addRoute('mobile/subscriptions', { authRequired: false }, {
     return jsend.success({});
   }
 });
+
+apiV1.addRoute('mobile/subscriptions/all', { authRequired: false }, {
+  get: function get() {
+    const { token, mobileToken } = this.bodyParams;
+    try {
+      check(token, String);
+      check(mobileToken, String);
+    } catch (e) {
+      return defaultFailParams(e);
+    }
+
+    const failed = checkAuthToken(token);
+    if (failed) return failed;
+
+    const user = Meteor.users.findOne({ fireBaseToken: mobileToken });
+    if (!user) return failed;
+
+    const result = Subscriptions.find({ owner: user._id });
+
+    return jsend.success({ subscriptions: result.fetch(), count: result.count() });
+  },
+  delete: function delAll() {
+    const { token, mobileToken } = this.bodyParams;
+    try {
+      check(token, String);
+      check(mobileToken, String);
+    } catch (e) {
+      return defaultFailParams(e);
+    }
+
+    const failed = checkAuthToken(token);
+    if (failed) return failed;
+
+    if (Meteor.users.find({ fireBaseToken: mobileToken }).count() !== 1) return failed;
+
+    const user = Meteor.users.findOne({ fireBaseToken: mobileToken });
+    if (!user) return failed;
+    const toRemove = Subscriptions.find({ owner: user._id }).count();
+    Subscriptions.remove({ owner: user._id });
+
+    return jsend.success({ count: toRemove });
+  }
+});

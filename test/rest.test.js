@@ -142,7 +142,7 @@ describe('basic api v1 returns', () => {
 
   let subsId;
 
-  it('should create mobile user subscriptions', async (done) => {
+  function addSubs(done) {
     // this are removed in the test database but we are testing in dev/ci database
 
     // Remove previous subs of this user
@@ -164,7 +164,47 @@ describe('basic api v1 returns', () => {
       subsId = jsendResult.data.subsId;
       done();
     });
+  }
+
+  it('should create mobile user subscriptions', async (done) => {
+    addSubs(done);
   });
+
+  it('should not create mobile user subscriptions with wrong token', async (done) => {
+    HTTP.post(url('api/v1/mobile/subscriptions'), {
+      data: {
+        token: 'wrongOne',
+        mobileToken,
+        lat: 3.106111,
+        lon: 53.5775,
+        distance: 100
+      }
+    }, (error, result) => {
+      chai.expect(error, null);
+      chai.expect(result.statusCode).equal(401);
+      done();
+    });
+  });
+
+  it('should get all mobile user subscriptions', async (done) => {
+    HTTP.get(url('api/v1/mobile/subscriptions/all'), {
+      data: {
+        token,
+        mobileToken
+      }
+    }, (error, result) => {
+      chai.expect(error, null);
+      chai.expect(result.statusCode).equal(200);
+      const jsendResult = result.data;
+      chai.expect(jsendResult.status).equal('success');
+      chai.expect(typeof jsendResult.data.subscriptions).to.equal('object');
+      chai.expect(typeof jsendResult.data.count).to.equal('number');
+      chai.expect(jsendResult.data.count).to.equal(1);
+      // console.log(JSON.stringify(jsendResult.data.subscriptions));
+      done();
+    });
+  });
+
 
   it('should remove mobile user subscriptions', async (done) => {
     // this are removed in the test database but we are testing in dev/ci database
@@ -184,21 +224,6 @@ describe('basic api v1 returns', () => {
     });
   });
 
-  it('should not create mobile user subscriptions with wrong token', async (done) => {
-    HTTP.post(url('api/v1/mobile/subscriptions'), {
-      data: {
-        token: 'wrongOne',
-        mobileToken,
-        lat: 3.106111,
-        lon: 53.5775,
-        distance: 100
-      }
-    }, (error, result) => {
-      chai.expect(error, null);
-      chai.expect(result.statusCode).equal(401);
-      done();
-    });
-  });
 
   it('should not remove mobile user subscriptions with wrong token', async (done) => {
     HTTP.del(url('api/v1/mobile/subscriptions'), {
@@ -214,7 +239,56 @@ describe('basic api v1 returns', () => {
     });
   });
 
-  // TODO list all subs
+  it('should not get mobile user subscriptions with wrong token', async (done) => {
+    HTTP.get(url('api/v1/mobile/subscriptions/all'), {
+      data: {
+        token: 'wrongOne',
+        mobileToken
+      }
+    }, (error, result) => {
+      chai.expect(error, null);
+      chai.expect(result.statusCode).equal(401);
+      done();
+    });
+  });
+
+  it('should get all mobile user subscriptions', async (done) => {
+    HTTP.get(url('api/v1/mobile/subscriptions/all'), {
+      data: {
+        token,
+        mobileToken
+      }
+    }, (error, result) => {
+      chai.expect(error, null);
+      chai.expect(result.statusCode).equal(200);
+      const jsendResult = result.data;
+      chai.expect(jsendResult.status).equal('success');
+      chai.expect(typeof jsendResult.data.subscriptions).to.equal('object');
+      chai.expect(typeof jsendResult.data.count).to.equal('number');
+      chai.expect(jsendResult.data.count).to.equal(0);
+      done();
+    });
+  });
+
+  it('should del all mobile user subscriptions', async (done) => {
+    // Add two
+    addSubs(() => {});
+    addSubs(() => {});
+    HTTP.del(url('api/v1/mobile/subscriptions/all'), {
+      data: {
+        token,
+        mobileToken
+      }
+    }, (error, result) => {
+      chai.expect(error, null);
+      chai.expect(result.statusCode).equal(200);
+      const jsendResult = result.data;
+      chai.expect(jsendResult.status).equal('success');
+      chai.expect(typeof jsendResult.data.count).to.equal('number');
+      chai.expect(jsendResult.data.count).to.equal(2);
+      done();
+    });
+  });
 
   // TODO remove all subs
 });
