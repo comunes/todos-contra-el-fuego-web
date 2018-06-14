@@ -70,8 +70,7 @@ describe('basic api v1 returns', () => {
       }
     }, (error, result) => {
       chai.expect(error, null);
-      chai.expect(result.data.status).equal('error');
-      chai.expect(result.statusCode).equal(200);
+      chai.expect(result.statusCode).equal(401);
       done();
     }));
 
@@ -81,16 +80,14 @@ describe('basic api v1 returns', () => {
       }
     }, (error, result) => {
       chai.expect(error, null);
-      chai.expect(result.data.status).equal('error');
-      chai.expect(result.statusCode).equal(200);
+      chai.expect(result.statusCode).equal(401);
       done();
     }));
 
   it('should not return fires with some wrong distance', async done =>
     HTTP.get(url(`api/v1/fires-in-full/${token}/38.736946/-9.142685/1100`), (error, result) => {
       chai.expect(error, null);
-      chai.expect(result.data.status).equal('error');
-      chai.expect(result.statusCode).equal(200);
+      chai.expect(result.statusCode).equal(400);
       done();
     }));
 
@@ -138,7 +135,7 @@ describe('basic api v1 returns', () => {
       }
     }, (error, result) => {
       chai.expect(error, null);
-      chai.expect(result.data.status).equal('error');
+      chai.expect(result.statusCode).equal(401);
       done();
     });
   });
@@ -198,7 +195,7 @@ describe('basic api v1 returns', () => {
       }
     }, (error, result) => {
       chai.expect(error, null);
-      chai.expect(result.data.status).equal('error');
+      chai.expect(result.statusCode).equal(401);
       done();
     });
   });
@@ -212,8 +209,12 @@ describe('basic api v1 returns', () => {
       }
     }, (error, result) => {
       chai.expect(error, null);
-      chai.expect(result.data.status).equal('error');
+      chai.expect(result.statusCode).equal(401);
       done();
     });
   });
+
+  // TODO list all subs
+
+  // TODO remove all subs
 });

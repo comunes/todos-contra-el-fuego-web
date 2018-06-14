@@ -20,20 +20,21 @@ const debug = false;
 
 const uptime = new Date();
 
+const restivusError = (code, message) => ({ status: 'error', statusCode: code, body: message });
 
 function fail(e) {
-  return jsend.error(`Unexpected error in REST call: ${e}`);
+  return restivusError(500, `Unexpected error in REST call: ${e}`);
 }
 
 function defaultFailParams(e) {
-  return jsend.error(`Wrong REST params: ${e}`);
+  return restivusError(400, `Wrong REST params: ${e}`);
 }
 
 function checkAuthToken(token) {
   if (token !== Meteor.settings.private.internalApiToken) {
     const message = `Unauthorized auth token '${token}' in REST API`;
     console.warn(message);
-    return jsend.error(message);
+    return restivusError(401, message);
   }
   return undefined;
 }
