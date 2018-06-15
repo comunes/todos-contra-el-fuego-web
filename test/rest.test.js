@@ -270,24 +270,22 @@ describe('basic api v1 returns', () => {
   });
 
   it('should del all mobile user subscriptions', async (done) => {
-    // Add two
-    addSubs(() => {});
-    addSubs(() => {});
-    HTTP.del(url('api/v1/mobile/subscriptions/all'), {
-      data: {
-        token,
-        mobileToken
-      }
-    }, (error, result) => {
-      chai.expect(error, null);
-      chai.expect(result.statusCode).equal(200);
-      const jsendResult = result.data;
-      chai.expect(jsendResult.status).equal('success');
-      chai.expect(typeof jsendResult.data.count).to.equal('number');
-      chai.expect(jsendResult.data.count).to.equal(2);
-      done();
+    // Add subs
+    addSubs(() => {
+      HTTP.del(url('api/v1/mobile/subscriptions/all'), {
+        data: {
+          token,
+          mobileToken
+        }
+      }, (error, result) => {
+        chai.expect(error, null);
+        chai.expect(result.statusCode).equal(200);
+        const jsendResult = result.data;
+        chai.expect(jsendResult.status).equal('success');
+        chai.expect(typeof jsendResult.data.count).to.equal('number');
+        chai.expect(jsendResult.data.count).to.equal(1);
+        done();
+      });
     });
   });
-
-  // TODO remove all subs
 });
