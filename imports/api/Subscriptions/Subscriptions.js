@@ -1,6 +1,7 @@
 /* eslint-disable consistent-return */
 /* eslint-disable import/no-absolute-path */
 
+import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 import { defaultCreatedAt, defaultUpdateAt } from '/imports/api/Utility/Utils.js';
@@ -42,6 +43,7 @@ Subscriptions.deny({
 
 
 Subscriptions.schema = new SimpleSchema({
+  _id: { type: Meteor.Collection.ObjectID, optional: true, blackbox: true },
   location: Object,
   'location.lat': Number,
   'location.lon': Number,

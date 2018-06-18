@@ -12,6 +12,7 @@ function geo(doc) {
 
 export function subscriptionsInsert(doc, userId, type) {
   check(doc, {
+    _id: Match.Maybe(Meteor.Collection.ObjectID),
     location: Match.ObjectIncluding({ lat: Number, lon: Number }),
     distance: Number
   });

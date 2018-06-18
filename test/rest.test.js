@@ -91,8 +91,9 @@ describe('basic api v1 returns', () => {
     }));
 
   const mobileToken = 'user-mobile-firebase-token';
-
   let testUserId;
+  let returnedSubsId;
+  const objId = new Meteor.Collection.ObjectID();
 
   it('should create mobile users', async (done) => {
     // this are removed in the test database but we are testing in dev/ci database
@@ -139,11 +140,9 @@ describe('basic api v1 returns', () => {
     });
   });
 
-  let subsId;
 
   function addSubs(done) {
     // this are removed in the test database but we are testing in dev/ci database
-
     // Remove previous subs of this user
     // Subscriptions.remove({ owner: testUserId });
     // chai.expect(Subscriptions.find({ owner: testUserId }).count()).to.equal(0);
@@ -151,16 +150,19 @@ describe('basic api v1 returns', () => {
       data: {
         token,
         mobileToken,
+        id: objId._str,
         lat: 3.106111,
         lon: 53.5775,
         distance: 100
       }
     }, (error, result) => {
       chai.expect(error, null);
+      if (result.statusCode !== 200) console.log(result);
       chai.expect(result.statusCode).equal(200);
       const jsendResult = result.data;
       chai.expect(jsendResult.status).equal('success');
-      subsId = jsendResult.data.subsId;
+      returnedSubsId = jsendResult.data.subsId;
+      chai.expect(returnedSubsId.toString()).equal(objId._str);
       done();
     });
   }
@@ -174,12 +176,14 @@ describe('basic api v1 returns', () => {
       data: {
         token: 'wrongOne',
         mobileToken,
+        id: objId._str,
         lat: 3.106111,
         lon: 53.5775,
         distance: 100
       }
     }, (error, result) => {
       chai.expect(error, null);
+      if (result.statusCode !== 401) console.log(result);
       chai.expect(result.statusCode).equal(401);
       done();
     });
@@ -189,6 +193,7 @@ describe('basic api v1 returns', () => {
     HTTP.get(url(`api/v1/mobile/subscriptions/all/${token}/${mobileToken}`), {
     }, (error, result) => {
       chai.expect(error, null);
+      if (result.statusCode !== 200) console.log(result);
       chai.expect(result.statusCode).equal(200);
       const jsendResult = result.data;
       chai.expect(jsendResult.status).equal('success');
@@ -208,13 +213,30 @@ describe('basic api v1 returns', () => {
       data: {
         token,
         mobileToken,
-        subsId
+        subsId: returnedSubsId
       }
     }, (error, result) => {
       chai.expect(error, null);
+      if (result.statusCode !== 200) console.log(result);
       chai.expect(result.statusCode).equal(200);
       const jsendResult = result.data;
       chai.expect(jsendResult.status).equal('success');
+      done();
+    });
+  });
+
+  it('should get all mobile user subscriptions after deletion', async (done) => {
+    HTTP.get(url(`api/v1/mobile/subscriptions/all/${token}/${mobileToken}`), {
+    }, (error, result) => {
+      chai.expect(error, null);
+      if (result.statusCode !== 200) console.log(result);
+      chai.expect(result.statusCode).equal(200);
+      const jsendResult = result.data;
+      chai.expect(jsendResult.status).equal('success');
+      chai.expect(typeof jsendResult.data.subscriptions).to.equal('object');
+      chai.expect(typeof jsendResult.data.count).to.equal('number');
+      chai.expect(jsendResult.data.count).to.equal(0);
+      // console.log(JSON.stringify(jsendResult.data.subscriptions));
       done();
     });
   });
@@ -225,10 +247,11 @@ describe('basic api v1 returns', () => {
       data: {
         token: 'wrongOne',
         mobileToken,
-        subsId
+        subsId: returnedSubsId
       }
     }, (error, result) => {
       chai.expect(error, null);
+      if (result.statusCode !== 401) console.log(result);
       chai.expect(result.statusCode).equal(401);
       done();
     });
@@ -238,6 +261,7 @@ describe('basic api v1 returns', () => {
     HTTP.get(url(`api/v1/mobile/subscriptions/all/wrongOne/${mobileToken}`), {
     }, (error, result) => {
       chai.expect(error, null);
+      if (result.statusCode !== 401) console.log(result);
       chai.expect(result.statusCode).equal(401);
       done();
     });
@@ -247,7 +271,8 @@ describe('basic api v1 returns', () => {
     HTTP.get(url(`api/v1/mobile/subscriptions/all/${token}/${mobileToken}`), {
     }, (error, result) => {
       chai.expect(error, null);
-      console.log(result);
+      // console.log(result);
+      if (result.statusCode !== 200) console.log(result);
       chai.expect(result.statusCode).equal(200);
       const jsendResult = result.data;
       chai.expect(jsendResult.status).equal('success');
@@ -264,11 +289,12 @@ describe('basic api v1 returns', () => {
       HTTP.del(url(`api/v1/mobile/subscriptions/all/${token}/${mobileToken}`), {
       }, (error, result) => {
         chai.expect(error, null);
+        if (result.statusCode !== 200) console.log(result);
         chai.expect(result.statusCode).equal(200);
         const jsendResult = result.data;
         chai.expect(jsendResult.status).equal('success');
         chai.expect(typeof jsendResult.data.count).to.equal('number');
-        chai.expect(jsendResult.data.count).to.equal(1);
+        chai.expect(jsendResult.data.count).to.be.at.most(1);
         done();
       });
     });

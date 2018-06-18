@@ -15,6 +15,7 @@ import Subscriptions from '/imports/api/Subscriptions/Subscriptions';
 import jsend from 'jsend';
 import { Random } from 'meteor/random';
 import { subscriptionsInsert } from '/imports/api/Subscriptions/methods.js';
+import { Mongo } from 'meteor/mongo';
 
 const debug = false;
 
@@ -275,18 +276,24 @@ if (!Meteor.settings.private.internalApiToken) {
       const {
         token,
         mobileToken,
+        id,
         lat,
         lon,
         distance
       } = this.bodyParams;
+      let oid;
       try {
         check(token, String);
         check(mobileToken, String);
+        check(id, String);
+        oid = new Mongo.ObjectID(id);
+        check(oid, Meteor.Collection.ObjectID);
         check(lat, Number);
         check(lon, Number);
         check(distance, Number);
         checkLatLonDist(distance, lat, lon);
       } catch (e) {
+        if (debug) console.log(e);
         return defaultFailParams(e);
       }
 
@@ -297,6 +304,7 @@ if (!Meteor.settings.private.internalApiToken) {
       if (!user) return failMsg('User not found');
 
       const newSubs = {};
+      newSubs._id = new Meteor.Collection.ObjectID(id);
       newSubs.location = {};
       newSubs.location.lat = lat;
       newSubs.location.lon = lon;
