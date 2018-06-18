@@ -186,11 +186,7 @@ describe('basic api v1 returns', () => {
   });
 
   it('should get all mobile user subscriptions', async (done) => {
-    HTTP.get(url('api/v1/mobile/subscriptions/all'), {
-      data: {
-        token,
-        mobileToken
-      }
+    HTTP.get(url(`api/v1/mobile/subscriptions/all/${token}/${mobileToken}`), {
     }, (error, result) => {
       chai.expect(error, null);
       chai.expect(result.statusCode).equal(200);
@@ -239,11 +235,7 @@ describe('basic api v1 returns', () => {
   });
 
   it('should not get mobile user subscriptions with wrong token', async (done) => {
-    HTTP.get(url('api/v1/mobile/subscriptions/all'), {
-      data: {
-        token: 'wrongOne',
-        mobileToken
-      }
+    HTTP.get(url(`api/v1/mobile/subscriptions/all/wrongOne/${mobileToken}`), {
     }, (error, result) => {
       chai.expect(error, null);
       chai.expect(result.statusCode).equal(401);
@@ -252,13 +244,10 @@ describe('basic api v1 returns', () => {
   });
 
   it('should get all mobile user subscriptions', async (done) => {
-    HTTP.get(url('api/v1/mobile/subscriptions/all'), {
-      data: {
-        token,
-        mobileToken
-      }
+    HTTP.get(url(`api/v1/mobile/subscriptions/all/${token}/${mobileToken}`), {
     }, (error, result) => {
       chai.expect(error, null);
+      console.log(result);
       chai.expect(result.statusCode).equal(200);
       const jsendResult = result.data;
       chai.expect(jsendResult.status).equal('success');
@@ -272,11 +261,7 @@ describe('basic api v1 returns', () => {
   it('should del all mobile user subscriptions', async (done) => {
     // Add subs
     addSubs(() => {
-      HTTP.del(url('api/v1/mobile/subscriptions/all'), {
-        data: {
-          token,
-          mobileToken
-        }
+      HTTP.del(url(`api/v1/mobile/subscriptions/all/${token}/${mobileToken}`), {
       }, (error, result) => {
         chai.expect(error, null);
         chai.expect(result.statusCode).equal(200);

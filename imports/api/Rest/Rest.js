@@ -22,6 +22,11 @@ const uptime = new Date();
 
 const restivusError = (code, message) => ({ status: 'error', statusCode: code, body: message });
 
+
+function failMsg(msg) {
+  return restivusError(500, `Unexpected error in REST call: ${msg}`);
+}
+
 function fail(e) {
   return restivusError(500, `Unexpected error in REST call: ${e}`);
 }
@@ -289,7 +294,7 @@ if (!Meteor.settings.private.internalApiToken) {
       if (failed) return failed;
 
       const user = Meteor.users.findOne({ fireBaseToken: mobileToken });
-      if (!user) return failed;
+      if (!user) return failMsg('User not found');
 
       const newSubs = {};
       newSubs.location = {};
@@ -323,7 +328,7 @@ if (!Meteor.settings.private.internalApiToken) {
       if (failed) return failed;
 
       const user = Meteor.users.findOne({ fireBaseToken: mobileToken });
-      if (!user) return failed;
+      if (!user) return failMsg('User not found');
 
       try {
         Subscriptions.remove({ owner: user._id, _id: new Meteor.Collection.ObjectID(subsId) });
@@ -335,9 +340,9 @@ if (!Meteor.settings.private.internalApiToken) {
     }
   });
 
-  apiV1.addRoute('mobile/subscriptions/all', { authRequired: false }, {
+  apiV1.addRoute('mobile/subscriptions/all/:token/:mobileToken', { authRequired: false }, {
     get: function get() {
-      const { token, mobileToken } = this.bodyParams;
+      const { token, mobileToken } = this.urlParams;
       try {
         check(token, String);
         check(mobileToken, String);
@@ -349,14 +354,14 @@ if (!Meteor.settings.private.internalApiToken) {
       if (failed) return failed;
 
       const user = Meteor.users.findOne({ fireBaseToken: mobileToken });
-      if (!user) return failed;
+      if (!user) return failMsg('User not found');
 
       const result = Subscriptions.find({ owner: user._id });
 
       return jsend.success({ subscriptions: result.fetch(), count: result.count() });
     },
     delete: function delAll() {
-      const { token, mobileToken } = this.bodyParams;
+      const { token, mobileToken } = this.urlParams;
       try {
         check(token, String);
         check(mobileToken, String);
@@ -365,12 +370,13 @@ if (!Meteor.settings.private.internalApiToken) {
       }
 
       const failed = checkAuthToken(token);
-      if (failed) return failed;
+      if (failed) return failed('Auth api check failed');
 
-      if (Meteor.users.find({ fireBaseToken: mobileToken }).count() !== 1) return failed;
+      if (Meteor.users.find({ fireBaseToken: mobileToken }).count() !== 1) return fail;
 
       const user = Meteor.users.findOne({ fireBaseToken: mobileToken });
-      if (!user) return failed;
+      if (!user) return failMsg('User not found');
+
       const toRemove = Subscriptions.find({ owner: user._id }).count();
       Subscriptions.remove({ owner: user._id });
 
