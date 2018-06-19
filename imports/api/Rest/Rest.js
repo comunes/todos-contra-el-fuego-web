@@ -317,13 +317,16 @@ if (!Meteor.settings.private.internalApiToken) {
         return fail(e);
       }
       return jsend.success({ subsId: result._str });
-    },
+    }
+  });
+
+  apiV1.addRoute('mobile/subscriptions/:token/:mobileToken/:subsId', { authRequired: false }, {
     delete: function del() {
       const {
         token,
         mobileToken,
         subsId
-      } = this.bodyParams;
+      } = this.urlParams;
       try {
         check(token, String);
         check(mobileToken, String);
