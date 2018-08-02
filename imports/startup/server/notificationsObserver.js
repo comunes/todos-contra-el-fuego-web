@@ -7,6 +7,7 @@ import { dateLongFormat } from '/imports/api/Common/dates';
 import Notifications from '/imports/api/Notifications/Notifications';
 // import sendMail from '/imports/startup/server/email';
 import sendEmail, { subjectTruncate } from '/imports/modules/server/send-email';
+import { isMailServerMaster } from '/imports/startup/server/email';
 // import { hr } from '/imports/startup/server/email';
 import getEmailOf from '/imports/modules/get-email-of-user';
 import image from 'google-maps-image-api-url';
@@ -42,7 +43,7 @@ Meteor.startup(() => {
   } */
 
   function process(notif) {
-    if (notif.type === 'mobile' && !notif.notified) {
+    if (isMailServerMaster && notif.type === 'mobile' && !notif.notified) {
       const user = Meteor.users.findOne({ _id: notif.userId });
       moment.locale(user.lang);
       // duplicate code below
@@ -78,7 +79,7 @@ Meteor.startup(() => {
           if (err) {
             console.error(err);
           } else {
-            // console.log(response);
+            console.log(response);
             Notifications.update(notif._id, { $set: { notified: true, notifiedAt: new Date() } });
           }
         });
