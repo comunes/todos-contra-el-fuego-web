@@ -3,7 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
-import { Line } from 'react-progressbar.js';
+import { Line } from 'react-progress-bar.js';
 
 import './LoadingBar.scss';
 

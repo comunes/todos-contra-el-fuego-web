@@ -8,7 +8,7 @@ Meteor.methods({
     check(notifId, Meteor.Collection.ObjectID);
 
     try {
-      Notifications.update(notifId, { $set: { webNotified: true, webNotifiedAt: new Date() } });
+      Notifications.update(notifId, { $set: { notified: true, notifiedAt: new Date() } });
       return notifId;
     } catch (exception) {
       throw new Meteor.Error('500', exception);

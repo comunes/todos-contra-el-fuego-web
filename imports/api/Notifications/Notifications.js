@@ -2,6 +2,7 @@
 /* eslint-disable import/no-absolute-path */
 
 import { Mongo } from 'meteor/mongo';
+import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import { defaultCreatedAt, defaultUpdateAt } from '/imports/api/Utility/Utils.js';
 import LocationSchema from '/imports/api/Utility/LocationSchema.js';
@@ -22,11 +23,12 @@ Notifications.deny({
 
 Notifications.schema = new SimpleSchema({
   userId: String,
+  subsId: { type: Meteor.Collection.ObjectID, optional: true, blackbox: true },
   content: String,
   geo: LocationSchema,
   type: String,
-  webNotified: { type: Boolean, optional: true },
-  webNotifiedAt: { type: Date, optional: true },
+  notified: { type: Boolean, optional: true },
+  notifiedAt: { type: Date, optional: true },
   emailNotified: { type: Boolean, optional: true },
   emailNotifiedAt: { type: Date, optional: true },
   when: Date,

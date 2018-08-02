@@ -8,7 +8,12 @@ This is web service that notifies about fires detected in an area of your intere
 
 Prerrequisites: a running meteor (we share the `fuegos` database with the telegram bot).
 
-Install `meteor` and run `npm start`
+Install `meteor` and run `meteor npm install` and `npm start`
+
+Some other development deps (in debian & ubuntu):
+```
+apt-get install libcairo2-dev libjpeg-dev libgif-dev pkg-config
+```
 
 ### GeoIP
 

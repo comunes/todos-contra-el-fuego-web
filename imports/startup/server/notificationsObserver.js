@@ -10,13 +10,19 @@ import sendEmail, { subjectTruncate } from '/imports/modules/server/send-email';
 // import { hr } from '/imports/startup/server/email';
 import getEmailOf from '/imports/modules/get-email-of-user';
 import image from 'google-maps-image-api-url';
+import gcm from 'node-gcm';
 import { trim } from '/imports/ui/components/NotificationsObserver/util.js';
 
 Meteor.startup(() => {
+  if (!(Meteor.settings.private.fcmApiToken && Meteor.settings.private.fcmApiToken.length > 0)) {
+    console.warn('Missing settings.private.fcmApiToken key, mobile notifications will not work');
+  }
+
+  const fcmSender = new gcm.Sender(Meteor.settings.private.fcmApiToken);
+
   // https://www.npmjs.com/package/google-maps-image-api-url
   // https://stackoverflow.com/questions/24355007/is-there-no-way-to-embed-a-google-map-into-an-html-email
   // https://developers.google.com/maps/documentation/static-maps/intro
-
   function imgUrl(lat, lng) {
     return image({
       key: Meteor.settings.gmaps.key,
@@ -36,7 +42,48 @@ Meteor.startup(() => {
   } */
 
   function process(notif) {
-    if (notif.type === 'web' && !notif.emailNotified) {
+    if (notif.type === 'mobile' && !notif.notified) {
+      const user = Meteor.users.findOne({ _id: notif.userId });
+      moment.locale(user.lang);
+      // duplicate code below
+      const body = `${trim(notif.content)} (${i18n.t('fireDetectedAt', { when: dateLongFormat(notif.when) })}).`;
+
+      // https://firebase.google.com/docs/cloud-messaging/concept-options
+      const msg = new gcm.Message();
+
+      msg.addNotification({
+        title: i18n.t('Alerta de fuego'),
+        body,
+        click_action: 'FLUTTER_NOTIFICATION_CLICK',
+        tag: notif._id, // prevent duplication of fire notifications
+        sound: 'default', // Indicates sound to be played. Supports only default currently.
+        icon: 'launch_image' // 'ic_launcher'
+      });
+
+      msg.addData('id', notif._id);
+      msg.addData('description', body);
+      msg.addData('lat', notif.geo.coordinates[1]);
+      msg.addData('lon', notif.geo.coordinates[0]);
+      msg.addData('when', notif.when);
+      msg.addData('subsId', notif.subsId._str);
+      msg.addData('sealed', notif.sealed);
+
+      const registrationTokens = [];
+      if (!user.fireBaseToken) {
+        console.warn('This mobile user doesn\'t have a firebase registration token');
+      } else {
+        registrationTokens.push(user.fireBaseToken);
+        // FIXME: better join users
+        fcmSender.send(msg, { registrationTokens }, (err, response) => {
+          if (err) {
+            console.error(err);
+          } else {
+            // console.log(response);
+            Notifications.update(notif._id, { $set: { notified: true, notifiedAt: new Date() } });
+          }
+        });
+      }
+    } else if (notif.type === 'web' && !notif.emailNotified) {
       const user = Meteor.users.findOne({ _id: notif.userId });
       const { firstName, emailAddress } = getEmailOf(user);
 

@@ -9,6 +9,7 @@ import SiteSettings from '/imports/api/SiteSettings/SiteSettings';
 import FalsePositives from '/imports/api/FalsePositives/FalsePositives';
 import Industries from '/imports/api/Industries/Industries';
 import IndustryRegistries from '/imports/api/Industries/IndustryRegistries';
+import Notifications from '/imports/api/Notifications/Notifications';
 import { Mongo } from 'meteor/mongo';
 
 Meteor.startup(() => {
@@ -224,6 +225,18 @@ Meteor.startup(() => {
         falseDoc.updatedAt = now;
         FalsePositives.insert(falseDoc);
       });
+    }
+  });
+
+  Migrations.add({
+    version: 17,
+    up: function renameWebNotifiedField() {
+      Notifications.update({ webNotified: { $exists: true } }, {
+        $rename: { webNotifiedAt: 'notifiedAt' }
+      }, { upsert: false, multi: true });
+      Notifications.update({ webNotified: { $exists: true } }, {
+        $rename: { webNotified: 'notified' }
+      }, { upsert: false, multi: true });
     }
   });
 
