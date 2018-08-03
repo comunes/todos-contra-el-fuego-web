@@ -50,7 +50,7 @@ Meteor.startup(() => {
       const user = Meteor.users.findOne({ _id: notif.userId });
       moment.locale(user.lang);
       // duplicate code below
-      const body = `${trim(notif.content)} (${i18n.t('fireDetectedAt', { when: dateLongFormat(notif.when) })}).`;
+      const body = `${trim(notif.content)}`;
 
       // https://firebase.google.com/docs/cloud-messaging/concept-options
       const msg = new gcm.Message();
@@ -83,7 +83,7 @@ Meteor.startup(() => {
             if (err) {
               console.error(`FCM error: ${err}`);
             } else {
-              console.log(`FCM response: ${response}`);
+              // console.log(`FCM response: ${response}`);
               Notifications.update(notif._id, { $set: { notified: true, notifiedAt: new Date() } });
             }
           }));
