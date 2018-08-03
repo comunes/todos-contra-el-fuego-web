@@ -61,7 +61,7 @@ Meteor.startup(() => {
         icon: 'launch_image' // 'ic_launcher'
       });
 
-      msg.addData('id', notif._id);
+      msg.addData('id', notif._id._str);
       msg.addData('description', body);
       msg.addData('lat', notif.geo.coordinates[1]);
       msg.addData('lon', notif.geo.coordinates[0]);
