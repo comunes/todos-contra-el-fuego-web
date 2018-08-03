@@ -15,8 +15,11 @@ import gcm from 'node-gcm';
 import { trim } from '/imports/ui/components/NotificationsObserver/util.js';
 
 Meteor.startup(() => {
+  let validFcmSender = true;
+
   if (!(Meteor.settings.private.fcmApiToken && Meteor.settings.private.fcmApiToken.length > 0)) {
     console.warn('Missing settings.private.fcmApiToken key, mobile notifications will not work');
+    validFcmSender = false;
   }
 
   const fcmSender = new gcm.Sender(Meteor.settings.private.fcmApiToken);
@@ -38,9 +41,9 @@ Meteor.startup(() => {
   }
 
   /*
-  function imgEl(lat, lng) {
-    return `<img src="${imgUrl(lat, lng)}" width="640" height="480"/>`;
-  } */
+     function imgEl(lat, lng) {
+     return `<img src="${imgUrl(lat, lng)}" width="640" height="480"/>`;
+     } */
 
   function process(notif) {
     if (isMailServerMaster && notif.type === 'mobile' && !notif.notified) {
@@ -75,14 +78,16 @@ Meteor.startup(() => {
       } else {
         registrationTokens.push(user.fireBaseToken);
         // FIXME: better join users
-        fcmSender.send(msg, { registrationTokens }, (err, response) => {
-          if (err) {
-            console.error(err);
-          } else {
-            console.log(response);
-            Notifications.update(notif._id, { $set: { notified: true, notifiedAt: new Date() } });
-          }
-        });
+        if (validFcmSender) {
+          fcmSender.send(msg, { registrationTokens }, Meteor.bindEnvironment(function processResult(err, response) {
+            if (err) {
+              console.error(`FCM error: ${err}`);
+            } else {
+              console.log(`FCM response: ${response}`);
+              Notifications.update(notif._id, { $set: { notified: true, notifiedAt: new Date() } });
+            }
+          }));
+        }
       }
     } else if (notif.type === 'web' && !notif.emailNotified) {
       const user = Meteor.users.findOne({ _id: notif.userId });
