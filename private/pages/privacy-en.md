@@ -1,97 +1,156 @@
-Your privacy is important to us.
+# PRIVACY POLICY #
 
-Comunes Association built the 'All Against the Fire' app and this SERVICE is provided by Comunes Association at no cost and is intended for use as is.
+*Last updated July 12, 2018*
 
-This page is used to inform website visitors regarding our policies with the collection, use, and disclosure of Personal Information if anyone decided to use our Service.
+**In Short**: *Your privacy is important to us. We do not do business with your data, we do not share it with third parties and we only worry about the fires and how to strengthen neighborhoods against them.*
 
-If you choose to use our Service, then you agree to the collection and use of information in relation to this policy. The Personal Information that we collect is used for providing and improving the Service. We will not use or share your information with anyone except as described in this Privacy Policy.
+Thank you for choosing to be part of our community 'All Against the Fires' at Comunes Association (“we”, “us”, or “our”). We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about our policy, or our practices with regards to your personal information, please contact us at info@comunes.org.
 
-The terms used in this Privacy Policy have the same meanings as in our [Terms and Conditions](/terms), which is accessible at 'All Against the Fire' unless otherwise defined in this Privacy Policy.
+When you visit our website [fires.comunes.org](https://fires.comunes.org), mobile application, and use our services, you trust us with your personal information. We take your privacy very seriously. In this privacy notice, we describe our privacy policy. We seek to explain to you in the clearest way possible what information we collect, how we use it and what rights you have in relation to it. We hope you take some time to read through it carefully, as it is important. If there are any terms in this privacy policy that you do not agree with, please discontinue use of our Sites or Apps and our services.
 
-**Information Collection and Use**
+This privacy policy applies to all information collected through our website (such as [fires.comunes.org](https://fires.comunes.org)), mobile application (the "**Apps**"), and/or any related services, or events (we refer to them collectively in this privacy policy as the "**Sites**").
 
-For a better experience, while using our Service, we may require you to provide us with certain personally identifiable information, including but not limited to name, email, language, and the telegram username (of our Telegram users). The information that we request is will be retained by us and used as described in this privacy policy.
+**Please read this privacy policy carefully as it will help you make informed decisions about sharing your personal information with us.**
 
-In addition, the app may collect certain information automatically, including, but not limited to, the type of device you use, the IP address of your device, your mobile operating system, the type of Internet browsers you use, and information about the way you use the app.
 
-We may use the information we collect in the following ways:
-* To personalize your experience and to allow us to deliver the type of content in which you are most interested.
-* To send periodic emails regarding our services.
+## 1. WHAT INFORMATION DO WE COLLECT? ##
 
-The app does use third party services that may collect information used to identify you.
+### Information automatically collected ###
 
-Links to privacy policy of third party service providers used by the app:
+**In Short:** *Some information – such as IP address and/or browser and device characteristics – is collected
+automatically when you visit our Sites or Apps.*
 
-* [OpenStreetMap](https://wiki.openstreetmap.org/wiki/Privacy_Policy/)
-* [Google Maps](https://developers.google.com/maps/terms?hl=es#3-privacy-and-personal-information)
+We automatically collect certain information when you visit, use or navigate the Sites or Apps. This information does not reveal your specific identity (like your name or contact information) but may include device and usage information, such as your IP address, browser and device characteristics, operating system, language preferences, referring URLs, device name, country, location, information about how and when you use our Sites or Apps and other technical information. This information is primarily needed to maintain the security and operation of our Sites or Apps, and for our internal analytics and reporting purposes. Like many businesses, we also collect information through cookies and similar technologies.
 
-We have not enabled Google AdSense.
+### Information collected through our Apps ###
 
-**Does the app collect precise real time location information of the device?**
+**In Short:** *We may collect information regarding your geo-location, push notifications, when you use our apps.*
 
-When you visit the app, we may use GPS technology (or other similar technology) to determine your current location in order to determine the city you are located within and/or display a location map of local fires and/or provide alerts of future fires in your zone. We **will not** share your current location with other users or partners.
+If you use our Apps, we may also collect the following information:
 
-If you do not want us to use your location for the purposes set forth above, you should turn off the location services for the mobile app located in your account settings or in your mobile phone settings and/or within the app and/or when asked by your browser.
+- *Geo-Location Information.* We may request at some point access or permission to location-based information from your mobile device to provide location-based services. If you wish to change our access or permissions, you may do so in your device's settings.
+- *Push Notifications.* We may request to send you push notifications regarding your account or the mobile application. If you wish to opt-out from receiving these types of communications, you may turn them off in your device's settings.
 
-**How do we protect your information?**
 
-We do not use vulnerability scanning and/or scanning to PCI standards. We only provide articles and information. We never ask for credit card numbers. We do not use Malware Scanning.
+## 2. HOW DO WE USE YOUR INFORMATION? ##
 
-Your personal information is contained behind secured networks and is only accessible by a limited number of persons who have special access rights to such systems, and are required to keep the information confidential. In addition, all sensitive information you supply is encrypted via Secure Socket Layer (SSL) technology.
+**In Short:** *We process your information for purposes based on legitimate interests, the fulfillment of our contract with you, compliance with our legal obligations, and/or your consent.*
 
-We implement a variety of security measures when a user enters, submits, or accesses their information to maintain the safety of your personal information.
+We use personal information collected via our Sites or Apps for a variety of purposes described below. We process your personal information for these purposes in order to enter into or perform a contract with you ("Contractual"), with your consent ("Consent"), and/or for compliance with our legal obligations ("Legal Reasons"). We indicate the specific processing grounds we rely on next to each purpose listed below.
 
-**Log Data**
+We use the information we collect or receive:
 
-We want to inform you that whenever you use our Service, in a case of an error in the app we collect data and information (through third party products) on your phone called Log Data. This Log Data may include information such as your device Internet Protocol (“IP”) address, device name, operating system version, the configuration of the app when utilizing our Service, the time and date of your use of the Service, and other statistics.
+- **To facilitate account creation and logon process** with your Consent. If you choose to link your account with us to a third party account \*(such as your Google or Telegram account), we use the information you allowed us to collect from those third parties to facilitate account creation and logon process.
+- **Request Feedback**. We may use your information to request feedback and to contact you about your use of our Sites or Apps.
+- **To enable user-to-user communications** with your Consent. We may use your information in order to enable user-to-user communications with each user's consent.
+- **To enforce our terms, conditions and policies**.
+- **To respond to legal requests and prevent harm** for Legal Reasons. If we receive a subpoena or other legal request, we may need to inspect the data we hold to determine how to respond.
 
-**Do we use 'cookies'?**
 
-Yes. Cookies are small files that a site or its service provider transfers to your computer's hard drive through your Web browser (if you allow) that enables the site's or service provider's systems to recognize your browser and capture and remember certain information. For instance, we use cookies to help us remember and process your prefered language. They are also used to help us understand your preferences based on previous or current site activity, which enables us to provide you with improved services. We also use cookies to help us compile aggregate data about site traffic and site interaction so that we can offer better site experiences and tools in the future.
+## 3. WILL YOUR INFORMATION BE SHARED WITH ANYONE? ##
 
-We use cookies to understand and save user's preferences for future visits.
+**In Short:** *We only share information with your consent, to comply with laws or to protect your rights.*
 
-You can choose to have your computer warn you each time a cookie is being sent, or you can choose to turn off all cookies. You do this through your browser settings. Since browser is a little different, look at your browser's Help Menu to learn the correct way to modify your cookies.
+We only share and disclose your information in the following situations:
 
-If you turn cookies off, some of the features that make your site experience more efficient may not function properly.
+- **Compliance with Laws**. We may disclose your information where we are legally required to do so in order to comply with applicable law, governmental requests, a judicial proceeding, court order, or legal process, such as in response to a court order or a subpoena (including in response to public authorities to meet national security or law enforcement requirements).
+- **Vital Interests and Legal Rights**. We may disclose your information where we believe it is necessary to investigate, prevent, or take action regarding potential violations of our policies, suspected fraud, situations involving potential threats to the safety of any person and illegal activities, or as evidence in litigation in which we are involved.
+- **With your Consent**. We may disclose your personal information for any other purpose with your consent.
 
-**Service Providers**
 
-We may employ third-party companies and individuals to facilitate our Service.
+## 4. DO WE USE COOKIES AND OTHER TRACKING TECHNOLOGIES? ##
 
-**Third-party disclosure**
+**In Short:** *We may use cookies and other tracking technologies to collect and store your information.*
 
-We do not sell, trade, or otherwise transfer to outside parties your Personally Identifiable Information.
+We may use cookies to access or store information about account login and your user preferences (like your prefered language).
 
-**Security**
 
-We value your trust in providing us your Personal Information, thus we are striving to use commercially acceptable means of protecting it. But remember that no method of transmission over the internet, or method of electronic storage is 100% secure and reliable, and we cannot guarantee its absolute security.
+## 5. DO WE USE GOOGLE MAPS? ##
 
-**Links to Other Sites**
+**In Short:** *Yes, we use Google Maps for the purpose of providing better service.*
 
-We do not include or offer third-party products or services on our website but this Service may contain links to other sites in user comments. If you click on a third-party link, you will be directed to that site. Note that these external sites are not operated by us. Therefore, we strongly advise you to review the Privacy Policy of these websites. We have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party sites or services.
+This website, mobile application, or Telegram application uses Google Maps APIs. You may find the Google Maps APIs Terms of Service [here](https://developers.google.com/maps/terms). To better understand Google's Privacy Policy, please refer to this [link](https://policies.google.com/privacy).
 
-**Children’s Privacy**
+By using our Maps API Implementation, you agree to be bound by Google's Terms of Service. You agree to allow us to obtain or cache your location. You may revoke your consent at anytime. We use information about location in conjunction with data from other data providers.
 
-These Services do not address anyone under the age of 13. We do not knowingly collect personally identifiable information from children under 13. In the case we discover that a child under 13 has provided us with personal information, we immediately delete this from our servers. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact us so that we will be able to do necessary actions.
 
-**Fair Information Practices**
+## 6. HOW LONG DO WE KEEP YOUR INFORMATION? ##
 
-The Fair Information Practices Principles form the backbone of privacy law in the United States and the concepts they include have played a significant role in the development of data protection laws around the globe. Understanding the Fair Information Practice Principles and how they should be implemented is critical to comply with the various privacy laws that protect personal information.
+**In Short:** *We keep your information for as long as necessary to fulfill the purposes outlined in this privacy policy unless otherwise required by law.*
 
-In order to be in line with Fair Information Practices we will take the following responsive action, should a data breach occur:
-* We will notify you via email, within 7 business days
+We will only keep your personal information for as long as it is necessary for the purposes set out in this privacy policy, unless a longer retention period is required or permitted by law (such as tax, accounting or other legal requirements). No purpose in this  policy will require us keeping your personal information for longer than the period of time in which users have an account with us.
 
-We also agree to the Individual Redress Principle which requires that individuals have the right to legally pursue enforceable rights against data collectors and processors who fail to adhere to the law. This principle requires not only that individuals have enforceable rights against data users, but also that individuals have recourse to courts or government agencies to investigate and/or prosecute non-compliance by data processors.
+When we have no ongoing legitimate need to process your personal information, we will either delete or anonymize it, or, if this is not possible (for example, because your personal information has been stored in backup archives), then we will securely store your personal information and isolate it from any further processing until deletion is possible.
 
-**Changes to This Privacy Policy**
 
-We may update our Privacy Policy from time to time. Thus, you are advised to review this page periodically for any changes. We will notify you of any changes by posting the new Privacy Policy on this page. These changes are effective immediately after they are posted on this page.
+## 7.HOW DO WE KEEP YOUR INFORMATION SAFE? ##
 
-**Your Consent**
+**In Short:** *We aim to protect your personal information through a system of organizational and technical security measures.*
 
-By using the app, you are consenting to our processing of your information as set forth in this Privacy Policy now and as amended by us. "Processing," means using cookies on a computer/hand held device or using or touching information in any way, including, but not limited to, collecting, storing, deleting, using, combining and disclosing information, all of which activities will take place in Spain. If you reside outside Spain your information will be transferred, processed and stored there under Spain privacy standards.
+We have implemented appropriate technical and organizational security measures designed to protect the security of any personal information we process. However, please also remember that we cannot guarantee that the internet itself is 100% secure. Although we will do our best to protect your personal information, transmission of personal information to and from our Sites or Apps is at your own risk. You should only access the services within a secure environment.
 
-**Contact Us**
 
-If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us: info AT comunes DOT org.
+## 8. DO WE COLLECT INFORMATION FROM MINORS? ##
+
+**In Short:** *We do not knowingly collect data from or market to children under 18 years of age.*
+
+We do not knowingly solicit data from or market to children under 18 years of age. By using the Sites or Apps, you represent that you are at least 18 or that you are the parent or guardian of such a minor and consent to such minor dependent's use of the Sites or Apps. If we learn that personal information from users less than 18 years of age has been collected, we will deactivate the account and take reasonable measures to promptly delete such data from our records. If you become aware of any data we have collected from children under age 18, please contact us at info@comunes.org.
+
+
+## 9. WHAT ARE YOUR PRIVACY RIGHTS? ##
+
+**In Short:** *In some regions, such as the European Economic Area, you have rights that allow you greater access to and control over your personal information. You may review, change, or terminate your account at any time.*
+
+In some regions (like the European Economic Area), you have certain rights under applicable data protection laws. These may include the right (i) to request access and obtain a copy of your personal information, (ii) to request rectification or erasure; (iii) to restrict the processing of your personal information; and (iv) if applicable, to data portability. In certain circumstances, you may also have the right to object to the processing of your personal information. To make such a request, please use the contact details provided below. We will consider and act upon any request in accordance with applicable data protection laws.
+
+If we are relying on your consent to process your personal information, you have the right to withdraw your consent at any time. Please note however that this will not affect the lawfulness of the processing before its withdrawal.
+
+If you are resident in the European Economic Area and you believe we are unlawfully processing your personal information, you also have the right to complain to your local data protection supervisory authority. You can find their contact details here: [http://ec.europa.eu/justice/data-protection/bodies/authorities/index_en.htm](http://ec.europa.eu/justice/data-protection/bodies/authorities/index_en.htm)
+
+### Account Information ###
+
+If you would at any time like to review or change the information in your account or terminate your account, you can:
+
+- Log into your account settings and update your user account.
+
+Upon your request to terminate your account, we will deactivate or delete your account and information from our active databases. However, some information may be retained in our files to prevent fraud, troubleshoot problems, assist with any investigations, enforce our Terms of Use and/or comply with legal requirements.
+
+**Cookies and similar technologies:** Most Web browsers are set to accept cookies by default. If you prefer, you can usually choose to set your browser to remove cookies and to reject cookies. If you choose to remove cookies or reject cookies, this could affect certain features or services of our Sites or Apps.
+
+**Opting out of email notifications:** You can unsubscribe from our notification emails at any time by clicking on the unsubscribe link in the emails that we send or by contacting us using the details provided below. You will then be removed from these emails – however, we will still need to send you service-related emails that are necessary for the administration and use of your account. To otherwise opt-out, you may:
+
+- Note your preferences when you register an account with the site.
+- Access your account settings and update preferences.
+
+
+## 10. DO CALIFORNIA RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS? ##
+
+**In Short:** *Yes, if you are a resident of California, you are granted specific rights regarding access to your personal information.*
+
+California Civil Code Section 1798.83, also known as the "Shine The Light" law, permits our users who are California residents to request and obtain from us, once a year and free of charge, information about categories of personal information (if any) we disclosed to third parties for direct marketing purposes and the  names and addresses of all third parties with which we shared personal information in the immediately preceding calendar year. If you are a California resident and would like to make such a request, please submit your request in writing to us using the contact information provided below.
+
+If you are under 18 years of age, reside in California, and have a registered account with the Sites or Apps, you have the right to request removal of unwanted data that you publicly post on the Sites or Apps. To request removal of such data, please contact us using the contact information provided below, and include the email address associated with your account and a statement that you reside in California. We will make sure the  data is not publicly displayed on the Sites or Apps, but please be aware that the data may not be completely or comprehensively removed from our systems.
+
+
+## 11. DO WE MAKE UPDATES TO THIS POLICY? ##
+
+**In Short:** *Yes, we will update this policy as necessary to stay compliant with relevant laws.*
+
+We may update this privacy policy from time to time. The updated version will be indicated by an updated "Revised" date and the updated version will be effective as soon as it is accessible. If we  make material changes to this privacy policy, we may notify you either by prominently posting a notice of such changes or by directly sending you a notification. We encourage you to review this privacy policy frequently to be informed of how we are protecting your information.
+
+
+## 12. HOW CAN YOU CONTACT US ABOUT THIS POLICY? ##
+
+If you have questions or comments about this policy, you may email us at info@comunes.org or by post to:
+
+ASOCIACIÓN COMUNES
+C/ COLÓN 21, 5º DCHA, ESC DCHA
+03001 ALICANTE
+SPAIN
+
+If you have any further questions or comments about us or our policies, email us at info@comunes.org or by post to:
+
+ASOCIACIÓN COMUNES
+C/ COLÓN 21, 5º DCHA, ESC DCHA
+03001 ALICANTE
+SPAIN
