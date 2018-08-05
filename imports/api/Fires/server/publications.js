@@ -175,5 +175,5 @@ export function fireFromHash(fireEnc, params) {
 Meteor.publish('fireFromHash', function fireFromHashFunc(fireEnc, params) {
   check(fireEnc, String);
   check(params, Object);
-  return fireFromHash(fireEnc, params);
+  return fireFromHash(fireEnc, params).bind(this);
 });
