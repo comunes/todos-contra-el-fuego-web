@@ -142,38 +142,37 @@ function logUrl(fireEnc, params) {
 export function fireFromHash(fireEnc, params) {
   check(fireEnc, String);
   check(params, Object);
-  try {
-    // console.log(fireEnc);
-    // const unsealed = Promise.await(urlEnc.decrypt(fireEnc));
-    const unsealed = Promise.await(unsealW(fireEnc));
-    if (unsealed === undefined) {
-      logUrl(fireEnc, params);
-      // https://guide.meteor.com/data-loading.html
-      return this.ready();
-    }
-    const w = unsealed.when;
-    unsealed.when = new Date(w);
-    const c = unsealed.createdAt;
-    unsealed.createdAt = !c ? new Date() : new Date(c);
-    const u = unsealed.updatedAt;
-    unsealed.updatedAt = !u ? new Date() : new Date(u);
-    // console.log(unsealed);
-    // FIXME:
-    const unsealedFix = fixConfidence(unsealed);
-    FiresCollection.schema.validate(unsealedFix);
-    return findOrCreateFire(unsealedFix);
-    /* console.log(`fires: ${fire.count()}`);
-     * return fire; */
-  } catch (e) {
-    console.warn(e);
-    logUrl(fireEnc, params);
 
-    return this.ready();
+  // console.log(fireEnc);
+  // const unsealed = Promise.await(urlEnc.decrypt(fireEnc));
+  const unsealed = Promise.await(unsealW(fireEnc));
+  if (unsealed === undefined) {
+    throw Error('Undefined unsealed');
   }
+  const w = unsealed.when;
+  unsealed.when = new Date(w);
+  const c = unsealed.createdAt;
+  unsealed.createdAt = !c ? new Date() : new Date(c);
+  const u = unsealed.updatedAt;
+  unsealed.updatedAt = !u ? new Date() : new Date(u);
+  // console.log(unsealed);
+  // FIXME:
+  const unsealedFix = fixConfidence(unsealed);
+  FiresCollection.schema.validate(unsealedFix);
+  return findOrCreateFire(unsealedFix);
+  /* console.log(`fires: ${fire.count()}`);
+   * return fire; */
 }
 
 Meteor.publish('fireFromHash', function fireFromHashFunc(fireEnc, params) {
   check(fireEnc, String);
   check(params, Object);
-  return fireFromHash(fireEnc, params).bind(this);
+  try {
+    return fireFromHash(fireEnc, params);
+  } catch (e) {
+    console.warn(e);
+    logUrl(fireEnc, params);
+    // https://guide.meteor.com/data-loading.html
+    return this.ready();
+  }
 });
