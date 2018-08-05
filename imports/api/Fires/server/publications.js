@@ -139,7 +139,7 @@ function logUrl(fireEnc, params) {
   ravenLogger.log(message);
 }
 
-Meteor.publish('fireFromHash', function fireFromHash(fireEnc, params) {
+export function fireFromHash(fireEnc, params) {
   check(fireEnc, String);
   check(params, Object);
   try {
@@ -163,11 +163,17 @@ Meteor.publish('fireFromHash', function fireFromHash(fireEnc, params) {
     FiresCollection.schema.validate(unsealedFix);
     return findOrCreateFire(unsealedFix);
     /* console.log(`fires: ${fire.count()}`);
-       * return fire; */
+     * return fire; */
   } catch (e) {
     console.warn(e);
     logUrl(fireEnc, params);
 
     return this.ready();
   }
+}
+
+Meteor.publish('fireFromHash', function fireFromHashFunc(fireEnc, params) {
+  check(fireEnc, String);
+  check(params, Object);
+  return fireFromHash(fireEnc, params);
 });

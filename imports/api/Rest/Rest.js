@@ -9,6 +9,7 @@ import SiteSettings from '/imports/api/SiteSettings/SiteSettings';
 import ActiveFiresCollection from '/imports/api/ActiveFires/ActiveFires';
 import { countRealFires } from '/imports/api/ActiveFires/server/countFires';
 import { whichAreFalsePositives, firesUnion } from '/imports/api/FalsePositives/server/publications';
+import { fireFromHash } from '/imports/api/Fires/server/publications.js';
 import FalsePositives from '/imports/api/FalsePositives/FalsePositives';
 import Industries from '/imports/api/Industries/Industries';
 import Subscriptions from '/imports/api/Subscriptions/Subscriptions';
@@ -16,7 +17,7 @@ import jsend from 'jsend';
 import { Random } from 'meteor/random';
 import { subscriptionsInsert } from '/imports/api/Subscriptions/methods.js';
 import { Mongo } from 'meteor/mongo';
-
+import { upsertFalsePositive } from '/imports/api/FalsePositives/methods.js';
 const debug = false;
 
 const uptime = new Date();
@@ -392,6 +393,56 @@ if (!Meteor.settings.private.internalApiToken) {
       Subscriptions.remove({ owner: user._id });
 
       return jsend.success({ count: toRemove });
+    }
+  });
+
+  apiV1.addRoute('status/subs-public-union/:token', { authRequired: false }, {
+    get: function get() {
+      const { token } = this.urlParams;
+      try {
+        check(token, String);
+      } catch (e) {
+        return defaultFailParams(e);
+      }
+
+      const failed = checkAuthToken(token);
+      if (failed) return failed;
+
+      const currentUnion = SiteSettings.findOne({ name: 'subs-public-union' });
+      const userSubsBounds = SiteSettings.findOne({ name: 'subs-public-union-bounds' });
+
+      return jsend.success({ union: currentUnion, bounds: userSubsBounds });
+    }
+  });
+
+  apiV1.addRoute('mobile/falsepositive', { authRequired: false }, {
+    post: function post() {
+      const {
+        token,
+        mobileToken,
+        sealed,
+        type
+      } = this.bodyParams;
+      try {
+        check(token, String);
+        check(mobileToken, String);
+        check(sealed, String);
+        check(type, String);
+      } catch (e) {
+        if (debug) console.log(e);
+        return defaultFailParams(e);
+      }
+
+      const failed = checkAuthToken(token);
+      if (failed) return failed;
+
+      const user = Meteor.users.findOne({ fireBaseToken: mobileToken });
+      if (!user) return failMsg('User not found');
+
+      // TODO
+      const fire = fireFromHash(sealed, {});
+      const result = upsertFalsePositive(type, user._id, fire);
+      return jsend.success({ upsert: result });
     }
   });
 }
