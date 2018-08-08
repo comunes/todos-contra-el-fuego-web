@@ -27,6 +27,13 @@ export const firesUnion = (fires) => {
   return union;
 };
 
+export const zoneToUnion = (lat, lon, distance) => {
+  const group = new L.FeatureGroup();
+  const remap = [{ location: { lat, lon }, distance }];
+  const union = calcUnion(remap, group, sub => sub);
+  return union;
+};
+
 export const whichAreFalsePositives = (collection, union) => {
   const result = collection.find({
     geo: {

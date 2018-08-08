@@ -8,7 +8,7 @@ import { check } from 'meteor/check';
 import SiteSettings from '/imports/api/SiteSettings/SiteSettings';
 import ActiveFiresCollection from '/imports/api/ActiveFires/ActiveFires';
 import { countRealFires } from '/imports/api/ActiveFires/server/countFires';
-import { whichAreFalsePositives, firesUnion } from '/imports/api/FalsePositives/server/publications';
+import { whichAreFalsePositives, firesUnion, zoneToUnion } from '/imports/api/FalsePositives/server/publications';
 import { fireFromHash } from '/imports/api/Fires/server/publications.js';
 import FalsePositives from '/imports/api/FalsePositives/FalsePositives';
 import Industries from '/imports/api/Industries/Industries';
@@ -166,22 +166,22 @@ if (!Meteor.settings.private.internalApiToken) {
       return result;
     }
 
+    let union;
+
     // TODO only get real
     const firesA = fires.fetch();
-    if (firesA.length > 0) {
-      const union = firesUnion(fires);
-      const falsePos = whichAreFalsePositives(FalsePositives, union);
-      const industries = whichAreFalsePositives(Industries, union);
-      result.fires = firesA;
-      result.industries = industries.fetch();
-      result.falsePos = falsePos.fetch();
-      return result;
-    }
 
-    // otherwise
-    return {
-      total: 0, real: 0, fires: [], falsePos: [], industries: []
-    };
+    if (firesA.length > 0) {
+      union = firesUnion(fires);
+    } else {
+      union = zoneToUnion(lat, lng, km);
+    }
+    const falsePos = whichAreFalsePositives(FalsePositives, union);
+    const industries = whichAreFalsePositives(Industries, union);
+    result.fires = firesA;
+    result.industries = industries.fetch();
+    result.falsePos = falsePos.fetch();
+    return result;
   }
 
   // Maps to: /api/v1/fires-in/:lat/:lng/:km
