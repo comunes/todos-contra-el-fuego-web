@@ -441,7 +441,7 @@ if (!Meteor.settings.private.internalApiToken) {
 
       // TODO
       const fire = fireFromHash(sealed, {});
-      console.log(`Marking fire as false positive: ${fire}`);
+      console.log(`Marking fire as false positive: ${JSON.stringify(fire)}`);
       const result = upsertFalsePositive(type, user._id, fire);
       return jsend.success({ upsert: result });
     }
