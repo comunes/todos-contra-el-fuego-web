@@ -439,11 +439,14 @@ if (!Meteor.settings.private.internalApiToken) {
       const user = Meteor.users.findOne({ fireBaseToken: mobileToken });
       if (!user) return failMsg('User not found');
 
-      // TODO
-      const fire = fireFromHash(sealed, {});
-      console.log(`Marking fire as false positive: ${JSON.stringify(fire)}`);
-      const result = upsertFalsePositive(type, user._id, fire);
-      return jsend.success({ upsert: result });
+      console.log(`Marking hash fire as '${type}' false positive: ${sealed}`);
+      const fire = fireFromHash(sealed, { id: sealed });
+      if (fire && typeof fire === 'object') {
+        console.log(`Marking fire as false positive: ${fire._id}`);
+        const result = upsertFalsePositive(type, user._id, fire);
+        return jsend.success({ upsert: result });
+      }
+      return failMsg('Cannot mark fire as false positive');
     }
   });
 }
