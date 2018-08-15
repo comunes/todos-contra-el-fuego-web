@@ -440,8 +440,9 @@ if (!Meteor.settings.private.internalApiToken) {
       if (!user) return failMsg('User not found');
 
       console.log(`Marking hash fire as '${type}' false positive: ${sealed}`);
-      const fire = fireFromHash(sealed, { id: sealed });
-      if (fire && typeof fire === 'object') {
+      const fireC = fireFromHash(sealed, { id: sealed });
+      if (fireC && typeof fireC === 'object') {
+        const fire = fireC.fetch()[0];
         console.log(`Marking fire as false positive: ${fire._id}`);
         const result = upsertFalsePositive(type, user._id, fire);
         return jsend.success({ upsert: result });
