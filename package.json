@@ -76,6 +76,7 @@
     "react-leaflet-fullscreen": "0.0.6",
     "react-leaflet-google": "^3.2.1",
     "react-leaflet-sidebarv2": "^0.5.1",
+    "react-mobile-store-button": "0.0.3",
     "react-places-autocomplete": "^5.4.3",
     "react-progress-bar.js": "^0.2.3",
     "react-resize-detector": "^1.1.0",
