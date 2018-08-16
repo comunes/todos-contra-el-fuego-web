@@ -3,8 +3,8 @@ import moment from 'moment';
 // Load the js langs
 import es from 'meteor-accounts-t9n/build/es';
 import en from 'meteor-accounts-t9n/build/en';
-// TODO
-import gl from 'meteor-accounts-t9n/build/gl';
+// TODO ask for translation of this
+// import gl from 'meteor-accounts-t9n/build/gl';
 
 const backOpts = {
   // path where resources get loaded from
