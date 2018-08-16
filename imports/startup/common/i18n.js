@@ -3,6 +3,8 @@ import moment from 'moment';
 // Load the js langs
 import es from 'meteor-accounts-t9n/build/es';
 import en from 'meteor-accounts-t9n/build/en';
+// TODO
+import gl from 'meteor-accounts-t9n/build/gl';
 
 const backOpts = {
   // path where resources get loaded from
@@ -21,7 +23,10 @@ const shouldDebug = (forceDebug && !Meteor.isProduction);
 const i18nOpts = {
   backend: backOpts,
   //  lng: 'es',
-  fallbackLng: ['es', 'en'],
+  fallbackLng: {
+    gl: ['es'],
+    default: ['en']
+  },
   sendMissingTo: 'fallback',
   interpolation: {
     escapeValue: false, // not needed for react!!
@@ -35,7 +40,7 @@ const i18nOpts = {
       return value;
     }
   },
-  whitelist: ['es', 'en'], // allowed languages
+  whitelist: ['es', 'en', 'gl'], // allowed languages
   load: 'languageOnly', // 'es' o 'en', previously: 'all', // es-ES -> es, en-US -> en
   debug: shouldDebug,
   ns: 'common',
