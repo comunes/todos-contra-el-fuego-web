@@ -17,7 +17,7 @@ import i18nOpts from '../common/i18n';
 
 const detectorOptions = {
   // order and from where user language should be detected
-  order: ['querystring', 'cookie', 'localStorage', 'navigator', 'htmlTag'],
+  order: ['querystring', 'navigator', 'cookie', 'localStorage', 'htmlTag'],
 
   // keys or params to lookup language from
   lookupQuerystring: 'lng',
@@ -61,6 +61,14 @@ if (sendMissing && Meteor.isDevelopment) {
   };
 }
 
+function setT9(lang) {
+  if (lang === 'gl') {
+    T9n.setLanguage('es');
+  } else {
+    T9n.setLanguage(lang);
+  }
+}
+
 i18n.use(backend)
   .use(LngDetector)
   .use(Cache)
@@ -75,7 +83,7 @@ i18n.use(backend)
     // document.title = t('AppName');
     // Accounts translation
     // https://github.com/softwarerero/meteor-accounts-t9n
-    T9n.setLanguage(i18n.language);
+    setT9(i18n.language);
     // console.log(T9n.get('error.accounts.User not found'));
     moment.locale(i18n.language);
 
@@ -104,7 +112,8 @@ Meteor.subscribe('userData'); // lang is there
 
 i18n.on('languageChanged', (lng) => {
   moment.locale(lng);
-  T9n.setLanguage(lng);
+  // TODO fix this when gl is translated
+  setT9(lng);
   Tracker.autorun((computation) => {
     if (Meteor.userId()) {
       // logged
