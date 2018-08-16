@@ -41,6 +41,7 @@ const i18nOpts = {
     }
   },
   whitelist: ['es', 'en', 'gl'], // allowed languages
+  preload: ['es', 'en', 'gl'],
   load: 'languageOnly', // 'es' o 'en', previously: 'all', // es-ES -> es, en-US -> en
   debug: shouldDebug,
   ns: 'common',
