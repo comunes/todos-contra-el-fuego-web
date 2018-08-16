@@ -10,30 +10,49 @@ function geo(doc) {
   };
 }
 
+export function subscriptionsInsert(doc, userId, type) {
+  check(doc, {
+    _id: Match.Maybe(Meteor.Collection.ObjectID),
+    location: Match.ObjectIncluding({ lat: Number, lon: Number }),
+    distance: Number
+  });
+  const newDoc = {
+    owner: userId,
+    type,
+    geo: geo(doc),
+    ...doc
+  };
+  // console.log(newDoc);
+  const already = Subscriptions.findOne(newDoc);
+  if (already) {
+    throw new Meteor.Error('on-already-subscribed', 'The user is already subscribed to this area');
+  }
+  try {
+    return Subscriptions.insert(newDoc);
+  } catch (exception) {
+    // console.error(exception);
+    throw new Meteor.Error('500', exception);
+  }
+}
+
+export function subscriptionsRemove(subscriptionId) {
+  check(subscriptionId, Meteor.Collection.ObjectID);
+
+  try {
+    return Subscriptions.remove(subscriptionId);
+  } catch (exception) {
+    console.error(exception);
+    throw new Meteor.Error('500', exception);
+  }
+}
+
 Meteor.methods({
-  'subscriptions.insert': function subscriptionsInsert(doc) {
+  'subscriptions.insert': function subscriptionInsertMethod(doc) {
     check(doc, {
       location: Match.ObjectIncluding({ lat: Number, lon: Number }),
       distance: Number
     });
-    const type = 'web';
-    const newDoc = {
-      owner: this.userId,
-      type,
-      geo: geo(doc),
-      ...doc
-    };
-    // console.log(newDoc);
-    const already = Subscriptions.findOne(newDoc);
-    if (already) {
-      throw new Meteor.Error('on-already-subscribed', 'The user is already subscribed to this area');
-    }
-    try {
-      return Subscriptions.insert(newDoc);
-    } catch (exception) {
-      // console.error(exception);
-      throw new Meteor.Error('500', exception);
-    }
+    return subscriptionsInsert(doc, this.userId, 'web');
   },
   'subscriptions.update': function subscriptionsUpdate(doc) {
     check(doc, {
@@ -52,15 +71,9 @@ Meteor.methods({
       throw new Meteor.Error('500', exception);
     }
   },
-  'subscriptions.remove': function subscriptionsRemove(subscriptionId) {
+  'subscriptions.remove': function subscriptionsRemoveMethod(subscriptionId) {
     check(subscriptionId, Meteor.Collection.ObjectID);
-
-    try {
-      return Subscriptions.remove(subscriptionId);
-    } catch (exception) {
-      console.error(exception);
-      throw new Meteor.Error('500', exception);
-    }
+    return subscriptionsRemove(subscriptionId);
   }
 });
 

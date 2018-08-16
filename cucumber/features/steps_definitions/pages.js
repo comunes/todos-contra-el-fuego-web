@@ -16,7 +16,7 @@ module.exports = function () {
     const content = pages[i][1];
     client.waitForVisible(id, 10000);
     client.click(id);
-    client.waitForText('#react-root', content);
+    client.waitUntilText('#react-root', content);
     // https://jasmine.github.io/2.3/introduction.html#section-Expectations
     expect(client.getTitle()).toContain(pages[i][1]);
   }
@@ -26,7 +26,7 @@ module.exports = function () {
     const content = pages[i][1];
     client.url(`${process.env.ROOT_URL}/${url}`);
     client.waitForVisible('#react-root', 10000);
-    client.waitForText('#react-root', content);
+    client.waitUntilText('#react-root', content);
     const checkTitle = pages[i][2] === 'true';
     // https://jasmine.github.io/2.3/introduction.html#section-Expectations
     if (checkTitle) {
@@ -41,10 +41,7 @@ module.exports = function () {
 
   this.Then(/^I check that all non visible pages works properly$/, (callback) => {
     for (let i = 0; i < pages.length; i += 1) {
-      client.url(`${process.env.ROOT_URL}/${pages[i][0]}`);
-      const content = pages[i][1];
-      client.waitForVisible('#react-root', 10000);
-      client.waitForText('#react-root', content);
+      processPageUrl(i);
     }
     callback();
   });
@@ -77,7 +74,7 @@ module.exports = function () {
     // Write code here that turns the phrase above into concrete actions
     for (let i = 0; i < pages.length; i += 1) {
       client.url(`${process.env.ROOT_URL}/${pages[i][0]}?_escaped_fragment_=`);
-      client.waitForText('#react-root', pages[i][1]);
+      client.waitUntilText('#react-root', pages[i][1]);
     }
     callback();
   });

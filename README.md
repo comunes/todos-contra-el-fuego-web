@@ -8,7 +8,12 @@ This is web service that notifies about fires detected in an area of your intere
 
 Prerrequisites: a running meteor (we share the `fuegos` database with the telegram bot).
 
-Install `meteor` and run `npm start`
+Install `meteor` and run `meteor npm install` and `npm start`
+
+Some other development deps (in debian & ubuntu):
+```
+apt-get install libcairo2-dev libjpeg-dev libgif-dev pkg-config
+```
 
 ### GeoIP
 
@@ -24,7 +29,7 @@ More platforms and services in the future...
 
 We do tests via:
 ```
-TEST_WATCH=1 MONGO_URL=mongodb://localhost:27017/fuegostest  meteor --settings settings-development.json test --driver-package meteortesting:mocha --port 3010
+TEST_PORT=3000 TEST_WATCH=1 TEST_CLIENT=0 MONGO_URL=mongodb://localhost:27017/fuegostest  meteor --settings settings-development.json test --driver-package meteortesting:mocha --port 3010
 
 # and
 

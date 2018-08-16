@@ -57,21 +57,23 @@ async function encAndDec(obj) {
 }
 
 describe('url encoding', () => {
-  it('should encrypt and dcrypt basic objects', async () => {
+  it('should encrypt and dcrypt basic objects', async (done) => {
     const obj = { lat: 2 };
     const sealed = await urlEnc.encrypt(obj);
     const unsealed = await urlEnc.decrypt(sealed);
     chai.expect(unsealed).to.deep.equal(obj);
+    done();
   });
 
-  it('should encrypt and dcrypt objects with date', async () => {
+  it('should encrypt and dcrypt objects with date', async (done) => {
     const obj = { lat: 40.234503, lon: -3.350386, when: (new Date()).toString() };
     const sealed = await urlEnc.encrypt(obj);
     const unsealed = await urlEnc.decrypt(sealed);
     chai.expect(unsealed).to.deep.equal(obj);
+    done();
   });
 
-  it('should encrypt complete objects', async () => {
+  it('should encrypt complete objects', async (done) => {
     const obj = {
       ourid: {
         type: 'Point',
@@ -105,13 +107,15 @@ describe('url encoding', () => {
     chai.expect(sealed).to.not.equal(sealed2);
     chai.expect(sealed).to.not.include('/');
     chai.expect(sealed).to.not.include('%');
+    done();
   });
 
   // This fails because Date is return as String (not as Date) and because _id
-  it('should encrypt and dcrypt collection objects', async () => {
+  it('should encrypt and dcrypt collection objects', async (done) => {
     seeder(ActiveFiresCollection, firesSeed());
     const obj = ActiveFiresCollection.findOne();
     encAndDec(obj);
+    done();
   });
 
   it('should decrypt node-red enc objects', async () => {
@@ -120,7 +124,7 @@ describe('url encoding', () => {
     // console.log(unsealed);
   });
 
-  it('should encrypt and dcrypt Accounts hashes', async () => {
+  it('should encrypt and dcrypt Accounts hashes', async (done) => {
     const token = Accounts._generateStampedLoginToken();
     const obj = Accounts._hashStampedToken(token);
     console.log(obj);
@@ -129,13 +133,15 @@ describe('url encoding', () => {
     const w = unsealed.when;
     unsealed.when = new Date(w);
     chai.expect(unsealed).to.deep.equal(obj);
+    done();
   });
 
   // limit 0 for no limit and test everything (and increase timeout)
-  it('should encrypt and dcrypt all collection objects', async () => {
+  it('should encrypt and dcrypt all collection objects', async (done) => {
     seeder(ActiveFiresCollection, firesSeed());
     ActiveFiresCollection.find({}, { limit: 1000 }).fetch().forEach((obj) => {
       encAndDec(obj);
     });
+    done();
   }).timeout(5000);
 });

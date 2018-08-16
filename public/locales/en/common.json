@@ -167,6 +167,7 @@
   "Verifica tu dirección de correo": "Verify Your Email Address",
   "Zonas vigiladas": "Monitored areas",
   "En verde, las zonas vigiladas por nuestros usuari@s actualmente": "In green, the areas monitored by our users currently",
+  "Actualizado <1></1>.": "Updated <1></1>.",
   "Actualizado <1></1>, último fuego detectado <3></3>.": "Updated <1></1>, last fire detected <3></3>.",
   "Información adicional sobre fuego": "Additional information about fire",
   "CO2emisions": "Did you know that wildfires <1>produce as much CO² as cars</1> and <3>about ⅕ of all our carbon emissions</3>?",
@@ -248,5 +249,7 @@
   "Note: Cloud cover might obscure active fire detections.",
   "Hay más información sobre un fuego":
   "There is more information about a fire",
-  "esDecirTalDia": "That is on {{date}}"
+  "esDecirTalDia": "That is on {{date}}",
+  "Actualizando...": "Updating...",
+  "Alerta de fuego": "Alert of fire"
 }

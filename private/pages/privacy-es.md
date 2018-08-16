@@ -1,97 +1,155 @@
-Su privacidad es importante para nosotros.
+# POLÍTICA DE PRIVACIDAD #
 
-La Asociación Comunes ha creado esta aplicación 'Tod@s contra el fuego' y este SERVICIO que se provee por la Asociación de Comunes sin costo y está destinado a ser usado tal cual.
+*Última actualización 12 de julio de 2018*
 
-Esta página se utiliza para informar a los visitantes del sitio web sobre nuestras políticas con la recopilación, el uso y la divulgación de información personal si alguien decide utilizar nuestro Servicio.
+**En resumen**: *Su privacidad es importante para nosotros/as. No hacemos negocios con sus datos, no los compartimos con terceros y solo nos preocupan los incendios y cómo fortalecer vecindarios contra ellos.*
 
-Si elige usar nuestro Servicio, acepta la recopilación y el uso de la información en relación con esta política. La información personal que recopilamos se usa para proporcionar y mejorar el servicio. No usaremos ni compartiremos su información con nadie, excepto según se describe en esta Política de privacidad.
+Gracias por elegir ser parte de nuestra comunidad 'Tod@s contra los Fuegos' en la Asociación de Comunes ("nosotras/os" o "nos"). Nos comprometemos a proteger su información personal y su derecho a la privacidad. Si tiene alguna pregunta o inquietud sobre nuestra política o nuestras prácticas con respecto a su información personal, contáctenos a info@comunes.org.
 
-Los términos utilizados en esta Política de privacidad tienen los mismos significados que en nuestros [Términos y condiciones](/terms), a los que se puede acceder en "Tod@s contra el fuego" a menos que se defina lo contrario en esta Política de privacidad.
+Cuando visita nuestro sitio web [fuegos.comunes.org](https://fuegos.comunes.org), la aplicación móvil y utiliza nuestros servicios, confía en nosotras/os con su información personal. Nos tomamos su privacidad muy en serio. En este aviso de privacidad, describimos nuestra política de privacidad. Buscamos explicarte de la manera más clara posible qué información recopilamos, cómo la utilizamos y qué derechos tienes en relación con ella. Esperamos que se tome un tiempo para leer detenidamente, ya que es importante. Si hay términos en esta política de privacidad con los que no está de acuerdo, interrumpa el uso de nuestros Sitios o Aplicaciones y nuestros servicios.
 
-**Recopilación y uso de información**
+Esta política de privacidad se aplica a toda la información recopilada a través de nuestro sitio web (como [fuegos.comunes.org](https://fuegos.comunes.org)), la aplicación móvil (las "**Aplicaciones**") y/o cualquier servicio relacionado o eventos (nos referimos a ellos colectivamente en esta política de privacidad como los "**Sitios**").
 
-Para una mejor experiencia, al utilizar nuestro Servicio, podemos solicitarle que nos brinde cierta información de identificación personal, que incluye, entre otros, nombre, correo electrónico, idioma y el nombre de usuario del telegrama (de nuestros usuarios de Telegram). La información que solicitamos será retenida por nosotros y utilizada como se describe en esta política de privacidad.
+**Lea atentamente esta política de privacidad, ya que le ayudará a tomar decisiones informadas sobre cómo compartir su información personal con nosotras/os.**
 
-Además, la aplicación puede recopilar cierta información automáticamente, que incluye, entre otros, el tipo de dispositivo que usa, la dirección IP de su dispositivo, su sistema operativo móvil, el tipo de navegador de Internet que utiliza e información sobre la forma que usas la aplicación.
 
-Podemos usar la información que recopilamos de las siguientes maneras:
-* Para personalizar su experiencia y permitirnos ofrecer el tipo de contenido que más le interesa.
-* Para enviar correos electrónicos periódicos con respecto a nuestros servicios.
+## 1. ¿QUÉ INFORMACIÓN RECOPILAMOS? ##
 
-La aplicación utiliza servicios de terceros que pueden recopilar información utilizada para identificarlo.
+### Información recopilada automáticamente ###
 
-Enlaces a la política de privacidad de proveedores de servicios de terceros utilizados por la aplicación:
+**En resumen:** *Recopilamos información automáticamente, como la dirección IP y/o las características del navegador y del dispositivo, cuando visita nuestros Sitios o Aplicaciones.*
 
-* [OpenStreetMap](https://wiki.openstreetmap.org/wiki/Privacy_Policy/)
-* [Google Maps](https://developers.google.com/maps/terms?hl=es#3-privacy-and-personal-information)
+Recopilamos cierta información automáticamente cuando visita, utiliza o navega por nuestros Sitios o Aplicaciones. Esta información no revela su identidad específica (como su nombre o información de contacto) pero puede incluir información de uso y dispositivo, como su dirección IP, características del navegador y del dispositivo, sistema operativo, preferencias de idioma, URL de referencia, nombre del dispositivo, país, ubicación , información sobre cómo y cuándo utiliza nuestros sitios o aplicaciones y otra información técnica. Esta información es principalmente necesaria para mantener la seguridad y el funcionamiento de nuestros sitios o aplicaciones, y para nuestros fines de análisis internos e informes. Al igual que muchas empresas, también recopilamos información a través de cookies y tecnologías similares.
 
-No hemos habilitado Google AdSense.
+### Información recopilada a través de nuestras aplicaciones ###
 
-**¿La aplicación recopila información precisa sobre la ubicación en tiempo real del dispositivo?**
+**En resumen:** *Podemos recopilar información sobre su ubicación geográfica, notificaciones push, cuando usa nuestras aplicaciones.*
 
-Cuando visita la aplicación, podemos usar tecnología GPS (u otra tecnología similar) para determinar su ubicación actual a fin de determinar la ciudad en la que se encuentra y/o mostrar un mapa de ubicación de incendios locales y/o proporcionar alertas de incendios futuros en tu zona. **No** compartiremos su ubicación actual con otros usuarios o socios.
+Si usa nuestras aplicaciones, también podemos recopilar la siguiente información:
 
-Si no desea que usemos su ubicación para los fines establecidos anteriormente, debe desactivar los servicios de ubicación para la aplicación móvil ubicados en la configuración de su cuenta o en la configuración de su teléfono móvil y/o dentro de la aplicación y/o cuando se le solicite por tu navegador.
+- *Información de geolocalización.* Podemos solicitar en algún momento acceso o permiso a la información basada en la ubicación desde su dispositivo móvil para proporcionar servicios basados ​​en la ubicación. Si desea cambiar nuestro acceso o permisos, puede hacerlo en la configuración de su dispositivo.
+- *Notificaciones Push.* Podemos solicitar el envío de notificaciones push con respecto a su cuenta o la aplicación móvil. Si desea optar por no recibir este tipo de comunicaciones, puede desactivarlas en la configuración de su dispositivo.
 
-**¿Cómo protegemos tu información?**
 
-No utilizamos el escaneo y/o escaneo de vulnerabilidades a estándares PCI. Solo proporcionamos artículos e información. Nunca pedimos números de tarjetas de crédito. No utilizamos el Malware Scanning.
+## 2. ¿CÓMO USAMOS SU INFORMACIÓN? ##
 
-Su información personal está almacenada detrás de redes seguras y solo es accesible para un número limitado de personas que tienen derechos especiales de acceso a dichos sistemas, y se les exige mantener la confidencialidad de la información. Además, toda la información sensible que usted suministra se cifra a través de la tecnología Secure Socket Layer (SSL).
+**En resumen:** *Procesamos su información para fines basados ​​en intereses legítimos, el cumplimiento de nuestro contrato con usted, el cumplimiento de nuestras obligaciones legales y/o su consentimiento.*
 
-Implementamos una variedad de medidas de seguridad cuando un usuario ingresa, envía o accede a su información para mantener la seguridad de su información personal.
+Usamos información personal recopilada a través de nuestros Sitios o Aplicaciones para una variedad de propósitos que se describen a continuación. Procesamos su información personal para estos fines a fin de celebrar o realizar un contrato con usted ("Contractual"), con su consentimiento ("Consentimiento"), y/o para cumplir con nuestras obligaciones legales ("Razones legales"). Indicamos los motivos de procesamiento específicos en los que confiamos junto a cada uno de los propósitos enumerados a continuación.
 
-**Dato de registro**
+Usamos la información que recopilamos o recibimos:
 
-Queremos informarle que cada vez que utiliza nuestro Servicio, en caso de error en la aplicación, recopilamos datos e información (a través de productos de terceros) en su teléfono, llamados Datos de registro. Este registro de datos puede incluir información como la dirección del protocolo de Internet ("IP"), el nombre del dispositivo, la versión del sistema operativo, la configuración de la aplicación al utilizar nuestro servicio, la hora y fecha de uso del servicio y otras estadísticas.
+- **Para facilitar la creación de la cuenta y el proceso de inicio de sesión** con su consentimiento. Si elige vincular su cuenta con nosotras/os a una cuenta de terceros \*(como su cuenta de Google o Telegram), usamos la información que nos permitió recopilar de esos terceros para facilitar la creación de la cuenta y el proceso de inicio de sesión.
+- **Solicitud de comentarios**. Podemos utilizar su información para solicitar comentarios y para comunicarnos con usted sobre su uso de nuestros Sitios o Aplicaciones.
+- **Para habilitar las comunicaciones de usuario a usuario** con su consentimiento. Podemos usar su información para permitir las comunicaciones de usuario a usuario con el consentimiento de cada usuario.
+- **Para hacer cumplir nuestros términos, condiciones y políticas**.
+- **Para responder a solicitudes legales y evitar daños** por razones legales. Si recibimos una citación u otra solicitud legal, es posible que tengamos que inspeccionar los datos que tenemos para determinar cómo responder.
 
-**¿Usamos 'cookies'?**
 
-Sí. Las cookies son pequeños archivos que un sitio o su proveedor de servicios transfiere al disco duro de su computadora a través de su navegador web (si lo permite) que permite que los sistemas del sitio o del proveedor de servicios reconozcan su navegador y capturen y recuerden cierta información. Por ejemplo, usamos cookies para ayudarnos a recordar y procesar su idioma preferido. También se utilizan para ayudarnos a comprender sus preferencias en función de la actividad del sitio anterior o actual, lo que nos permite brindarle mejores servicios. También utilizamos cookies para ayudarnos a recopilar datos agregados sobre el tráfico del sitio y la interacción del sitio para que podamos ofrecer mejores experiencias y herramientas del sitio en el futuro.
+## 3. ¿SU INFORMACIÓN SERÁ COMPARTIDA CON ALGUIEN? ##
 
-Usamos cookies para comprender y guardar las preferencias del usuario para futuras visitas.
+**En resumen:** *Solo compartimos información con su consentimiento, para cumplir con las leyes o proteger sus derechos*
 
-Puede optar por que su computadora lo advierta cada vez que se envía una cookie, o puede optar por desactivar todas las cookies. Lo haces a través de la configuración de tu navegador. Dado que el navegador es un poco diferente, consulte el Menú de Ayuda de su navegador para conocer la forma correcta de modificar sus cookies.
+Solo compartimos y divulgamos su información en las siguientes situaciones:
 
-Si desactiva las cookies, es posible que algunas de las funciones que hacen que su sitio sea más eficiente no funcionen correctamente.
+- **De acuerdo con las leyes**. Podemos divulgar su información cuando se nos requiera legalmente para cumplir con la ley aplicable, las solicitudes gubernamentales, un procedimiento judicial, una orden judicial o un proceso legal, como por ejemplo en respuesta a una orden judicial o una citación judicial (incluso en respuesta a las autoridades públicas para cumplir con los requisitos de seguridad nacional o cumplimiento de la ley).
+- **Intereses vitales y derechos legales**. Podemos divulgar su información cuando creemos que es necesario investigar, prevenir o tomar medidas con respecto a posibles violaciones de nuestras políticas, sospecha de fraude, situaciones que involucren amenazas potenciales a la seguridad de cualquier persona y actividades ilegales, o como evidencia en un litigio en el cual estamos involucrados.
+- **Con su consentimiento**. Podemos divulgar su información personal para cualquier otro propósito con su consentimiento.
 
-**Proveedores de servicio**
 
-Podemos emplear compañías e individuos de terceros para facilitar nuestro Servicio.
+## 4. ¿USAMOS COOKIES Y OTRAS TECNOLOGÍAS DE SEGUIMIENTO? ##
 
-**Divulgación de terceros**
+**En resumen:** *Podemos utilizar cookies y otras tecnologías de seguimiento para recopilar y almacenar su información.*
 
-No vendemos, comercializamos ni transferimos a terceros su información de identificación personal.
+Podemos usar cookies para acceder o almacenar información sobre el inicio de sesión de la cuenta y sus preferencias de usuario (como su idioma preferido).
 
-**Seguridad**
 
-Valoramos su confianza al proporcionarnos su información personal, por lo tanto, nos esforzamos por utilizar medios comercialmente aceptables para protegerla. Pero recuerde que ningún método de transmisión a través de Internet o método de almacenamiento electrónico es 100% seguro y confiable, y no podemos garantizar su seguridad absoluta.
+## 5. ¿USAMOS GOOGLE MAPS? ##
 
-**Enlaces a otros sitios**
+**En resumen:** *Sí, utilizamos Google Maps con el fin de proporcionar un mejor servicio.*
 
-No incluimos ni ofrecemos productos o servicios de terceros en nuestro sitio web, pero este Servicio puede contener enlaces a otros sitios en los comentarios de los usuarios. Si hace clic en un enlace de un tercero, se lo dirigirá a ese sitio. Tenga en cuenta que estos sitios externos no son operados por nosotros. Por lo tanto, le recomendamos encarecidamente que revise la Política de privacidad de estos sitios web. No tenemos control ni asumimos ninguna responsabilidad por el contenido, las políticas de privacidad o las prácticas de sitios o servicios de terceros.
+Este sitio web, aplicación móvil o aplicación Telegram utiliza las API de Google Maps. Puede encontrar las Condiciones del servicio de las API de Google Maps [aquí](https://developers.google.com/maps/terms). Para comprender mejor la Política de privacidad de Google, consulte este [enlace](https://policies.google.com/privacy).
 
-**Privacidad de los niños**
+Al utilizar nuestra implementación de Maps API, usted acepta estar sujeto a los Términos de Servicio de Google. Usted acepta permitirnos obtener o almacenar en caché su ubicación. Puede revocar su consentimiento en cualquier momento. Usamos información sobre la ubicación junto con datos de otros proveedores de datos.
 
-Estos servicios no se dirigen a personas menores de 13 años. No recopilamos deliberadamente información personal identificable de niños menores de 13 años. En el caso de que descubramos que un niño menor de 13 años nos ha proporcionado información personal, la borramos inmediatamente de nuestros servidores. Si usted es un padre o tutor y sabe que su hijo nos ha proporcionado información personal, comuníquese con nosotros para que podamos hacer las acciones necesarias.
 
-**Prácticas justas de información**
+## 6. ¿CUÁNTO TIEMPO CONSERVAMOS SU INFORMACIÓN? ##
 
-Los principios de prácticas justas de información (del inglés 'Fair Information Practices') forman la columna vertebral de la ley de privacidad en los Estados Unidos y los conceptos que incluyen han jugado un papel importante en el desarrollo de las leyes de protección de datos en todo el mundo. Comprender los principios prácticos de información justa y cómo deben implementarse es fundamental para cumplir con las diversas leyes de privacidad que protegen la información personal.
+**En resumen:** *Conservamos su información el tiempo que sea necesario para cumplir con los fines descritos en esta política de privacidad, a menos que la ley así lo requiera.*
 
-Para estar en línea con las prácticas de información justas, tomaremos la siguiente medida de respuesta, en caso de que se produzca una violación de datos:
-* Le notificaremos por correo electrónico dentro de los 7 días hábiles
+Solo conservaremos su información personal durante el tiempo que sea necesario para los fines establecidos en esta política de privacidad, a menos que la ley exija o permita un período de retención más largo (como impuestos, contabilidad u otros requisitos legales). Ningún propósito de esta política nos obligará a conservar su información personal por un período mayor al que el usuario tenga una cuenta con nosotras/os.
 
-También aceptamos el principio de reparación individual que exige que las personas tengan derecho a buscar legalmente derechos exigibles contra los recolectores de datos y procesadores que no cumplan con la ley. Este principio requiere no solo que los individuos tengan derechos exigibles contra los usuarios de los datos, sino también que los individuos recurran a los tribunales o agencias gubernamentales para investigar y/o enjuiciar el incumplimiento por parte de los procesadores de datos.
+Cuando no tenemos una necesidad legítima continua de procesar su información personal, la borraremos o la anonimizamos, o, si esto no es posible (por ejemplo, porque su información personal ha sido almacenada en archivos de respaldo), almacenaremos de manera segura su información personal y aislarlo de cualquier procesamiento posterior hasta que la eliminación sea posible.
 
-**Cambios a esta política de privacidad**
 
-Es posible que actualicemos nuestra política de privacidad de vez en cuando. Por lo tanto, se recomienda revisar esta página periódicamente para cualquier cambio. Le notificaremos de cualquier cambio publicando la nueva política de privacidad en esta página. Estos cambios entran en vigencia inmediatamente después de que se publiquen en esta página.
+## 7. ¿CÓMO MANTENEMOS SU INFORMACIÓN SEGURA? ##
 
-**Tu consentimiento**
+**En resumen:** *Nuestro objetivo es proteger su información personal a través de un sistema de medidas de seguridad técnicas y organizativas.*
 
-Al utilizar la aplicación, usted está dando su consentimiento para que procesemos su información según lo establecido en esta política de privacidad ahora y en la forma en que nosotros lo modifiquemos. "Procesamiento" significa usar cookies en una computadora/dispositivo de mano o usar o tocar información de cualquier manera, incluyendo, pero no limitado a, recolectar, almacenar, eliminar, usar, combinar y divulgar información, todas las cuales se llevarán a cabo en España. Si reside fuera de España, su información será transferida, procesada y almacenada allí según los estándares de privacidad de España.
+Hemos implementado medidas de seguridad organizacionales y técnicas adecuadas diseñadas para proteger la seguridad de cualquier información personal que procesamos. Sin embargo, recuerde que no podemos garantizar que Internet sea 100% seguro. Aunque haremos nuestro mejor esfuerzo para proteger su información personal, la transmisión de información personal hacia y desde nuestros Sitios o Aplicaciones es bajo su propio riesgo. Solo debe acceder a los servicios dentro de un entorno seguro.
 
-**Contáctenos**
 
-Si tiene alguna pregunta o sugerencia sobre nuestra Política de privacidad, no dude en ponerse en contacto con nosotros: info ARROBA comunes PUNTO org.
+## 8. ¿RECOPILAMOS INFORMACIÓN DE MENORES DE EDAD? ##
+
+**En resumen:** *No recopilamos deliberadamente ni comercializamos datos de niños menores de 18 años.*
+
+No solicitamos intencionalmente ni comercializamos datos de niños menores de 18 años. Al utilizar los Sitios o Aplicaciones, usted declara que tiene al menos 18 años o que es el padre o tutor de dicho menor y acepta el uso de los Sitios o Aplicaciones por parte de dicho menor dependiente. Si descubrimos que se ha recopilado información personal de usuarios menores de 18 años, desactivaremos la cuenta y tomaremos medidas razonables para eliminar dichos datos de inmediato de nuestros registros. Si toma conocimiento de cualquier información que hayamos recopilado de niños menores de 18 años, contáctenos a info@comunes.org.
+
+
+## 9. ¿CUÁLES SON SUS DERECHOS DE PRIVACIDAD? ##
+
+**En resumen:** *En algunas regiones, como el Unión Europea, tiene derechos que le permiten un mayor acceso y control sobre su información personal. Puede revisar, cambiar o cancelar su cuenta en cualquier momento.*
+
+En algunas regiones (como la Unión Europea), usted tiene ciertos derechos bajo las leyes de protección de datos aplicables. Estos pueden incluir el derecho (i) de solicitar acceso y obtener una copia de su información personal, (ii) solicitar una rectificación o cancelación; (iii) restringir el procesamiento de su información personal; y (iv) si corresponde, a la portabilidad de datos. En determinadas circunstancias, también puede tener derecho a oponerse al procesamiento de su información personal. Para realizar dicha solicitud, utilice los datos de contacto que se proporcionan a continuación. Consideraremos y actuaremos en cualquier solicitud de acuerdo con las leyes de protección de datos aplicables.
+
+Si confiamos en su consentimiento para procesar su información personal, tiene derecho a retirar su consentimiento en cualquier momento. Sin embargo, tenga en cuenta que esto no afectará la legalidad del procesamiento antes de su retirada.
+
+Si usted reside en la Unión Europea y considera que estamos procesando ilegalmente su información personal, también tiene derecho a presentar una queja ante la autoridad de supervisión de protección de datos local. Puede encontrar sus datos de contacto aquí: [http://ec.europa.eu/justice/data-protection/bodies/authorities/index_en.htm](http://ec.europa.eu/justice/data-protection/bodies/authorities/index_en.htm)
+
+### Información de la cuenta ###
+
+Si en algún momento desea revisar o cambiar la información en su cuenta o cancelar su cuenta, puede:
+
+- Inicie sesión en la configuración de su cuenta y actualice su cuenta de usuario.
+
+Tras su solicitud para cancelar su cuenta, desactivaremos o eliminaremos su cuenta y la información de nuestras bases de datos activas. Sin embargo, parte de la información se puede conservar en nuestros archivos para evitar fraudes, solucionar problemas, ayudar con cualquier investigación, hacer cumplir nuestros Términos de uso y/o cumplir con los requisitos legales.
+
+**Cookies y tecnologías similares:** La mayoría de los navegadores web están configurados para aceptar cookies por defecto. Si lo prefiere, generalmente puede elegir configurar su navegador para que elimine las cookies y rechace las cookies. Si elige eliminar las cookies o rechazar las cookies, esto podría afectar ciertas funciones o servicios de nuestros sitios o aplicaciones.
+
+**Optar por no recibir notificaciones por correo electrónico:** Puede darse de baja de nuestros correos electrónicos de notificación en cualquier momento haciendo clic en el enlace para darse de baja en los correos electrónicos que le enviamos o poniéndose en contacto con nosotras/os utilizando los detalles que se proporcionan a continuación. A continuación, se le eliminará de estos correos electrónicos; sin embargo, aún así le enviaremos correos electrónicos relacionados con el servicio que son necesarios para la administración y el uso de su cuenta. Para optar por no participar, usted puede:
+
+- Tener en cuenta sus preferencias cuando registra una cuenta en el sitio.
+- Acceder a la configuración de tu cuenta y actualizar tus preferencias.
+
+
+## 10. ¿LOS RESIDENTES DE CALIFORNIA TIENEN DERECHOS DE PRIVACIDAD ESPECÍFICOS? ##
+
+**En resumen:** *Sí, si usted es residente de California, se le otorgan derechos específicos con respecto al acceso a su información personal.*
+
+La Sección 1798.83 del Código Civil de California, también conocida como la ley "Shine The Light", permite a nuestros usuarios que son residentes de California solicitar y obtener de nosotras/os, una vez al año y sin cargo, información sobre categorías de información personal (si corresponde) que divulgado a terceros para fines de marketing directo y los nombres y direcciones de todos los terceros con quienes compartimos información personal en el año calendario inmediatamente anterior. Si usted es residente de California y desea realizar dicha solicitud, envíe su solicitud por escrito a nosotras/os utilizando la información de contacto que se proporciona a continuación.
+
+Si eres menor de 18 años, resides en California y tienes una cuenta registrada en los Sitios o Aplicaciones, tienes el derecho de solicitar la eliminación de datos no deseados que publiques en los Sitios o Aplicaciones. Para solicitar la eliminación de dichos datos, contáctenos utilizando la información de contacto que se proporciona a continuación, e incluya la dirección de correo electrónico asociada a su cuenta y una declaración de que reside en California. Nos aseguraremos de que los datos no se muestren públicamente en los Sitios o Aplicaciones, pero tenga en cuenta que es posible que los datos no se eliminen completa o completamente de nuestros sistemas.
+
+
+## 11. ¿HACEMOS ACTUALIZACIONES DE ESTA POLÍTICA? ##
+
+**En resumen:** *Sí, actualizaremos esta política según sea necesario para cumplir con las leyes pertinentes.*
+
+Podemos actualizar esta política de privacidad de vez en cuando. La versión actualizada se indicará con una fecha actualizada "Revisada" y la versión actualizada entrará en vigencia tan pronto como sea accesible. Si realizamos cambios sustanciales a esta política de privacidad, podemos notificarlo publicando de manera prominente un aviso de dichos cambios o enviándole directamente una notificación. Le recomendamos que revise esta política de privacidad con frecuencia para recibir información sobre cómo protegemos su información.
+
+
+## 12. ¿CÓMO PUEDE CONTACTARNOS SOBRE ESTA POLÍTICA? ##
+
+Si tiene preguntas o comentarios sobre esta política, puede enviarnos un correo electrónico a info@comunes.org o por correo postal a:
+
+ASOCIACIÓN COMUNES
+C/ COLÓN 21, 5º DCHA, ESC DCHA
+03001 ALICANTE
+ESPAÑA
+
+Si tiene más preguntas o comentarios sobre nosotras/os o nuestras políticas, envíenos un correo electrónico a info@comunes.org o por correo postal a:
+
+ASOCIACIÓN COMUNES
+C/ COLÓN 21, 5º DCHA, ESC DCHA
+03001 ALICANTE
+ESPAÑA

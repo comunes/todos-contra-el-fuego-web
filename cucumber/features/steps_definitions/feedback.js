@@ -24,6 +24,7 @@ module.exports = function doSteps() {
     client.waitForVisible('#feedback-tab', 10000);
     client.click('#feedback-tab');
     client.waitForVisible('#feedback-form', 10000);
+    client.waitForEnabled('input[name="email"]');
     client.setValue('input[name="email"]', randomEmail());
     client.setValue('#feedbackTextarea', randomText(500));
     client.click('#sendFeedbackBtn');

@@ -12,7 +12,7 @@ import { trim } from './util.js';
 function process(notif) {
   // No already notified
   if (Push.Permission.has()) {
-    if (!notif.webNotified) {
+    if (!notif.notified && notif.type === 'web') {
       Push.create(i18n.t('AppName'), {
         body: `${trim(notif.content)} (${i18n.t('fireDetected', { when: dateFromNow(notif.when) })})`,
         icon: '/n-fire-marker.png',
@@ -47,7 +47,7 @@ Meteor.startup(() => {
   if (Meteor.userId()) {
     Meteor.subscribe('mynotifications');
     // Check for notifications not processed at startup
-    Notifications.find({ webNotified: null }).forEach((notif) => {
+    Notifications.find({ notified: null, type: 'web' }).forEach((notif) => {
       process(notif);
     });
   }

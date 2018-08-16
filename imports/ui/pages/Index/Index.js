@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 // import { Link } from 'react-router-dom';
 // https://www.npmjs.com/package/react-resize-detector
 import ReactResizeDetector from 'react-resize-detector';
+import MobileStoreButton from 'react-mobile-store-button';
 import _ from 'lodash';
 import 'html5-device-mockups/dist/device-mockups.min.css';
 import 'bootstrap-carousel-swipe/carousel-swipe';
@@ -20,7 +21,6 @@ import SubscriptionsMap from '/imports/ui/pages/Subscriptions/SubscriptionsMap';
 import ShareIt from '/imports/ui/components/ShareIt/ShareIt';
 import getFallbackLang from '/imports/modules/lang-fallback';
 import FiresMap from '../FiresMap/FiresMap';
-
 import './Index.scss';
 import './Index-custom.scss';
 
@@ -102,6 +102,7 @@ class Index extends Component {
   render() {
     const { t } = this.props;
     const title = `${t('AppName')}: ${t('Inicio')}`;
+    const androidUrl = 'https://play.google.com/store/apps/details?id=org.comunes.fires';
     return (
       <div className="IndexDisabled full-width">
         <Helmet>
@@ -181,6 +182,9 @@ class Index extends Component {
                 </div>
                 <p className="moto"><Trans>Siempre alerta a los fuegos en nuestro vecindario</Trans></p>
                 {/* <Link className="participe-btn btn btn-lg btn-warning" role="button" to="/#platforms">{this.props.t('Participa')}</Link> */}
+                <p>
+                  <MobileStoreButton store="android" url={androidUrl} />
+                </p>
               </div>
             </section>
           </section>

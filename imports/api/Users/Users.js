@@ -107,6 +107,7 @@ const schemaUser = new SimpleSchema({
   telegramUsername: { type: String, optional: true },
   telegramFirstName: { type: String, optional: true },
   telegramLanguageCode: { type: String, optional: true },
+  fireBaseToken: { type: String, optional: true },
   createdAt: defaultCreatedAt,
   updatedAt: defaultUpdateAt
 });

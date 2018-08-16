@@ -10,7 +10,7 @@ let pass;
 let email;
 
 const setUserValues = (isEdit) => {
-  client.waitForVisible('input[name="firstName"]', 5000);
+  client.waitForVisible('input[name="firstName"]', 10000);
   firstName = randomUsername();
   lastName = randomUsername();
   email = randomEmail();
@@ -32,18 +32,40 @@ module.exports = function doSteps(notos) {
     goHome(client);
   });
 
-  function register() {
+  function waitNoBert() {
+    client.pause(2000);
+    if (client.isVisible('.bert-container')) {
+      // console.log('Removing bert alert');
+      client.click('.bert-container');
+      client.waitForVisible('.bert-container', 10000, true);
+    } else {
+      // console.log('No bert alert');
+    }
+  }
+
+  function logoutIfLogged() {
     if (client.isVisible('#logout')) {
       client.click('#logout');
     }
-    client.waitForVisible('#signup', 5000);
+    client.waitForVisible('#signup', 10000);
+  }
+
+  function register() {
+    logoutIfLogged();
+    client.waitForVisible('#signup', 10000);
     client.click('#signup');
     setUserValues();
     if (!notos) {
       client.click('input[name="tos"]');
     }
     client.click('#signUpSubmit');
+    client.waitForVisible('#logout', 10000);
   }
+
+  this.Given(/^I logout if logged$/, () => {
+    waitNoBert();
+    logoutIfLogged();
+  });
 
   this.Given(/^I have an account and I logged in$/, () => {
     register();
@@ -51,12 +73,13 @@ module.exports = function doSteps(notos) {
 
   function checkName() {
     client.waitForVisible('#profile', 5000);
-    client.waitForText('#profile', firstName);
-    client.waitForText('#profile', lastName);
+    client.waitUntilText('#profile', firstName);
+    client.waitUntilText('#profile', lastName);
   }
 
   this.Then(/^I should be logged in$/, () => {
     client.waitUntil(() => client.isVisible('#logout') === true, 10000);
+    client.waitUntil(() => client.isVisible('#profile') === true, 10000);
   });
 
   /* this.Given(/^I am signed out$/, () => {
@@ -64,30 +87,24 @@ module.exports = function doSteps(notos) {
    * });
    */
 
-  function closeAlert() {
-    // client.waitForVisible('.bert-alert', 5000);
-    // client.click('.bert-content');
-    client.waitUntil(() => client.isVisible('.bert-alert') === false, 10000);
-  }
 
   this.When(/^I sign out$/, () => {
-    if (client.isVisible('.bert-alert')) {
-      client.waitUntil(() => client.isVisible('.bert-alert') === false, 10000);
-    }
-    client.waitForVisible('#logout', 10000);
+    waitNoBert();
+    client.waitForClickable('#logout', 10000);
+    // client.waitForVisible('#logout', 10000);
     client.click('#logout');
     client.waitForVisible('#login', 10000);
   });
 
   function login(badpass) {
+    waitNoBert();
     client.waitForVisible('#login', 10000);
-    client.waitUntil(() => client.isVisible('.bert-alert') === false, 10000);
     client.click('#login');
     client.waitForVisible('#loginSubmit', 5000);
     client.setValue('input[name="emailAddress"]', email);
     client.setValue('input[name="password"]', badpass ? randomPassword() : pass);
     client.click('#loginSubmit');
-    closeAlert();
+    waitNoBert();
   }
 
   this.When(/^I enter my email and password$/, () => {
@@ -95,11 +112,13 @@ module.exports = function doSteps(notos) {
   });
 
   this.Then(/^I can edit my profile$/, () => {
-    client.waitForVisible('#profile', 5000);
+    waitNoBert();
+    client.waitForClickable('#profile', 10000);
     client.click('#profile');
+    client.pause(2000);
     setUserValues(true);
     client.click('#profileSubmit');
-    closeAlert();
+    waitNoBert();
     checkName();
   });
 
@@ -117,7 +136,7 @@ module.exports = function doSteps(notos) {
 
   this.Then(/^I should be registered$/, () => {
     client.waitForVisible('.bert-alert', 10000, true);
-    closeAlert();
+    waitNoBert();
   });
 
   this.Given(/^I register with some name, password and email but without accept conditions$/, () => {
