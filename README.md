@@ -51,4 +51,5 @@ GNU APLv3. See our [LICENSE](https://github.com/comunes/todos-contra-el-fuego-we
 
 ## Thanks & other acknowlegments
 
-(...)
+Thanks indeed to:
+- Lupe Bao Reixa for Galician translation
