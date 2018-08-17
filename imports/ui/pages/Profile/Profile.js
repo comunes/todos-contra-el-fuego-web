@@ -202,7 +202,7 @@ class Profile extends React.Component {
             {langName[i18n.language]}
           </button>
           <div className="dropdown-menu">
-            {i18n.languages.map(lang => (
+            {Object.keys(i18n.services.resourceStore.data).map(lang => (
               <button
                 className="dropdown-item"
                 onClick={() => this.onLangSelect(lang)}
