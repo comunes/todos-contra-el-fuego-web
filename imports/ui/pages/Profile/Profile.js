@@ -18,6 +18,8 @@ import { T9n } from 'meteor-accounts-t9n';
 
 import './Profile.scss';
 
+// List of languages: https://github.com/i18next/i18next/issues/1068
+
 class Profile extends React.Component {
   constructor(props) {
     super(props);
