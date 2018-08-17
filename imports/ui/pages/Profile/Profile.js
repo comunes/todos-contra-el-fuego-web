@@ -9,12 +9,12 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { testId } from '/imports/ui/components/Utils/TestUtils';
-import Col from '../../components/Col/Col';
-import { withTracker } from 'meteor/react-meteor-data';
-import InputHint from '../../components/InputHint/InputHint';
-import validate from '../../../modules/validate';
 import { translate } from 'react-i18next';
 import { T9n } from 'meteor-accounts-t9n';
+import { withTracker } from 'meteor/react-meteor-data';
+import Col from '../../components/Col/Col';
+import InputHint from '../../components/InputHint/InputHint';
+import validate from '../../../modules/validate';
 
 import './Profile.scss';
 
@@ -157,6 +157,7 @@ class Profile extends React.Component {
 
   renderPasswordUser(loading, user) {
     const { t, i18n } = this.props;
+    const enabledLangs = ['en', 'es', 'gl'];
     const langName = {
       en: 'English', es: 'Español', gl: 'Galego', ast: 'Asturianu', ca: 'Català'
     };
@@ -204,7 +205,7 @@ class Profile extends React.Component {
             {langName[i18n.language]}
           </button>
           <div className="dropdown-menu">
-            {Object.keys(i18n.services.resourceStore.data).map(lang => (
+            {enabledLangs.map(lang => (
               <button
                 className="dropdown-item"
                 onClick={() => this.onLangSelect(lang)}
