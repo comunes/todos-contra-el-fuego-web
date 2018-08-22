@@ -156,6 +156,7 @@ if (!Meteor.settings.private.internalApiToken) {
         lat: 1,
         lon: 1,
         when: 1,
+        type: 1, // modis, viirs, vecinal
         scan: 1
       }
     });
