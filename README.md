@@ -41,6 +41,11 @@ chimp --ddp=http://localhost:3000 --path=cucumber
 
 ```
 
+### FAQ & Troubleshooting
+
+**Q** - I get something like `(...) /node_modules/fibers/future.js:280 (...) Error: Could not locate the bindings file.` What can I do?
+**A** - Try `meteor npm rebuild`
+
 ## Data source acknowledgements
 
 *We acknowledge the use of data and imagery from LANCE FIRMS operated by the NASA/GSFC/Earth Science Data and Information System (ESDIS) with funding provided by NASA/HQ*.
