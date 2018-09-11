@@ -1,15 +1,16 @@
 import { check } from 'meteor/check';
-import LGeo from 'leaflet-geodesy';
 import tunion from '@turf/union';
 import ttrunc from '@turf/truncate';
+import { rectangleAround } from 'map-common-utils';
+import tcircle from '@turf/circle';
 
-// https://stackoverflow.com/questions/35394577/leaflet-js-union-merge-circles
+ // https://stackoverflow.com/questions/35394577/leaflet-js-union-merge-circles
 const truncOptions = { precision: 6, coordinates: 2 };
 
 const unify = (polyList) => {
   let unionTemp;
   for (let i = 0; i < polyList.length; i += 1) {
-    const pol = polyList[i].toGeoJSON();
+    const pol = polyList[i];
     const cleanPol = ttrunc(pol, truncOptions);
     if (i === 0) {
       unionTemp = cleanPol;
@@ -20,11 +21,9 @@ const unify = (polyList) => {
   return unionTemp;
 };
 
-const calcUnion = (subs, group, decorated) => {
-  const unionGroup = group;
-  const copts = {
-    parts: 144
-  };
+const calcUnion = (L, subs, decorated, typeCircle) => {
+  const unionGroup = [];
+  const doCircle = (typeof typeCircle !== 'undefined') ? typeCircle : true;
   subs.forEach((osub) => {
     try {
       if (osub.location && osub.location.lat && osub.location.lon && osub.distance) {
@@ -32,17 +31,26 @@ const calcUnion = (subs, group, decorated) => {
         check(osub.location.lat, Number);
         check(osub.distance, Number);
         const dsub = decorated(osub);
-        const circle = LGeo.circle([dsub.location.lat, dsub.location.lon], dsub.distance * 1000, copts);
-        circle.addTo(unionGroup);
+        const jsonPolygon = doCircle ?
+                       tcircle(
+                         [dsub.location.lon, dsub.location.lat], dsub.distance,
+                         { units: 'kilometers', steps: 144 }
+                       ) :
+                       rectangleAround(
+                         { lon: dsub.location.lon, lat: dsub.location.lat },
+                         dsub.distance,
+                         (typeof dsub.distanceY !== 'undefined') ? dsub.distanceY : dsub.distance
+                       );
+        unionGroup.push(jsonPolygon);
       } else {
-        console.info(`Wrong subscription ${JSON.stringify(osub)}`);
+        console.info(`Wrong element to do union ${JSON.stringify(osub)}`);
       }
     } catch (e) {
-      console.error(e, `Wrong subscription trying to make union ${JSON.stringify(osub)}`);
+      console.error(e, `Wrong element trying to make union ${JSON.stringify(osub)}`);
     }
   });
-  const unionJson = unify(unionGroup.getLayers());
-  return [unionJson, unionGroup.getBounds()];
+  const unionJson = unify(unionGroup);
+  return [unionJson, L.geoJSON(unionJson).getBounds()];
 };
 
 export default calcUnion;

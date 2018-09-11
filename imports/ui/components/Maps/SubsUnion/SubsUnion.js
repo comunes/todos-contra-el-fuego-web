@@ -33,8 +33,7 @@ const subsUnion = (union, options) => {
           options.map.leafletElement.fitBounds(L.latLngBounds(bounds._northEast, bounds._southWest));
         }
       } else if (options.subs.length > 0) {
-        const unionGroup = new L.FeatureGroup();
-        const result = calcUnion(options.subs, unionGroup, sub => sub);
+        const result = calcUnion(L, options.subs, sub => sub, true);
         const unionJson = result[0];
         const bounds = result[1];
 

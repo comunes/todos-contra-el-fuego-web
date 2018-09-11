@@ -17,20 +17,24 @@ Meteor.publish('falsePositivesTotal', function total() {
 });
 
 export const firesUnion = (fires) => {
-  const group = new L.FeatureGroup();
   const firesArray = Array.isArray(fires) ? fires : fires.fetch(); // if not is a cursor
   const remap = firesArray.map(function remap(doc) {
-    // default scan: 1 for neightbor alerts
-    return { location: { lat: doc.lat, lon: doc.lon }, distance: doc.scan || 1 };
+    const isNASA = doc.type === 'modis' || doc.type === 'viirs';
+    const pixelSize = doc.type === 'viirs' ? 0.375 : 1; // viirs has 375m pixel size, modis 1000m
+    // default 1 km for neightbor alerts
+    return {
+      location: { lat: doc.lat, lon: doc.lon },
+      distance: isNASA ? doc.scan * pixelSize : 1,
+      distanceY: isNASA ? doc.track * pixelSize : 1
+    };
   });
-  const union = calcUnion(remap, group, sub => sub);
+  const union = calcUnion(L, remap, sub => sub, false);
   return union;
 };
 
 export const zoneToUnion = (lat, lon, distance) => {
-  const group = new L.FeatureGroup();
   const remap = [{ location: { lat, lon }, distance }];
-  const union = calcUnion(remap, group, sub => sub);
+  const union = calcUnion(L, remap, sub => sub, true);
   return union;
 };
 
