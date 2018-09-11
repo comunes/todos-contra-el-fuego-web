@@ -4,6 +4,8 @@
 import { Meteor } from 'meteor/meteor';
 import { tweetIberiaFires, tweetEuropeFires } from '/imports/api/ActiveFires/server/tweetFiresInZone';
 import { isMailServerMaster, sendEmailsFromQueue } from '/imports/startup/server/email';
+import Notifications from '/imports/api/Notifications/Notifications';
+import processNotif from '/imports/modules/server/notificationsProcess.js';
 
 // https://github.com/thesaucecode/meteor-synced-cron/
 
@@ -44,13 +46,31 @@ Meteor.startup(() => {
       timezone: 'Europe/Madrid',
       schedule: (parser) => {
         // http://bunkat.github.io/later/
-        const sched = parser.text('every 1 min');
+        const sched = parser.text('every 10 min');
         if (sched.error !== -1) {
           console.error(`Mail cron 'when' field parsed with errors: ${sched.error}`);
         }
         return sched;
       },
       job: () => sendEmailsFromQueue()
+    });
+
+    SyncedCron.add({
+      name: 'Process pending notif',
+      timezone: 'Europe/Madrid',
+      schedule: (parser) => {
+        // http://bunkat.github.io/later/
+        const sched = parser.text('every 15 min');
+        if (sched.error !== -1) {
+          console.error(`Mail cron 'when' field parsed with errors: ${sched.error}`);
+        }
+        return sched;
+      },
+      job: () => {
+        Notifications.find({ nofitied: null }).forEach((notif) => {
+          processNotif(notif);
+        });
+      }
     });
   }
 
