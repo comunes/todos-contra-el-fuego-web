@@ -67,7 +67,10 @@ Meteor.startup(() => {
         return sched;
       },
       job: () => {
-        Notifications.find({ nofitied: null }).forEach((notif) => {
+        Notifications.find({ nofitied: null, type: 'mobile' }).forEach((notif) => {
+          processNotif(notif);
+        });
+        Notifications.find({ emailNofitied: null, type: 'web' }).forEach((notif) => {
           processNotif(notif);
         });
       }
