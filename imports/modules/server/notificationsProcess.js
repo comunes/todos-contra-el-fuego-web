@@ -13,6 +13,7 @@ import getEmailOf from '/imports/modules/get-email-of-user';
 import image from 'google-maps-image-api-url';
 import gcm from 'node-gcm';
 import { trim } from '/imports/ui/components/NotificationsObserver/util.js';
+import ravenLogger from '/imports/startup/server/ravenLogger';
 
 let validFcmSender = true;
 
@@ -45,7 +46,7 @@ function imgUrl(lat, lng) {
    } */
 
 const processNotif = (notif) => {
-  if (isMailServerMaster && notif.type === 'mobile' && !notif.notified) {
+  if (isMailServerMaster && notif.type === 'mobile' && notif.notified !== true) {
     const user = Meteor.users.findOne({ _id: notif.userId });
     moment.locale(user.lang);
     // duplicate code below
@@ -82,6 +83,7 @@ const processNotif = (notif) => {
           if (err) {
             console.error(`FCM error: ${err}`);
             // FIXME send to sentry
+            ravenLogger.log(err);
           } else {
             // console.log(`FCM response: ${response}`);
             Notifications.update(notif._id, { $set: { notified: true, notifiedAt: new Date() } });
@@ -89,7 +91,8 @@ const processNotif = (notif) => {
         }));
       }
     }
-  } else if (notif.type === 'web' && !notif.emailNotified) {
+  }
+  if (isMailServerMaster && notif.type === 'web' && notif.emailNotified !== true) {
     const user = Meteor.users.findOne({ _id: notif.userId });
     const { firstName, emailAddress } = getEmailOf(user);
 
@@ -130,7 +133,11 @@ const processNotif = (notif) => {
       });
       // sendMail(emailOpts, true);
       Notifications.update(notif._id, { $set: { emailNotified: true, emailNotifiedAt: new Date() } });
-    }
+    } else {
+      // Not email or not verified -> remove notif so we don't retry to send it
+      Notifications.remove({ _id: notif._id });
+    }gn
+
   }
 };
 
