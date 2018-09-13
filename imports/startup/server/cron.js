@@ -67,12 +67,15 @@ Meteor.startup(() => {
         return sched;
       },
       job: () => {
-        Notifications.find({ nofitied: null, type: 'mobile' }).forEach((notif) => {
+        const mobileNotif = Notifications.find({ nofitied: null, type: 'mobile' });
+        mobileNotif.forEach((notif) => {
           processNotif(notif);
         });
-        Notifications.find({ emailNofitied: null, type: 'web' }).forEach((notif) => {
+        const emailNotif = Notifications.find({ emailNofitied: null, type: 'web' });
+        emailNotif.forEach((notif) => {
           processNotif(notif);
         });
+        return { mobile: mobileNotif.count(), web: emailNotif.count() };
       }
     });
   }
