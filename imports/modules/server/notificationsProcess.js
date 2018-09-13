@@ -136,8 +136,7 @@ const processNotif = (notif) => {
     } else {
       // Not email or not verified -> remove notif so we don't retry to send it
       Notifications.remove({ _id: notif._id });
-    }gn
-
+    }
   }
 };
 
