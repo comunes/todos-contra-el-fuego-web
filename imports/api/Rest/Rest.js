@@ -18,6 +18,7 @@ import { Random } from 'meteor/random';
 import { subscriptionsInsert } from '/imports/api/Subscriptions/methods.js';
 import { Mongo } from 'meteor/mongo';
 import { upsertFalsePositive } from '/imports/api/FalsePositives/methods.js';
+
 const debug = false;
 
 const uptime = new Date();
@@ -157,11 +158,13 @@ if (!Meteor.settings.private.internalApiToken) {
         lon: 1,
         when: 1,
         type: 1, // modis, viirs, vecinal
-        scan: 1
+        scan: 1,
+        track: 1
       }
     });
 
     const result = { total: fires.count(), real: countRealFires(fires) };
+    if (debug) console.log(`Query for fires in ${lat}, ${lng} in ${km} km radius ${result}`);
 
     if (!full) {
       return result;

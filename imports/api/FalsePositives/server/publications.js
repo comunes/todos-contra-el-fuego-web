@@ -22,11 +22,13 @@ export const firesUnion = (fires) => {
     const isNASA = doc.type === 'modis' || doc.type === 'viirs';
     const pixelSize = doc.type === 'viirs' ? 0.375 : 1; // viirs has 375m pixel size, modis 1000m
     // default 1 km for neightbor alerts
-    return {
+    const map = {
       location: { lat: doc.lat, lon: doc.lon },
       distance: isNASA ? doc.scan * pixelSize : 1,
       distanceY: isNASA ? doc.track * pixelSize : 1
     };
+    // console.log(map);
+    return map;
   });
   const union = calcUnion(L, remap, sub => sub, false);
   return union;

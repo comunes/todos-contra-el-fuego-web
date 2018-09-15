@@ -31,7 +31,8 @@ const activefires = (northEastLng, northEastLat, southWestLng, southWestLat, wit
       lat: 1,
       lon: 1,
       when: 1,
-      scan: 1
+      scan: 1,
+      track: 1
     }
   });
 

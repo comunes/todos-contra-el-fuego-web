@@ -32,7 +32,9 @@ const findFiresInRegion = (zone) => {
 export const countRealFires = (firesCursor) => {
   const realFires = [];
   firesCursor.forEach((fire) => {
+    if (debug) console.log(`${JSON.stringify(fire)} -----`);
     const union = firesUnion([fire]);
+    if (debug) console.log(`${JSON.stringify(union)} -----`);
     const falsePos = whichAreFalsePositives(FalsePositives, union);
     const industries = whichAreFalsePositives(Industries, union);
     if (falsePos.count() === 0 && industries.count() === 0) {

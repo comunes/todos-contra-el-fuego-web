@@ -33,7 +33,8 @@ Meteor.publish('fireAlerts', function fireAlerts(northEastLng, northEastLat, sou
     fields: {
       lat: 1,
       lon: 1,
-      scan: 1
+      scan: 1,
+      track: 1
     }
   });
   if (Meteor.isDevelopment) console.log(`Neighbour alerts total: ${fires.count()}`);
