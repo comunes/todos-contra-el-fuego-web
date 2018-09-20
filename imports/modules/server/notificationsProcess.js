@@ -22,8 +22,6 @@ if (!(Meteor.settings.private.fcmApiToken && Meteor.settings.private.fcmApiToken
   validFcmSender = false;
 }
 
-const fcmSender = new gcm.Sender(Meteor.settings.private.fcmApiToken);
-
 // https://www.npmjs.com/package/google-maps-image-api-url
 // https://stackoverflow.com/questions/24355007/is-there-no-way-to-embed-a-google-map-into-an-html-email
 // https://developers.google.com/maps/documentation/static-maps/intro
@@ -46,7 +44,8 @@ function imgUrl(lat, lng) {
    } */
 
 const processNotif = (notif) => {
-  if (isMailServerMaster && notif.type === 'mobile' && notif.notified !== true) {
+  if (isMailServerMaster && validFcmSender && notif.type === 'mobile' && notif.notified !== true) {
+    const fcmSender = new gcm.Sender(Meteor.settings.private.fcmApiToken);
     const user = Meteor.users.findOne({ _id: notif.userId });
     moment.locale(user.lang);
     // duplicate code below
