@@ -10,6 +10,7 @@ import FalsePositives from '/imports/api/FalsePositives/FalsePositives';
 import Industries from '/imports/api/Industries/Industries';
 import IndustryRegistries from '/imports/api/Industries/IndustryRegistries';
 import Notifications from '/imports/api/Notifications/Notifications';
+import ActiveFiresUnion from '/imports/api/ActiveFiresUnion/ActiveFiresUnion';
 import { Mongo } from 'meteor/mongo';
 
 Meteor.startup(() => {
@@ -237,6 +238,18 @@ Meteor.startup(() => {
       Notifications.update({ webNotified: { $exists: true } }, {
         $rename: { webNotified: 'notified' }
       }, { upsert: false, multi: true });
+    }
+  });
+
+  Migrations.add({
+    version: 18,
+    up: () => {
+      const raw = ActiveFiresUnion.rawCollection();
+      raw.createIndex({ centerid: '2dsphere' });
+      raw.createIndex({ shape: '2dsphere' });
+      raw.createIndex({ when: 1 });
+      raw.createIndex({ createdAt: 1 });
+      raw.createIndex({ updatedAt: 1 });
     }
   });
 
