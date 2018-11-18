@@ -98,66 +98,66 @@ const App = props => (
   /* https://react.i18next.com/components/i18nextprovider.html */
   <div>
     {props.i18nReady.get() &&
-     <ErrorBoundary>
-       <I18nextProvider i18n={i18n}>
-         <ErrorBoundary appName={i18n.t('AppNameFull')} title={i18n.t('general-error-title')} subTitle={i18n.t('general-error-description')}>
-           <Router history={history}>
-             <LocationListener>
-               { !props.loading &&
-                 <div className="App">
-                   <Helmet>
-                     <meta charSet="utf-8" />
-                     <title>{i18n.t('AppName')}</title>
-                     <meta name="description" content={`${i18n.t('AppDescrip')}: ${i18n.t('AppDescripLong')}`} />
-                     <link rel="alternate" href={`https://fires.comunes.org${history.location.pathname}`} hrefLang="en" />
-                     <link rel="alternate" href={`https://fuegos.comunes.org${history.location.pathname}`} hrefLang="es" />
-                   </Helmet>
-                   <Navigation {...props} />
-                   <ReSendEmail {...props} />
+    <ErrorBoundary>
+      <I18nextProvider i18n={i18n}>
+        <ErrorBoundary appName={i18n.t('AppNameFull')} title={i18n.t('general-error-title')} subTitle={i18n.t('general-error-description')}>
+          <Router history={history}>
+            <LocationListener>
+              { !props.loading &&
+              <div className="App">
+                <Helmet>
+                  <meta charSet="utf-8" />
+                  <title>{i18n.t('AppName')}</title>
+                  <meta name="description" content={`${i18n.t('AppDescrip')}: ${i18n.t('AppDescripLong')}`} />
+                  <link rel="alternate" href={`https://fires.comunes.org${history.location.pathname}`} hrefLang="en" />
+                  <link rel="alternate" href={`https://fuegos.comunes.org${history.location.pathname}`} hrefLang="es" />
+                </Helmet>
+                <Navigation {...props} />
+                <ReSendEmail {...props} />
 
-                   <Grid>
-                     <Switch>
-                       <Route exact name="index" path="/" component={Index} />
-                       <Authenticated exact path="/subscriptions" component={Subscriptions} {...props} />
-                       <Authenticated exact path="/subscriptions/new" component={NewSubscription} {...props} />
-                       <Authenticated exact path="/subscriptions/:_id" component={ViewSubscription} {...props} />
-                       <Authenticated exact path="/subscriptions/:_id/edit" component={EditSubscription} {...props} />
-                       <Authenticated exact path="/profile" component={Profile} {...props} />
-                       <Authenticated exact path="/status" component={Status} {...props} />
-                       <Route path="/fires" component={FiresMap} industries={false} {...props} />
-                       <Route path="/zones" component={ZonesMap} {...props} />
+                <Grid>
+                  <Switch>
+                    <Route exact name="index" path="/" component={Index} />
+                    <Authenticated exact path="/subscriptions" component={Subscriptions} {...props} />
+                    <Authenticated exact path="/subscriptions/new" component={NewSubscription} {...props} />
+                    <Authenticated exact path="/subscriptions/:_id" component={ViewSubscription} {...props} />
+                    <Authenticated exact path="/subscriptions/:_id/edit" component={EditSubscription} {...props} />
+                    <Authenticated exact path="/profile" component={Profile} {...props} />
+                    <Authenticated exact path="/status" component={Status} {...props} />
+                    <Route path="/fires" component={FiresMap} industries={false} {...props} />
+                    <Route path="/zones" component={ZonesMap} {...props} />
 
-                       <Route path="/fire/:type(active|archive|alert)/:id" component={Fires} {...props} />
-                       <Route path="/fire/:id" component={Fires} {...props} />
-                       <Public path="/auth/:token" component={Auth} {...props} />
-                       <Public path="/signup" component={Signup} {...props} />
-                       <Public path="/login" component={Login} {...props} />
-                       <Route path="/logout" component={Logout} {...props} />
-                       <Route path="/sandbox" component={Sandbox} {...props} />
-                       <Route path="/error" component={TestError} {...props} />
+                    <Route path="/fire/:type(active|archive|alert)/:id" component={Fires} {...props} />
+                    <Route path="/fire/:id" component={Fires} {...props} />
+                    <Public path="/auth/:token" component={Auth} {...props} />
+                    <Public path="/signup" component={Signup} {...props} />
+                    <Public path="/login" component={Login} {...props} />
+                    <Route path="/logout" component={Logout} {...props} />
+                    <Route path="/sandbox" component={Sandbox} {...props} />
+                    <Route path="/error" component={TestError} {...props} />
 
-                       <Route name="verify-email" path="/verify-email/:token" component={VerifyEmail} />
-                       <Route name="recover-password" path="/recover-password" component={RecoverPassword} />
-                       <Route name="reset-password" path="/reset-password/:token" component={ResetPassword} />
-                       <Route name="terms" path="/terms" component={Terms} />
-                       <Route name="privacy" path="/privacy" component={Privacy} />
-                       <Route name="license" path="/license" component={License} />
-                       <Route name="credits" path="/credits" component={Credits} />
-                       <Route name="about" path="/about" component={About} />
+                    <Route name="verify-email" path="/verify-email/:token" component={VerifyEmail} />
+                    <Route name="recover-password" path="/recover-password" component={RecoverPassword} />
+                    <Route name="reset-password" path="/reset-password/:token" component={ResetPassword} />
+                    <Route name="terms" path="/terms" component={Terms} />
+                    <Route name="privacy" path="/privacy" component={Privacy} />
+                    <Route name="license" path="/license" component={License} />
+                    <Route name="credits" path="/credits" component={Credits} />
+                    <Route name="about" path="/about" component={About} />
 
-                       <Route component={NotFound} />
-                     </Switch>
-                   </Grid>
-                   <Footer />
-                   <Reconnect {...props} />
-                   <Feedback {...props} />
-                   {props.i18nReady.get() && <Blaze template="cookieConsent" /> }
-                 </div>}
-             </LocationListener>
-           </Router>
-         </ErrorBoundary>
-       </I18nextProvider>
-     </ErrorBoundary> }
+                    <Route component={NotFound} />
+                  </Switch>
+                </Grid>
+                <Footer />
+                <Reconnect {...props} />
+                <Feedback {...props} />
+                {props.i18nReady.get() && <Blaze template="cookieConsent" /> }
+              </div>}
+            </LocationListener>
+          </Router>
+        </ErrorBoundary>
+      </I18nextProvider>
+    </ErrorBoundary> }
   </div>
 );
 
@@ -186,7 +186,9 @@ export default withTracker(() => {
   const loading = !Roles.subscription.ready() || !i18nReady.get();
   const name = user && user.profile && user.profile.name && getUserName(user.profile.name);
   const emailAddress = user && user.emails && user.emails[0].address;
-  // console.log(`i18n ready?: ${i18nReady.get()}`);
+  Meteor.autorun(() => {
+    console.log(`i18n ready?: ${i18nReady.get()}`);
+  });
   return {
     loading,
     loggingIn,
