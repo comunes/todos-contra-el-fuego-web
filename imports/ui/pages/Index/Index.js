@@ -182,9 +182,9 @@ class Index extends Component {
                 </div>
                 <p className="moto"><Trans>Siempre alerta a los fuegos en nuestro vecindario</Trans></p>
                 {/* <Link className="participe-btn btn btn-lg btn-warning" role="button" to="/#platforms">{this.props.t('Participa')}</Link> */}
-                <p>
+                <div className="android-btn">
                   <MobileStoreButton store="android" url={androidUrl} />
-                </p>
+                </div>
               </div>
             </section>
           </section>
