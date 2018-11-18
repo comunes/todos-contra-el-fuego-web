@@ -33,11 +33,11 @@ TEST_PORT=3000 TEST_WATCH=1 TEST_CLIENT=0 MONGO_URL=mongodb://localhost:27017/fu
 
 # and
 
-chimp --watch --ddp=http://localhost:3000 --path=cucumber
+node_modules/.bin/chimp --watch --ddp=http://localhost:3000 --path=cucumber
 
 # and
 
-chimp --ddp=http://localhost:3000 --path=cucumber
+node_modules/.bin/chimp --ddp=http://localhost:3000 --path=cucumber
 
 ```
 
