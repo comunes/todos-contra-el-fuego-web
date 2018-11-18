@@ -147,7 +147,7 @@ export function fireFromHash(fireEnc, params) {
   // const unsealed = Promise.await(urlEnc.decrypt(fireEnc));
   const unsealed = Promise.await(unsealW(fireEnc));
   if (unsealed === undefined) {
-    throw Error('Undefined unsealed');
+    throw Error(`Fail to unseal ${fireEnc}`);
   }
   const w = unsealed.when;
   unsealed.when = new Date(w);
