@@ -140,13 +140,12 @@ class Fire extends React.Component {
            >
              <Fragment>
                <GeoJSON
+                   ref={(circle) => { this.circle = circle; this.handleLeafletCircleLoad(circle); }}
                    data={rect}
                    color="red"
                    stroke
                    width="1"
-
                    fillOpacity="0.0"
-                   ref={(circle) => { this.circle = circle; this.handleLeafletCircleLoad(circle); }}
                />
              </Fragment>
              <FireList
