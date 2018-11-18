@@ -23,9 +23,11 @@ import 'leaflet-sleep/Leaflet.Sleep.js';
 import geolocation from '/imports/startup/client/geolocation';
 import CenterInMyPosition from '/imports/ui/components/CenterInMyPosition/CenterInMyPosition';
 import FireList from '/imports/ui/components/Maps/FireList';
+import FireListUnion from '/imports/ui/components/Maps/FireListUnion';
 import subsUnion from '/imports/ui/components/Maps/SubsUnion/SubsUnion';
 import DefMapLayers from '/imports/ui/components/Maps/DefMapLayers';
 import ActiveFiresCollection from '/imports/api/ActiveFires/ActiveFires';
+import ActiveFiresUnion from '/imports/api/ActiveFiresUnion/ActiveFiresUnion';
 import FireAlertsCollection from '/imports/api/FireAlerts/FireAlerts';
 import IndustriesCollection, { industriesRemap } from '/imports/api/Industries/Industries';
 import FalsePositivesCollection, { falsePositivesRemap } from '/imports/api/FalsePositives/FalsePositives';
@@ -202,6 +204,7 @@ class FiresMap extends React.Component {
 
     if (Meteor.isDevelopment && this.props.activefires.length === 1) console.log(`Active fire: ${JSON.stringify(this.props.activefires[0])}`);
     if (Meteor.isDevelopment) console.log(`Active fires total: ${this.props.activefires.length}`);
+    if (Meteor.isDevelopment) console.log(`Active fires union total: ${this.props.activefiresunion.length}`);
     if (Meteor.isDevelopment) console.log(`False positives total: ${this.props.falsePositives.length}`);
     if (Meteor.isDevelopment) console.log(`Fire alerts total: ${this.props.firealerts.length}`);
     if (Meteor.isDevelopment) console.log(`Industries total: ${this.props.industries.length}`);
@@ -307,6 +310,14 @@ class FiresMap extends React.Component {
                    neighbour={false}
                    industries={false}
                />
+               { Meteor.isDevelopment &&
+               <FireListUnion
+                   t={t}
+                   history={this.props.history}
+                   firesUnion={this.props.activefiresunion}
+                   nasa
+               />
+               }
                <FireList
                    t={t}
                    history={this.props.history}
@@ -369,12 +380,14 @@ FiresMap.propTypes = {
   userSubs: PropTypes.string,
   userSubsBounds: PropTypes.string,
   activefires: PropTypes.arrayOf(PropTypes.object).isRequired,
+  activefiresunion: PropTypes.arrayOf(PropTypes.object).isRequired,
   lastFireDetected: PropTypes.object,
   firealerts: PropTypes.arrayOf(PropTypes.object).isRequired,
   falsePositives: PropTypes.arrayOf(PropTypes.object).isRequired,
   industries: PropTypes.arrayOf(PropTypes.object).isRequired,
   lastCheck: PropTypes.instanceOf(Date),
   activefirestotal: PropTypes.number.isRequired,
+  activefiresuniontotal: PropTypes.number.isRequired,
   center: PropTypes.arrayOf(PropTypes.number),
   zoom: PropTypes.number,
   marks: PropTypes.bool.isRequired,
@@ -391,6 +404,7 @@ export default translate([], { wait: true })(withTracker(() => {
   // console.log(`With industries: ${withIndustries}`);
 
   let subscription;
+  let subscriptionUnion;
   let alertSubscription;
 
   const centerStored = store.get('firesmap_center');
@@ -422,6 +436,14 @@ export default translate([], { wait: true })(withTracker(() => {
         mapSize.get()[1].lat,
         marks.get() && zoom.get() >= MAXZOOM
       );
+      subscriptionUnion = Meteor.subscribe(
+        'activefiresunionmyloc',
+        mapSize.get()[0].lng,
+        mapSize.get()[0].lat,
+        mapSize.get()[1].lng,
+        mapSize.get()[1].lat,
+        false
+      );
       alertSubscription = Meteor.subscribe(
         'fireAlerts',
         mapSize.get()[0].lng,
@@ -442,6 +464,7 @@ export default translate([], { wait: true })(withTracker(() => {
   });
 
   Meteor.subscribe('activefirestotal');
+  Meteor.subscribe('activefiresuniontotal');
 
   const settingsSubs = Meteor.subscribe('settings');
   const lastCheck = SiteSettings.findOne({ name: 'last-fire-check' });
@@ -453,13 +476,15 @@ export default translate([], { wait: true })(withTracker(() => {
   const lastFireDetected = ActiveFiresCollection.findOne({}, { sort: { when: -1 } });
 
   return {
-    loading: Meteor.status().status !== 'connected' || !subscription ? true : !(subscription.ready() && settingsSubs.ready() && alertSubscription.ready() && settingsSubs.ready()),
+    loading: Meteor.status().status !== 'connected' || !subscription ? true : !(subscription.ready() && settingsSubs.ready() && alertSubscription.ready() && settingsSubs.ready() && subscriptionUnion.ready()),
     userSubs: userSubs ? userSubs.value : null,
     userSubsBounds: userSubs ? userSubsBounds.value : null,
     subsready: settingsSubs.ready(),
     // Not reactive query depending on zoom level
     activefires: ActiveFiresCollection.find({}, { reactive: zoom.get() >= MAXZOOMREACTIVE }).fetch(),
+    activefiresunion: ActiveFiresUnion.find({}, { reactive: zoom.get() >= MAXZOOMREACTIVE }).fetch(),
     activefirestotal: Counter.get('countActiveFires') + fireAlerts.length,
+    activefiresuniontotal: Counter.get('countActiveFiresUnion') + fireAlerts.length,
     firealerts: fireAlerts,
     falsePositives,
     industries,

@@ -1,5 +1,6 @@
 /* eslint-disable consistent-return */
 
+import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 import firesCommonSchema from '../Common/FiresSchema';
@@ -18,8 +19,11 @@ ActiveFires.deny({
   remove: () => true
 });
 
+const activeFiresSchema = firesCommonSchema;
 
-ActiveFires.schema = new SimpleSchema(firesCommonSchema);
+activeFiresSchema.fireUnion = { type: Meteor.Collection.ObjectID, optional: true, blackbox: true };
+
+ActiveFires.schema = new SimpleSchema(activeFiresSchema);
 
 ActiveFires.attachSchema(ActiveFires.schema);
 

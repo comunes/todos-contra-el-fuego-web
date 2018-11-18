@@ -3,8 +3,8 @@ import React, { Component, Fragment } from 'react';
 import { CircleMarker, Marker, Tooltip } from 'react-leaflet';
 import PropTypes from 'prop-types';
 import { fireIconS, fireIconM, fireIconL, nFireIcon, industryIcon, regIndustryIcon } from '/imports/ui/components/Maps/Icons';
-import { onMarkClick } from './MarkListeners';
 import { translate } from 'react-i18next';
+import { onMarkClick } from './MarkListeners';
 import FirePopup from './FirePopup';
 
 class FireIconMark extends Component {
@@ -30,17 +30,7 @@ class FireIconMark extends Component {
 
   render() {
     const {
-      lat,
-      lon,
-      scan,
-      nasa,
-      id,
-      history,
-      falsePositives,
-      industries,
-      neighbour,
-      when,
-      t
+      lat, lon, scan, track, nasa, id, history, falsePositives, industries, neighbour, when, t
     } = this.props;
     return (
       <div>
@@ -79,6 +69,7 @@ FireIconMark.propTypes = {
   lat: PropTypes.number.isRequired,
   lon: PropTypes.number.isRequired,
   scan: PropTypes.number,
+  track: PropTypes.number,
   nasa: PropTypes.bool,
   falsePositives: PropTypes.bool.isRequired,
   industries: PropTypes.bool.isRequired,

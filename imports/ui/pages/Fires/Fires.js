@@ -10,7 +10,8 @@ import { Row, Col, Alert, FormGroup } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { Helmet } from 'react-helmet';
-import { Map, Circle } from 'react-leaflet';
+import { Map, GeoJSON } from 'react-leaflet';
+import { rectangleAround } from 'map-common-utils';
 import Blaze from 'meteor/gadicc:blaze-react-component';
 import DefMapLayers from '/imports/ui/components/Maps/DefMapLayers';
 import NotFound from '/imports/ui/pages/NotFound/NotFound';
@@ -115,8 +116,9 @@ class Fire extends React.Component {
         t('Información adicional sobre fuego detectado en {{where}} el {{when}}', { where: fire.address, when: this.dateLongFormat }) :
         t('Información adicional sobre fuego detectado el {{when}}', { when: this.dateLongFormat });
     }
-
-    return (fire && !loading ? (
+    const ready = fire && !loading;
+    const rect = ready ? rectangleAround({ lat: fire.lat, lon: fire.lon }, fire.track, fire.track) : null;
+    return (ready ? (
       <div className="ViewFire">
         <Helmet>
           <title>{t('AppName')}: {t('Información adicional sobre fuego')}</title>
@@ -137,13 +139,13 @@ class Fire extends React.Component {
                zoom={13}
            >
              <Fragment>
-               <Circle
-                   center={[fire.lat, fire.lon]}
+               <GeoJSON
+                   data={rect}
                    color="red"
-                   fillColor="red"
-                   fillOpacity={0.0}
-                   interactive={false}
-                   radius={fire.scan ? fire.scan * 500 : 300}
+                   stroke
+                   width="1"
+
+                   fillOpacity="0.0"
                    ref={(circle) => { this.circle = circle; this.handleLeafletCircleLoad(circle); }}
                />
              </Fragment>
