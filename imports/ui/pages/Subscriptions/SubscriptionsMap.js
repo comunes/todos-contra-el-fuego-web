@@ -63,8 +63,8 @@ class SubscriptionsMap extends React.Component {
 
   handleLeafletLoad(map) {
     // console.log('Map loading');
-    // console.log(map);
-    if (map) {
+    if (map && this.props.userSubs !== 'null') {
+      // console.log(`Union of ${this.props.userSubs}`);
       this.state.union = subsUnion(this.state.union, {
         map,
         subs: this.props.userSubs,
