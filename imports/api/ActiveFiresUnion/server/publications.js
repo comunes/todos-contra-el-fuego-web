@@ -67,12 +67,14 @@ Meteor.publish('activefiresunionmyloc', function activeInMyLoc(northEastLng, nor
   check(northEastLat, NumberBetween(-90, 90));
   check(withMarks, Boolean);
 
-  if (!Meteor.isDevelopment) return this.ready(); // empty
+  // I use this for fire stats
+  // if (!Meteor.isDevelopment) return this.ready(); // empty
   return activeFiresUnion(northEastLng, northEastLat, southWestLng, southWestLat, withMarks);
 });
 
 // Warning: this increase always by one the fire stats
 Meteor.publish('lastFireUnionDetected', function lastFireDetected() {
-  if (!Meteor.isDevelopment) return this.ready(); // empty
+  // I use this for fire stats
+  // if (!Meteor.isDevelopment) return this.ready(); // empty
   return ActiveFiresUnion.find({}, { limit: 1, sort: { when: -1 } });
 });

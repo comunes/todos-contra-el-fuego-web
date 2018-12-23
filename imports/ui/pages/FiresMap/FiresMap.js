@@ -84,19 +84,6 @@ class FiresMap extends React.Component {
     });
   }
 
-  /* shouldComponentUpdate(nextProps, nextState) {
-   *   const notMoving = !nextState.moving;
-   *   const markersChanged = this.state.useMarkers !== nextState.useMarkers;
-   *   const unionChanged = this.state.showSubsUnion !== nextState.showSubsUnion;
-   *   const otherViewport = this.state.viewport !== nextState.viewport;
-   *   // const init = nextState.viewport.center === [0, 0];
-   *   // console.log(notMoving ? 'Not moving map' : 'Moving map');
-   *   // console.log(otherViewport ? 'Other viewport' : 'Not other viewport');
-   *   console.log(`${otherViewport ? 'OTHER' : 'Not other'} viewport ${nextState.viewport.center} zoom: ${nextState.viewport.zoom}`);
-   *   return this.state.init || (notMoving && otherViewport && this.state.moved) || unionChanged || markersChanged;
-   * }
-   */
-
   shouldComponentUpdate(nextProps, nextState) {
     const notMoving = !nextState.moving;
     return notMoving;
@@ -249,7 +236,7 @@ class FiresMap extends React.Component {
               <p className="firesmap-legend">
                 { (this.props.activefires.length + this.props.firealerts.length) === 0 ?
                   <Fragment><Trans parent="span" i18nKey="noActiveFireInMapCount">No hay fuegos activos en esta zona del mapa. <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos en el mundo.</Trans> <FireStats loadingAll={loading} {... this.props} /></Fragment> :
-                  <Fragment><Trans parent="span" i18nKey="activeFireInMapCount">En rojo, <strong>{{ count: this.props.activefires.length + this.props.firealerts.length }}</strong> fuegos activos. <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos en el mundo.</Trans> <FireStats loadingAll={loading} {... this.props} /></Fragment>
+                  <Fragment><Trans parent="span" i18nKey="activeFireInMapCount">En rojo, <strong>{{ count: this.props.activefiresunion.length + this.props.firealerts.length }}</strong> fuegos activos. <strong>{{ countTotal: this.props.activefirestotal }}</strong> fuegos activos en el mundo.</Trans> <FireStats loadingAll={loading} {... this.props} /></Fragment>
                 }
               </p>
               {isNotHomeAndMobile() && this.props.firealerts.length > 0 &&

@@ -31,7 +31,7 @@ class FireCircleMark extends Component {
     } = this.props;
     const rect = rectangleAround({ lat, lon }, track, track);
     return (
-      <GeoJSON data={rect} color="red" stroke width="1" opacity=".4" fillOpacity=".3">
+      <GeoJSON data={rect} color="red" stroke width="1" opacity=".4" fillOpacity="1">
         <FirePopup t={t} history={history} id={id} nasa={nasa} lat={lat} lon={lon} when={when} />
       </GeoJSON>
     );
