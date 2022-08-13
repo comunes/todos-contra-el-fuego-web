@@ -35,7 +35,8 @@ class DefMapLayers extends Component {
         <TileLayer
             opacity={defOpacity}
             attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-            url="https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png"
+            // url="https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png"
+            url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
         />
       </BaseLayer>);
     const osmlayer = (
